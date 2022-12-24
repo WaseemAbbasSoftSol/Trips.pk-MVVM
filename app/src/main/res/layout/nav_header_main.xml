@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:id="@+id/nav_header_main"
+    android:background="@color/primary_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_back"
+            android:id="@+id/back"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:iconTint="@color/white"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_above="@id/tv_name"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_profile" />
+
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_desig"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/raleway_semiboldd"
+            android:text="Makhdoom Al Beruni"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_desig"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="Job Seeker"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+
+
+        <View
+            android:id="@+id/line"
+            android:background="@color/primary_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>

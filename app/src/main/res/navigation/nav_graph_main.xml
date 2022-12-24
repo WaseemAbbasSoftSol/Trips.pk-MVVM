@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/main_fragment">
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.trips.pk.ui.MainFragment"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_dashboard_to_flight_search_fragment"
+            app:destination="@id/flight_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_search_fragment"
+        android:name="com.trips.pk.ui.flight.search.FlightSearchFragment"
+        tools:layout="@layout/fragment_flight_search">
+        <action
+            android:id="@+id/action_flight_search_to_flight_list_fragment"
+            app:destination="@id/flight_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_list_fragment"
+        android:name="com.trips.pk.ui.flight.listing.FlightListingFragment"
+        tools:layout="@layout/fragment_flight_listing">
+
+        <argument
+            android:name="search"
+            app:argType="com.trips.pk.model.FlightSearch"/>
+
+        <argument
+            android:name="from_to"
+            app:argType="string"/>
+
+        <action
+            android:id="@+id/action_flight_list_to_flight_detail_fragment"
+            app:destination="@id/flight_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flight_detail_fragment"
+        android:name="com.trips.pk.ui.flight.detail.FlightDetailFragment"
+        tools:layout="@layout/fragment_flight_detail">
+
+    </fragment>
+
+</navigation>

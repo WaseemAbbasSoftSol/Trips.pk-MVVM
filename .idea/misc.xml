@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/bg_bar_view.xml" value="0.209" />
+        <entry key="app/src/main/res/drawable/bg_checkbox_selected.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/bg_dashed_line.xml" value="0.208" />
+        <entry key="app/src/main/res/drawable/bg_rounded_btn.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/bg_rounded_btn_unfilled.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable/bg_rounded_cardview.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/bg_rounded_edittext.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/bg_rounded_edittext2.xml" value="0.164" />
+        <entry key="app/src/main/res/drawable/bg_rounded_view.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/bg_sq_cardview.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/fg_cardview_grey.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/fg_selected_card.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/half_circle.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.2635" />
+        <entry key="app/src/main/res/drawable/ic_flight_going.xml" value="0.208" />
+        <entry key="app/src/main/res/drawable/ic_group_2624.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/radio_states.xml" value="0.187" />
+        <entry key="app/src/main/res/drawable/round_corners_vh.xml" value="0.187" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.381025641025641" />
+        <entry key="app/src/main/res/layout/base_toolbar.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/layout/book_now_bottom_sheet.xml" value="0.38385416666666666" />
+        <entry key="app/src/main/res/layout/bottom_sheet_origin_layout.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/layout/calendar_day_layout.xml" value="0.3859375" />
+        <entry key="app/src/main/res/layout/choose_adult_bottomsheet.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/date_range_picker_bottomsheet.xml" value="0.3859375" />
+        <entry key="app/src/main/res/layout/dummy.xml" value="0.3859375" />
+        <entry key="app/src/main/res/layout/flight_filter_bottom_sheet.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.34444444444444444" />
+        <entry key="app/src/main/res/layout/fragment_flight_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_flight_listing.xml" value="0.2857692307692308" />
+        <entry key="app/src/main/res/layout/fragment_flight_search.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/layout/item_airlines_and_stops.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_flight_listing.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_flight_listing_one_way.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_cl_flight_going.xml" value="0.3859375" />
+        <entry key="app/src/main/res/layout/layout_flight_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_flight_detail_header.xml" value="0.38385416666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

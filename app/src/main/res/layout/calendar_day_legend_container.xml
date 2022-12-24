@@ -1,0 +1,42 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="7"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/first"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/sec"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/third"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/fourth"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/fifth"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/six"
+            layout="@layout/calendar_day_legend_text" />
+
+        <include
+            android:id="@+id/sev"
+            layout="@layout/calendar_day_legend_text" />
+
+    </LinearLayout>
+</layout>
