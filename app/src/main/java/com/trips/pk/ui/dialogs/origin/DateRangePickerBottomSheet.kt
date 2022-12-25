@@ -42,9 +42,10 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
+    private var isSingleSelection=true
+    private var singleSelectedDate: LocalDate? = null
     private lateinit var binding: DateRangePickerBottomsheetBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -158,8 +159,11 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
                 setTextColor(Color.GRAY)
             }
         }
-
-        binding.exFourSaveButton.isEnabled = selection.daysBetween != null
+        if (isSingleSelection){
+            val date = singleSelectedDate
+            binding.exFourSaveButton.isEnabled=singleSelectedDate!=null
+        }
+       else binding.exFourSaveButton.isEnabled = selection.daysBetween != null
     }
 
     override fun onStart() {
@@ -175,161 +179,239 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         }
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(closeIndicator)
     }
-
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun configureBinders() {
-        val clipLevelHalf = 5000
-        val ctx = requireContext()
+        if (isSingleSelection){
+
+            val calendarView = binding.exFourCalendar
+
+            class DayViewContainerSingleSelection(view: View) : ViewContainer(view) {
+                // Will be set when this container is bound. See the dayBinder.
+                lateinit var day: CalendarDay
+                val textView = Example4CalendarDayBinding.bind(view).exFourDayText
+
+                init {
+                    textView.setOnClickListener {
+                        if (day.position == DayPosition.MonthDate &&
+                            (day.date == today || day.date.isAfter(today))
+                        ) {
+                            if (singleSelectedDate == day.date) {
+                                singleSelectedDate = null
+                                calendarView.notifyDayChanged(day)
+                            } else {
+                                val oldDate = singleSelectedDate
+                                singleSelectedDate = day.date
+                                calendarView.notifyDateChanged(day.date)
+                                oldDate?.let { calendarView.notifyDateChanged(oldDate) }
+                            }
+                         //   menuItem.isVisible = selectedDate != null
+                            binding.exFourSaveButton.isEnabled = selection.daysBetween != null
+                        }
+                    }
+                }
+            }
+
+            calendarView.dayBinder = object : MonthDayBinder<DayViewContainerSingleSelection> {
+
+                override fun create(view: View) = DayViewContainerSingleSelection(view)
+
+                override fun bind(container: DayViewContainerSingleSelection, data: CalendarDay) {
+                    container.day = data
+                    val textView = container.textView
+                    textView.text = data.date.dayOfMonth.toString()
+
+                    if (data.position == DayPosition.MonthDate) {
+                        textView.makeVisible()
+                        when (data.date) {
+                            singleSelectedDate -> {
+                                textView.setTextColorRes(R.color.black)
+                                textView.setBackgroundResource( R.drawable.bg_single_range_date)
+                            }
+                            today -> {
+                                textView.setTextColorRes(R.color.white)
+                                textView.setBackgroundResource( R.drawable.bg_today_date)
+                            }
+                            else -> {
+                                textView.setTextColorRes(R.color.black)
+                                textView.background = null
+                            }
+                        }
+                    } else {
+                        textView.makeInVisible()
+                    }
+                }
+            }
+
+            class MonthViewContainerSingleSelection(view: View) : ViewContainer(view) {
+                val textView = Example4CalendarHeaderBinding.bind(view).exFourHeaderText
+            }
+            calendarView.monthHeaderBinder =
+                object : MonthHeaderFooterBinder<MonthViewContainerSingleSelection> {
+                    override fun create(view: View) = MonthViewContainerSingleSelection(view)
+                    @RequiresApi(Build.VERSION_CODES.O)
+                    override fun bind(container: MonthViewContainerSingleSelection, data: CalendarMonth) {
+                        container.textView.text = data.yearMonth.displayText()
+                    }
+                }
+
+        }else{
+
+            val clipLevelHalf = 5000
+            val ctx = requireContext()
 //        val rangeStartBackground =
 //            ctx.getDrawableCompat(R.drawable.example_4_continuous_selected_bg_start).also {
 //                it.level = clipLevelHalf // Used by ClipDrawable
 //            }
 
-        val rangeStartBackground =
-            ContextCompat.getDrawable(requireContext(), R.drawable.bg_start_range_date).also {
-                it!!.level = clipLevelHalf
-            }
+            val rangeStartBackground =
+                ContextCompat.getDrawable(requireContext(), R.drawable.bg_start_range_date).also {
+                    it!!.level = clipLevelHalf
+                }
 
-        val rangeEndBackground =
-            ContextCompat.getDrawable(requireContext(), R.drawable.bg_end_range_date).also {
-                it!!.level = clipLevelHalf // Used by ClipDrawable
-            }
-        val rangeMiddleBackground =
-            ContextCompat.getDrawable(requireContext(), R.drawable.dummy)
+            val rangeEndBackground =
+                ContextCompat.getDrawable(requireContext(), R.drawable.bg_end_range_date).also {
+                    it!!.level = clipLevelHalf // Used by ClipDrawable
+                }
+            val rangeMiddleBackground =
+                ContextCompat.getDrawable(requireContext(), R.drawable.dummy)
 
-        val singleBackground = ContextCompat.getDrawable(
-            requireContext(),
-            R.drawable.bg_single_range_date
-        )
+            val singleBackground = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.bg_single_range_date
+            )
 
-        val todayBackground = ContextCompat.getDrawable(
-            requireContext(),
-            R.drawable.bg_today_date
-        )
+            val todayBackground = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.bg_today_date
+            )
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            lateinit var day: CalendarDay // Will be set when this container is bound.
-            val binding = Example4CalendarDayBinding.bind(view)
+            @RequiresApi(Build.VERSION_CODES.O)
+            class DayViewContainer(view: View) : ViewContainer(view) {
+                lateinit var day: CalendarDay // Will be set when this container is bound.
+                val binding = Example4CalendarDayBinding.bind(view)
 
-            init {
-                view.setOnClickListener {
-                    if (day.position == DayPosition.MonthDate &&
-                        (day.date == today || day.date.isAfter(today))
-                    ) {
-                        selection = getSelection(
-                            clickedDate = day.date,
-                            dateSelection = selection,
-                        )
-                        this@DateRangePickerBottomSheet.binding.exFourCalendar.notifyCalendarChanged()
-                        bindSummaryViews()
+                init {
+                    view.setOnClickListener {
+                        if (day.position == DayPosition.MonthDate &&
+                            (day.date == today || day.date.isAfter(today))
+                        ) {
+                            selection = getSelection(
+                                clickedDate = day.date,
+                                dateSelection = selection,
+                            )
+                            this@DateRangePickerBottomSheet.binding.exFourCalendar.notifyCalendarChanged()
+                            bindSummaryViews()
+                        }
                     }
                 }
             }
-        }
 
-        binding.exFourCalendar.dayBinder = object : MonthDayBinder<DayViewContainer> {
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun create(view: View) = DayViewContainer(view)
-
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.day = data
-                val textView = container.binding.exFourDayText
-                val roundBgView = container.binding.exFourRoundBackgroundView
-                val continuousBgView = container.binding.exFourContinuousBackgroundView
-
-                textView.text = null
-                roundBgView.makeInVisible()
-                continuousBgView.makeInVisible()
-
-                val (startDate, endDate) = selection
-
-                when (data.position) {
-                    DayPosition.MonthDate -> {
-                        textView.text = data.date.dayOfMonth.toString()
-                        if (data.date.isBefore(today)) {
-                            textView.setTextColorRes(R.color.black)
-                        } else {
-                            when {
-                                startDate == data.date && endDate == null -> {
-                                    textView.setTextColorRes(R.color.black)
-                                    if (singleBackground != null) {
-                                        roundBgView.applyBackground(singleBackground)
-                                    }
-                                }
-                                data.date == startDate -> {
-                                    textView.setTextColorRes(R.color.black)
-                                    if (rangeStartBackground != null) {
-                                        continuousBgView.applyBackground(rangeStartBackground)
-                                    }
-                                    if (singleBackground != null) {
-                                        roundBgView.applyBackground(singleBackground)
-                                    }
-                                }
-                                startDate != null && endDate != null && (data.date > startDate && data.date < endDate) -> {
-                                    textView.setTextColorRes(R.color.black)
-                                    if (rangeMiddleBackground != null) {
-                                        continuousBgView.applyBackground(rangeMiddleBackground)
-                                    }
-                                }
-                                data.date == endDate -> {
-                                    textView.setTextColorRes(R.color.black)
-                                    if (rangeEndBackground != null) {
-                                        continuousBgView.applyBackground(rangeEndBackground)
-                                    }
-                                    if (singleBackground != null) {
-                                        roundBgView.applyBackground(singleBackground)
-                                    }
-                                }
-                                data.date == today -> {
-                                    textView.setTextColorRes(R.color.white)
-                                    if (todayBackground != null) {
-                                        roundBgView.applyBackground(todayBackground)
-                                    }
-                                }
-                                else -> textView.setTextColorRes(R.color.black)
-                            }
-                        }
-                    }
-                    // Make the coloured selection background continuous on the
-                    // invisible in and out dates across various months.
-                    DayPosition.InDate ->
-                        if (startDate != null && endDate != null &&
-                            isInDateBetweenSelection(data.date, startDate, endDate)
-                        ) {
-                            if (rangeMiddleBackground != null) {
-                                continuousBgView.applyBackground(rangeMiddleBackground)
-                            }
-                        }
-                    DayPosition.OutDate ->
-                        if (startDate != null && endDate != null &&
-                            isOutDateBetweenSelection(data.date, startDate, endDate)
-                        ) {
-                            if (rangeMiddleBackground != null) {
-                                continuousBgView.applyBackground(rangeMiddleBackground)
-                            }
-                        }
-                }
-            }
-
-            private fun View.applyBackground(drawable: Drawable) {
-                makeVisible()
-                background = drawable
-            }
-        }
-
-        class MonthViewContainer(view: View) : ViewContainer(view) {
-            val textView = Example4CalendarHeaderBinding.bind(view).exFourHeaderText
-        }
-        binding.exFourCalendar.monthHeaderBinder =
-            object : MonthHeaderFooterBinder<MonthViewContainer> {
-                override fun create(view: View) = MonthViewContainer(view)
+            binding.exFourCalendar.dayBinder = object : MonthDayBinder<DayViewContainer> {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun create(view: View) = DayViewContainer(view)
 
                 @RequiresApi(Build.VERSION_CODES.O)
-                override fun bind(container: MonthViewContainer, data: CalendarMonth) {
-                    container.textView.text = data.yearMonth.displayText()
+                override fun bind(container: DayViewContainer, data: CalendarDay) {
+                    container.day = data
+                    val textView = container.binding.exFourDayText
+                    val roundBgView = container.binding.exFourRoundBackgroundView
+                    val continuousBgView = container.binding.exFourContinuousBackgroundView
+
+                    textView.text = null
+                    roundBgView.makeInVisible()
+                    continuousBgView.makeInVisible()
+
+                    val (startDate, endDate) = selection
+
+                    when (data.position) {
+                        DayPosition.MonthDate -> {
+                            textView.text = data.date.dayOfMonth.toString()
+                            if (data.date.isBefore(today)) {
+                                textView.setTextColorRes(R.color.black)
+                            } else {
+                                when {
+                                    startDate == data.date && endDate == null -> {
+                                        textView.setTextColorRes(R.color.black)
+                                        if (singleBackground != null) {
+                                            roundBgView.applyBackground(singleBackground)
+                                        }
+                                    }
+                                    data.date == startDate -> {
+                                        textView.setTextColorRes(R.color.black)
+                                        if (rangeStartBackground != null) {
+                                            continuousBgView.applyBackground(rangeStartBackground)
+                                        }
+                                        if (singleBackground != null) {
+                                            roundBgView.applyBackground(singleBackground)
+                                        }
+                                    }
+                                    startDate != null && endDate != null && (data.date > startDate && data.date < endDate) -> {
+                                        textView.setTextColorRes(R.color.black)
+                                        if (rangeMiddleBackground != null) {
+                                            continuousBgView.applyBackground(rangeMiddleBackground)
+                                        }
+                                    }
+                                    data.date == endDate -> {
+                                        textView.setTextColorRes(R.color.black)
+                                        if (rangeEndBackground != null) {
+                                            continuousBgView.applyBackground(rangeEndBackground)
+                                        }
+                                        if (singleBackground != null) {
+                                            roundBgView.applyBackground(singleBackground)
+                                        }
+                                    }
+                                    data.date == today -> {
+                                        textView.setTextColorRes(R.color.white)
+                                        if (todayBackground != null) {
+                                            roundBgView.applyBackground(todayBackground)
+                                        }
+                                    }
+                                    else -> textView.setTextColorRes(R.color.black)
+                                }
+                            }
+                        }
+                        // Make the coloured selection background continuous on the
+                        // invisible in and out dates across various months.
+                        DayPosition.InDate ->
+                            if (startDate != null && endDate != null &&
+                                isInDateBetweenSelection(data.date, startDate, endDate)
+                            ) {
+                                if (rangeMiddleBackground != null) {
+                                    continuousBgView.applyBackground(rangeMiddleBackground)
+                                }
+                            }
+                        DayPosition.OutDate ->
+                            if (startDate != null && endDate != null &&
+                                isOutDateBetweenSelection(data.date, startDate, endDate)
+                            ) {
+                                if (rangeMiddleBackground != null) {
+                                    continuousBgView.applyBackground(rangeMiddleBackground)
+                                }
+                            }
+                    }
+                }
+
+                private fun View.applyBackground(drawable: Drawable) {
+                    makeVisible()
+                    background = drawable
                 }
             }
+
+            class MonthViewContainer(view: View) : ViewContainer(view) {
+                val textView = Example4CalendarHeaderBinding.bind(view).exFourHeaderText
+            }
+            binding.exFourCalendar.monthHeaderBinder =
+                object : MonthHeaderFooterBinder<MonthViewContainer> {
+                    override fun create(view: View) = MonthViewContainer(view)
+
+                    @RequiresApi(Build.VERSION_CODES.O)
+                    override fun bind(container: MonthViewContainer, data: CalendarMonth) {
+                        container.textView.text = data.yearMonth.displayText()
+                    }
+                }
+
+        }
+
     }
 
     interface OnDateRangeSelected{
