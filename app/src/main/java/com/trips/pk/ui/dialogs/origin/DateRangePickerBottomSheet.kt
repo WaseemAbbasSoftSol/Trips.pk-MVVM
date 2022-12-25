@@ -4,9 +4,11 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -14,7 +16,10 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
-import com.kizitonwose.calendar.core.*
+import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.core.CalendarMonth
+import com.kizitonwose.calendar.core.DayPosition
+import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
@@ -32,10 +37,12 @@ import com.trips.pk.utils.CustomDateRangeHelper.makeInVisible
 import com.trips.pk.utils.CustomDateRangeHelper.makeVisible
 import com.trips.pk.utils.CustomDateRangeHelper.setTextColorRes
 import com.trips.pk.utils.Helpers
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
     private lateinit var binding: DateRangePickerBottomsheetBinding
@@ -64,6 +71,7 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         binding.lifecycleOwner = this
         Helpers.makeBottomSheetRounded(binding.root, dialog!!)
 
+        Log.d("todayss", today.toString())
     /*    binding.exFourHeaderText.text=getMonthNameManually(mCurrentMonth.toString())
         binding.arrowRight.setOnClickListener {
             mCurrentMonth = mCurrentMonth.nextMonth
@@ -88,7 +96,7 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         //  binding = Example4FragmentBinding.bind(view)
         // Set the First day of week depending on Locale
         val daysOfWeek = daysOfWeek()
-
+        getCurrentTim()
 //        binding.legendLayout.root.children.forEachIndexed { index, child ->
 //            (child as TextView).apply {
 //                text = daysOfWeek[index].displayText()
@@ -356,5 +364,18 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
             e.printStackTrace()
         }
         return "$monthName-$d"
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getCurrentTim(){
+
+        val timestamp=SimpleDateFormat("HH:mm:ss")
+
+        val time = Calendar.getInstance()
+        time.add(Calendar.MINUTE, 3)
+
+        val d  = timestamp.format(time.time)
+        Toast.makeText(requireContext(),d.toString(), Toast.LENGTH_LONG).show()
+
     }
 }

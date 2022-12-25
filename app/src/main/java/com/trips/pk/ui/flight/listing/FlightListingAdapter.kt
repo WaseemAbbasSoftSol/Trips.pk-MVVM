@@ -16,7 +16,6 @@ import com.trips.pk.ui.flight.listing.viewholder.OneStopFlightsVH
 class FlightListingAdapter(
     val context: Context,
     val flightList:ArrayList<ItinerariesDetail>,
-    val flightDescription:List<OriginDestination>,
     private val listener:FlightListClickListener,
     private var viewtypes:Int
 ) :

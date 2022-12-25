@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -37,11 +38,18 @@ class AirlinesAndStopsAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
+        if (position==0) setMargins(holder.itemView,25,0,0,0)
         val flight=flightList[position]
         Glide.with(context).load(flight.legs[0].beggageInformation.airlineLogo).into(holder.airlineLogo)
     }
     override fun getItemCount(): Int {
         return flightList.size
     }
-
+    private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
+        if (view.layoutParams is MarginLayoutParams) {
+            val p = view.layoutParams as MarginLayoutParams
+            p.setMargins(left, top, right, bottom)
+            view.requestLayout()
+        }
+    }
 }

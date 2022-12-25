@@ -106,11 +106,10 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/light_blue_01"
+                    android:background="@drawable/bg_rounded_cl"
                     >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@color/light_blue"
                         android:id="@+id/cl_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
