@@ -38,9 +38,17 @@ class AirlinesAndStopsAdapter(
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
-        if (position==0) setMargins(holder.itemView,25,0,0,0)
-        val flight=flightList[position]
-        Glide.with(context).load(flight.legs[0].beggageInformation.airlineLogo).into(holder.airlineLogo)
+        try {
+            if (position==0) setMargins(holder.itemView,25,0,0,0)
+            val flight=flightList[position]
+            Glide.with(context).load(flight.legs[0].beggageInformation.airlineLogo).into(holder.airlineLogo)
+            val c=flight.pricingInformation.currency.toString()
+            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
+
+            holder.totalMoney.text = "$c $money"
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
     override fun getItemCount(): Int {
         return flightList.size

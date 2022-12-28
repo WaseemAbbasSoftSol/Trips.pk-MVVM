@@ -62,6 +62,13 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
 
     private var listener: OnDateRangeSelected?=null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val bundle=this.arguments
+        val tourType=bundle!!.getString("tourType")
+        isSingleSelection = tourType=="oneway"
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,6 +93,10 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
             binding.exFourHeaderText.text=getMonthNameManually(mCurrentMonth.toString())
         }*/
 
+        if (isSingleSelection){
+            binding.exFourEndDateText.visibility=View.GONE
+            binding.dateDivider.visibility=View.GONE
+        }
         return binding.root
     }
 
@@ -97,7 +108,6 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         //  binding = Example4FragmentBinding.bind(view)
         // Set the First day of week depending on Locale
         val daysOfWeek = daysOfWeek()
-        getCurrentTim()
 //        binding.legendLayout.root.children.forEachIndexed { index, child ->
 //            (child as TextView).apply {
 //                text = daysOfWeek[index].displayText()
@@ -124,13 +134,21 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         binding.exFourCalendar.scrollToMonth(currentMonth)
 
         binding.exFourSaveButton.setOnClickListener click@{
-            val (startDate, endDate) = selection
-            if (startDate != null && endDate != null) {
-                val text = dateRangeDisplayText(startDate, endDate)
-                Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG).show()
+            if (isSingleSelection){
+                listener!!.selectedRange(start = headerDateFormatter.format(singleSelectedDate),
+                    isToday = checkIfSelectedDateIsToday(headerDateFormatter.format(singleSelectedDate)))
+                listener!!.selectedRange(end = "", isToday = false)
+                dismiss()
+            }else{
+                val (startDate, endDate) = selection
+                if (startDate != null && endDate != null) {
+                    val text = dateRangeDisplayText(startDate, endDate)
+                    Snackbar.make(requireView(), text, Snackbar.LENGTH_LONG).show()
+                }
+                dismiss()
+                //  parentFragmentManager.popBackStack()
             }
-            dismiss()
-            //  parentFragmentManager.popBackStack()
+
         }
 
         bindSummaryViews()
@@ -142,7 +160,8 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
             if (selection.startDate != null) {
                 setText(headerDateFormatter.format(selection.startDate))
                 setTextColorRes(R.color.black)
-                listener!!.selectedRange(start = headerDateFormatter.format(selection.startDate))
+                listener!!.selectedRange(start = headerDateFormatter.format(selection.startDate),
+                    isToday = checkIfSelectedDateIsToday(headerDateFormatter.format(selection.startDate)))
             } else {
                setText(getString(R.string.start_date))
                 setTextColor(Color.GRAY)
@@ -153,7 +172,8 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
             if (selection.endDate != null) {
                 setText(headerDateFormatter.format(selection.endDate))
                 setTextColorRes(R.color.black)
-                listener!!.selectedRange(end = headerDateFormatter.format(selection.endDate))
+                listener!!.selectedRange(end = headerDateFormatter.format(selection.endDate),
+                    isToday = checkIfSelectedDateIsToday(headerDateFormatter.format(selection.endDate)))
             } else {
                setText(getString(R.string.end_date))
                 setTextColor(Color.GRAY)
@@ -161,7 +181,8 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
         }
         if (isSingleSelection){
             val date = singleSelectedDate
-            binding.exFourSaveButton.isEnabled=singleSelectedDate!=null
+          //  binding.exFourSaveButton.isEnabled=singleSelectedDate!=null
+            binding.exFourSaveButton.isEnabled=true
         }
        else binding.exFourSaveButton.isEnabled = selection.daysBetween != null
     }
@@ -191,24 +212,31 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
                 val textView = Example4CalendarDayBinding.bind(view).exFourDayText
 
                 init {
-                    textView.setOnClickListener {
-                        if (day.position == DayPosition.MonthDate &&
-                            (day.date == today || day.date.isAfter(today))
-                        ) {
-                            if (singleSelectedDate == day.date) {
-                                singleSelectedDate = null
-                                calendarView.notifyDayChanged(day)
-                            } else {
-                                val oldDate = singleSelectedDate
-                                singleSelectedDate = day.date
-                                calendarView.notifyDateChanged(day.date)
-                                oldDate?.let { calendarView.notifyDateChanged(oldDate) }
+
+                    textView.setOnClickListener(object : View.OnClickListener{
+                        override fun onClick(p0: View?) {
+                            if (day.position == DayPosition.MonthDate &&
+                                (day.date == today || day.date.isAfter(today))
+                            ) {
+                                if (singleSelectedDate == day.date) {
+                                    singleSelectedDate = null
+                                    calendarView.notifyDayChanged(day)
+                                } else {
+                                    val oldDate = singleSelectedDate
+                                    singleSelectedDate = day.date
+                                    calendarView.notifyDateChanged(day.date)
+                                    oldDate?.let { calendarView.notifyDateChanged(oldDate) }
+                                }
+                                //   menuItem.isVisible = selectedDate != null
+                             //   binding.exFourSaveButton.isEnabled = selection.daysBetween != null
                             }
-                         //   menuItem.isVisible = selectedDate != null
-                            binding.exFourSaveButton.isEnabled = selection.daysBetween != null
+                            binding.exFourStartDateText.setText(singleSelectedDate.toString())
+                            binding.exFourStartDateText.setTextColorRes(R.color.black)
                         }
-                    }
+
+                    })
                 }
+
             }
 
             calendarView.dayBinder = object : MonthDayBinder<DayViewContainerSingleSelection> {
@@ -415,7 +443,7 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
     }
 
     interface OnDateRangeSelected{
-        fun selectedRange(start:String="", end:String="")
+        fun selectedRange(start:String="", end:String="", isToday:Boolean)
     }
     fun setSelectedRange(listener: OnDateRangeSelected){
         this.listener=listener
@@ -449,15 +477,7 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getCurrentTim(){
-
-        val timestamp=SimpleDateFormat("HH:mm:ss")
-
-        val time = Calendar.getInstance()
-        time.add(Calendar.MINUTE, 3)
-
-        val d  = timestamp.format(time.time)
-        Toast.makeText(requireContext(),d.toString(), Toast.LENGTH_LONG).show()
-
+    private fun checkIfSelectedDateIsToday(date:String):Boolean{
+        return date==today.toString()
     }
 }

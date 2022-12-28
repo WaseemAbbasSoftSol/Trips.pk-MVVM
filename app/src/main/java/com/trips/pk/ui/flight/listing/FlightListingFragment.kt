@@ -14,7 +14,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightListingBinding
 import com.trips.pk.model.FlightSearch
+import com.trips.pk.ui.common.mFromTo
 import com.trips.pk.ui.common.sNoOfStops
+import com.trips.pk.ui.common.mTourType
 import com.trips.pk.ui.flight.listing.stops.OneStopFlightsFragment
 import com.trips.pk.ui.flight.listing.stops.NoStopFlightsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,14 +26,13 @@ class FlightListingFragment : Fragment() {
     private val mViewModel: FlightListingViewModel by viewModel()
     private var listingAdapter: FlightListingAdapter? = null
     private lateinit var flightSearch: FlightSearch
-    private var fromTo = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments.let {
             val args = FlightListingFragmentArgs.fromBundle(it!!)
             flightSearch = args.search
-            fromTo = args.fromTo
             mViewModel.searchFlights(flightSearch)
         }
     }
@@ -43,7 +44,8 @@ class FlightListingFragment : Fragment() {
     ): View? {
         binding = FragmentFlightListingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.tvToolbar.text = fromTo
+        binding.tvToolbar.text = mFromTo
+        binding.tvDepartureReturn.text=if (mTourType=="oneway") "Departure" else "Departure-Return"
 
         initListeners()
 

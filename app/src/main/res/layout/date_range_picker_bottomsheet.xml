@@ -81,6 +81,7 @@
                                 android:padding="@dimen/_10dp"/>
 
                             <View
+                                android:id="@+id/date_divider"
                                 android:layout_width="@dimen/_1dp"
                                 android:layout_height="match_parent"
                                 android:background="@color/grey"/>

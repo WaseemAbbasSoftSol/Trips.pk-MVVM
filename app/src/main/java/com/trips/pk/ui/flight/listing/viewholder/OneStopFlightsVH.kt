@@ -36,12 +36,17 @@ class OneStopFlightsVH(view:View, private val context: Context):RecyclerView.Vie
     val oTotalTime=itemView.findViewById<TextView>(R.id.tv_total_time)
     val dTotalTime=itemView.findViewById<TextView>(R.id.tv_total_time_return)
 
+    val money=itemView.findViewById<TextView>(R.id.tv_money)
+
     fun bindData(flight:ItinerariesDetail, holder: OneStopFlightsVH){
         try {
             val firstLeg=flight.legs[0]
 
             Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.oLogo)
             Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.dLogo)
+
+            holder.oCarrier.text = firstLeg.beggageInformation.airlineName
+            holder.dCarrier.text=firstLeg.beggageInformation.airlineName
 
             holder.oTime.text="${changeTimeFormat(firstLeg.schedules[0].departure.time)} ${firstLeg.schedules[0].departure.airport}"
             holder.dTime.text="${changeTimeFormat(firstLeg.schedules[0].arrival.time)} ${firstLeg.schedules[0].arrival.airport}"
@@ -61,6 +66,10 @@ class OneStopFlightsVH(view:View, private val context: Context):RecyclerView.Vie
 
             holder.oTotalTime.text="${firstLeg.schedules[0].elapsedTime} hrs"
             holder.dTotalTime.text="${firstLeg.schedules[1].elapsedTime} hrs"
+
+            val c=flight.pricingInformation.currency.toString()
+            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
+            holder.money.text = "$c $money"
         }catch (e:Exception){
             e.printStackTrace()
         }

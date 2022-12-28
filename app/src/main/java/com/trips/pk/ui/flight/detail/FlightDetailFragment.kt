@@ -11,6 +11,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightDetailBinding
 import com.trips.pk.model.flight.ItinerariesDetail
+import com.trips.pk.ui.common.mFromTo
+import com.trips.pk.ui.common.mTourType
 import com.trips.pk.ui.common.sItinerariesDetail
 import com.trips.pk.ui.common.sNoOfStops
 import java.text.SimpleDateFormat
@@ -33,7 +35,8 @@ class FlightDetailFragment: Fragment() {
         binding.lifecycleOwner=this
         flightDetail= sItinerariesDetail
         val firstLeg=flightDetail!!.legs[0]
-        binding.tvToolbar.text = "Dubai-Lahore"
+        binding.tvToolbar.text = mFromTo
+        binding.tvDepartureReturn.text=if (mTourType =="oneway") "Departure" else "Departure-Return"
         binding.inboundFlightHeader.tvOutboundFlightDetail.text = "Inbound Flight Detail"
 //        binding.inboundFlightLayout.root.setOnClickListener {
 //            //showBookNowDialog()
@@ -45,30 +48,46 @@ class FlightDetailFragment: Fragment() {
 
        // binding.outboundFlightLayout.tvFlightOrigin.text=flightDetail!!.legs[0].schedules[0].departure
         Glide.with(requireContext()).load(flightDetail!!.legs[0].beggageInformation.airlineLogo).into(binding.outboundFlightLayout.ivFlight)
+
+        binding.outboundFlightLayout.tvFlightOrigin.text=firstLeg.beggageInformation.airlineName
+
         binding.outboundFlightLayout.tvFlightCode.text=flightDetail!!.legs[0].beggageInformation.airlineCode
         binding.outboundFlightLayout.tvFlightOriginTime.text="${changeTimeFormat(firstLeg.schedules[0].departure.time)} ${firstLeg.schedules[0].departure.airport}"
         binding.outboundFlightLayout.tvFlightFinalTime.text="${changeTimeFormat(firstLeg.schedules[0].arrival.time)} ${firstLeg.schedules[0].arrival.airport}"
-        binding.outboundFlightLayout.tvLhrPk.text=getCityAndCountry("${firstLeg.schedules[0].departure.country}",
-            "${firstLeg.schedules[0].departure.city}")
-        binding.outboundFlightLayout.tvDubaiUae.text=getCityAndCountry("${firstLeg.schedules[0].arrival.country}",
-            "${firstLeg.schedules[0].arrival.city}")
+
+    /*    binding.outboundFlightLayout.tvLhrPk.text=getCityAndCountry("${firstLeg.schedules[0].departure.country}",
+            "${firstLeg.schedules[0].departure.city}")*/
+
+        binding.outboundFlightLayout.tvLhrPk.text=firstLeg.schedules[0].departure.city+"-"+firstLeg.schedules[0].departure.country
+        binding.outboundFlightLayout.tvDubaiUae.text=firstLeg.schedules[0].arrival.city+"-"+firstLeg.schedules[0].arrival.country
+
+
         binding.outboundFlightLayout.tvFlightOriginDate.text=changeDateFormat(firstLeg.schedules[0].departure.date)
         binding.outboundFlightLayout.tvDestinationDate.text=changeDateFormat(firstLeg.schedules[0].arrival.date)
         binding.outboundFlightLayout.tvFlightTime.text="${firstLeg.schedules[0].elapsedTime} hrs"
 
+        val c=flightDetail!!.pricingInformation.currency.toString()
+        val money=String.format("%.2f",flightDetail!!.pricingInformation.totalFare.toDouble())
+        binding.tvTotalPrice.text = "$c $money"
 
         if (sNoOfStops==0){
             binding.outboundFlightLayout.clReturn.visibility=View.GONE
         }else{
             //binding.outboundFlightLayout.tvFlightReturn.text=""
             Glide.with(requireContext()).load(flightDetail!!.legs[0].beggageInformation.airlineLogo).into(binding.outboundFlightLayout.ivFlightReturn)
+
+            binding.outboundFlightLayout.tvFlightReturn.text=firstLeg.beggageInformation.airlineName
+
             binding.outboundFlightLayout.tvFlightCodeReturn.text=flightDetail!!.legs[0].beggageInformation.airlineCode
             binding.outboundFlightLayout.tvFlightFinalTimeReturn.text="${changeTimeFormat(firstLeg.schedules[1].departure.time)} ${firstLeg.schedules[1].departure.airport}"
             binding.outboundFlightLayout.tvFlightFinalTimeReturn1.text="${changeTimeFormat(firstLeg.schedules[1].arrival.time)} ${firstLeg.schedules[1].arrival.airport}"
-            binding.outboundFlightLayout.tvLhrPkReturn.text=getCityAndCountry("${firstLeg.schedules[1].departure.country}",
-                "${firstLeg.schedules[1].departure.city}")
-            binding.outboundFlightLayout.tvDubaiUaeReturn.text=getCityAndCountry("${firstLeg.schedules[1].arrival.country}",
-                "${firstLeg.schedules[1].arrival.city}")
+
+          /*  binding.outboundFlightLayout.tvLhrPkReturn.text=getCityAndCountry("${firstLeg.schedules[1].departure.country}",
+                "${firstLeg.schedules[1].departure.city}")*/
+
+            binding.outboundFlightLayout.tvLhrPkReturn.text = firstLeg.schedules[1].departure.city+"-"+firstLeg.schedules[1].departure.country
+            binding.outboundFlightLayout.tvDubaiUaeReturn.text = firstLeg.schedules[1].arrival.city+"-"+firstLeg.schedules[1].arrival.country
+
             binding.outboundFlightLayout.tvFlightOriginDateReturn.text=changeDateFormat(firstLeg.schedules[1].departure.date)
             binding.outboundFlightLayout.tvDestinationDateReturn.text=changeDateFormat(firstLeg.schedules[1].arrival.date)
             binding.outboundFlightLayout.tvFlightTimeReturn.text="${firstLeg.schedules[1].elapsedTime} hrs"
@@ -140,18 +159,6 @@ class FlightDetailFragment: Fragment() {
             e.printStackTrace()
         }
         return actualDate
-    }
-
-    private fun getCityAndCountry(countryCode:String, city:String):String{
-        var cityCountry=""
-        try {
-            val loc = Locale(countryCode)
-            loc.country
-            cityCountry = "$city-$loc"
-        }catch (e:Exception){
-            e.printStackTrace()
-        }
-        return cityCountry
     }
 
 }

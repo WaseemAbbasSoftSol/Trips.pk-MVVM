@@ -41,29 +41,39 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tv_toolbar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Dashboard"
-                android:textSize="@dimen/_20sp"
-                android:fontFamily="@font/raleway_semiboldd"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/cv_back"
+                app:layout_constraintEnd_toStartOf="@id/cv_filter"
+                app:layout_constraintTop_toTopOf="@id/cv_back"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="@dimen/_5dp"
+                android:paddingBottom="@dimen/_5dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_back">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_toolbar"
-                android:text="Departure-Return"
-                android:textSize="@dimen/_11sp"
-                android:textColor="@color/white"
-                />
+                <TextView
+                    android:id="@+id/tv_toolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard"
+                    android:textSize="@dimen/_20sp"
+                    android:fontFamily="@font/raleway_semiboldd"
+                    android:textColor="@color/white"
+                   />
+
+                <TextView
+                    android:id="@+id/tv_departure_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Departure-Return"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_filter"

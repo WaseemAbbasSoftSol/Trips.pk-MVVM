@@ -33,6 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioGroup
+                    android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -234,6 +235,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/bg_rounded_view"
                         android:hint="@string/lbl_0_adult"
+                        android:text="1 Adult"
                         android:focusable="false"
                         android:textColorHint="@color/grey_001"
                         android:fontFamily="@font/poppins_regular"

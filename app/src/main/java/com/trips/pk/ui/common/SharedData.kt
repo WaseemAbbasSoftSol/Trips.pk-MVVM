@@ -8,7 +8,8 @@ import com.trips.pk.model.flight.OriginDestination
 val airPortList= arrayListOf<Airport>()
 var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
-
+var mTourType = "round"
+var mFromTo=""
 var sNoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sOneStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sTwoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()

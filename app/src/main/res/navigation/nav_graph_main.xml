@@ -44,10 +44,6 @@
             android:name="search"
             app:argType="com.trips.pk.model.FlightSearch"/>
 
-        <argument
-            android:name="from_to"
-            app:argType="string"/>
-
         <action
             android:id="@+id/action_flight_list_to_flight_detail_fragment"
             app:destination="@id/flight_detail_fragment"

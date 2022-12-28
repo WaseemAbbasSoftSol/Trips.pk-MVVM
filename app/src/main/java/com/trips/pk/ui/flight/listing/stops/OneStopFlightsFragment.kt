@@ -50,12 +50,12 @@ class OneStopFlightsFragment(): Fragment(), FlightListingAdapter.FlightListClick
                 binding.rvAirlines.adapter=ticketAdapter
             }
         })
-
+/*
         sFlightDescription.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
 
             }
-        })
+        })*/
     }
 
     override fun onListClick(flight:ItinerariesDetail, position:Int) {

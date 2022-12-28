@@ -34,12 +34,12 @@ class NoStopFlightsFragment(): Fragment(), FlightListingAdapter.FlightListClickL
         super.onViewCreated(view, savedInstanceState)
 
 
-        sFlightDescription.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()){
-
-
-            }
-        })
+//        sFlightDescription.observe(viewLifecycleOwner, Observer {
+//            if (it.isNotEmpty()){
+//
+//
+//            }
+//        })
 
         sNoStopsFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){

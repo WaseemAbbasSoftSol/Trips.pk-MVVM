@@ -21,4 +21,9 @@ interface TripsApi {
         @Body params: FlightSearch
     ):Response<BaseResponse<FlightsDetail>>
 
+    //To be add in future
+    /*
+    * /api/GetListOfAirlines
+    * /api/GetAirlinesByKey
+    * */
 }

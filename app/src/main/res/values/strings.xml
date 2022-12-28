@@ -65,4 +65,5 @@
     <string name="end_date">Destination</string>
     <string name="start_date">Origin</string>
     <string name="access_token"></string>
+    <string name="lbl_field_required">This field is required</string>
 </resources>
