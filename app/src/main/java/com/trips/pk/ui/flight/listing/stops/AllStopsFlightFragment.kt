@@ -10,16 +10,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.databinding.FlightListingLayoutBinding
 import com.trips.pk.model.flight.ItinerariesDetail
+import com.trips.pk.ui.common.sAllFlights
 import com.trips.pk.ui.common.sFlightDescription
 import com.trips.pk.ui.common.sItinerariesDetail
 import com.trips.pk.ui.common.sNoStopsFlights
 import com.trips.pk.ui.flight.listing.AirlinesAndStopsAdapter
+import com.trips.pk.ui.flight.listing.AllStopsAdapter
 import com.trips.pk.ui.flight.listing.FlightListingAdapter
 import com.trips.pk.ui.flight.listing.FlightListingFragmentDirections
 
-class NoStopFlightsFragment(): Fragment(), FlightListingAdapter.FlightListClickListener {
+class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
     private lateinit var binding:FlightListingLayoutBinding
-    private var adapter: FlightListingAdapter?=null
+    private var adapter: AllStopsAdapter?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,22 +36,13 @@ class NoStopFlightsFragment(): Fragment(), FlightListingAdapter.FlightListClickL
         super.onViewCreated(view, savedInstanceState)
 
 
-//        sFlightDescription.observe(viewLifecycleOwner, Observer {
-//            if (it.isNotEmpty()){
-//
-//
-//            }
-//        })
-
-        sNoStopsFlights.observe(viewLifecycleOwner, Observer {
+        sAllFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
                 val layoutManager= LinearLayoutManager(requireContext())
                 binding.rvFlight.layoutManager=layoutManager
                 binding.rvFlight.setHasFixedSize(true)
-                adapter= FlightListingAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this, 0 )
+                adapter= AllStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this)
                 binding.rvFlight.adapter=adapter
-
-
             }
 
         })

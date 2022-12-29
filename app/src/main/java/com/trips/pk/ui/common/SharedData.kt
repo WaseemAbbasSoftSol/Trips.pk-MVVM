@@ -10,7 +10,10 @@ var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
 var mTourType = "round"
 var mFromTo=""
+var selectedStop="non stop"
 var sNoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sOneStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sTwoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
+var sAllFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sFlightDescription= MutableLiveData<List<OriginDestination>>()
+

@@ -110,48 +110,47 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_50dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/guide1"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:background="@drawable/bg_rounded_view"
                         android:layout_marginEnd="@dimen/_5dp"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:weightSum="2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:orientation="horizontal">
 
                         <EditText
                             android:id="@+id/ed_origin"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:focusable="false"
                             android:hint="@string/lbl_origin"
+                            android:layout_weight="1"
                             android:textColorHint="@color/grey_001"
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
                             android:padding="@dimen/_10dp"/>
 
+                        <View
+                            android:layout_width="0.8dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_002"/>
+
+                        <EditText
+                            android:id="@+id/ed_final"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="@string/lbl_destination"
+                            android:focusable="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="14sp"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/grey_001"
+                            android:padding="@dimen/_10dp"
+                            />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_50dp"
-                        android:layout_marginStart="@dimen/_5dp"
-                       app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintStart_toEndOf="@id/guide1"
-                        android:background="@drawable/bg_rounded_view"
-                        app:layout_constraintTop_toTopOf="parent">
 
-                           <EditText
-                               android:id="@+id/ed_final"
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:background="@null"
-                               android:hint="@string/lbl_destination"
-                               android:focusable="false"
-                               android:fontFamily="@font/poppins_regular"
-                               android:textSize="14sp"
-                               android:textColorHint="@color/grey_001"
-                               android:padding="@dimen/_10dp"
-                               />
-
-                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,15 +173,18 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_50dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/guide2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
                         android:background="@drawable/bg_rounded_view"
                         android:layout_marginEnd="@dimen/_5dp"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <EditText
                             android:id="@+id/ed_from_date"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@null"
                             android:focusable="false"
                             android:hint="@string/lbl_from_date"
@@ -190,22 +192,15 @@
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
                             android:padding="@dimen/_10dp"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_50dp"
-                        android:layout_marginStart="@dimen/_5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guide2"
-                        android:background="@drawable/bg_rounded_view"
-                        app:layout_constraintTop_toTopOf="parent">
-
+                        <View
+                            android:layout_width="0.8dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_002"/>
                         <EditText
                             android:id="@+id/ed_to_date"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@null"
                             android:hint="@string/lbl_to_date"
                             android:focusable="false"
@@ -225,7 +220,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10dp"
                     android:orientation="horizontal"
-                    android:weightSum="3"
+                    android:background="@drawable/bg_rounded_view"
+                    android:weightSum="3.2"
                     app:layout_constraintTop_toBottomOf="@id/cl_date">
 
                     <EditText
@@ -233,7 +229,7 @@
                         android:layout_width="@dimen/_0dp"
                         android:layout_height="@dimen/_50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_rounded_view"
+                        android:background="@null"
                         android:hint="@string/lbl_0_adult"
                         android:text="1 Adult"
                         android:focusable="false"
@@ -242,14 +238,17 @@
                         android:textSize="14sp"
                         android:padding="@dimen/_10dp"
                         android:layout_marginEnd="@dimen/_4dp"/>
-
+                    <View
+                        android:layout_width="@dimen/_1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey"/>
                     <EditText
                         android:id="@+id/ed_child"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="@dimen/_0dp"
                         android:layout_height="@dimen/_50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_rounded_view"
+                        android:background="@null"
                         android:hint="@string/lbl_0_child"
                         android:textColorHint="@color/grey_001"
                         android:fontFamily="@font/poppins_regular"
@@ -258,14 +257,17 @@
                         android:layout_marginStart="@dimen/_6dp"
                         android:layout_marginEnd="@dimen/_4dp"
                         android:padding="@dimen/_10dp"/>
-
+                    <View
+                        android:layout_width="@dimen/_1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey"/>
                     <EditText
                         android:id="@+id/ed_infant"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="@dimen/_0dp"
                         android:layout_height="@dimen/_50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_rounded_view"
+                        android:background="@null"
                         android:hint="@string/lbl_0_infant"
                         android:textColorHint="@color/grey_001"
                         android:fontFamily="@font/poppins_regular"

@@ -42,13 +42,8 @@ class OneStopFlightsFragment(): Fragment(), FlightListingAdapter.FlightListClick
                 adapter= FlightListingAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this, 1 )
                 binding.rvFlight.adapter=adapter
 
-
-                val ticketAdapter= AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
-                val layoutManager1=LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-                binding.rvAirlines.layoutManager=layoutManager1
-                binding.rvAirlines.setHasFixedSize(true)
-                binding.rvAirlines.adapter=ticketAdapter
             }
+
         })
 /*
         sFlightDescription.observe(viewLifecycleOwner, Observer {

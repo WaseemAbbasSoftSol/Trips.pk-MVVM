@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.TripsRepository
+import com.trips.pk.model.BaseError
 import com.trips.pk.model.FlightSearch
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.ItinerariesDetail
@@ -24,11 +25,21 @@ class FlightListingViewModel(
     private val _flights = MutableLiveData<FlightsDetail>()
     val flights: LiveData<FlightsDetail> = _flights
 
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
     private var noStopsFlights = arrayListOf<ItinerariesDetail>()
     private var oneStopsFlights = arrayListOf<ItinerariesDetail>()
     private var twoStopsFlights = arrayListOf<ItinerariesDetail>()
     private var flightDescription = arrayListOf<OriginDestination>()
 
+
+    init {
+        sNoStopsFlights.value= emptyList()
+        sOneStopsFlights.value= emptyList()
+        sTwoStopsFlights.value= emptyList()
+        sFlightDescription.value= emptyList()
+    }
     fun searchFlights(search: FlightSearch) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -37,6 +48,8 @@ class FlightListingViewModel(
                 if (response.isSuccessful) {
                     response.body().let {
                         _flights.postValue(it!!.data!!)
+                        sAllFlights.postValue(it.data.itineraryGroups.itineraries)
+                        //_message.postValue(it.error[0].errorDescription)
                         noStopsFlights.clear()
                         oneStopsFlights.clear()
                         twoStopsFlights.clear()
@@ -67,6 +80,7 @@ class FlightListingViewModel(
                     }
                 } else {
                     response.errorBody().let {
+                        _message.postValue(it.toString())
                         Log.d("dddd", it!!.toString())
                         Log.d("wwww", it!!.string())
                     }
@@ -74,8 +88,10 @@ class FlightListingViewModel(
                 _state.postValue(RequestState.DONE)
             } catch (e: Exception) {
                 _state.postValue(RequestState.ERROR)
+                _message.postValue(e.message.toString())
                 e.printStackTrace()
             } catch (t: Throwable) {
+                _message.postValue(t.message.toString())
                 _state.postValue(RequestState.ERROR)
                 t.printStackTrace()
             }

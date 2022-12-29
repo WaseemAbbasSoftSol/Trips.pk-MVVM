@@ -116,18 +116,44 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_rounded_cl"
                     >
 
+                    <LinearLayout
+                        android:id="@+id/ll_up_down"
+                        android:layout_width="@dimen/_25dp"
+                        android:layout_height="@dimen/_25dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="@dimen/_20dp"
+                        android:layout_marginTop="@dimen/_15dp"
+                        android:elevation="@dimen/_5dp">
+                        <ImageView
+
+                            android:id="@+id/iv_down"
+                            android:layout_width="@dimen/_25dp"
+                            android:layout_height="@dimen/_25dp"
+                            android:src="@drawable/ic_down"/>
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/iv_up"
+                            android:layout_width="@dimen/_25dp"
+                            android:layout_height="@dimen/_25dp"
+                            android:src="@drawable/ic_up"/>
+                    </LinearLayout>
+
+
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="gone"
                         android:id="@+id/cl_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="@dimen/_5dp"
                         android:paddingEnd="@dimen/_5dp"
+                        android:background="@color/light_blue"
                         android:paddingBottom="@dimen/_10dp"
                         android:paddingTop="@dimen/_15dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ll_up_down"
+                        android:layout_marginTop="@dimen/_13dp"
                         app:layout_constraintStart_toStartOf="parent">
 
                         <androidx.constraintlayout.widget.Guideline
@@ -202,12 +228,27 @@
                             app:layout_constraintStart_toEndOf="@id/guide2"
                             app:layout_constraintEnd_toEndOf="@id/guide3"
                             />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:visibility="gone"
+                            android:id="@+id/rv_airlines"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/_15dp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/btn_one_stop"
+                            tools:listitem="@layout/item_airlines_and_stops" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/vp_flights"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/_15dp"
                             app:layout_constraintTop_toBottomOf="@id/cl_horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"/>
 

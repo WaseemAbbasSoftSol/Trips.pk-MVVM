@@ -60,4 +60,10 @@ class AirlinesAndStopsAdapter(
             view.requestLayout()
         }
     }
+
+    fun updateList(list: List<ItinerariesDetail>){
+        flightList.clear()
+        flightList.addAll(list)
+        notifyDataSetChanged()
+    }
 }

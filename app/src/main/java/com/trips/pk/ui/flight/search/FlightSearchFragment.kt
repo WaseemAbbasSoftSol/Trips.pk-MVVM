@@ -28,6 +28,7 @@ import com.trips.pk.model.FlightSearch
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.mFromTo
 import com.trips.pk.ui.common.mTourType
+import com.trips.pk.ui.common.selectedStop
 import com.trips.pk.ui.dialogs.origin.DateRangePickerBottomSheet
 import com.trips.pk.ui.dialogs.origin.SearchOriginDestinationBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,7 +63,7 @@ class FlightSearchFragment:Fragment() {
         binding= FragmentFlightSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
         binding.toolbarLayout.tvToolbar.text="Flight Search"
-
+        selectedStop ="non stop"
         val dialog= SearchOriginDestinationBottomSheet()
         val bundle=Bundle()
 
@@ -290,7 +291,7 @@ class FlightSearchFragment:Fragment() {
     }
 
     private fun validateFields():Boolean{
-        if (origin==""){
+        if (binding.edOrigin.text.toString().trim().isNullOrEmpty()){
             binding.edOrigin.error = getString(R.string.lbl_field_required)
             return false
         }
