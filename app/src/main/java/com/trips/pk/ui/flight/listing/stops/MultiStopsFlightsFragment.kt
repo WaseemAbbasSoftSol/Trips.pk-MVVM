@@ -1,5 +1,4 @@
 package com.trips.pk.ui.flight.listing.stops
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,19 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.trips.pk.databinding.FlightListingLayoutBinding
 import com.trips.pk.databinding.FlightMainRvListBinding
 import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.ui.common.sFlightDescription
-import com.trips.pk.ui.common.sItinerariesDetail
-import com.trips.pk.ui.common.sOneStopsFlights
-import com.trips.pk.ui.flight.listing.AirlinesAndStopsAdapter
-import com.trips.pk.ui.flight.listing.AllStopsAdapter
-import com.trips.pk.ui.flight.listing.FlightListingAdapter
-import com.trips.pk.ui.flight.listing.FlightListingFragmentNewDirections
+import com.trips.pk.ui.common.*
+import com.trips.pk.ui.flight.listing.*
 
-class OneStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
-    private lateinit var binding: FlightMainRvListBinding
+class MultiStopsFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
+    private lateinit var binding:FlightMainRvListBinding
     private var adapter: AllStopsAdapter?=null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,18 +29,16 @@ class OneStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
         super.onViewCreated(view, savedInstanceState)
 
 
-        sOneStopsFlights.observe(viewLifecycleOwner, Observer {
+        sMultiStopsFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
                 val layoutManager= LinearLayoutManager(requireContext())
                 binding.rvFlight.layoutManager=layoutManager
                 binding.rvFlight.setHasFixedSize(true)
-                adapter= AllStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this )
+                adapter= AllStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this)
                 binding.rvFlight.adapter=adapter
-
             }
 
         })
-
     }
 
     override fun onListClick(flight:ItinerariesDetail, position:Int) {

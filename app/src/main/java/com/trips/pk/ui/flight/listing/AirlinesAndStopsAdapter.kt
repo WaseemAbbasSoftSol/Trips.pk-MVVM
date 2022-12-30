@@ -41,11 +41,15 @@ class AirlinesAndStopsAdapter(
         try {
             if (position==0) setMargins(holder.itemView,25,0,0,0)
             val flight=flightList[position]
-            Glide.with(context).load(flight.legs[0].beggageInformation.airlineLogo).into(holder.airlineLogo)
-            val c=flight.pricingInformation.currency.toString()
-            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
+       //     Glide.with(context).load(flight.legs[0].beggageInformation.airlineLogo).into(holder.airlineLogo)
+            Glide.with(context).load(flight.pricingInformation.fare.passengerList[position].passengerInfo.beggageInformation[position].airlineLogo).into(holder.airlineLogo)
 
+        //            val c=flight.pricingInformation.currency.toString()
+//            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
+            val c=flight.pricingInformation.fare.fares.currency
+            val money=String.format("%.2f",flight.pricingInformation.fare.fares.totalFare.toString())
             holder.totalMoney.text = "$c $money"
+
         }catch (e:Exception){
             e.printStackTrace()
         }

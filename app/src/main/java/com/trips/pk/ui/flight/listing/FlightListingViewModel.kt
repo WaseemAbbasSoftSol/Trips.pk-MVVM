@@ -30,14 +30,15 @@ class FlightListingViewModel(
 
     private var noStopsFlights = arrayListOf<ItinerariesDetail>()
     private var oneStopsFlights = arrayListOf<ItinerariesDetail>()
-    private var twoStopsFlights = arrayListOf<ItinerariesDetail>()
+    private var multiStopsFlights = arrayListOf<ItinerariesDetail>()
     private var flightDescription = arrayListOf<OriginDestination>()
 
 
     init {
+        sAllFlights.value= emptyList()
         sNoStopsFlights.value= emptyList()
         sOneStopsFlights.value= emptyList()
-        sTwoStopsFlights.value= emptyList()
+        sMultiStopsFlights.value= emptyList()
         sFlightDescription.value= emptyList()
     }
     fun searchFlights(search: FlightSearch) {
@@ -52,19 +53,14 @@ class FlightListingViewModel(
                         //_message.postValue(it.error[0].errorDescription)
                         noStopsFlights.clear()
                         oneStopsFlights.clear()
-                        twoStopsFlights.clear()
+                        multiStopsFlights.clear()
                         flightDescription.clear()
                         for ((i,value ) in it.data.itineraryGroups.itineraries.withIndex()){
                             for ((j, sub) in value.legs.withIndex()) {
                                 when (sub.stops) {
-                                    "Zero Stop" -> if (j == 0) {
-                                        noStopsFlights.add(value)
-                                    }
+                                    "Zero Stop" -> if (j == 0)noStopsFlights.add(value)
                                     "One Stops" -> if (j == 0) oneStopsFlights.add(value)
-                                    "Two Stops" -> if (j == 0) twoStopsFlights.add(value)
-                                    else -> if (j == 0) {
-                                     //   tempList.add(value)
-                                    }
+                                    else -> if (j == 0) multiStopsFlights.add(value)
                                 }
                             }
                         }
@@ -75,7 +71,7 @@ class FlightListingViewModel(
 
                         sNoStopsFlights.postValue(noStopsFlights)
                         sOneStopsFlights.postValue(oneStopsFlights)
-                        sTwoStopsFlights.postValue(twoStopsFlights)
+                        sMultiStopsFlights.postValue(multiStopsFlights)
                         sFlightDescription.postValue(flightDescription)
                     }
                 } else {

@@ -14,33 +14,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
-import com.trips.pk.databinding.FragmentFlightListingBinding
+import com.trips.pk.databinding.FragmentFlightListingNewBinding
 import com.trips.pk.model.FlightSearch
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.ui.common.*
 import com.trips.pk.ui.flight.listing.stops.AllStopsFlightFragment
+import com.trips.pk.ui.flight.listing.stops.MultiStopsFlightsFragment
 import com.trips.pk.ui.flight.listing.stops.OneStopFlightsFragment
 import com.trips.pk.ui.flight.listing.stops.NoStopFlightsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FlightListingFragment : Fragment() {
-    private lateinit var binding: FragmentFlightListingBinding
+class FlightListingFragmentNew : Fragment() {
+    private lateinit var binding: FragmentFlightListingNewBinding
     private val mViewModel: FlightListingViewModel by viewModel()
     private var listingAdapter: FlightListingAdapter? = null
     private lateinit var flightSearch: FlightSearch
-
-    private var noStopsFlights = arrayListOf<ItinerariesDetail>()
-    private var oneStopsFlights = arrayListOf<ItinerariesDetail>()
-    private var twoStopsFlights = arrayListOf<ItinerariesDetail>()
 
     private var airlinesAdapter:AirlinesAndStopsAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments.let {
-//            val args = FlightListingFragmentArgs.fromBundle(it!!)
-//            flightSearch = args.search
-//            mViewModel.searchFlights(flightSearch)
+            val args = FlightListingFragmentNewArgs.fromBundle(it!!)
+            flightSearch = args.search
+            mViewModel.searchFlights(flightSearch)
         }
     }
 
@@ -49,7 +46,7 @@ class FlightListingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFlightListingBinding.inflate(inflater, container, false)
+        binding = FragmentFlightListingNewBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.tvToolbar.text = mFromTo
         binding.tvDepartureReturn.text=if (mTourType=="oneway") "One Way" else "Return"
@@ -64,35 +61,43 @@ class FlightListingFragment : Fragment() {
         binding.vpFlights.adapter = pagerAdapter
         binding.vpFlights.isUserInputEnabled = false
 
-        if (selectedStop=="non stop"){
-            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+        if (selectedStop=="all"){
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnMultiStop.changeBackground(
                 R.drawable.bg_rounded_btn_unfilled2,
                 R.color.black
             )
-        }else{
+        }
+        else if (selectedStop=="non stop"){
+            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnMultiStop.changeBackground(
+                R.drawable.bg_rounded_btn_unfilled2,
+                R.color.black
+            )
+        }
+        else if (selectedStop=="one stop"){
             binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnMultiStop.changeBackground(
                 R.drawable.bg_rounded_btn_unfilled2,
                 R.color.black
             )
         }
-
-        binding.ivDown.setOnClickListener {
-            binding.ivDown.visibility=View.GONE
-            binding.ivUp.visibility=View.VISIBLE
-            binding.clHorizontal.visibility=View.VISIBLE
-            setMargins(binding.vpFlights,0,0,0,0)
+        else{
+            binding.btnMultiStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnMultiStop.changeBackground(
+                R.drawable.bg_rounded_btn_unfilled2,
+                R.color.black
+            )
         }
 
-        binding.ivUp.setOnClickListener {
-            binding.ivDown.visibility=View.VISIBLE
-            binding.ivUp.visibility=View.GONE
-            binding.clHorizontal.visibility=View.GONE
-            setMargins(binding.vpFlights,0,15,0,0)
-        }
         return binding.root
     }
 
@@ -101,9 +106,7 @@ class FlightListingFragment : Fragment() {
         binding.viewModel = mViewModel
         mViewModel.flights.observe(viewLifecycleOwner) {
             if (null == it) {
-              //  binding.clHorizontal.visibility = View.GONE
-            } else {
-              //  binding.clHorizontal.visibility = View.VISIBLE
+
             }
         }
         mViewModel.message.observe(viewLifecycleOwner) {
@@ -112,11 +115,19 @@ class FlightListingFragment : Fragment() {
             }
         }
 
-        sNoStopsFlights.observe(viewLifecycleOwner, Observer {
+        sAllFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
 
-                noStopsFlights.clear()
-                noStopsFlights.addAll(it)
+                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
+                val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+                binding.rvAirlines.layoutManager=layoutManager1
+                binding.rvAirlines.setHasFixedSize(true)
+                binding.rvAirlines.adapter=airlinesAdapter
+
+            }
+        })
+        sNoStopsFlights.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()){
 
                 airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
                 val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
@@ -129,9 +140,6 @@ class FlightListingFragment : Fragment() {
 
         sOneStopsFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
-                oneStopsFlights.clear()
-                oneStopsFlights.addAll(it)
-
                 airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
                 val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
                 binding.rvAirlines.layoutManager=layoutManager1
@@ -158,13 +166,12 @@ class FlightListingFragment : Fragment() {
 
     private fun initListeners() {
 
-        binding.btnNonStop.setOnClickListener {
-            binding.rvAirlines.visibility=View.VISIBLE
-            airlinesAdapter!!.updateList(noStopsFlights)
-            selectedStop="non stop"
-            binding.vpFlights.currentItem = 1
-            sNoOfStops = 0
-            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+        binding.btnAll.setOnClickListener {
+            selectedStop="all"
+            binding.vpFlights.currentItem = 0
+           // sNoOfStops = 0
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnMultiStop.changeBackground(
                 R.drawable.bg_rounded_btn_unfilled2,
@@ -172,14 +179,29 @@ class FlightListingFragment : Fragment() {
             )
         }
 
+        binding.btnNonStop.setOnClickListener {
+       //     binding.rvAirlines.visibility=View.VISIBLE
+         //   airlinesAdapter!!.updateList(noStopsFlights)
+            selectedStop="non stop"
+            binding.vpFlights.currentItem = 1
+            sNoOfStops = 0
+            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnMultiStop.changeBackground(
+                R.drawable.bg_rounded_btn_unfilled2,
+                R.color.black
+            )
+        }
+
         binding.btnOneStop.setOnClickListener {
-            binding.rvAirlines.visibility=View.VISIBLE
-            airlinesAdapter!!.updateList(oneStopsFlights)
+         //   airlinesAdapter!!.updateList(oneStopsFlights)
             selectedStop = "one stop"
             binding.vpFlights.currentItem = 2
             sNoOfStops = 1
             binding.btnOneStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
             binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
             binding.btnMultiStop.changeBackground(
                 R.drawable.bg_rounded_btn_unfilled2,
                 R.color.black
@@ -187,7 +209,16 @@ class FlightListingFragment : Fragment() {
         }
 
         binding.btnMultiStop.setOnClickListener {
-            Toast.makeText(requireContext(), "Not available", Toast.LENGTH_SHORT).show()
+            selectedStop = "multi"
+            binding.vpFlights.currentItem = 3
+            sNoOfStops = 2
+            binding.btnMultiStop.changeBackground(R.drawable.bg_rounded_btn_filled, R.color.white)
+            binding.btnNonStop.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnAll.changeBackground(R.drawable.bg_rounded_btn_unfilled2, R.color.black)
+            binding.btnOneStop.changeBackground(
+                R.drawable.bg_rounded_btn_unfilled2,
+                R.color.black
+            )
         }
 
         binding.cvFilter.setOnClickListener {
@@ -196,14 +227,15 @@ class FlightListingFragment : Fragment() {
     }
 
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 3
+        override fun getItemCount(): Int = 4
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> AllStopsFlightFragment()
                 1 -> NoStopFlightsFragment()
                 2 -> OneStopFlightsFragment()
-                else -> NoStopFlightsFragment()
+                3 -> MultiStopsFlightsFragment()
+                else -> AllStopsFlightFragment()
             }
         }
     }
@@ -213,11 +245,5 @@ class FlightListingFragment : Fragment() {
         setTextColor(ContextCompat.getColor(requireContext(), textColor))
     }
 
-    private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
-        if (view.layoutParams is ViewGroup.MarginLayoutParams) {
-            val p = view.layoutParams as ViewGroup.MarginLayoutParams
-            p.setMargins(left, top, right, bottom)
-            view.requestLayout()
-        }
-    }
+
 }

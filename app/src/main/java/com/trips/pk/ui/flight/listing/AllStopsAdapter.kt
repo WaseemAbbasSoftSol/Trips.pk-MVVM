@@ -2,81 +2,53 @@ package com.trips.pk.ui.flight.listing
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.ui.common.VIEW_TYPE_NO_STOP
-import com.trips.pk.ui.common.VIEW_TYPE_ONE_STOP
-import com.trips.pk.ui.flight.listing.viewholder.NoStopsFlightsVH
-import com.trips.pk.ui.flight.listing.viewholder.OneStopFlightsVH
+import com.trips.pk.model.flight.Legs
+import kotlin.collections.ArrayList
+
 
 class AllStopsAdapter(
     val context: Context,
     val flightList:ArrayList<ItinerariesDetail>,
     private val listener:FlightListClickListener,
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+): RecyclerView.Adapter<AllStopsAdapter.ItemRecyclerViewHolder>(),StopsInnerAdapter.InnerListListener {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType){
-            VIEW_TYPE_ONE_STOP ->{
-                return OneStopFlightsVH(
-                    LayoutInflater.from(context).inflate(
-                        R.layout.item_flight_listing,
-                        parent,
-                        false
-                    ),context
-                )
-            }
-        }
-        return NoStopsFlightsVH(
+    class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val rv: RecyclerView =itemView.findViewById(R.id.rv_item_list)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
+        return ItemRecyclerViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_flight_listing_no_stops,
+                R.layout.item_main_rv_list,
                 parent,
                 false
-            ),context
+            )
         )
     }
-
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder.itemViewType){
-
-            VIEW_TYPE_NO_STOP ->{
-                val flight=flightList[position]
-
-                val noStopsHolder: NoStopsFlightsVH = holder as NoStopsFlightsVH
-                noStopsHolder.bindData(flight, noStopsHolder)
-
-                noStopsHolder.itemView.setOnClickListener {
-                    listener.onListClick(flight, position)
-                }
-            }
-            VIEW_TYPE_ONE_STOP ->{
-                val flight=flightList[position]
-
-                val oneStopHolder: OneStopFlightsVH = holder as OneStopFlightsVH
-                oneStopHolder.bindData(flight, oneStopHolder)
-
-                oneStopHolder.itemView.setOnClickListener {
-                    listener.onListClick(flight, position)
-                }
-            }
-        }
+    override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
+        val flight=flightList[position]
+        setInnerList(holder.rv,flight.legs[0], flight)
     }
-    override fun getItemViewType(position: Int): Int {
-        if (flightList[position].legs[0].stops=="Zero Stop"){
-            return VIEW_TYPE_NO_STOP
-        }
-        return VIEW_TYPE_ONE_STOP
-    }
-
     override fun getItemCount(): Int {
-        return flightList.size
+        return flightList!!.size
     }
     interface FlightListClickListener{
         fun onListClick(flight: ItinerariesDetail, position: Int)
     }
 
+    private fun setInnerList(recyclerView: RecyclerView, leg:Legs, flight: ItinerariesDetail) {
+        val itemRecyclerAdapter = StopsInnerAdapter(context,leg, flight,this)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = itemRecyclerAdapter
+    }
+
+    override fun onListClick(flight: ItinerariesDetail, position: Int) {
+        TODO("Not yet implemented")
+    }
 }

@@ -42,11 +42,11 @@ class OneStopFlightsVH(view:View, private val context: Context):RecyclerView.Vie
         try {
             val firstLeg=flight.legs[0]
 
-            Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.oLogo)
-            Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.dLogo)
+          //  Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.oLogo)
+         //   Glide.with(context).load(firstLeg.beggageInformation.airlineLogo).into(holder.dLogo)
 
-            holder.oCarrier.text = firstLeg.beggageInformation.airlineName
-            holder.dCarrier.text=firstLeg.beggageInformation.airlineName
+       //     holder.oCarrier.text = firstLeg.beggageInformation.airlineName
+          //  holder.dCarrier.text=firstLeg.beggageInformation.airlineName
 
             holder.oTime.text="${changeTimeFormat(firstLeg.schedules[0].departure.time)} ${firstLeg.schedules[0].departure.airport}"
             holder.dTime.text="${changeTimeFormat(firstLeg.schedules[0].arrival.time)} ${firstLeg.schedules[0].arrival.airport}"
@@ -54,22 +54,22 @@ class OneStopFlightsVH(view:View, private val context: Context):RecyclerView.Vie
             holder.oTimeReturn.text="${changeTimeFormat(firstLeg.schedules[1].departure.time)} ${firstLeg.schedules[1].departure.airport}"
             holder.dTimeReturn.text="${changeTimeFormat(firstLeg.schedules[1].arrival.time)} ${firstLeg.schedules[1].arrival.airport}"
 
-            holder.oFlightCode.text=firstLeg.beggageInformation.airlineCode
-            holder.dFlightCode.text=firstLeg.beggageInformation.airlineCode
+         //   holder.oFlightCode.text=firstLeg.beggageInformation.airlineCode
+        //    holder.dFlightCode.text=firstLeg.beggageInformation.airlineCode
 
             holder.oDate.text =changeDateFormat(firstLeg.schedules[0].departure.date)
             holder.dDate.text = changeDateFormat(firstLeg.schedules[0].arrival.date)
             holder.oDateReturn.text = changeDateFormat(firstLeg.schedules[1].departure.date)
             holder.dDateReturn.text = changeDateFormat(firstLeg.schedules[1].arrival.date)
 
-            holder.weight.text=firstLeg.beggageInformation.allowance
+        //    holder.weight.text=firstLeg.beggageInformation.allowance
 
             holder.oTotalTime.text="${firstLeg.schedules[0].elapsedTime} hrs"
             holder.dTotalTime.text="${firstLeg.schedules[1].elapsedTime} hrs"
-
-            val c=flight.pricingInformation.currency.toString()
-            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
-            holder.money.text = "$c $money"
+//
+//            val c=flight.pricingInformation.currency.toString()
+//            val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
+//            holder.money.text = "$c $money"
         }catch (e:Exception){
             e.printStackTrace()
         }

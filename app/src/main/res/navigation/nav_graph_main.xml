@@ -37,8 +37,8 @@
 
     <fragment
         android:id="@+id/flight_list_fragment"
-        android:name="com.trips.pk.ui.flight.listing.FlightListingFragment"
-        tools:layout="@layout/fragment_flight_listing">
+        android:name="com.trips.pk.ui.flight.listing.FlightListingFragmentNew"
+        tools:layout="@layout/fragment_flight_listing_new">
 
         <argument
             android:name="search"
