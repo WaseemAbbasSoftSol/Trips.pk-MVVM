@@ -51,23 +51,26 @@ class StopsInnerAdapter(
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
 
         val schedule=leg.schedules[position]
+        val fare=flight.pricingInformation.fare
 
-      //  Glide.with(context).load(leg.beggageInformation.airlineLogo).into(holder.oLogo)
+        Glide.with(context).load(fare.passengerList[0].passengerInfo.beggageInformation[0].airlineLogo).into(holder.oLogo)
 
-      //  holder.oCarrier.text = leg.beggageInformation.airlineName
+        holder.oCarrier.text = fare.passengerList[0].passengerInfo.beggageInformation[0].airlineName
         holder.oTime.text="${changeTimeFormat(schedule.departure.time)} ${schedule.departure.airport}"
         holder.dTime.text="${changeTimeFormat(schedule.arrival.time)} ${schedule.arrival.airport}"
 
-        //holder.oFlightCode.text=leg.beggageInformation.airlineCode
+
+        holder.oFlightCode.text=fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode
 
         holder.oDate.text =changeDateFormat(schedule.departure.date)
         holder.dDate.text = changeDateFormat(schedule.arrival.date)
-       // holder.weight.text=leg.beggageInformation.allowance
+
+        holder.weight.text=fare.passengerList[0].passengerInfo.beggageInformation[0].allowance
         holder.oTotalTime.text="${schedule.elapsedTime} hrs"
 
-//        val c=flight.pricingInformation.currency.toString()
-//        val money=String.format("%.2f",flight.pricingInformation.totalFare.toDouble())
-//        holder.money.text = "$c $money"
+        val c=fare.fares.currency
+        val money=String.format("%.0f",fare.fares.totalFare)
+        holder.money.text = "$c $money"
 
         holder.cl.visibility=if (position==leg.schedules.size-1)View.VISIBLE else View.GONE
         holder.view1.visibility=if (position==leg.schedules.size-1)View.GONE else View.VISIBLE

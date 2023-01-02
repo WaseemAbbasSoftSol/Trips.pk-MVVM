@@ -18,6 +18,7 @@ import com.trips.pk.ui.flight.listing.*
 
 class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
     private lateinit var binding:FlightMainRvListBinding
+    private var airlinesAdapter:AirlinesAndStopsAdapter?=null
     private var adapter: AllStopsAdapter?=null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,16 +34,25 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
         super.onViewCreated(view, savedInstanceState)
 
 
-        sAllFlights.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()){
-                val layoutManager= LinearLayoutManager(requireContext())
-                binding.rvFlight.layoutManager=layoutManager
+        sAllFlights.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val layoutManager = LinearLayoutManager(requireContext())
+                binding.rvFlight.layoutManager = layoutManager
                 binding.rvFlight.setHasFixedSize(true)
-                adapter= AllStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this)
-                binding.rvFlight.adapter=adapter
-            }
+                adapter =
+                    AllStopsAdapter(requireContext(), it as ArrayList<ItinerariesDetail>, this)
+                binding.rvFlight.adapter = adapter
 
-        })
+                val ff= getLeastPriceFlight1(it)
+                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),ff)
+                val layoutManager1 = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.rvAirlines.layoutManager = layoutManager1
+                binding.rvAirlines.setHasFixedSize(true)
+                binding.rvAirlines.adapter = airlinesAdapter
+                binding.tvNoFlight.visibility = View.GONE
+            } else binding.tvNoFlight.visibility = View.VISIBLE
+
+        }
     }
 
     override fun onListClick(flight:ItinerariesDetail, position:Int) {
@@ -54,4 +64,39 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
 
     }
 
-}
+    fun getLeastPriceFlight1(list: java.util.ArrayList<ItinerariesDetail>): java.util.ArrayList<ItinerariesDetail> {
+        var isAdd=true
+        val tempList= arrayListOf<ItinerariesDetail>()
+        try {
+            for ((index,value ) in list.withIndex()){
+                val iterator=tempList.iterator()
+                for (i in iterator){
+                    if (i.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode ==
+                        value.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode){
+                        val iteratorValue=String.format("%.0f",i.pricingInformation.fare.fares.totalFare).toInt()
+                        val actualValue = String.format("%.0f",value.pricingInformation.fare.fares.totalFare).toInt()
+                        if (iteratorValue >= actualValue){
+                            isAdd=true
+                            iterator.remove()
+                        } else{
+                            isAdd=false
+                            continue
+                        }
+                    }else {
+                        isAdd = true
+                        
+                    }
+                }
+                if (isAdd) {
+                    tempList.add(value)
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
+        return tempList
+    }
+
+
+ }

@@ -30,8 +30,6 @@ class FlightListingFragmentNew : Fragment() {
     private var listingAdapter: FlightListingAdapter? = null
     private lateinit var flightSearch: FlightSearch
 
-    private var airlinesAdapter:AirlinesAndStopsAdapter?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments.let {
@@ -115,7 +113,7 @@ class FlightListingFragmentNew : Fragment() {
             }
         }
 
-        sAllFlights.observe(viewLifecycleOwner, Observer {
+     /*   sNoStopsFlights.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()){
 
                 airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
@@ -125,28 +123,9 @@ class FlightListingFragmentNew : Fragment() {
                 binding.rvAirlines.adapter=airlinesAdapter
 
             }
-        })
-        sNoStopsFlights.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()){
+        })*/
 
-                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
-                val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-                binding.rvAirlines.layoutManager=layoutManager1
-                binding.rvAirlines.setHasFixedSize(true)
-                binding.rvAirlines.adapter=airlinesAdapter
 
-            }
-        })
-
-        sOneStopsFlights.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()){
-                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
-                val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-                binding.rvAirlines.layoutManager=layoutManager1
-                binding.rvAirlines.setHasFixedSize(true)
-                binding.rvAirlines.adapter=airlinesAdapter
-            }
-        })
 
     }
 

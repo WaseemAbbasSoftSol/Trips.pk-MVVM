@@ -22,6 +22,7 @@ import com.trips.pk.ui.flight.listing.FlightListingFragmentNewDirections
 class OneStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
     private lateinit var binding: FlightMainRvListBinding
     private var adapter: AllStopsAdapter?=null
+    private var airlinesAdapter:AirlinesAndStopsAdapter?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,17 +37,26 @@ class OneStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
         super.onViewCreated(view, savedInstanceState)
 
 
-        sOneStopsFlights.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()){
-                val layoutManager= LinearLayoutManager(requireContext())
-                binding.rvFlight.layoutManager=layoutManager
+        sOneStopsFlights.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                val layoutManager = LinearLayoutManager(requireContext())
+                binding.rvFlight.layoutManager = layoutManager
                 binding.rvFlight.setHasFixedSize(true)
-                adapter= AllStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>,this )
-                binding.rvFlight.adapter=adapter
+                adapter =
+                    AllStopsAdapter(requireContext(), it as ArrayList<ItinerariesDetail>, this)
+                binding.rvFlight.adapter = adapter
 
-            }
 
-        })
+                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it)
+                val layoutManager1 =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.rvAirlines.layoutManager = layoutManager1
+                binding.rvAirlines.setHasFixedSize(true)
+                binding.rvAirlines.adapter = airlinesAdapter
+                binding.tvNoFlight.visibility = View.GONE
+            } else binding.tvNoFlight.visibility = View.VISIBLE
+
+        }
 
     }
 

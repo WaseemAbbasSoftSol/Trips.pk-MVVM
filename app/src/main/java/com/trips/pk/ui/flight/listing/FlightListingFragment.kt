@@ -33,7 +33,7 @@ class FlightListingFragment : Fragment() {
     private var oneStopsFlights = arrayListOf<ItinerariesDetail>()
     private var twoStopsFlights = arrayListOf<ItinerariesDetail>()
 
-    private var airlinesAdapter:AirlinesAndStopsAdapter?=null
+  //  private var airlinesAdapter:AirlinesAndStopsAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,12 +118,12 @@ class FlightListingFragment : Fragment() {
                 noStopsFlights.clear()
                 noStopsFlights.addAll(it)
 
-                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
+            /*    airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
                 val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
                 binding.rvAirlines.layoutManager=layoutManager1
                 binding.rvAirlines.setHasFixedSize(true)
                 binding.rvAirlines.adapter=airlinesAdapter
-
+*/
             }
         })
 
@@ -132,11 +132,11 @@ class FlightListingFragment : Fragment() {
                 oneStopsFlights.clear()
                 oneStopsFlights.addAll(it)
 
-                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
+            /*    airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),it as ArrayList<ItinerariesDetail>)
                 val layoutManager1= LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
                 binding.rvAirlines.layoutManager=layoutManager1
                 binding.rvAirlines.setHasFixedSize(true)
-                binding.rvAirlines.adapter=airlinesAdapter
+                binding.rvAirlines.adapter=airlinesAdapter*/
             }
         })
 
@@ -160,7 +160,7 @@ class FlightListingFragment : Fragment() {
 
         binding.btnNonStop.setOnClickListener {
             binding.rvAirlines.visibility=View.VISIBLE
-            airlinesAdapter!!.updateList(noStopsFlights)
+            //airlinesAdapter!!.updateList(noStopsFlights)
             selectedStop="non stop"
             binding.vpFlights.currentItem = 1
             sNoOfStops = 0
@@ -174,7 +174,7 @@ class FlightListingFragment : Fragment() {
 
         binding.btnOneStop.setOnClickListener {
             binding.rvAirlines.visibility=View.VISIBLE
-            airlinesAdapter!!.updateList(oneStopsFlights)
+          //  airlinesAdapter!!.updateList(oneStopsFlights)
             selectedStop = "one stop"
             binding.vpFlights.currentItem = 2
             sNoOfStops = 1
