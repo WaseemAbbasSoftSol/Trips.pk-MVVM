@@ -47,7 +47,7 @@
     <string name="lbl_departure">Departure</string>
     <string name="lbl_departure_and_return">Dubai-Lahore</string>
     <string name="lbl_two_stops">Two Stops</string>
-    <string name="lbl_outbound_flight_detail">Outbound Flight Details</string>
+    <string name="lbl_outbound_flight_detail">Outbound Flight</string>
     <string name="lbl_travel_time">- Travel Time</string>
     <string name="lahore_pakistan">Lahore-Pakistan</string>
     <string name="dxb_uae">Dubai-Uae</string>
@@ -66,4 +66,5 @@
     <string name="start_date">Origin</string>
     <string name="access_token"></string>
     <string name="lbl_field_required">This field is required</string>
+    <string name="lbl_arival">Arrival</string>
 </resources>

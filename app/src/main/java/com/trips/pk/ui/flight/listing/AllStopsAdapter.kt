@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.trips.pk.R
@@ -49,6 +50,12 @@ class AllStopsAdapter(
     }
 
     override fun onListClick(flight: ItinerariesDetail, position: Int) {
-        TODO("Not yet implemented")
+     listener.onListClick(flight,position)
+    }
+
+    fun updateList(list: List<ItinerariesDetail>){
+        flightList.clear()
+        flightList.addAll(list)
+        notifyDataSetChanged()
     }
 }

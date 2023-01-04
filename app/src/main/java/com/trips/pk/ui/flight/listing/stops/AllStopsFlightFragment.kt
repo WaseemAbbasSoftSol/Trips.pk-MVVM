@@ -4,22 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.databinding.FlightMainRvListBinding
 import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.ui.common.sAllFlights
-import com.trips.pk.ui.common.sFlightDescription
-import com.trips.pk.ui.common.sItinerariesDetail
-import com.trips.pk.ui.common.sNoStopsFlights
+import com.trips.pk.ui.common.*
 import com.trips.pk.ui.flight.listing.*
 
-class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListener {
+class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListener,OnListItemClickListener<ItinerariesDetail> {
     private lateinit var binding:FlightMainRvListBinding
     private var airlinesAdapter:AirlinesAndStopsAdapter?=null
     private var adapter: AllStopsAdapter?=null
+    private var allFlights= arrayListOf<ItinerariesDetail>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +35,8 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
 
         sAllFlights.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                allFlights.clear()
+                allFlights.addAll(it)
                 val layoutManager = LinearLayoutManager(requireContext())
                 binding.rvFlight.layoutManager = layoutManager
                 binding.rvFlight.setHasFixedSize(true)
@@ -44,7 +45,7 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
                 binding.rvFlight.adapter = adapter
 
                 val ff= getLeastPriceFlight1(it)
-                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),ff)
+                airlinesAdapter = AirlinesAndStopsAdapter(requireContext(),ff,this)
                 val layoutManager1 = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvAirlines.layoutManager = layoutManager1
                 binding.rvAirlines.setHasFixedSize(true)
@@ -64,7 +65,7 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
 
     }
 
-    fun getLeastPriceFlight1(list: java.util.ArrayList<ItinerariesDetail>): java.util.ArrayList<ItinerariesDetail> {
+   private fun getLeastPriceFlight1(list: java.util.ArrayList<ItinerariesDetail>): java.util.ArrayList<ItinerariesDetail> {
         var isAdd=true
         val tempList= arrayListOf<ItinerariesDetail>()
         try {
@@ -83,8 +84,13 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
                             continue
                         }
                     }else {
-                        isAdd = true
-                        
+                        for ((t,v) in tempList.withIndex()){
+                            if (v.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode ==
+                                value.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode){
+                                isAdd=false
+                                break
+                            }else isAdd=true
+                        }
                     }
                 }
                 if (isAdd) {
@@ -98,5 +104,15 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
         return tempList
     }
 
+    override fun onItemClick(item: ItinerariesDetail, pos: Int) {
+        val tempList= arrayListOf<ItinerariesDetail>()
+        for ((i,value ) in allFlights.withIndex()){
+            if (item.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode ==
+                value.pricingInformation.fare.passengerList[0].passengerInfo.beggageInformation[0].airlineCode){
+                tempList.add(item)
+            }
+        }
+        adapter!!.updateList(tempList)
+    }
 
- }
+}

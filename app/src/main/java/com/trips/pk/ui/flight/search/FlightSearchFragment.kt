@@ -70,14 +70,26 @@ class FlightSearchFragment:Fragment() {
         binding.radioOneWay.setOnClickListener {
             tourType="oneway"
             mTourType="oneway"
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            fromDate=""
+            binding.edToDate.alpha = 0.2f
         }
         binding.radioReturn.setOnClickListener {
             tourType="round"
             mTourType="round"
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            fromDate=""
+            binding.edToDate.alpha = 1.0f
         }
         binding.radioMultiDestination.setOnClickListener {
             tourType="multi"
             mTourType="multi"
+            fromDate=""
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            binding.edToDate.alpha = 1.0f
         }
 
         binding.edOrigin.setOnClickListener {

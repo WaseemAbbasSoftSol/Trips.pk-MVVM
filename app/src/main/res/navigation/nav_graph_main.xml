@@ -47,8 +47,8 @@
         <action
             android:id="@+id/action_flight_list_to_flight_detail_fragment"
             app:destination="@id/flight_detail_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_right_2"
+            app:exitAnim="@anim/slide_out_left_2"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
@@ -56,9 +56,9 @@
 
     <fragment
         android:id="@+id/flight_detail_fragment"
-        android:name="com.trips.pk.ui.flight.detail.FlightDetailFragment"
-        tools:layout="@layout/fragment_flight_detail">
-
+        android:name="com.trips.pk.ui.flight.detail.FlightDetailFragmentNew"
+        tools:layout="@layout/fragment_flight_detail_new">
     </fragment>
+
 
 </navigation>

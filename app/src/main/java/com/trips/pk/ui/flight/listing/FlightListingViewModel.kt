@@ -48,9 +48,9 @@ class FlightListingViewModel(
                 val response = repository.searchFlights(search)
                 if (response.isSuccessful) {
                     response.body().let {
+                        if (!it!!.isDone) _message.postValue(it!!.error[0].errorDescription)
                         _flights.postValue(it!!.data!!)
                         sAllFlights.postValue(it.data.itineraryGroups.itineraries)
-                        //_message.postValue(it.error[0].errorDescription)
                         noStopsFlights.clear()
                         oneStopsFlights.clear()
                         multiStopsFlights.clear()
@@ -84,10 +84,10 @@ class FlightListingViewModel(
                 _state.postValue(RequestState.DONE)
             } catch (e: Exception) {
                 _state.postValue(RequestState.ERROR)
-                _message.postValue(e.message.toString())
+                if (_message.value.isNullOrEmpty())_message.postValue(e.message.toString())
                 e.printStackTrace()
             } catch (t: Throwable) {
-                _message.postValue(t.message.toString())
+                if (_message.value.isNullOrEmpty()) _message.postValue(t.message.toString())
                 _state.postValue(RequestState.ERROR)
                 t.printStackTrace()
             }

@@ -57,7 +57,6 @@
                     android:layout_width="@dimen/_40dp"
                     android:layout_height="@dimen/_40dp"
                     android:layout_marginEnd="@dimen/_20dp"
-                    app:cardCornerRadius="@dimen/_8dp"
                     android:backgroundTint="@color/primary_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

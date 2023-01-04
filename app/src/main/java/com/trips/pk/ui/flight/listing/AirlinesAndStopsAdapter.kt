@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
+import com.trips.pk.ui.common.OnListItemClickListener
 
 
 class AirlinesAndStopsAdapter(
     val context: Context,
-    val flightList:ArrayList<ItinerariesDetail>
+    val flightList:ArrayList<ItinerariesDetail>,
+    val listener:OnListItemClickListener<ItinerariesDetail>?=null
 ) :
     RecyclerView.Adapter<AirlinesAndStopsAdapter.ItemRecyclerViewHolder>() {
 
@@ -49,6 +51,9 @@ class AirlinesAndStopsAdapter(
             val c=fare.fares.currency
             val money=String.format("%.0f",fare.fares.totalFare)
             holder.totalMoney.text = "$c $money"
+            holder.itemView.setOnClickListener {
+                listener!!.onItemClick(flight,position)
+            }
 
         }catch (e:Exception){
             e.printStackTrace()

@@ -138,21 +138,21 @@
                         android:layout_width="1dp"
                         android:layout_height="@dimen/_10dp"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.26" />
+                        app:layout_constraintGuide_percent="0.24" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guide2"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.50" />
+                        app:layout_constraintGuide_percent="0.48" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guide3"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.75" />
+                        app:layout_constraintGuide_percent="0.72" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_all"
@@ -221,7 +221,6 @@
                         app:layout_constraintStart_toEndOf="@id/guide3"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="@dimen/_20dp"
-                        android:layout_marginStart="@dimen/_2dp"
                         />
 
 
