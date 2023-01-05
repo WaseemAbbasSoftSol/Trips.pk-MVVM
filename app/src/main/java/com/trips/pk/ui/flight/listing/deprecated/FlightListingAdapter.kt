@@ -1,22 +1,21 @@
-package com.trips.pk.ui.flight.listing
+package com.trips.pk.ui.flight.listing.deprecated
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.ui.common.VIEW_TYPE_NO_STOP
 import com.trips.pk.ui.common.VIEW_TYPE_ONE_STOP
-import com.trips.pk.ui.flight.listing.viewholder.NoStopsFlightsVH
-import com.trips.pk.ui.flight.listing.viewholder.OneStopFlightsVH
+import com.trips.pk.ui.flight.listing.deprecated.viewholder.NoStopsFlightsVH
+import com.trips.pk.ui.flight.listing.deprecated.viewholder.OneStopFlightsVH
 
+@Deprecated("Deprecated")
 class FlightListingAdapter(
     val context: Context,
     val flightList:ArrayList<ItinerariesDetail>,
-    private val listener:FlightListClickListener,
+    private val listener: FlightListClickListener,
     private var viewtypes:Int
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){

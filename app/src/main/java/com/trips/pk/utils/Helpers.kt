@@ -24,6 +24,7 @@ import com.trips.pk.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
@@ -197,4 +198,15 @@ object CustomDateRangeHelper{
         }
     }
 
+}
+ fun changeStringDateFormat(date:kotlin.String):kotlin.String{
+    var formattedDate=""
+    try {
+        val fromUser = SimpleDateFormat("yyyy-MM-dd")
+        val myFormat = SimpleDateFormat("dd/MM/yyyy")
+        formattedDate =  myFormat.format(fromUser.parse(date))
+    }catch (e:Exception){
+        e.printStackTrace()
+    }
+    return formattedDate
 }

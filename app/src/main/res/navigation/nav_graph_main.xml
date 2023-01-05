@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/main_fragment">
+    app:startDestination="@id/dashboard_fragment">
 
     <fragment
-        android:id="@+id/main_fragment"
-        android:name="com.trips.pk.ui.MainFragment"
-        tools:layout="@layout/fragment_main">
+        android:id="@+id/dashboard_fragment"
+        android:name="com.trips.pk.ui.DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
 
         <action
             android:id="@+id/action_dashboard_to_flight_search_fragment"
@@ -60,5 +60,10 @@
         tools:layout="@layout/fragment_flight_detail_new">
     </fragment>
 
+    <fragment
+        android:id="@+id/flight_book_fragment"
+        android:name="com.trips.pk.ui.flight.book.FlightBookFragment"
+        tools:layout="@layout/fragment_flight_book">
+    </fragment>
 
 </navigation>

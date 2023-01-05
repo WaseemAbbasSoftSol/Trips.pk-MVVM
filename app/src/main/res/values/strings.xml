@@ -67,4 +67,25 @@
     <string name="access_token"></string>
     <string name="lbl_field_required">This field is required</string>
     <string name="lbl_arival">Arrival</string>
+    <string name="lbl_enter_info_of_traveler">Enter Information about the traveler\n(Contact Person)</string>
+    <string name="label_prefix">Prefix</string>
+    <string name="label_first_name">First Name</string>
+    <string name="label_middle_name">Middle Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_dob">Date of Birth</string>
+    <string name="label_contact">Contact #</string>
+    <string name="label_email">Email</string>
+    <string name="label_city">City / Location</string>
+    <string name="label_country">Country</string>
+    <string name="label_address">Address</string>
+    <string name="label_zipcode">Zip Code / Postal Code</string>
+    <string name="lbl_passport_detail">Passport Detail</string>
+    <string name="label_passport_no">Passport No</string>
+    <string name="label_expire_date">Expire Date</string>
+    <string name="label_passport_nat_country">Passport Nationality Country</string>
+    <string name="lbl_enter_about_traveler">Enter Information about the traveler</string>
+    <string name="lbl_adult1">(Adult # 1)</string>
+    <string name="lbl_child1">(Child # 1)</string>
+    <string name="label_gender">Gender</string>
+    <string name="lbl_continue_next">CONTINUE TO THE NEXT</string>
 </resources>

@@ -27,7 +27,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FlightListingFragmentNew : Fragment() {
     private lateinit var binding: FragmentFlightListingNewBinding
     private val mViewModel: FlightListingViewModel by viewModel()
-    private var listingAdapter: FlightListingAdapter? = null
     private lateinit var flightSearch: FlightSearch
 
     override fun onCreate(savedInstanceState: Bundle?) {

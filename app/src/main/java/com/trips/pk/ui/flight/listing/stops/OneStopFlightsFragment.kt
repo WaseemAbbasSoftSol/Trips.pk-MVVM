@@ -5,19 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.trips.pk.databinding.FlightListingLayoutBinding
 import com.trips.pk.databinding.FlightMainRvListBinding
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.ui.common.OnListItemClickListener
-import com.trips.pk.ui.common.sFlightDescription
 import com.trips.pk.ui.common.sItinerariesDetail
 import com.trips.pk.ui.common.sOneStopsFlights
 import com.trips.pk.ui.flight.listing.AirlinesAndStopsAdapter
 import com.trips.pk.ui.flight.listing.AllStopsAdapter
-import com.trips.pk.ui.flight.listing.FlightListingAdapter
 import com.trips.pk.ui.flight.listing.FlightListingFragmentNewDirections
 
 class OneStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListener,OnListItemClickListener<ItinerariesDetail> {

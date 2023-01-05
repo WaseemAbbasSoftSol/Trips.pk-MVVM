@@ -1,4 +1,4 @@
-package com.trips.pk.ui.dialogs.origin
+package com.trips.pk.ui.flight.dialogs.origin
 
 import android.content.Context
 import android.view.LayoutInflater

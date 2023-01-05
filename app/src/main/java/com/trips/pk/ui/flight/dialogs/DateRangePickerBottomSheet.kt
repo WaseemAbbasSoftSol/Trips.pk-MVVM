@@ -1,4 +1,4 @@
-package com.trips.pk.ui.dialogs.origin
+package com.trips.pk.ui.flight.dialogs
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -37,6 +37,7 @@ import com.trips.pk.utils.CustomDateRangeHelper.makeInVisible
 import com.trips.pk.utils.CustomDateRangeHelper.makeVisible
 import com.trips.pk.utils.CustomDateRangeHelper.setTextColorRes
 import com.trips.pk.utils.Helpers
+import com.trips.pk.utils.changeStringDateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
@@ -158,7 +159,8 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
     private fun bindSummaryViews() {
         binding.exFourStartDateText.apply {
             if (selection.startDate != null) {
-                setText(headerDateFormatter.format(selection.startDate))
+                val dd= changeStringDateFormat(selection.startDate.toString())//For frontend view
+                setText(dd)
                 setTextColorRes(R.color.black)
                 listener!!.selectedRange(start = headerDateFormatter.format(selection.startDate),
                     isToday = checkIfSelectedDateIsToday(headerDateFormatter.format(selection.startDate)))
@@ -170,7 +172,9 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
 
         binding.exFourEndDateText.apply {
             if (selection.endDate != null) {
-                setText(headerDateFormatter.format(selection.endDate))
+              // setText(headerDateFormatter.format(selection.startDate))
+                val dd= changeStringDateFormat(selection.endDate.toString()) // for front end view
+                setText(dd)
                 setTextColorRes(R.color.black)
                 listener!!.selectedRange(end = headerDateFormatter.format(selection.endDate),
                     isToday = checkIfSelectedDateIsToday(headerDateFormatter.format(selection.endDate)))
@@ -230,7 +234,9 @@ class DateRangePickerBottomSheet:BottomSheetDialogFragment() {
                                 //   menuItem.isVisible = selectedDate != null
                              //   binding.exFourSaveButton.isEnabled = selection.daysBetween != null
                             }
-                            binding.exFourStartDateText.setText(singleSelectedDate.toString())
+                            val dd= changeStringDateFormat(singleSelectedDate.toString())
+                          //  binding.exFourStartDateText.setText(headerDateFormatter.format(selection.endDate))
+                            binding.exFourStartDateText.setText(dd)
                             binding.exFourStartDateText.setTextColorRes(R.color.black)
                         }
 

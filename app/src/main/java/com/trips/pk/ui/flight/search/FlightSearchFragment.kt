@@ -2,24 +2,16 @@ package com.trips.pk.ui.flight.search
 
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.aminography.primecalendar.civil.CivilCalendar
 
-import com.aminography.primedatepicker.picker.PrimeDatePicker
-import com.aminography.primedatepicker.picker.callback.RangeDaysPickCallback
-import com.aminography.primedatepicker.picker.theme.LightThemeFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightSearchBinding
@@ -29,8 +21,9 @@ import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.mFromTo
 import com.trips.pk.ui.common.mTourType
 import com.trips.pk.ui.common.selectedStop
-import com.trips.pk.ui.dialogs.origin.DateRangePickerBottomSheet
-import com.trips.pk.ui.dialogs.origin.SearchOriginDestinationBottomSheet
+import com.trips.pk.ui.flight.dialogs.DateRangePickerBottomSheet
+import com.trips.pk.ui.flight.dialogs.origin.SearchOriginDestinationBottomSheet
+import com.trips.pk.utils.changeStringDateFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.String
 import java.text.SimpleDateFormat
@@ -134,13 +127,15 @@ class FlightSearchFragment:Fragment() {
                 override fun selectedRange(start: kotlin.String, end: kotlin.String, isToday:Boolean) {
                     if (start.isNotEmpty()){
                         fromDate=start
-                        binding.edFromDate.setText(start.toString())
+                        val dd= changeStringDateFormat(fromDate)
+                        binding.edFromDate.setText(dd)
                         binding.edFromDate.error = null
                         if (isToday)fromDate=fromDate+"T"+getCurrentTimeAheadThreeMinutes()
                     }
                     if (end.isNotEmpty()){
                         toDate=end
-                        binding.edToDate.setText(end.toString())
+                        val dd= changeStringDateFormat(toDate)
+                        binding.edToDate.setText(dd)
                     }
                 }
 
@@ -162,13 +157,15 @@ class FlightSearchFragment:Fragment() {
                 override fun selectedRange(start: kotlin.String, end: kotlin.String, isToday:Boolean) {
                     if (start.isNotEmpty()){
                         fromDate=start
-                        binding.edFromDate.setText(start.toString())
+                        val dd= changeStringDateFormat(fromDate)
+                        binding.edFromDate.setText(dd)
                         binding.edFromDate.error = null
                         if (isToday)fromDate=fromDate+"T"+getCurrentTimeAheadThreeMinutes()
                     }
                     if (end.isNotEmpty()){
                         toDate=end
-                        binding.edToDate.setText(end.toString())
+                        val dd= changeStringDateFormat(toDate)
+                        binding.edToDate.setText(dd)
                     }
                 }
 
@@ -317,5 +314,4 @@ class FlightSearchFragment:Fragment() {
         }
         return true
     }
-
 }

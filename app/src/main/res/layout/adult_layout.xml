@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_enter_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_10dp"
+            android:text="@string/lbl_enter_about_traveler"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/raleway_semiboldd"/>
+        <TextView
+            android:id="@+id/tv_traveler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_enter_info"
+            android:text="@string/lbl_adult1"
+            android:textSize="@dimen/_18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/raleway_semiboldd"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_prefix"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/_5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guide1"
+            app:layout_constraintTop_toBottomOf="@id/tv_traveler"
+            android:layout_marginTop="@dimen/_15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_prefix"
+                style="@style/AppTheme.TextInputLayout"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_prefix"
+                    style="@style/FieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_prefix"
+                    android:inputType="textNoSuggestions"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_first_name"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/guide1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_traveler"
+            android:layout_marginTop="@dimen/_15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_first_name"
+                style="@style/AppTheme.TextInputLayout"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_first_name"
+                    style="@style/FieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_first_name"
+                    android:inputType="textNoSuggestions"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_middle_name"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/_5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guide1"
+            app:layout_constraintTop_toBottomOf="@id/ll_prefix"
+            android:layout_marginTop="@dimen/_15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_middle_name"
+                style="@style/AppTheme.TextInputLayout"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_middle_name"
+                    style="@style/FieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_middle_name"
+                    android:inputType="textNoSuggestions"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_last_name"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/guide1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_first_name"
+            android:layout_marginTop="@dimen/_15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_last_name"
+                style="@style/AppTheme.TextInputLayout"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_last_name"
+                    style="@style/FieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_last_name"
+                    android:inputType="textNoSuggestions"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_pass_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_last_name"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="@string/lbl_passport_detail"
+                android:textSize="@dimen/_18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/raleway_semiboldd"/>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_passport_no"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/_5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guide1"
+                app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
+                android:layout_marginTop="@dimen/_15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_passport_no"
+                    style="@style/AppTheme.TextInputLayout"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_passport_no"
+                        style="@style/FieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_passport_no"
+                        android:inputType="textNoSuggestions"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_passport_expire_date"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@id/guide1"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/_5dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
+                android:layout_marginTop="@dimen/_15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_passport_expire_date"
+                    style="@style/AppTheme.TextInputLayout"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_passport_expire_date"
+                        style="@style/FieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_expire_date"
+                        android:inputType="textNoSuggestions"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_passport_nat_country"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/_5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guide1"
+                app:layout_constraintTop_toBottomOf="@id/ll_passport_no"
+                android:layout_marginTop="@dimen/_15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_passport_nat_country"
+                    style="@style/AppTheme.TextInputLayout"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_passport_nat_country"
+                        style="@style/FieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_passport_nat_country"
+                        android:inputType="textNoSuggestions"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_dob"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/_5dp"
+                app:layout_constraintStart_toEndOf="@id/guide1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_passport_expire_date"
+                android:layout_marginTop="@dimen/_15dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_dob"
+                    style="@style/AppTheme.TextInputLayout"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_dob"
+                        style="@style/FieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/label_dob"
+                        android:inputType="textNoSuggestions"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

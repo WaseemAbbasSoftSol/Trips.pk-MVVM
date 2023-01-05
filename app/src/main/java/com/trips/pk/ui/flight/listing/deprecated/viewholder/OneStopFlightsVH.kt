@@ -1,4 +1,4 @@
-package com.trips.pk.ui.flight.listing.viewholder
+package com.trips.pk.ui.flight.listing.deprecated.viewholder
 
 import android.content.Context
 import android.view.View
@@ -11,6 +11,7 @@ import com.trips.pk.model.flight.ItinerariesDetail
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Deprecated("Deprecated")
 class OneStopFlightsVH(view:View, private val context: Context):RecyclerView.ViewHolder(view) {
 
     val oLogo=itemView.findViewById<ImageView>(R.id.iv_flight_origin)

@@ -1,4 +1,4 @@
-package com.trips.pk.ui.dialogs.origin
+package com.trips.pk.ui.flight.dialogs.origin
 
 import android.os.Bundle
 import android.text.Editable
@@ -20,10 +20,10 @@ import com.trips.pk.utils.Helpers
 class SearchOriginDestinationBottomSheet: BottomSheetDialogFragment(),OnListItemClickListener<Airport> {
 
 private lateinit var binding:BottomSheetOriginLayoutBinding
-private var adapter:SearchOriginDestinationAdapter?=null
+private var adapter: SearchOriginDestinationAdapter?=null
 private var list= arrayListOf<Airport>()
     private var isOrigin=true
-    private var listener:LocationSelectedListener?=null
+    private var listener: LocationSelectedListener?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bundle = this.arguments
@@ -72,7 +72,7 @@ private var list= arrayListOf<Airport>()
     interface LocationSelectedListener{
         fun onLocationSelected(airport: Airport, isOrigin:Boolean)
     }
-    fun setSelectedLocation(listener:LocationSelectedListener){
+    fun setSelectedLocation(listener: LocationSelectedListener){
         this.listener=listener
     }
 
