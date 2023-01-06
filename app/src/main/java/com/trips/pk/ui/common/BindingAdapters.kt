@@ -151,19 +151,19 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //    view.setHasFixedSize(hasFixSize)
 //}
 //
-////@BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
-////fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
-////    val adapter = ArrayAdapter<T>(
-////        view.context,
-////        android.R.layout.simple_spinner_dropdown_item, items
-////    )
-////    view.setAdapter(adapter)
-////    if (isSpinner) {
-////        view.setOnClickListener { view.showDropDown() } //show drop down like spinner
-////    } else if (view is MultiAutoCompleteTextView) {
-////        view.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-////    }
-////}
+@BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
+fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
+    val adapter = ArrayAdapter<T>(
+        view.context,
+        android.R.layout.simple_spinner_dropdown_item, items
+    )
+    view.setAdapter(adapter)
+    if (isSpinner) {
+        view.setOnClickListener { view.showDropDown() } //show drop down like spinner
+    } else if (view is MultiAutoCompleteTextView) {
+        view.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+    }
+}
 //
 //@BindingAdapter(value = ["spItemsList", "isSmall"], requireAll = false)
 //fun <T> setSpinnerItems(view: Spinner, spItemsList: List<T>, isSmall: Boolean = false) {

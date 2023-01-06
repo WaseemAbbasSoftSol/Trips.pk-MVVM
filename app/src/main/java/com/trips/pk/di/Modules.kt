@@ -5,6 +5,7 @@ import com.trips.pk.data.OAuthInterceptor
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsApi
 import com.trips.pk.data.TripsRepository
+import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
 import okhttp3.OkHttpClient
@@ -22,6 +23,7 @@ private const val BASE_URL = "https://flightapis.green.pk/api/"
 val viewModelsModule= module {
     viewModel { FlightSearchViewModel(get(), get()) }
     viewModel { FlightListingViewModel(get()) }
+    viewModel { FlightBookViewModel(get(), get()) }
     }
 
   val repositoriesModule = module {

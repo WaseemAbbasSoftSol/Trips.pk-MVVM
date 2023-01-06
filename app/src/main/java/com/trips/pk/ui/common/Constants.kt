@@ -11,6 +11,13 @@ const val VIEW_TYPE_NO_STOP = 1011
 const val VIEW_TYPE_ONE_STOP = 2022
 const val VIEW_TYPE_TWO_STOP = 3033
 
+enum class Prefix{
+    Mr, Mrs
+}
+ val prefixList= arrayListOf(
+    Prefix.Mr,
+    Prefix.Mrs
+)
 enum class RequestState{
     DONE, LOADING, ERROR
 }

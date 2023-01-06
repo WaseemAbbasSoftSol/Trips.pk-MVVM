@@ -1,5 +1,6 @@
 package com.trips.pk.ui.common
 
+import android.widget.AutoCompleteTextView
 import androidx.lifecycle.MutableLiveData
 import com.trips.pk.model.Airport
 import com.trips.pk.model.flight.ItinerariesDetail
@@ -16,4 +17,8 @@ var sNoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sOneStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sMultiStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sFlightDescription= MutableLiveData<List<OriginDestination>>()
+
+var isButtonClick=MutableLiveData<Boolean>()
+var sharedDob:AutoCompleteTextView?=null
+var sharedExpireDate:AutoCompleteTextView?=null
 

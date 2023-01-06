@@ -5,45 +5,15 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.trips.pk.ui.flight.book.FlightBookViewModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      >
-
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/base_toolbar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_adult"
-            android:layout_width="match_parent"
-            android:nestedScrollingEnabled="false"
-            android:layout_height="0dp"
-            tools:listitem="@layout/adult_layout"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
-            app:layout_constraintBottom_toTopOf="@id/btn_continue"
-            />
-
-      <!--  <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedscroll"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@id/btn_continue"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_20dp"
                 android:layout_marginEnd="@dimen/_20dp"
                 >
-
                 <TextView
                     android:id="@+id/tv_enter_info"
                     android:layout_width="wrap_content"
@@ -82,12 +52,10 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/sp_qualification"
+                            android:id="@+id/sp_prefix"
                             style="@style/FieldStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            isSpinner="@{true}"
-                            itemsList="@{viewModel.prefix}"
                             android:text="Mr"
                             android:cursorVisible="false"
                             android:focusable="false"
@@ -416,59 +384,115 @@
 
                 </LinearLayout>
 
-                <include
-                    android:id="@+id/layout_passport"
-                    layout="@layout/passport_layout"
+                <TextView
+                    android:id="@+id/tv_pass_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginTop="@dimen/_20dp"
+                    android:text="@string/lbl_passport_detail"
+                    android:textSize="@dimen/_18sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/raleway_semiboldd"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_adult"
+                <LinearLayout
+                    android:id="@+id/ll_passport_no"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guide1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
+                    android:layout_marginTop="@dimen/_15dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/et_passport_no"
+                        style="@style/AppTheme.TextInputLayout"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/adult_layout"
-                        android:nestedScrollingEnabled="false"
-                        app:layout_constraintTop_toBottomOf="@id/layout_passport"
-                      />
+                        android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/rv_child"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/adult_layout"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@id/rv_adult"
-                    />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ed_passport_no"
+                            style="@style/FieldStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/label_passport_no"
+                            android:inputType="textNoSuggestions"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
-                    android:id="@+id/rv_infent"
-                    android:layout_width="match_parent"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_passport_expire_date"
+                    android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/adult_layout"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@id/rv_child"
-                    />
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/guide1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="@dimen/_5dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
+                    android:layout_marginTop="@dimen/_15dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/et_passport_expire_date"
+                        style="@style/AppTheme.TextInputLayout"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/tv_expire_date"
+                            style="@style/FieldStyle"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_calendar"
+                            android:hint="@string/label_expire_date" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_passport_nat_country"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/_5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guide1"
+                    app:layout_constraintTop_toBottomOf="@id/ll_passport_no"
+                    android:layout_marginTop="@dimen/_15dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/et_passport_nat_country"
+                        style="@style/AppTheme.TextInputLayout"
+                        app:hintTextAppearance="@style/TextInputLayoutHintText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ed_passport_nat_country"
+                            style="@style/FieldStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/label_passport_nat_country"
+                            android:inputType="textNoSuggestions"
+
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.core.widget.NestedScrollView>-->
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_continue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.ContainedButton"
-            android:text="@string/lbl_continue_next"
-            android:textSize="@dimen/_14sp"
-            android:fontFamily="@font/poppins_semibold"
-          app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_marginEnd="@dimen/_20dp"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

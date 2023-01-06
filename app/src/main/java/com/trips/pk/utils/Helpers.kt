@@ -1,5 +1,6 @@
 package com.trips.pk.utils
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.usage.UsageEvents
 import android.content.ContentResolver
@@ -21,6 +22,8 @@ import com.kizitonwose.calendar.core.nextMonth
 import com.kizitonwose.calendar.core.previousMonth
 import com.kizitonwose.calendar.core.yearMonth
 import com.trips.pk.R
+import com.trips.pk.ui.common.sharedDob
+import com.trips.pk.ui.common.sharedExpireDate
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -34,6 +37,24 @@ import java.time.format.TextStyle
 import java.time.temporal.ChronoUnit
 import java.util.*
 
+ val mCalendar: Calendar = Calendar.getInstance()
+val date = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+        mCalendar[Calendar.YEAR] = year
+        mCalendar[Calendar.MONTH] = month
+        mCalendar[Calendar.DAY_OF_MONTH] = day
+        updateDobLabel()
+    }
+
+fun updateDobLabel(){
+    val myFormat = "dd MMM, yyyy"
+    val serverFormat="yyyy-MM-dd"
+    val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+    val dateFormatForServer = SimpleDateFormat(serverFormat, Locale.US)
+    // dob=dateFormatForServer.format(myCalendar.time)
+    val date = dateFormat.format(mCalendar.time)
+    if (sharedDob!=null) sharedDob!!.setText(date)
+    if (sharedExpireDate!=null)sharedExpireDate!!.setText(date)
+}
 object Helpers {
 
     fun makeBottomSheetRounded(view: View, dialog: Dialog){
