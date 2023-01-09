@@ -61,23 +61,23 @@ class FlightBookHostFragment: Fragment() {
     }
 
     private fun getPassengerInfo(animEnter: Int, animExit: Int) {
-        val bundle = Bundle()
-        bundle.putInt("index", currentIndex)
-        bundle.putInt("viewType", 0)
-        val frag = FlightBookFragment()
-        val transaction = activity?.supportFragmentManager?.beginTransaction()
-        transaction?.setCustomAnimations(animEnter, animExit)
-        frag.arguments = bundle
-        transaction?.replace(R.id.flight_booking_host, frag)
-        transaction?.commit()
-        frag.setValidator(object : FlightBookFragment.FieldValidator{
-            override fun onValidated(contactPerson: ContactPerson,passenger: Passenger, position: Int,viewtype:Int) {
-                ++currentIndex
-                getPassengerInfo(R.anim.slide_in_right_3, R.anim.slide_out_left_3)
-                previewButton()
-            }
-
-        })
+//        val bundle = Bundle()
+//        bundle.putInt("index", currentIndex)
+//        bundle.putInt("viewType", 0)
+//        val frag = FlightBookFragment()
+//        val transaction = activity?.supportFragmentManager?.beginTransaction()
+//        transaction?.setCustomAnimations(animEnter, animExit)
+//        frag.arguments = bundle
+//        transaction?.replace(R.id.flight_booking_host, frag)
+//        transaction?.commit()
+//        frag.setValidator(object : FlightBookFragment.FieldValidator{
+//            override fun onValidated(contactPerson: ContactPerson,passenger: Passenger, position: Int,viewtype:Int) {
+//                ++currentIndex
+//                getPassengerInfo(R.anim.slide_in_right_3, R.anim.slide_out_left_3)
+//                previewButton()
+//            }
+//
+//        })
     }
 
     private fun previewButton() {

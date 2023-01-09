@@ -35,14 +35,12 @@ class AdultAdapter(
     val context: Context,
     var listener:AdultTextGetter,
     var layoutManager:LinearLayoutManager?=null,
-    var index:Int,
-    var viewType:Int
 ) :
     RecyclerView.Adapter<AdultAdapter.ItemRecyclerViewHolder>() {
 
     private var flightBooker:FlightBooker?=null
-    private var contactPerson:ContactPerson?=null
-    private var passengerList= arrayListOf<Passenger>()
+
+
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val prefix=itemView.findViewById<MaterialAutoCompleteTextView>(R.id.sp_prefix)
         val firstName=itemView.findViewById<TextInputEditText>(R.id.ed_first_name)
@@ -95,7 +93,7 @@ class AdultAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
 
-        if (index==0){
+        if (position==0){
             holder.llContact.visibility=View.VISIBLE
             holder.llemail.visibility=View.VISIBLE
             holder.lladdress.visibility=View.VISIBLE
@@ -136,6 +134,7 @@ class AdultAdapter(
 
         isButtonClick.observe(holder.itemView.context as LifecycleOwner) {
             if (it) {
+
                 val prefix = holder.prefix.text.toString().trim()
                     val firstName = holder.firstName.text.toString().trim()
                     val middleName = holder.middleName.text.toString().trim()
@@ -154,87 +153,91 @@ class AdultAdapter(
              //   var viewType: Int = if (position<2) VIEW_TYPE_ADULT else if (position <5) VIEW_TYPE_CHILD else VIEW_TYPE_INFANT
                 var isValid=true
 
-         pIndex.observe(context as LifecycleOwner, androidx.lifecycle.Observer {
-            if (it[index].isClicked){
+                    if (firstName.isNullOrEmpty()){
+                        holder.etFirstName.error = context.getString(R.string.lbl_field_required)
+                        mIsValid=false
 
-                if (firstName.isNullOrEmpty()){
-                    holder.etFirstName.error = context.getString(R.string.lbl_field_required)
-                    isValid=false
+                        //layoutManager!!.scrollToPosition(position)
+                    }/*else if (middleName.isNullOrEmpty()){
+                        isValid=false
+                        holder.etMiddleName.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (lastName.isNullOrEmpty()){
+                        isValid=false
+                        holder.etLastName.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (dob.isNullOrEmpty()){
+                        isValid=false
+                        holder.etDob.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (contact.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etContact.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (email.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etEmail.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (address.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etAddress.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (zipCode.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etZipCode.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (city.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etCity.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (country.isNullOrEmpty() && position==0){
+                        isValid=false
+                        holder.etCountry.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (passportNo.isNullOrEmpty()){
+                        isValid=false
+                        holder.etPassportNo.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (passExDate.isNullOrEmpty()){
+                        isValid=false
+                        holder.etPassportExpireDate.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }
+                    else if (passNat.isNullOrEmpty()){
+                        isValid=false
+                        holder.etPassportNatCountry.error = context.getString(R.string.lbl_field_required)
+                        //layoutManager!!.scrollToPosition(position)
+                    }*/
+                    else{
+                        val gndr=if (prefix=="Mr") "Male" else "Female"
+                        val name="$prefix $firstName $middleName $lastName"
+                      if (position==0){
+                        val   contactPerson= ContactPerson(name, contact, gndr, email)
+                          mContactPeron.add(contactPerson)
+                      }
+                        val passportInfo=PassportInfo(0, passExDate, passportNo)
+                        val passenger=Passenger(firstName, middleName, lastName,gndr, dob,"", passportInfo)
+                        mPassengerList.add(passenger)
+                     if (position==2 && mIsValid){
+                         listener.onTextChanged(
+                             mContactPeron!!,
+                             mPassengerList!!, position, position==2)
+                     }
 
-                    //layoutManager!!.scrollToPosition(position)
-                }else if (middleName.isNullOrEmpty()){
-                    isValid=false
-                    holder.etMiddleName.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (lastName.isNullOrEmpty()){
-                    isValid=false
-                    holder.etLastName.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (dob.isNullOrEmpty()){
-                    isValid=false
-                    holder.etDob.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (contact.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etContact.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (email.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etEmail.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (address.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etAddress.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (zipCode.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etZipCode.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (city.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etCity.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (country.isNullOrEmpty() && position==0){
-                    isValid=false
-                    holder.etCountry.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (passportNo.isNullOrEmpty()){
-                    isValid=false
-                    holder.etPassportNo.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (passExDate.isNullOrEmpty()){
-                    isValid=false
-                    holder.etPassportExpireDate.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else if (passNat.isNullOrEmpty()){
-                    isValid=false
-                    holder.etPassportNatCountry.error = context.getString(R.string.lbl_field_required)
-                    //layoutManager!!.scrollToPosition(position)
-                }
-                else{
-                    val gndr=if (prefix=="Mr") "Male" else "Female"
-                    val name="$prefix $firstName $middleName $lastName"
-                    contactPerson= ContactPerson(name, contact, gndr, email)
-                    val passportInfo=PassportInfo(0, passExDate, passportNo)
-                    val passenger=Passenger(firstName, middleName, lastName,gndr, dob,"", passportInfo)
-                    flightBooker=FlightBooker(contactPerson!!.name,contactPerson!!.number,contactPerson!!.gender,contactPerson!!.email, passengerList)
-                    listener.onTextChanged(contactPerson!!,passenger!!, position, viewType)
 
-                }
+                    }
 
-          }
-        })
+
             }
         }
 
@@ -242,11 +245,11 @@ class AdultAdapter(
     }
 
     override fun getItemCount(): Int {
-      return 1
+      return 3
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (viewType) {
+        return when (position) {
             0 -> VIEW_TYPE_ADULT
             1 -> VIEW_TYPE_CHILD
             else -> VIEW_TYPE_INFANT
@@ -254,7 +257,7 @@ class AdultAdapter(
     }
 
     interface AdultTextGetter{
-        fun onTextChanged(contactPerson: ContactPerson,passenger: Passenger, position: Int, viewType:Int)
+        fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int,isLast:Boolean)
     }
 
 

@@ -14,9 +14,13 @@ import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.ui.common.isButtonClick
+import com.trips.pk.ui.common.mContactPeron
+import com.trips.pk.ui.common.mIsValid
+import com.trips.pk.ui.common.mPassengerList
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.List
 
 
 class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
@@ -24,9 +28,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
     private val mViewModel:FlightBookViewModel by viewModel()
     private var booker= arrayListOf<Passenger>()
     private var adapter:AdultAdapter?=null
-    private var currentIndex=0
-    private var viewType=0
-    private var listener:FieldValidator?=null
+
 
     private val myCalendar: Calendar = Calendar.getInstance()
     override fun onCreateView(
@@ -36,12 +38,12 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
     ): View? {
         binding= FragmentFlightBookBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
-        val bundle = this.arguments
-        currentIndex = bundle!!.getInt("index")
-        viewType = bundle!!.getInt("viewType")
-        isButtonClick.value=false
+
 
         binding.btnContinue.setOnClickListener {
+            mPassengerList.clear()
+            mContactPeron.clear()
+            mIsValid=true
             isButtonClick.value=true
         }
     /*    val adultView=View.inflate(requireContext(), R.layout.adult_layout, null)
@@ -52,7 +54,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
 
         val layoutManager1 = LinearLayoutManager(requireContext())
         binding.rvAdult.layoutManager = layoutManager1
-        adapter=AdultAdapter(requireContext(), this, layoutManager1, currentIndex,viewType)
+        adapter=AdultAdapter(requireContext(), this, layoutManager1)
         binding.rvAdult.setHasFixedSize(true)
         binding.rvAdult.adapter = adapter
 
@@ -83,16 +85,14 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
         binding.viewModel=mViewModel
     }
 
-    override fun onTextChanged(contactPerson: ContactPerson,passenger: Passenger, position: Int, viewType:Int) {
-        listener!!.onValidated(contactPerson,passenger,position,viewType)
+    override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int, isLast:Boolean) {
+        val contact=contactPerson[0]
+        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,passenger)
+        //mViewModel.bookFlight()
+    Log.d("ddd",passenger.size.toString() )
     }
 
-    interface FieldValidator{
-        fun onValidated(contactPerson: ContactPerson,passenger: Passenger, position: Int,viewType: Int)
-    }
-    fun setValidator(listener:FieldValidator){
-        this.listener=listener
-    }
+
 
     private fun updateDobLabel() {
 //        val myFormat = "MM/dd/yy"

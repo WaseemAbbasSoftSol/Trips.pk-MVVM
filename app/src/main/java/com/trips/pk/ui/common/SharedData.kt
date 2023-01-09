@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.trips.pk.model.Airport
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.OriginDestination
+import com.trips.pk.model.flight.book.ContactPerson
+import com.trips.pk.model.flight.book.FlightBooker
+import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.ui.flight.book.PassengerIndex
 
 val airPortList= arrayListOf<Airport>()
@@ -24,5 +27,10 @@ var sharedDob:AutoCompleteTextView?=null
 var sharedExpireDate:AutoCompleteTextView?=null
 
 var pIndex=MutableLiveData<List<PassengerIndex>>()
+
+ var mPassengerList= arrayListOf<Passenger>()
+var mContactPeron= arrayListOf<ContactPerson>()
+var mIsValid=false
+
 
 
