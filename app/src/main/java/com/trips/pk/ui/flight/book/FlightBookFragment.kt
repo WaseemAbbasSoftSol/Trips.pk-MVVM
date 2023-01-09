@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.databinding.FragmentFlightBookBinding
-import com.trips.pk.model.flight.book.Adult
+import com.trips.pk.model.flight.book.ContactPerson
+import com.trips.pk.model.flight.book.FlightBooker
+import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.ui.common.isButtonClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -21,10 +22,11 @@ import java.util.*
 class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
     private lateinit var binding:FragmentFlightBookBinding
     private val mViewModel:FlightBookViewModel by viewModel()
-    private var adultList= arrayListOf<Adult>()
+    private var booker= arrayListOf<Passenger>()
     private var adapter:AdultAdapter?=null
-
-    private var passengerList= arrayListOf<Adult>()
+    private var currentIndex=0
+    private var viewType=0
+    private var listener:FieldValidator?=null
 
     private val myCalendar: Calendar = Calendar.getInstance()
     override fun onCreateView(
@@ -34,7 +36,10 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
     ): View? {
         binding= FragmentFlightBookBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
-        binding.toolbarLayout.tvToolbar.text="Passenger Info"
+        val bundle = this.arguments
+        currentIndex = bundle!!.getInt("index")
+        viewType = bundle!!.getInt("viewType")
+        isButtonClick.value=false
 
         binding.btnContinue.setOnClickListener {
             isButtonClick.value=true
@@ -47,17 +52,9 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
 
         val layoutManager1 = LinearLayoutManager(requireContext())
         binding.rvAdult.layoutManager = layoutManager1
-        adapter=AdultAdapter(requireContext(), this, layoutManager1)
+        adapter=AdultAdapter(requireContext(), this, layoutManager1, currentIndex,viewType)
         binding.rvAdult.setHasFixedSize(true)
         binding.rvAdult.adapter = adapter
-
-
-        val childAdapter=ChildAdapter(requireContext())
-        val layoutm=LinearLayoutManager(requireContext())
-//        binding.rvChild.layoutManager = layoutm
-//        binding.rvChild.setHasFixedSize(true)
-//        binding.rvChild.isNestedScrollingEnabled=false
-//        binding.rvChild.adapter = childAdapter
 
         val date =
             DatePickerDialog.OnDateSetListener { view, year, month, day ->
@@ -86,28 +83,15 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
         binding.viewModel=mViewModel
     }
 
-    override fun onTextChanged(adult: Adult, position: Int, viewType:Int, isLast:Boolean) {
-        adultList.add(adult)
+    override fun onTextChanged(contactPerson: ContactPerson,passenger: Passenger, position: Int, viewType:Int) {
+        listener!!.onValidated(contactPerson,passenger,position,viewType)
+    }
 
-       if (isLast){
-           passengerList.clear()
-           passengerList.addAll(adultList)
-           adultList.clear()
-           Log.d("ddd", passengerList.size.toString())
-       }
-      //  Log.d("ddd", "type "+viewType)
-
-        var isValid=true
-//      for ((i,value) in passengerList.withIndex()){
-//          if (value.firstName.isNullOrEmpty()){
-//               if (isLast){
-//                   Toast.makeText(requireContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show()
-//                   binding.rvAdult.scrollToPosition(0)
-//               }
-//              break
-//          }
-//      }
-
+    interface FieldValidator{
+        fun onValidated(contactPerson: ContactPerson,passenger: Passenger, position: Int,viewType: Int)
+    }
+    fun setValidator(listener:FieldValidator){
+        this.listener=listener
     }
 
     private fun updateDobLabel() {
@@ -122,4 +106,6 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
        // dob=dateFormatForServer.format(myCalendar.time)
        // binding.tvDob.setText(dateFormat.format(myCalendar.time))
     }
+
+
 }

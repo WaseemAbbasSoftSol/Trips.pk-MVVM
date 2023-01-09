@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.flight.book.FlightBookViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/base_toolbar" />
+
+
+        <FrameLayout
+            android:id="@+id/flight_booking_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:layout_constraintBottom_toTopOf="@id/llbtn"/>
+
+        <LinearLayout
+            android:id="@+id/llbtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_prev"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                style="@style/AppTheme.ContainedButton"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:strokeWidth="1dp"
+                android:letterSpacing="0"
+                android:text="Previous"
+                android:textSize="14sp"
+                app:cornerRadius="25dp">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                style="@style/AppTheme.ContainedButton"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:letterSpacing="0"
+                android:text="Next"
+                android:textSize="14sp"
+                app:cornerRadius="25dp">
+
+            </androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.ContainedButton"
+            android:text="@string/lbl_continue_next"
+            android:textSize="@dimen/_14sp"
+            android:fontFamily="@font/poppins_semibold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginEnd="@dimen/_20dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

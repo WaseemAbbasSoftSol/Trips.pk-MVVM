@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.trips.pk.model.Airport
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.OriginDestination
+import com.trips.pk.ui.flight.book.PassengerIndex
 
 val airPortList= arrayListOf<Airport>()
 var sItinerariesDetail:ItinerariesDetail?=null
@@ -21,4 +22,7 @@ var sFlightDescription= MutableLiveData<List<OriginDestination>>()
 var isButtonClick=MutableLiveData<Boolean>()
 var sharedDob:AutoCompleteTextView?=null
 var sharedExpireDate:AutoCompleteTextView?=null
+
+var pIndex=MutableLiveData<List<PassengerIndex>>()
+
 
