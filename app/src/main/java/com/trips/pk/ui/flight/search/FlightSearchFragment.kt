@@ -185,7 +185,7 @@ class FlightSearchFragment:Fragment() {
         binding.btnSearch.setOnClickListener {
             if (validateFields()){
                 if (tourType=="oneway") toDate=""
-                val flightSearch=FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType)
+                val flightSearch=FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType,"PKR")
                 val bundle=Bundle()
                 mFromTo = "$originName-$destinationName"
                 bundle.putSerializable("search",flightSearch)

@@ -3,14 +3,17 @@ package com.trips.pk.ui.common
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.MutableLiveData
 import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Passenger
+import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.ui.flight.book.PassengerIndex
 
 val airPortList= arrayListOf<Airport>()
+val countriesList= arrayListOf<Countries>()
 var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
 var mTourType = "round"
@@ -31,6 +34,16 @@ var pIndex=MutableLiveData<List<PassengerIndex>>()
  var mPassengerList= arrayListOf<Passenger>()
 var mContactPeron= arrayListOf<ContactPerson>()
 var mIsValid=false
+
+var mNoOfAdult=1
+var mNoOfChildern=1
+var mNoOfInfent=1
+
+var mTotalPassenger= arrayListOf<PassengerType>()
+
+var whichAdult=1
+var whichChild=0
+var whichInfant=0
 
 
 

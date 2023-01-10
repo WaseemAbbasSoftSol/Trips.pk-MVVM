@@ -10,13 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.databinding.FragmentFlightBookBinding
+import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Passenger
-import com.trips.pk.ui.common.isButtonClick
-import com.trips.pk.ui.common.mContactPeron
-import com.trips.pk.ui.common.mIsValid
-import com.trips.pk.ui.common.mPassengerList
+import com.trips.pk.model.flight.book.PassengerType
+import com.trips.pk.ui.common.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,9 +27,18 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
     private val mViewModel:FlightBookViewModel by viewModel()
     private var booker= arrayListOf<Passenger>()
     private var adapter:AdultAdapter?=null
+    private var flightDetail:ItinerariesDetail?=null
 
 
     private val myCalendar: Calendar = Calendar.getInstance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            val args=FlightBookFragmentArgs.fromBundle(it!!)
+            flightDetail=args.detail
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,10 +60,16 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
         val childView=View.inflate(requireContext(), R.layout.child_layout, null)
         binding.clChild.addView(childView)*/
 
+        var siz= mNoOfAdult+ mNoOfChildern+ mNoOfInfent
+        for (i in 0..siz-1){
+            mTotalPassenger.add(PassengerType(1))
+        }
+
         val layoutManager1 = LinearLayoutManager(requireContext())
         binding.rvAdult.layoutManager = layoutManager1
         adapter=AdultAdapter(requireContext(), this, layoutManager1)
         binding.rvAdult.setHasFixedSize(true)
+        binding.rvAdult.isNestedScrollingEnabled=false
         binding.rvAdult.adapter = adapter
 
         val date =
@@ -87,9 +101,9 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
 
     override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int, isLast:Boolean) {
         val contact=contactPerson[0]
-        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,passenger)
-        //mViewModel.bookFlight()
-    Log.d("ddd",passenger.size.toString() )
+        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,passenger,flightDetail!!)
+        mViewModel.bookFlight(booker)
+
     }
 
 

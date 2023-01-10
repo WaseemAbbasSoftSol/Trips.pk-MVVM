@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -68,6 +69,11 @@ class FlightDetailFragmentNew: Fragment() {
             binding.rvInbound.adapter = adapter1
 
 
+            binding.btnBook.setOnClickListener{
+                val bundle=Bundle()
+                bundle.putSerializable("detail",flightDetail)
+                findNavController().navigate(R.id.action_flight_detail_to_flight_book_fragment, bundle)
+            }
         }
 
 

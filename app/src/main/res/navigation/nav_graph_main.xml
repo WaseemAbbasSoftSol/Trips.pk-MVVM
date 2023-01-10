@@ -67,12 +67,23 @@
         android:id="@+id/flight_detail_fragment"
         android:name="com.trips.pk.ui.flight.detail.FlightDetailFragmentNew"
         tools:layout="@layout/fragment_flight_detail_new">
+        <action
+            android:id="@+id/action_flight_detail_to_flight_book_fragment"
+            app:destination="@id/flight_book_fragment"
+            app:enterAnim="@anim/slide_in_right_2"
+            app:exitAnim="@anim/slide_out_left_2"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
         android:id="@+id/flight_book_fragment"
         android:name="com.trips.pk.ui.flight.book.FlightBookFragment"
         tools:layout="@layout/fragment_flight_book">
+        <argument
+            android:name="detail"
+            app:argType="com.trips.pk.model.flight.ItinerariesDetail"/>
     </fragment>
 
 </navigation>

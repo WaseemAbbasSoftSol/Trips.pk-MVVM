@@ -3,7 +3,9 @@ package com.trips.pk.data
 import com.trips.pk.model.Airport
 import com.trips.pk.model.BaseResponse
 import com.trips.pk.model.FlightSearch
+import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
+import com.trips.pk.model.flight.book.FlightBooker
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,11 +17,21 @@ interface TripsApi {
     @Headers("Content-Type:application/json")
     suspend fun getAllAirports():Response<BaseResponse<List<Airport>>>
 
-    @POST("Flight/GetSearchingFlights")
+    @POST("GetSearchingFlights")
     @Headers("Content-Type:application/json")
     suspend fun searchFlights(
         @Body params: FlightSearch
     ):Response<BaseResponse<FlightsDetail>>
+
+    @GET("GetListOfCountries")
+    @Headers("Content-Type:application/json")
+    suspend fun getAllCountries():Response<BaseResponse<List<Countries>>>
+
+    @POST("Flight/BookFlight")
+    @Headers("Content-Type:application/json")
+    suspend fun bookFlight(
+        @Body params: FlightBooker
+    ):Response<BaseResponse<String>>
 
     //To be add in future
     /*

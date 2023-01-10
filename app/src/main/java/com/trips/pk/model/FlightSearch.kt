@@ -20,4 +20,6 @@ data class FlightSearch(
     val infants:Int,
     @SerializedName("TourType")
     val tourType:String,
+    @SerializedName("CurrencyCode")
+    val currencyCode:String
 ): Serializable

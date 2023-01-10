@@ -19,12 +19,14 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.trips.pk.R
+import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.PassengerList
 import com.trips.pk.model.flight.book.*
 import com.trips.pk.ui.common.*
 import com.trips.pk.utils.date
 import com.trips.pk.utils.mCalendar
+import java.text.SimpleDateFormat
 import java.util.*
 
 const val VIEW_TYPE_ADULT=1
@@ -52,10 +54,11 @@ class AdultAdapter(
         val edAddress=itemView.findViewById<TextInputEditText>(R.id.ed_address)
         val edZipCode=itemView.findViewById<TextInputEditText>(R.id.ed_zipcode)
         val edCity=itemView.findViewById<TextInputEditText>(R.id.ed_city)
-        val edCountry=itemView.findViewById<TextInputEditText>(R.id.ed_country)
+        val edCountry=itemView.findViewById<MaterialAutoCompleteTextView>(R.id.ed_country)
         val edPassportNo=itemView.findViewById<TextInputEditText>(R.id.ed_passport_no)
         val edPassportExpireDate=itemView.findViewById<AutoCompleteTextView>(R.id.tv_expire_date)
-        val edPassportNatCountry=itemView.findViewById<TextInputEditText>(R.id.ed_passport_nat_country)
+        val edPassportNatCountry=itemView.findViewById<MaterialAutoCompleteTextView>(R.id.ed_passport_nat_country)
+        val tvEnterInfo=itemView.findViewById<TextView>(R.id.tv_enter_info)
 
         val llContact=itemView.findViewById<LinearLayout>(R.id.ll_contact)
         val llemail=itemView.findViewById<LinearLayout>(R.id.ll_email)
@@ -107,9 +110,25 @@ class AdultAdapter(
             holder.llzipcode.visibility=View.GONE
             holder.llcity.visibility=View.GONE
             holder.llcontry.visibility=View.GONE
+
+            if (holder.itemViewType== VIEW_TYPE_ADULT){
+                whichAdult+=1
+                holder.tvEnterInfo.text = "Enter Information about the traveler\nAdult $whichAdult"
+            }
+            else if (holder.itemViewType== VIEW_TYPE_CHILD){
+                whichChild+=1
+                holder.tvEnterInfo.text = "Enter Information about the traveler\nChild $whichChild"
+            }
+            else{
+                whichInfant+=1
+                holder.tvEnterInfo.text = "Enter Information about the traveler\nInfant $whichInfant"
+            }
         }
 
         setSpinner(holder.prefix,prefixList)
+        setCountries(holder.edCountry, countriesList)
+        setCountries(holder.edPassportNatCountry, countriesList)
+
         holder.dob.setOnClickListener {
             DatePickerDialog(
                 context,
@@ -225,13 +244,23 @@ class AdultAdapter(
                         val   contactPerson= ContactPerson(name, contact, gndr, email)
                           mContactPeron.add(contactPerson)
                       }
-                        val passportInfo=PassportInfo(0, passExDate, passportNo)
-                        val passenger=Passenger(firstName, middleName, lastName,gndr, dob,"", passportInfo)
+                        var countryId=0
+                        for ((i,value ) in countriesList.withIndex()){
+                            if (value.name.toString()==country){
+                                countryId=value.id
+                                break
+                            }
+                        }
+                        val passexpdate=changeStringDateFormat(passExDate)
+                        val passportInfo=PassportInfo(countryId, passexpdate, passportNo)
+                        val db=changeStringDateFormat(dob)
+                        val passengerType=if (holder.itemViewType== VIEW_TYPE_ADULT)"Adult" else if (holder.itemViewType== VIEW_TYPE_CHILD)"Child" else "Infant"
+                        val passenger=Passenger(firstName, middleName, lastName,gndr, db,passengerType, passportInfo)
                         mPassengerList.add(passenger)
-                     if (position==2 && mIsValid){
+                     if (position== mTotalPassenger.size-1 && mIsValid){
                          listener.onTextChanged(
                              mContactPeron!!,
-                             mPassengerList!!, position, position==2)
+                             mPassengerList!!, position, position==mTotalPassenger.size-1)
                      }
 
 
@@ -245,15 +274,19 @@ class AdultAdapter(
     }
 
     override fun getItemCount(): Int {
-      return 3
+      return mTotalPassenger.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> VIEW_TYPE_ADULT
-            1 -> VIEW_TYPE_CHILD
-            else -> VIEW_TYPE_INFANT
-        }
+        var adult= mNoOfAdult
+        var child= mNoOfChildern
+        var infent= mNoOfInfent
+
+
+        if (position<adult) return VIEW_TYPE_ADULT
+        else if(position>=adult && position < adult+child) return  VIEW_TYPE_CHILD
+        else return VIEW_TYPE_INFANT
+
     }
 
     interface AdultTextGetter{
@@ -266,6 +299,22 @@ class AdultAdapter(
         view.setAdapter(adapter)
         view.setOnClickListener { view.showDropDown() } //show drop down like spinner
     }
+    fun setCountries(view:AutoCompleteTextView,items:List<Countries>){
+        val adapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_dropdown_item, items)
+        view.setAdapter(adapter)
+        view.setOnClickListener { view.showDropDown() } //show drop down like spinner
+    }
 
+   private fun changeStringDateFormat(date:kotlin.String):kotlin.String{
+        var formattedDate=""
+        try {
+            val fromUser = SimpleDateFormat("dd MMMM, yyyy")
+            val myFormat = SimpleDateFormat("yyyy-MM-dd")
+            formattedDate =  myFormat.format(fromUser.parse(date))
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return formattedDate
+    }
 
 }

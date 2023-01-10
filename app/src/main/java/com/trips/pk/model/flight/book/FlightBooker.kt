@@ -14,7 +14,7 @@ data class FlightBooker(
     val email:String,
     @SerializedName("Passengers")
     val passengerList:List<Passenger>,
- //   @SerializedName("FlightDetail")
-   // val flightDetail:ItinerariesDetail
+    @SerializedName("FlightDetail")
+    val flightDetail:ItinerariesDetail
 
 )
