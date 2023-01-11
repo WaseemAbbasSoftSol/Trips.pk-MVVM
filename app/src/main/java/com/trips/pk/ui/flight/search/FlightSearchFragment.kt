@@ -17,10 +17,7 @@ import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightSearchBinding
 import com.trips.pk.model.Airport
 import com.trips.pk.model.FlightSearch
-import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.common.mFromTo
-import com.trips.pk.ui.common.mTourType
-import com.trips.pk.ui.common.selectedStop
+import com.trips.pk.ui.common.*
 import com.trips.pk.ui.flight.dialogs.DateRangePickerBottomSheet
 import com.trips.pk.ui.flight.dialogs.origin.SearchOriginDestinationBottomSheet
 import com.trips.pk.utils.changeStringDateFormat
@@ -184,6 +181,9 @@ class FlightSearchFragment:Fragment() {
 
         binding.btnSearch.setOnClickListener {
             if (validateFields()){
+                mNoOfAdult=noOfAdult
+                mNoOfChildern=noOfChild
+                mNoOfInfent=noOfInfant
                 if (tourType=="oneway") toDate=""
                 val flightSearch=FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType,"PKR")
                 val bundle=Bundle()

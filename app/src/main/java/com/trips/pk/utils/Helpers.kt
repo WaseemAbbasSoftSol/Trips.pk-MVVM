@@ -11,11 +11,14 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.view.ViewTreeObserver
 import android.webkit.MimeTypeMap
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import com.github.razir.progressbutton.hideProgress
+import com.github.razir.progressbutton.showProgress
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.nextMonth
@@ -55,6 +58,17 @@ fun updateDobLabel(){
     if (sharedDob!=null) sharedDob!!.setText(date)
     if (sharedExpireDate!=null)sharedExpireDate!!.setText(date)
 }
+
+fun Button.makeProgressOnButton(loadingTextRes: Int) {
+    showProgress {
+        buttonTextRes = loadingTextRes
+        progressColor = currentTextColor
+    }
+}
+fun Button.hideProgressOnButton(text:String) {
+    hideProgress(text)
+}
+
 object Helpers {
 
     fun makeBottomSheetRounded(view: View, dialog: Dialog){

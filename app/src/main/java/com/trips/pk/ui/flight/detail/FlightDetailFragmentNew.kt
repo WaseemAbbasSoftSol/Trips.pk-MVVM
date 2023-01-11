@@ -68,14 +68,10 @@ class FlightDetailFragmentNew: Fragment() {
             binding.rvInbound.setHasFixedSize(true)
             binding.rvInbound.adapter = adapter1
 
-
-            binding.btnBook.setOnClickListener{
-                val bundle=Bundle()
-                bundle.putSerializable("detail",flightDetail)
-                findNavController().navigate(R.id.action_flight_detail_to_flight_book_fragment, bundle)
-            }
         }
-
+        binding.btnBook.setOnClickListener{
+            findNavController().navigate(R.id.action_flight_detail_to_flight_book_fragment)
+        }
 
         return binding.root
     }

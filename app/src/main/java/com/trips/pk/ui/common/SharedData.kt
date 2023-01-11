@@ -41,9 +41,7 @@ var mNoOfInfent=1
 
 var mTotalPassenger= arrayListOf<PassengerType>()
 
-var whichAdult=1
-var whichChild=0
-var whichInfant=0
+
 
 
 

@@ -27,7 +27,7 @@ interface TripsApi {
     @Headers("Content-Type:application/json")
     suspend fun getAllCountries():Response<BaseResponse<List<Countries>>>
 
-    @POST("Flight/BookFlight")
+    @POST("BookFlight")
     @Headers("Content-Type:application/json")
     suspend fun bookFlight(
         @Body params: FlightBooker

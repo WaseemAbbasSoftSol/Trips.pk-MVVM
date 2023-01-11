@@ -19,15 +19,6 @@
             app:popExitAnim="@anim/slide_out_right"
             />
 
-        <action
-            android:id="@+id/action_dashboard_to_flight_book_fragment"
-            app:destination="@id/flight_book_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
-
     </fragment>
 
     <fragment
@@ -81,9 +72,28 @@
         android:id="@+id/flight_book_fragment"
         android:name="com.trips.pk.ui.flight.book.FlightBookFragment"
         tools:layout="@layout/fragment_flight_book">
-        <argument
-            android:name="detail"
-            app:argType="com.trips.pk.model.flight.ItinerariesDetail"/>
+
+        <action
+            android:id="@+id/action_flight_book_to_confirmation_fragment"
+            app:destination="@id/flight_book_confirmed_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/flight_book_confirmed_fragment"
+        android:name="com.trips.pk.ui.flight.book.FlightBookConfirmedFragment"
+        tools:layout="@layout/fragment_flight_book_confirmed"/>
+
+    <action
+        android:id="@+id/action_global_to_flight_search_fragment"
+        app:destination="@id/flight_search_fragment"
+        app:popUpTo="@id/flight_search_fragment"
+        app:popUpToInclusive="true"
+        />
 
 </navigation>

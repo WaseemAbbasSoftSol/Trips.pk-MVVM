@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightBookingContainerBinding
-import com.trips.pk.model.flight.book.ContactPerson
-import com.trips.pk.model.flight.book.Passenger
-import com.trips.pk.ui.common.isButtonClick
 import com.trips.pk.ui.common.pIndex
 
 class FlightBookHostFragment: Fragment() {
@@ -30,7 +27,7 @@ class FlightBookHostFragment: Fragment() {
 
             pIndex.value!![currentIndex]!!.isClicked=true
 
-            isButtonClick.value=true
+          //  isButtonClick.value=true
             //   ++currentIndex
          //   getPassengerInfo(R.anim.slide_in_right_3, R.anim.slide_out_left_3)
          //   previewButton()

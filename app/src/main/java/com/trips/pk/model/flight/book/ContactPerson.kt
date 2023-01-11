@@ -11,4 +11,12 @@ data class ContactPerson(
     val gender:String,
     @SerializedName("Email")
     val email:String,
+    @SerializedName("zip")
+    val zipCode:String,
+    @SerializedName("Address")
+    val address:String,
+    @SerializedName("country")
+    val country:String,
+    @SerializedName("city")
+    val city:String,
 )

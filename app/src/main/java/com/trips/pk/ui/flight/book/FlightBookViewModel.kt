@@ -26,6 +26,9 @@ class FlightBookViewModel(
     private val _flights = MutableLiveData<FlightsDetail>()
     val flights: LiveData<FlightsDetail> = _flights
 
+    private val _bookConfirmationMessage = MutableLiveData<String>()
+    val bookConfirmationMessage: LiveData<String> = _bookConfirmationMessage
+
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
@@ -46,11 +49,11 @@ class FlightBookViewModel(
                 val response = repository.bookFlight(book)
                 if (response.isSuccessful) {
                     response.body().let {
-
+                        _bookConfirmationMessage.postValue(it!!.data!!)
                     }
                 } else {
                     response.errorBody().let {
-                        _message.postValue(it.toString())
+                        _bookConfirmationMessage.postValue(it.toString())
                         Log.d("dddd", it!!.toString())
                         Log.d("wwww", it!!.string())
                     }
@@ -58,10 +61,10 @@ class FlightBookViewModel(
                 _state.postValue(RequestState.DONE)
             } catch (e: Exception) {
                 _state.postValue(RequestState.ERROR)
-                if (_message.value.isNullOrEmpty())_message.postValue(e.message.toString())
+                if (_bookConfirmationMessage.value.isNullOrEmpty())_bookConfirmationMessage.postValue(e.message.toString())
                 e.printStackTrace()
             } catch (t: Throwable) {
-                if (_message.value.isNullOrEmpty()) _message.postValue(t.message.toString())
+                if (_bookConfirmationMessage.value.isNullOrEmpty()) _bookConfirmationMessage.postValue(t.message.toString())
                 _state.postValue(RequestState.ERROR)
                 t.printStackTrace()
             }

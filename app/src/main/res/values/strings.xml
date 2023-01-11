@@ -88,5 +88,8 @@
     <string name="lbl_child1">(Child # 1)</string>
     <string name="label_gender">Gender</string>
     <string name="lbl_continue_next">CONTINUE TO THE NEXT</string>
+    <string name="lbl_book_confirmed">Your flight request has been recieved &amp;\none of our agent will contact you for\nconfirmation</string>
+    <string name="lbl_back_to_home">BACK TO HOME</string>
+    <string name="lbl_wait">Please wait…</string>
 
 </resources>

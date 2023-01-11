@@ -41,6 +41,9 @@ class AdultAdapter(
     RecyclerView.Adapter<AdultAdapter.ItemRecyclerViewHolder>() {
 
     private var flightBooker:FlightBooker?=null
+    var whichAdult=1
+    var whichChild=0
+    var whichInfant=0
 
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -241,7 +244,7 @@ class AdultAdapter(
                         val gndr=if (prefix=="Mr") "Male" else "Female"
                         val name="$prefix $firstName $middleName $lastName"
                       if (position==0){
-                        val   contactPerson= ContactPerson(name, contact, gndr, email)
+                        val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, country = "2",city="2")
                           mContactPeron.add(contactPerson)
                       }
                         var countryId=0
@@ -261,6 +264,7 @@ class AdultAdapter(
                          listener.onTextChanged(
                              mContactPeron!!,
                              mPassengerList!!, position, position==mTotalPassenger.size-1)
+                         isButtonClick.value=false
                      }
 
 

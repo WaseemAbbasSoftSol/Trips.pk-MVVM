@@ -13,6 +13,8 @@ const val VIEW_TYPE_NO_STOP = 1011
 const val VIEW_TYPE_ONE_STOP = 2022
 const val VIEW_TYPE_TWO_STOP = 3033
 
+const val FLIGHT_BOOKED_SUCCESSFULLY = "Your Inquiry submit successfully!"
+
 enum class Prefix{
     Mr, Mrs
 }
