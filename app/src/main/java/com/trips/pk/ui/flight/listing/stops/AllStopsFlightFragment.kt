@@ -51,7 +51,7 @@ class AllStopsFlightFragment(): Fragment(), AllStopsAdapter.FlightListClickListe
                 binding.rvAirlines.setHasFixedSize(true)
                 binding.rvAirlines.adapter = airlinesAdapter
                 binding.tvNoFlight.visibility = View.GONE
-            } else binding.tvNoFlight.visibility = View.VISIBLE
+            } //else binding.tvNoFlight.visibility = View.VISIBLE
 
         }
     }

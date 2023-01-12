@@ -1,5 +1,6 @@
 package com.trips.pk.ui.flight.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,8 @@ import com.trips.pk.ui.common.mFromTo
 import com.trips.pk.ui.common.mTourType
 import com.trips.pk.ui.common.sItinerariesDetail
 import com.trips.pk.ui.common.sNoOfStops
+import okhttp3.internal.format
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +28,7 @@ class FlightDetailFragmentNew: Fragment() {
     private var flightDetail:ItinerariesDetail?=null
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +48,9 @@ class FlightDetailFragmentNew: Fragment() {
 
         val c=flightDetail!!.pricingInformation.fare.fares.currency.toString()
         val money=String.format("%.0f",flightDetail!!.pricingInformation.fare.fares.totalFare.toDouble())
-        binding.tvTotalPrice.text = "$c $money"
+        val m=Integer.parseInt(money)
+        val formattedMoney= NumberFormat.getInstance().format(m);
+        binding.tvTotalPrice.text = "$c ${formattedMoney}"
 
         val adapter=FlightDetailAdapter(requireContext(),flightDetail!!.legs[0],flightDetail!!,"outbound")
         val layoutManager = LinearLayoutManager(requireContext())

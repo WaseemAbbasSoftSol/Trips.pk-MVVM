@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.ui.common.OnListItemClickListener
+import java.text.NumberFormat
 
 
 class AirlinesAndStopsAdapter(
@@ -50,7 +51,9 @@ class AirlinesAndStopsAdapter(
 
             val c=fare.fares.currency
             val money=String.format("%.0f",fare.fares.totalFare)
-            holder.totalMoney.text = "$c $money"
+            val m=Integer.parseInt(money)
+            val formattedMoney= NumberFormat.getInstance().format(m);
+            holder.totalMoney.text = "$c $formattedMoney"
             holder.itemView.setOnClickListener {
                 listener!!.onItemClick(flight,position)
             }

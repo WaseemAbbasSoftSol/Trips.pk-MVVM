@@ -102,8 +102,9 @@ class FlightListingFragmentNew : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = mViewModel
         mViewModel.flights.observe(viewLifecycleOwner) {
-            if (null == it) {
-
+            if (null == it.itineraryGroups) {
+                binding.tvNoFlight.visibility=View.VISIBLE
+                binding.vpFlights.visibility=View.GONE
             }
         }
         mViewModel.message.observe(viewLifecycleOwner) {

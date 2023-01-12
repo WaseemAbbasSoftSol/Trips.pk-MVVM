@@ -16,10 +16,11 @@ const val VIEW_TYPE_TWO_STOP = 3033
 const val FLIGHT_BOOKED_SUCCESSFULLY = "Your Inquiry submit successfully!"
 
 enum class Prefix{
-    Mr, Mrs
+    Mr,Ms, Mrs
 }
  val prefixList= arrayListOf(
     Prefix.Mr,
+     Prefix.Ms,
     Prefix.Mrs
 )
 enum class RequestState{

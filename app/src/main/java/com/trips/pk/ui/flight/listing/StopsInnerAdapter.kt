@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.Legs
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -71,7 +72,9 @@ class StopsInnerAdapter(
 
         val c=fare.fares.currency
         val money=String.format("%.0f",fare.fares.totalFare)
-        holder.money.text = "$c $money"
+        val m=Integer.parseInt(money)
+        val formattedMoney= NumberFormat.getInstance().format(m);
+        holder.money.text = "$c $formattedMoney"
 
         holder.cl.visibility=if (position==leg.schedules.size-1)View.VISIBLE else View.GONE
         holder.view1.visibility=if (position==leg.schedules.size-1)View.GONE else View.VISIBLE

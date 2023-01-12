@@ -45,6 +45,23 @@ class AdultAdapter(
     var whichChild=0
     var whichInfant=0
 
+    var prefix = ""
+    var firstName = ""
+    var middleName= ""
+    var lastName = ""
+    var dob = ""
+    var contact = ""
+    var email = ""
+    var address = ""
+    var zipCode = ""
+    var city = ""
+    var country = ""
+    var passportNo = ""
+    var passExDate = ""
+    var passNat = ""
+
+
+
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val prefix=itemView.findViewById<MaterialAutoCompleteTextView>(R.id.sp_prefix)
@@ -157,89 +174,101 @@ class AdultAdapter(
         isButtonClick.observe(holder.itemView.context as LifecycleOwner) {
             if (it) {
 
-                val prefix = holder.prefix.text.toString().trim()
-                    val firstName = holder.firstName.text.toString().trim()
-                    val middleName = holder.middleName.text.toString().trim()
-                    val lastName = holder.lastName.text.toString().trim()
-                val dob=holder.dob.text.toString().trim()
-                val contact=holder.edContact.text.toString().toString()
-                val email=holder.edEmail.text.toString().trim()
-                val address=holder.edAddress.text.toString().trim()
-                val zipCode=holder.edZipCode.text.toString().trim()
-                val city=holder.edCity.text.toString().trim()
-                val country=holder.edCountry.text.toString().toString()
-                val passportNo=holder.edPassportNo.text.toString().trim()
-                val passExDate=holder.edPassportExpireDate.text.toString().trim()
-                val passNat=holder.edPassportNatCountry.text.toString().trim()
+                prefix = holder.prefix.text.toString().trim()
+                firstName = holder.firstName.text.toString().trim()
+                middleName = holder.middleName.text.toString().trim()
+                lastName = holder.lastName.text.toString().trim()
+                dob=holder.dob.text.toString().trim()
+                contact=holder.edContact.text.toString().toString()
+                email=holder.edEmail.text.toString().trim()
+                address=holder.edAddress.text.toString().trim()
+                zipCode=holder.edZipCode.text.toString().trim()
+                city=holder.edCity.text.toString().trim()
+                country=holder.edCountry.text.toString().toString()
+                passportNo=holder.edPassportNo.text.toString().trim()
+                passExDate=holder.edPassportExpireDate.text.toString().trim()
+                passNat=holder.edPassportNatCountry.text.toString().trim()
 
              //   var viewType: Int = if (position<2) VIEW_TYPE_ADULT else if (position <5) VIEW_TYPE_CHILD else VIEW_TYPE_INFANT
-                var isValid=true
 
                     if (firstName.isNullOrEmpty()){
                         holder.etFirstName.error = context.getString(R.string.lbl_field_required)
                         mIsValid=false
-
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                         //layoutManager!!.scrollToPosition(position)
-                    }/*else if (middleName.isNullOrEmpty()){
-                        isValid=false
-                        holder.etMiddleName.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
-                    }
+                   }
+//                    else if (middleName.isNullOrEmpty()){
+//                        holder.etMiddleName.error = context.getString(R.string.lbl_field_required)
+//                        mIsValid=false
+//                         isButtonClick.value=false
+//                    }
                     else if (lastName.isNullOrEmpty()){
-                        isValid=false
                         holder.etLastName.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (dob.isNullOrEmpty()){
-                        isValid=false
                         holder.etDob.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (contact.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etContact.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (email.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etEmail.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (address.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etAddress.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (zipCode.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etZipCode.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (city.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etCity.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (country.isNullOrEmpty() && position==0){
-                        isValid=false
                         holder.etCountry.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (passportNo.isNullOrEmpty()){
-                        isValid=false
                         holder.etPassportNo.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (passExDate.isNullOrEmpty()){
-                        isValid=false
                         holder.etPassportExpireDate.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                     }
                     else if (passNat.isNullOrEmpty()){
-                        isValid=false
                         holder.etPassportNatCountry.error = context.getString(R.string.lbl_field_required)
-                        //layoutManager!!.scrollToPosition(position)
-                    }*/
+                        mIsValid=false
+                         isButtonClick.value=false
+                        Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                    }
                     else{
                         val gndr=if (prefix=="Mr") "Male" else "Female"
                         val name="$prefix $firstName $middleName $lastName"
@@ -320,5 +349,20 @@ class AdultAdapter(
         }
         return formattedDate
     }
-
+private fun clearAllText(){
+    prefix = ""
+    firstName = ""
+    middleName= ""
+    lastName = ""
+    dob = ""
+    contact = ""
+    email = ""
+    address = ""
+    zipCode = ""
+    city = ""
+    country = ""
+    passportNo = ""
+    passExDate = ""
+    passNat = ""
+ }
 }

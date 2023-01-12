@@ -109,7 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/guide1"
                     app:layout_constraintTop_toBottomOf="@id/ll_prefix"
-                    android:layout_marginTop="@dimen/_15dp">
+                    android:layout_marginTop="@dimen/_20dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_middle_name"
@@ -140,8 +140,8 @@
                     app:layout_constraintStart_toEndOf="@id/guide1"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="@dimen/_5dp"
-                    app:layout_constraintTop_toBottomOf="@id/ll_first_name"
-                    android:layout_marginTop="@dimen/_15dp">
+                    app:layout_constraintTop_toBottomOf="@id/ll_prefix"
+                    android:layout_marginTop="@dimen/_20dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_last_name"
@@ -173,7 +173,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/guide1"
                     app:layout_constraintTop_toBottomOf="@id/ll_middle_name"
-                    android:layout_marginTop="@dimen/_15dp">
+                    android:layout_marginTop="@dimen/_20dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_dob"
@@ -204,8 +204,8 @@
                     app:layout_constraintStart_toEndOf="@id/guide1"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="@dimen/_5dp"
-                    app:layout_constraintTop_toBottomOf="@id/ll_last_name"
-                    android:layout_marginTop="@dimen/_15dp">
+                    app:layout_constraintTop_toBottomOf="@id/ll_middle_name"
+                    android:layout_marginTop="@dimen/_20dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_contact"
@@ -251,7 +251,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/label_email"
-                            android:inputType="textNoSuggestions|textEmailAddress"
+                            android:inputType="textEmailAddress"
 
                             />
 
@@ -314,7 +314,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/label_zipcode"
-                            android:inputType="textNoSuggestions"
+                            android:inputType="textNoSuggestions|text"
 
                             />
 
@@ -360,8 +360,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/guide1"
-                    android:layout_marginStart="@dimen/_5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_zipcode"
                     android:layout_marginTop="@dimen/_15dp">
 
@@ -393,9 +392,9 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_country"
-                    android:layout_marginTop="@dimen/_20dp"
+                    android:layout_marginTop="@dimen/_10dp"
                     android:text="@string/lbl_passport_detail"
-                    android:textSize="@dimen/_18sp"
+                    android:textSize="@dimen/_14sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/raleway_semiboldd"/>
 
@@ -408,7 +407,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/guide1"
                     app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
-                    android:layout_marginTop="@dimen/_15dp">
+                    android:layout_marginTop="@dimen/_10dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_passport_no"
@@ -423,7 +422,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/label_passport_no"
-                            android:inputType="textNoSuggestions"
+                            android:inputType="textNoSuggestions|number"
 
                             />
 
@@ -440,7 +439,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="@dimen/_5dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_pass_detail"
-                    android:layout_marginTop="@dimen/_15dp">
+                    android:layout_marginTop="@dimen/_10dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_passport_expire_date"
@@ -469,9 +468,8 @@
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginEnd="@dimen/_5dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/guide1"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ll_passport_no"
                     android:layout_marginTop="@dimen/_15dp">
 
