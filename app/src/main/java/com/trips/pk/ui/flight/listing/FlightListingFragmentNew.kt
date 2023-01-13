@@ -9,14 +9,11 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightListingNewBinding
-import com.trips.pk.model.FlightSearch
-import com.trips.pk.model.flight.ItinerariesDetail
+import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.ui.common.*
 import com.trips.pk.ui.flight.listing.stops.AllStopsFlightFragment
 import com.trips.pk.ui.flight.listing.stops.MultiStopsFlightsFragment

@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightSearchBinding
-import com.trips.pk.model.Airport
-import com.trips.pk.model.FlightSearch
+import com.trips.pk.model.flight.Airport
+import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.ui.common.*
 import com.trips.pk.ui.flight.dialogs.DateRangePickerBottomSheet
 import com.trips.pk.ui.flight.dialogs.origin.SearchOriginDestinationBottomSheet
@@ -185,7 +185,7 @@ class FlightSearchFragment:Fragment() {
                 mNoOfChildern=noOfChild
                 mNoOfInfent=noOfInfant
                 if (tourType=="oneway") toDate=""
-                val flightSearch=FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType,"PKR")
+                val flightSearch= FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType,"PKR")
                 val bundle=Bundle()
                 mFromTo = "$originName-$destinationName"
                 bundle.putSerializable("search",flightSearch)

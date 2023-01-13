@@ -1,6 +1,6 @@
 package com.trips.pk.ui.common
 
-import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Airport
 import com.trips.pk.model.flight.Countries
 import java.util.ArrayList
 

@@ -1,4 +1,4 @@
-package com.trips.pk.model
+package com.trips.pk.model.flight
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

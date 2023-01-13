@@ -129,6 +129,4 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
        // dob=dateFormatForServer.format(myCalendar.time)
        // binding.tvDob.setText(dateFormat.format(myCalendar.time))
     }
-
-
 }

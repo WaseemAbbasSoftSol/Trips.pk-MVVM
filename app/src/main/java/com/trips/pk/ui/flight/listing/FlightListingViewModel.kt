@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.TripsRepository
-import com.trips.pk.model.BaseError
-import com.trips.pk.model.FlightSearch
+import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.OriginDestination

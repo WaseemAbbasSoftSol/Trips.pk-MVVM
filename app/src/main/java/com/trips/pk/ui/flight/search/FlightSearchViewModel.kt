@@ -1,6 +1,5 @@
 package com.trips.pk.ui.flight.search
 
-import android.provider.SyncStateContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,9 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsRepository
-import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Airport
 import com.trips.pk.ui.common.AIRPORT_LIST
-import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
 import com.trips.pk.ui.common.airPortList
 import kotlinx.coroutines.Dispatchers

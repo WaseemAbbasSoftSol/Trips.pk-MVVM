@@ -2,12 +2,11 @@ package com.trips.pk.ui.common
 
 import android.widget.AutoCompleteTextView
 import androidx.lifecycle.MutableLiveData
-import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Airport
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.model.flight.book.ContactPerson
-import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.ui.flight.book.PassengerIndex

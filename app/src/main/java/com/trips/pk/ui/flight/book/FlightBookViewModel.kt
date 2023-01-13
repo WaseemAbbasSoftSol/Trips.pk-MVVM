@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsRepository
-import com.trips.pk.model.FlightSearch
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker

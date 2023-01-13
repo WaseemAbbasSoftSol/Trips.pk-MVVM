@@ -88,8 +88,12 @@
     <string name="lbl_child1">(Child # 1)</string>
     <string name="label_gender">Gender</string>
     <string name="lbl_continue_next">CONTINUE TO THE NEXT</string>
-    <string name="lbl_book_confirmed">Your flight request has been recieved &amp;\none of our agent will contact you for\nconfirmation</string>
+    <string name="lbl_book_confirmed">Your flight request has been received &amp;\none of our agent will contact you for\nconfirmation</string>
     <string name="lbl_back_to_home">BACK TO HOME</string>
     <string name="lbl_wait">Please wait…</string>
+    <string name="lbl_where">Where?</string>
+    <string name="lbl_find_on_a_location">Find on a location such as Dubai, Turkey\nNaran, Hunza etc</string>
+    <string name="lbl_worldwide_trips">Worldwide trips</string>
+    <string name="lbl_view_all">VIEW ALL</string>
 
 </resources>

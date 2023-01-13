@@ -27,8 +27,18 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+
+        <action
+            android:id="@+id/action_dashboard_to_tours_search_fragment"
+            app:destination="@id/tour_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
+    <!--Flight Module-->
     <fragment
         android:id="@+id/flight_search_fragment"
         android:name="com.trips.pk.ui.flight.search.FlightSearchFragment"
@@ -50,7 +60,7 @@
 
         <argument
             android:name="search"
-            app:argType="com.trips.pk.model.FlightSearch"/>
+            app:argType="com.trips.pk.model.flight.FlightSearch"/>
 
         <action
             android:id="@+id/action_flight_list_to_flight_detail_fragment"
@@ -97,11 +107,19 @@
         android:name="com.trips.pk.ui.flight.book.FlightBookConfirmedFragment"
         tools:layout="@layout/fragment_flight_book_confirmed"/>
 
+    <!--Tours Module-->
+    <fragment
+        android:id="@+id/tour_search_fragment"
+        android:name="com.trips.pk.ui.tour.search.TourSearchFragment"
+        tools:layout="@layout/fragment_tours_search"/>
+
+    <!--Global Navigation-->
     <action
         android:id="@+id/action_global_to_flight_search_fragment"
         app:destination="@id/flight_search_fragment"
         app:popUpTo="@id/flight_search_fragment"
         app:popUpToInclusive="true"
         />
+
 
 </navigation>

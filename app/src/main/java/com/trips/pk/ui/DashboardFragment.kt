@@ -36,6 +36,10 @@ class DashboardFragment:Fragment() {
         }
         binding.appBarLayout.clTour.setOnClickListener{
             //   binding.ivFlight.foreground=resources.getDrawable(R.drawable.fg_selected_card)
+            findNavController().navigate(R.id.action_dashboard_to_tours_search_fragment)
+        }
+        binding.appBarLayout.clRentACar.setOnClickListener{
+            //   binding.ivFlight.foreground=resources.getDrawable(R.drawable.fg_selected_card)
             findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)
         }
 

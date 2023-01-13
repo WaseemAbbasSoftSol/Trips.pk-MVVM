@@ -2,10 +2,9 @@ package com.trips.pk.data
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import com.trips.pk.R
-import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Airport
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.utils.FileHelper
 

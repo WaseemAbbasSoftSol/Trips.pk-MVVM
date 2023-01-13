@@ -1,6 +1,6 @@
 package com.trips.pk.data
 
-import com.trips.pk.model.FlightSearch
+import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.book.FlightBooker
 
 class TripsRepository (private val tripsApi: TripsApi) {

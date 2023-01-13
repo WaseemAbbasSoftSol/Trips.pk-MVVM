@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.trips.pk.R
 import com.trips.pk.databinding.BottomSheetOriginLayoutBinding
-import com.trips.pk.model.Airport
+import com.trips.pk.model.flight.Airport
 import com.trips.pk.ui.common.OnListItemClickListener
 import com.trips.pk.ui.common.airPortList
 import com.trips.pk.utils.Helpers

@@ -86,6 +86,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'com.github.razir.progressbutton:progressbutton:2.0.0'
 
+    //UI
+    implementation 'com.github.mike14u:shimmer-recyclerview-x:1.0.4'
+
     //Date Time Picker
     implementation 'com.aminography:primedatepicker:3.6.0'
     implementation 'com.aminography:primecalendar:1.7.0'
