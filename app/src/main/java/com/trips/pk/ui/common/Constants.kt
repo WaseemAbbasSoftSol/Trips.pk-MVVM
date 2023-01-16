@@ -26,3 +26,7 @@ enum class Prefix{
 enum class RequestState{
     DONE, LOADING, ERROR
 }
+
+interface DummyClickListener{
+    fun onDummyClick()
+}

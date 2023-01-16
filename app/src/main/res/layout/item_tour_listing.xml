@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5dp"
+        app:cardElevation="@dimen/_0dp"
+        android:layout_marginTop="@dimen/_10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_city"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/im_europe"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:id="@+id/tv_tour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_europe_tour"
+                android:fontFamily="@font/raleway_semiboldd"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sp"
+                android:layout_marginTop="@dimen/_8px"
+                app:layout_constraintTop_toBottomOf="@id/iv_city"
+                />
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_tour"
+                android:layout_marginTop="@dimen/_8px"
+                android:text="@string/lbl_money"
+                android:textSize="@dimen/_14sp"
+                android:textColor="@color/btn_color"
+                android:fontFamily="@font/poppins_semibold"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green50"
+                android:backgroundTint="@color/green50"
+                app:cardElevation="@dimen/_0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_money"
+                app:layout_constraintBottom_toBottomOf="@id/tv_money">
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_12dp"
+                    android:paddingEnd="@dimen/_12dp"
+                    android:paddingTop="@dimen/_4dp"
+                    android:text="On Sale"
+                    android:textSize="@dimen/_11sp"
+                    android:textColor="#00A65A"
+                    android:fontFamily="@font/poppins_medium"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_departure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_money"
+                android:layout_marginTop="@dimen/_8px"
+                android:text="Departure:"
+                android:textColor="@color/grey_002"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_12sp"/>
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/tv_departure"
+                app:layout_constraintTop_toTopOf="@id/tv_departure"
+                app:layout_constraintBottom_toBottomOf="@id/tv_departure"
+                android:layout_marginStart="@dimen/_10px"
+                android:text="BERNE"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_13sp"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="@dimen/_1dp"
+                android:layout_height="@dimen/_0dp"
+                app:layout_constraintTop_toTopOf="@id/tv_city"
+                app:layout_constraintBottom_toBottomOf="@id/tv_city"
+                app:layout_constraintStart_toEndOf="@id/tv_city"
+                android:layout_marginStart="@dimen/_20px"
+                android:layout_marginTop="@dimen/_3dp"
+                android:layout_marginBottom="@dimen/_3dp"
+                android:background="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_request"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/view1"
+                app:layout_constraintTop_toTopOf="@id/tv_departure"
+                app:layout_constraintBottom_toBottomOf="@id/tv_departure"
+                android:layout_marginStart="@dimen/_20px"
+                android:text="On Request"
+                android:textColor="#0890FA"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_13sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1dp"
+                android:background="@color/grey_005"
+                app:layout_constraintTop_toBottomOf="@id/tv_departure"
+                android:layout_marginTop="@dimen/_10px"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

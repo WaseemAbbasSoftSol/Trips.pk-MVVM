@@ -95,5 +95,9 @@
     <string name="lbl_find_on_a_location">Find on a location such as Dubai, Turkey\nNaran, Hunza etc</string>
     <string name="lbl_worldwide_trips">Worldwide trips</string>
     <string name="lbl_view_all">VIEW ALL</string>
+    <string name="lbl_tour_pak">Tour packages for Pakistan</string>
+    <string name="lbl_europe_tour">Europe 16 days tour summer vocations from Karachi</string>
+    <string name="lbl_16_days">16 days trip to BERNE</string>
+    <string name="lbl_included_trip">Included in Trip</string>
 
 </resources>

@@ -1,27 +1,21 @@
-package com.trips.pk.ui.tour.search
+package com.trips.pk.ui.tour.listing
 
 import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.trips.pk.R
-import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.ui.common.DummyClickListener
-import com.trips.pk.ui.common.OnListItemClickListener
-import java.text.NumberFormat
 
-class WorldWideAdapter(
+class TourListingAdapter(
     val context: Context,
     val size:Int,
     val listener:DummyClickListener
 ) :
-    RecyclerView.Adapter<WorldWideAdapter.ItemRecyclerViewHolder>() {
+    RecyclerView.Adapter<TourListingAdapter.ItemRecyclerViewHolder>() {
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -30,7 +24,7 @@ class WorldWideAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
         return ItemRecyclerViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_worldwide_trips,
+                R.layout.item_tour_listing,
                 parent,
                 false
             )
@@ -50,6 +44,5 @@ class WorldWideAdapter(
     override fun getItemCount(): Int {
         return size
     }
-
 
 }

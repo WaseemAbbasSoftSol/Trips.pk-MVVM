@@ -9,7 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10px">
+        android:layout_marginTop="@dimen/_10px"
+        android:paddingStart="@dimen/_5dp"
+        android:paddingEnd="@dimen/_5dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
@@ -19,8 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:foreground="@drawable/bg_sq_cv"
-            app:cardCornerRadius="@dimen/_8dp"
-            app:cardElevation="@dimen/_0dp">
+            app:cardElevation="@dimen/_0dp"
+         >
 
             <LinearLayout
                 android:layout_width="@dimen/_35dp"

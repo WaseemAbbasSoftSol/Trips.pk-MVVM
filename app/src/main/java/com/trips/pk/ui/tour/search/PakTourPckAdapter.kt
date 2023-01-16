@@ -16,12 +16,12 @@ import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.common.OnListItemClickListener
 import java.text.NumberFormat
 
-class WorldWideAdapter(
+class PakTourPckAdapter(
     val context: Context,
     val size:Int,
     val listener:DummyClickListener
 ) :
-    RecyclerView.Adapter<WorldWideAdapter.ItemRecyclerViewHolder>() {
+    RecyclerView.Adapter<PakTourPckAdapter.ItemRecyclerViewHolder>() {
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -30,7 +30,7 @@ class WorldWideAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
         return ItemRecyclerViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_worldwide_trips,
+                R.layout.item_pak_tour_pkg,
                 parent,
                 false
             )
@@ -50,6 +50,5 @@ class WorldWideAdapter(
     override fun getItemCount(): Int {
         return size
     }
-
 
 }

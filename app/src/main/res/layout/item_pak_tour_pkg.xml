@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45dp"
+            android:foreground="@drawable/fg_cardview_white"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/_10px"
+            android:layout_marginStart="@dimen/_5dp"
+            android:layout_marginEnd="@dimen/_5dp"
+            app:cardElevation="@dimen/_0dp"
+            >
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Skardu"
+             android:textColor="@color/black"
+             android:textSize="@dimen/_13sp"
+             android:fontFamily="@font/poppins_regular"
+             android:layout_gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+</layout>

@@ -34,14 +34,17 @@
             android:id="@+id/tv_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dashboard"
-            android:textSize="@dimen/_20sp"
             android:fontFamily="@font/raleway_semiboldd"
+            android:text="Dashboard"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_20sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.378"
+            app:layout_constraintStart_toEndOf="@id/cv_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

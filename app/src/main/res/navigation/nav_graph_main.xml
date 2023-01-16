@@ -111,7 +111,60 @@
     <fragment
         android:id="@+id/tour_search_fragment"
         android:name="com.trips.pk.ui.tour.search.TourSearchFragment"
-        tools:layout="@layout/fragment_tours_search"/>
+        tools:layout="@layout/fragment_tours_search">
+        <action
+            android:id="@+id/action_tour_search_to_tour_pkg"
+            app:destination="@id/tour_pkg_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+        <action
+            android:id="@+id/action_tour_search_to_tour_listing"
+            app:destination="@id/tour_listing_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tour_pkg_fragment"
+        android:name="com.trips.pk.ui.tour.pkg.TourPackageFragment"
+        tools:layout="@layout/fragment_tour_pkg">
+        <argument
+            android:name="tour_type"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_tour_pkg_to_tour_listing"
+            app:destination="@id/tour_listing_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tour_listing_fragment"
+        android:name="com.trips.pk.ui.tour.listing.TourListingFragment"
+        tools:layout="@layout/fragment_tour_listing">
+        <action
+            android:id="@+id/action_tour_listing_to_tour_detail"
+            app:destination="@id/tour_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tour_detail_fragment"
+        android:name="com.trips.pk.ui.tour.detail.TourDetailFragment"
+        tools:layout="@layout/fragment_tour_detail"/>
 
     <!--Global Navigation-->
     <action
