@@ -6,7 +6,7 @@
 
     </data>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45dp"
@@ -15,7 +15,11 @@
             android:layout_marginTop="@dimen/_10px"
             android:layout_marginStart="@dimen/_5dp"
             android:layout_marginEnd="@dimen/_5dp"
+            app:cardCornerRadius="@dimen/_8dp"
             app:cardElevation="@dimen/_0dp"
+            app:rippleColor="@color/btn_color"
+            app:strokeWidth="@dimen/_1dp"
+            app:strokeColor="@color/grey"
             >
 
          <TextView
@@ -27,6 +31,6 @@
              android:fontFamily="@font/poppins_regular"
              android:layout_gravity="center"/>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
 </layout>

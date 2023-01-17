@@ -99,5 +99,18 @@
     <string name="lbl_europe_tour">Europe 16 days tour summer vocations from Karachi</string>
     <string name="lbl_16_days">16 days trip to BERNE</string>
     <string name="lbl_included_trip">Included in Trip</string>
+    <string name="lbl_highlight">Highlights</string>
+    <string name="lbl_highlight_desc">Lucerne, Milan, Venice, Rome,Vatican,Arezzo,Florence,Pisa,Genoa,Monaco,Nice,Cannes,Avignon, Paris</string>
+    <string name="lbl_desc">Description</string>
+    <string name="lbl_full_desc">Paris is one of the most beautiful metropolises in the world. It is known worldwide for the Louvre Museum, Notre- Dameedifice, and the Eiffel palace. It has a character of being a romantic and artistic megacity. The megacity is also known for its high qualigycooking.</string>
+    <string name="lbl_price_date">Price/Dates</string>
+    <string name="lbl_book_now">BOOK NOW</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="label_adult">Adult</string>
+    <string name="label_child">Child</string>
+    <string name="label_infant">Infant</string>
+    <string name="lbl_departure_city">Departure City</string>
+    <string name="lbl_date">Date</string>
+    <string name="lbl_share_detail">Please share further details/preferences*</string>
 
 </resources>

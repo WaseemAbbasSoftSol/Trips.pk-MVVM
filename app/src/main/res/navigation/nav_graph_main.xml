@@ -164,8 +164,35 @@
     <fragment
         android:id="@+id/tour_detail_fragment"
         android:name="com.trips.pk.ui.tour.detail.TourDetailFragment"
-        tools:layout="@layout/fragment_tour_detail"/>
+        tools:layout="@layout/fragment_tour_detail">
+        <action
+            android:id="@+id/action_tour_detail_to_book_list"
+            app:destination="@id/tour_book_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
 
+    <fragment
+        android:id="@+id/tour_book_list_fragment"
+        android:name="com.trips.pk.ui.tour.book.TourBookListFragment"
+        tools:layout="@layout/fragment_tour_booking_list">
+        <action
+            android:id="@+id/action_tour_book_list_to_book_detail"
+            app:destination="@id/tour_book_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tour_book_detail_fragment"
+        android:name="com.trips.pk.ui.tour.book.TourBookingDetailFragment"
+        tools:layout="@layout/fragment_tour_booking_detail"/>
     <!--Global Navigation-->
     <action
         android:id="@+id/action_global_to_flight_search_fragment"

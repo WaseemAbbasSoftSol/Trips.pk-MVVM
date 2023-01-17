@@ -7,6 +7,8 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Build
+import android.os.Parcel
+import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.view.View
 import android.view.ViewTreeObserver
@@ -17,9 +19,14 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
+import androidx.fragment.app.FragmentManager
 import com.github.razir.progressbutton.hideProgress
 import com.github.razir.progressbutton.showProgress
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.nextMonth
 import com.kizitonwose.calendar.core.previousMonth
@@ -244,4 +251,109 @@ object CustomDateRangeHelper{
         e.printStackTrace()
     }
     return formattedDate
+}
+
+object DatePicker {
+    const val DATE_ENABLED_ALL = 0
+    const val DATE_ENABLED_PAST_ONLY = 1
+    const val DATE_ENABLED_FUTURE_ONLY = 2
+
+    fun showDateRangePicker(
+        fm: FragmentManager, enabledDates: Int, selection: Pair<Long, Long>? = null,
+        onDateSelectedListener: MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>? = null
+    ) {
+        val builder = MaterialDatePicker.Builder.dateRangePicker()
+        builder.setSelection(selection)
+        if (enabledDates != DATE_ENABLED_ALL) {
+            builder.setCalendarConstraints(limitRange(enabledDates).build())
+        }
+        val picker = builder.build()
+        picker.addOnPositiveButtonClickListener(onDateSelectedListener)
+        picker.show(fm, picker.toString())
+    }
+
+    fun showDatePicker(
+        fm: FragmentManager, enabledDates: Int, selection: Long? = null,
+        onDateSelectedListener: MaterialPickerOnPositiveButtonClickListener<Long>? = null
+    ) {
+        val builder = MaterialDatePicker.Builder.datePicker().setTheme(R.style.MaterialCalendarTheme)
+        builder.setSelection(selection)
+        if (enabledDates != DATE_ENABLED_ALL) {
+            builder.setCalendarConstraints(limitRange(enabledDates).build())
+        }
+        val picker = builder.build()
+        picker.addOnPositiveButtonClickListener(onDateSelectedListener)
+        picker.show(fm, picker.toString())
+    }
+
+    private fun limitRange(enabledDates: Int): CalendarConstraints.Builder {
+
+        val constraintsBuilderRange = CalendarConstraints.Builder()
+
+        val calendarStart: Calendar = Calendar.getInstance()
+        val calendarEnd: Calendar = Calendar.getInstance()
+
+        val year = calendarStart.get(Calendar.YEAR)
+        val month = calendarStart.get(Calendar.MONTH) + 1
+        val day = calendarStart.get(Calendar.DATE)
+
+        when (enabledDates) {
+            DATE_ENABLED_PAST_ONLY -> {
+                calendarStart.set(
+                    year - 10,
+                    month - 1,
+                    day - 1
+                )
+                calendarEnd.set(year, month - 1, day)
+            }
+            DATE_ENABLED_FUTURE_ONLY -> {
+                calendarStart.set(year, month - 1, day - 1)
+                calendarEnd.set(year + 10, month - 1, day)
+            }
+        }
+
+        val minDate = calendarStart.timeInMillis
+        val maxDate = calendarEnd.timeInMillis
+
+        constraintsBuilderRange.setStart(minDate)
+        constraintsBuilderRange.setEnd(maxDate)
+
+        constraintsBuilderRange.setValidator(RangeValidator(minDate, maxDate))
+
+        return constraintsBuilderRange
+    }
+}
+
+
+private class RangeValidator(private val minDate: Long, private val maxDate: Long) :
+    CalendarConstraints.DateValidator {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readLong(),
+        parcel.readLong()
+    )
+
+    override fun writeToParcel(p0: Parcel, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    override fun isValid(date: Long): Boolean {
+        return !(minDate > date || maxDate < date)
+
+    }
+
+    companion object CREATOR : Parcelable.Creator<RangeValidator> {
+        override fun createFromParcel(parcel: Parcel): RangeValidator {
+            return RangeValidator(parcel)
+        }
+
+        override fun newArray(size: Int): Array<RangeValidator?> {
+            return arrayOfNulls(size)
+        }
+    }
+
 }

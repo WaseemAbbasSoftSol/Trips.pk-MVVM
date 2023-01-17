@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.flight.book.FlightBookViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/base_toolbar" />
+
+
+          <androidx.core.widget.NestedScrollView
+              android:id="@+id/nestedscroll"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:fillViewport="true"
+              android:background="@color/primary_color"
+              app:layout_constraintBottom_toTopOf="@id/btn_book"
+              app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+
+              <com.github.captain_miao.optroundcardview.OptRoundCardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:behavior_hideable="true"
+                  android:background="#F2F2F2"
+                  app:layout_behavior="@string/bottom_sheet_behavior"
+                  app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:optRoundCardBackgroundColor="@color/white"
+                  app:optRoundCardCornerRadius="35dp"
+                  app:optRoundCardLeftBottomCorner="false"
+                  app:optRoundCardRightBottomCorner="false"
+                  >
+                  <androidx.constraintlayout.widget.ConstraintLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginStart="@dimen/_20dp"
+                      android:layout_marginEnd="@dimen/_20dp"
+                      >
+
+                      <TextView
+                          android:id="@+id/tv_enter_info"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintTop_toTopOf="parent"
+                          android:layout_marginTop="@dimen/_10dp"
+                          android:text="@string/lbl_europe_tour"
+                          android:textSize="@dimen/_18sp"
+                          android:textColor="@color/black"
+                          android:fontFamily="@font/poppins_medium"/>
+
+
+                      <LinearLayout
+                          android:id="@+id/ll_name"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/tv_enter_info"
+                          android:layout_marginTop="@dimen/_18px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_name"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_name"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_full_name"
+                                  android:inputType="textNoSuggestions"
+
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_email"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_name"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_email"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_email"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_email"
+                                  android:inputType="textNoSuggestions"
+
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_mob"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_email"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_mob"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_mob"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_contact"
+                                  android:inputType="textNoSuggestions"
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_adult"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toStartOf="@id/guide1"
+                          app:layout_constraintTop_toBottomOf="@id/ll_mob"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_adult"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_adult"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_adult"
+                                  android:focusable="false"
+                                  android:inputType="textNoSuggestions"
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_child"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toEndOf="@id/guide1"
+                          app:layout_constraintEnd_toStartOf="@id/guide2"
+                          app:layout_constraintTop_toBottomOf="@id/ll_mob"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_child"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_child"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_child"
+                                  android:focusable="false"
+                                  android:inputType="textNoSuggestions"
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_infant"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toEndOf="@id/guide2"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_mob"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_infant"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_infant"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/label_infant"
+                                  android:focusable="false"
+                                  android:inputType="textNoSuggestions"
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_dep_city"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_adult"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_dep_city"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_dep_city"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/lbl_departure_city"
+                                  android:inputType="textNoSuggestions"
+
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <LinearLayout
+                          android:id="@+id/ll_date"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_dep_city"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_date"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_date"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/lbl_date"
+                                  android:focusable="false"
+                                  android:inputType="textNoSuggestions"
+
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <CheckBox
+                          android:id="@+id/checkbox_flexible_date"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/ll_date"
+                          android:layout_marginTop="@dimen/_16px"
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:button="@null"
+                          app:buttonCompat="@null"
+                          android:background="@drawable/radio_states"
+                          />
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          app:layout_constraintTop_toTopOf="@id/checkbox_flexible_date"
+                          app:layout_constraintBottom_toBottomOf="@id/checkbox_flexible_date"
+                          app:layout_constraintStart_toEndOf="@id/checkbox_flexible_date"
+                          android:layout_marginStart="@dimen/_10dp"
+                          android:text="My date is someone flixible"
+                          android:textColor="@color/black"
+                          android:textSize="@dimen/_12sp"
+                          android:fontFamily="@font/poppins_regular"/>
+
+                      <LinearLayout
+                          android:id="@+id/ll_desc"
+                          android:layout_width="@dimen/_0dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintTop_toBottomOf="@id/checkbox_flexible_date"
+                          android:layout_marginTop="@dimen/_16px">
+
+                          <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/et_desc"
+                              style="@style/AppTheme.TextInputLayout"
+                              app:hintTextAppearance="@style/TextInputLayoutHintText"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content">
+
+                              <com.google.android.material.textfield.TextInputEditText
+                                  android:id="@+id/ed_desc"
+                                  style="@style/FieldStyle"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:hint="@string/lbl_share_detail"
+                                  android:inputType="textNoSuggestions|textMultiLine"
+                                  android:maxLines="4"
+                                  />
+
+                          </com.google.android.material.textfield.TextInputLayout>
+
+                      </LinearLayout>
+
+                      <androidx.constraintlayout.widget.Guideline
+                          android:id="@+id/guide1"
+                          android:layout_width="1dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          app:layout_constraintGuide_percent="0.33" />
+
+                      <androidx.constraintlayout.widget.Guideline
+                          android:id="@+id/guide2"
+                          android:layout_width="1dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          app:layout_constraintGuide_percent="0.66" />
+
+                  </androidx.constraintlayout.widget.ConstraintLayout>
+
+              </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+
+
+          </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.ContainedButton"
+            android:text="@string/lbl_book_now"
+            android:textSize="@dimen/_14sp"
+            android:fontFamily="@font/poppins_semibold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginEnd="@dimen/_20dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
