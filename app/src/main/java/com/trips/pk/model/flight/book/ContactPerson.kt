@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 data class ContactPerson(
     @SerializedName("Name")
-    val name:String,
+    val name:String="",
     @SerializedName("Number")
-    val number:String,
+    val number:String="",
     @SerializedName("Gender")
-    val gender:String,
+    val gender:String="",
     @SerializedName("Email")
-    val email:String,
+    val email:String="",
     @SerializedName("zip")
-    val zipCode:String,
+    val zipCode:String="",
     @SerializedName("Address")
-    val address:String,
+    val address:String="",
     @SerializedName("country")
-    val country:String,
+    val country:String="",
     @SerializedName("city")
-    val city:String,
+    val city:String="",
 )

@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class Passenger(
     @SerializedName("FirstName")
-    val firstName: String,
+    val firstName: String="",
     @SerializedName("MiddleName")
-    val middleName: String,
+    val middleName: String="",
     @SerializedName("LastName")
-    val lastName: String,
+    val lastName: String="",
     @SerializedName("Gender")
-    val gender: String,
+    val gender: String="",
     @SerializedName("DateOfBirth")
-    val dob: String,
+    val dob: String="",
     @SerializedName("PassengerType")
-    val passengerType: String,
+    val passengerType: String="",
     @SerializedName("PassportInfo")
     val passportInfo: PassportInfo
-)
+):java.io.Serializable

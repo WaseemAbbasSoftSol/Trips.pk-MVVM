@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class PassportInfo(
     @SerializedName("CountryID")
-    val countryID: Int,
+    val countryID: Int=0,
     @SerializedName("ExpirtyDate")
-    val expirtyDate: String,
+    val expirtyDate: String="",
     @SerializedName("PassportNumber")
-    val passportNumber: String
+    val passportNumber: String=""
 )

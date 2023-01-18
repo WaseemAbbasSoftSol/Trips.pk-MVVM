@@ -9,7 +9,7 @@ import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
-import com.trips.pk.ui.flight.book.PassengerIndex
+import com.trips.pk.ui.flight.book.newpck.AllUser
 
 val airPortList= arrayListOf<Airport>()
 val countriesList= arrayListOf<Countries>()
@@ -28,17 +28,24 @@ var isButtonClick=MutableLiveData<Boolean>()
 var sharedDob:AutoCompleteTextView?=null
 var sharedExpireDate:AutoCompleteTextView?=null
 
-var pIndex=MutableLiveData<List<PassengerIndex>>()
-
- var mPassengerList= arrayListOf<Passenger>()
+var mPassengerList= arrayListOf<Passenger>()
 var mContactPeron= arrayListOf<ContactPerson>()
 var mIsValid=false
 
-var mNoOfAdult=1
-var mNoOfChildern=1
+var mNoOfAdult=2
+var mNoOfChildern=2
 var mNoOfInfent=1
 
 var mTotalPassenger= arrayListOf<PassengerType>()
+
+interface TempListener{
+    fun onTempClick(which:String, user: AllUser)
+}
+
+var isNextClicked=MutableLiveData<Boolean>()
+var whichAdult=1
+var whichChild=0
+var whichInfant=0
 
 
 
