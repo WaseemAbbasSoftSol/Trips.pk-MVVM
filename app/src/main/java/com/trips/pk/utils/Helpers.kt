@@ -11,6 +11,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.provider.OpenableColumns
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.webkit.MimeTypeMap
 import android.widget.Button
@@ -92,7 +93,13 @@ object Helpers {
             }
         })
     }
-
+    fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
+        if (view.layoutParams is ViewGroup.MarginLayoutParams) {
+            val p = view.layoutParams as ViewGroup.MarginLayoutParams
+            p.setMargins(left, top, right, bottom)
+            view.requestLayout()
+        }
+    }
 }
 
 object FileHelper {

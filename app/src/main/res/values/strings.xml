@@ -112,5 +112,12 @@
     <string name="lbl_departure_city">Departure City</string>
     <string name="lbl_date">Date</string>
     <string name="lbl_share_detail">Please share further details/preferences*</string>
+    <string name="lbl_enter_pickup_location">Enter Pickup Location</string>
+    <string name="lbl_enter_category">Enter Category</string>
+    <string name="lbl_honda_civic">Honda Civic</string>
+    <string name="lbl_per_day">Per day</string>
+    <string name="lbl_rent_a_car_companies">Rent a Car Companies in Pakistan</string>
+    <string name="lbl_find_vehical_type">Find a Vehical type to suit\nyour needs</string>
+    <string name="lbl_slash_per_day">/Per Day</string>
 
 </resources>

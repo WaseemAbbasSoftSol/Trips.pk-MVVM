@@ -36,6 +36,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard_to_rent_a_car_search_fragment"
+            app:destination="@id/rent_a_car_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -106,6 +114,7 @@
         android:id="@+id/flight_book_confirmed_fragment"
         android:name="com.trips.pk.ui.flight.book.FlightBookConfirmedFragment"
         tools:layout="@layout/fragment_flight_book_confirmed"/>
+    <!--End of Flight Module-->
 
     <!--Tours Module-->
     <fragment
@@ -193,6 +202,28 @@
         android:id="@+id/tour_book_detail_fragment"
         android:name="com.trips.pk.ui.tour.book.TourBookingDetailFragment"
         tools:layout="@layout/fragment_tour_booking_detail"/>
+    <!--End of Tours Module-->
+
+    <!--Rent a Car Module-->
+    <fragment
+        android:id="@+id/rent_a_car_search_fragment"
+        android:name="com.trips.pk.ui.rent_a_car.search.RentCarSearchFragment"
+        tools:layout="@layout/fragment_rent_a_car_search">
+        <action
+            android:id="@+id/action_rent_a_car_search_to_rent_a_car_list_fragment"
+            app:destination="@id/rent_a_car_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rent_a_car_list_fragment"
+        android:name="com.trips.pk.ui.rent_a_car.listing.VehicalListFragment"
+        tools:layout="@layout/fragment_vehical_list"/>
+
     <!--Global Navigation-->
     <action
         android:id="@+id/action_global_to_flight_search_fragment"

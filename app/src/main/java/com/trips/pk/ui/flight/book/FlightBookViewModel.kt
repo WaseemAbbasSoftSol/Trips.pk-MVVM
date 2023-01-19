@@ -100,11 +100,6 @@ class FlightBookViewModel(
         }
     }
 
-    val prefix= arrayListOf(
-        Prefix.Mr,
-        Prefix.Mrs
-    )
-
 
     private fun getCountries(){
         COUNTRIES_LIST.addAll(prefRepository.getCountries())

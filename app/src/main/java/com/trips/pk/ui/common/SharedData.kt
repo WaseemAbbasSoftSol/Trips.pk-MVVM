@@ -32,9 +32,9 @@ var mPassengerList= arrayListOf<Passenger>()
 var mContactPeron= arrayListOf<ContactPerson>()
 var mIsValid=false
 
-var mNoOfAdult=2
-var mNoOfChildern=2
-var mNoOfInfent=1
+var mNoOfAdult=1
+var mNoOfChildern=1
+var mNoOfInfent=0
 
 var mTotalPassenger= arrayListOf<PassengerType>()
 

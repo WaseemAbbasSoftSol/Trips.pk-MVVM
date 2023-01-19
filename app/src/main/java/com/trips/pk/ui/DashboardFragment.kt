@@ -40,8 +40,10 @@ class DashboardFragment:Fragment() {
         }
         binding.appBarLayout.clRentACar.setOnClickListener{
             //   binding.ivFlight.foreground=resources.getDrawable(R.drawable.fg_selected_card)
-            findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)
+            findNavController().navigate(R.id.action_dashboard_to_rent_a_car_search_fragment)
         }
+
+        binding.appBarLayout.clVisa.setOnClickListener {  findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment) }
 
         return binding.root
     }

@@ -76,7 +76,6 @@
                               style="@style/FieldStyle"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                              android:text="Mr"
                               android:cursorVisible="false"
                               android:focusable="false"
                               android:drawableEnd="@drawable/ic_drop_down_arrow"
