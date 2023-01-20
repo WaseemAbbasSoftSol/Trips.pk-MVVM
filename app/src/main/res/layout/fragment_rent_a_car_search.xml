@@ -61,7 +61,7 @@
                     android:layout_marginEnd="@dimen/_20dp"
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_enter_category"
-                    android:focusable="true"
+                    android:focusable="false"
                     android:textColorHint="@color/grey"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"

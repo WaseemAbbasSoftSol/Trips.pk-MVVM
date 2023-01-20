@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentRentACarSearchBinding
+import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.DummyClickListener
+import com.trips.pk.ui.rent_a_car.dialogs.CarCategoryBottomsheet
+import com.trips.pk.ui.rent_a_car.dialogs.CarOptionsBottomsheet
 
 class RentCarSearchFragment: Fragment(), DummyClickListener {
     private lateinit var binding:FragmentRentACarSearchBinding
@@ -41,10 +44,15 @@ class RentCarSearchFragment: Fragment(), DummyClickListener {
         binding.tvViewAll.setOnClickListener {
             findNavController().navigate(R.id.action_rent_a_car_search_to_rent_a_car_list_fragment)
         }
+        binding.edEnterCategory.setOnClickListener {
+            val dialog=CarCategoryBottomsheet()
+            dialog.show(parentFragmentManager, APP_TAG)
+        }
         return binding.root
     }
 
     override fun onDummyClick() {
-       Toast.makeText(requireContext(),"Varieties are coming soon",Toast.LENGTH_SHORT).show()
+       val dialog=CarOptionsBottomsheet()
+        dialog.show(parentFragmentManager, APP_TAG)
     }
 }

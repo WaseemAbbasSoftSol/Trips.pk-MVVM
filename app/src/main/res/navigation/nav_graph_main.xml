@@ -224,6 +224,17 @@
         android:name="com.trips.pk.ui.rent_a_car.listing.VehicalListFragment"
         tools:layout="@layout/fragment_vehical_list"/>
 
+    <fragment
+        android:id="@+id/rent_a_car_searh_result_fragment"
+        android:name="com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultFragment"
+        tools:layout="@layout/fragment_rent_a_car_search_result"/>
+
+    <fragment
+        android:id="@+id/rent_a_car_booking_detail_fragment"
+        android:name="com.trips.pk.ui.rent_a_car.book.RentACarBookingDetailFragment"
+        tools:layout="@layout/fragment_rent_a_car_booking_detail"/>
+    <!--End of Rent a Car Module-->
+
     <!--Global Navigation-->
     <action
         android:id="@+id/action_global_to_flight_search_fragment"
@@ -232,5 +243,22 @@
         app:popUpToInclusive="true"
         />
 
+    <action
+        android:id="@+id/action_global_to_rent_a_car_search_result_fragment"
+        app:destination="@id/rent_a_car_searh_result_fragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        />
+
+    <action
+        android:id="@+id/action_global_to_rent_a_car_booking_detail_fragment"
+        app:destination="@id/rent_a_car_booking_detail_fragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        />
 
 </navigation>

@@ -13,8 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.trips.pk.R
 import com.trips.pk.databinding.BottomSheetOriginLayoutBinding
 import com.trips.pk.model.flight.Airport
+import com.trips.pk.ui.common.AIRPORT_LIST
 import com.trips.pk.ui.common.OnListItemClickListener
-import com.trips.pk.ui.common.airPortList
 import com.trips.pk.utils.Helpers
 
 class SearchOriginDestinationBottomSheet: BottomSheetDialogFragment(),OnListItemClickListener<Airport> {
@@ -42,7 +42,7 @@ private var list= arrayListOf<Airport>()
         list.clear()
         binding.edSearchOrigin.text.clear()
         binding.edSearchOrigin.requestFocus()
-        list.addAll(airPortList)
+        list.addAll(AIRPORT_LIST)
 
         binding.edSearchOrigin.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}

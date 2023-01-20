@@ -119,5 +119,12 @@
     <string name="lbl_rent_a_car_companies">Rent a Car Companies in Pakistan</string>
     <string name="lbl_find_vehical_type">Find a Vehical type to suit\nyour needs</string>
     <string name="lbl_slash_per_day">/Per Day</string>
+    <string name="lbl_lhr">Lahore</string>
+    <string name="lbl_rent_a_car_booking">Rent a Car Booking</string>
+    <string name="lbl_residence_city">City Of Residence*</string>
+    <string name="lbl_where_u_need_car">Where You Need This Car?*</string>
+    <string name="lbl_return_date">Return Date</string>
+    <string name="lbl_pickup_date">pickup Date</string>
+    <string name="lbl_done">DONE</string>
 
 </resources>

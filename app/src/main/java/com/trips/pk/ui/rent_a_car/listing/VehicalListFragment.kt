@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentVehicalListBinding
+import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.DummyClickListener
+import com.trips.pk.ui.rent_a_car.dialogs.CarOptionsBottomsheet
 import com.trips.pk.ui.rent_a_car.search.CarsVarietyAdapter
 
 class VehicalListFragment:Fragment(),DummyClickListener {
@@ -33,6 +35,7 @@ class VehicalListFragment:Fragment(),DummyClickListener {
     }
 
     override fun onDummyClick() {
-
+        val dialog= CarOptionsBottomsheet()
+        dialog.show(parentFragmentManager, APP_TAG)
     }
 }

@@ -5,8 +5,9 @@ import com.trips.pk.model.flight.Countries
 import java.util.ArrayList
 
 const val APP_TAG = "Trips"
+const val KEY_AIRPORT_LIST = "airport_list"
 
-val AIRPORT_LIST: ArrayList<Airport> = ArrayList()
+
 val COUNTRIES_LIST: ArrayList<Countries> = ArrayList()
 
 const val VIEW_TYPE_NO_STOP = 1011

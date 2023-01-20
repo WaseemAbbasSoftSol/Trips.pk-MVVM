@@ -11,7 +11,7 @@ import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.ui.flight.book.newpck.AllUser
 
-val airPortList= arrayListOf<Airport>()
+val AIRPORT_LIST = arrayListOf<Airport>()
 val countriesList= arrayListOf<Countries>()
 var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0

@@ -27,6 +27,7 @@
     <dimen name="_45dp">45dp</dimen>
     <dimen name="_46dp">46dp</dimen>
     <dimen name="_50dp">50dp</dimen>
+    <dimen name="_55dp">55dp</dimen>
     <dimen name="_60dp">60dp</dimen>
 
     <dimen name="_1sp">1sp</dimen>
@@ -81,6 +82,7 @@
     <dimen name="_40px">40px</dimen>
     <dimen name="_46px">46px</dimen>
     <dimen name="_50px">50px</dimen>
+    <dimen name="_55px">55px</dimen>
     <dimen name="_60px">60px</dimen>
 
 
