@@ -126,5 +126,8 @@
     <string name="lbl_return_date">Return Date</string>
     <string name="lbl_pickup_date">pickup Date</string>
     <string name="lbl_done">DONE</string>
+    <string name="lbl_type_country_name">Type a country name…</string>
+    <string name="lbl_visa_service">Visa services for various countries for Pakistani Nationals</string>
+    <string name="lbl_visa_processing_time">Processing Time (5-15) Working daysComplete documentation and Advice</string>
 
 </resources>

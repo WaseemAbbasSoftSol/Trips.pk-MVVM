@@ -10,9 +10,10 @@ import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.ui.flight.book.newpck.AllUser
+import java.util.ArrayList
 
 val AIRPORT_LIST = arrayListOf<Airport>()
-val countriesList= arrayListOf<Countries>()
+
 var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
 var mTourType = "round"

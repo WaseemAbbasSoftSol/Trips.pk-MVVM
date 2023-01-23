@@ -16,7 +16,9 @@ data class ContactPerson(
     @SerializedName("Address")
     val address:String="",
     @SerializedName("country")
-    val country:String="",
+    val countryId:String="Pakistan",
+    val countryName:String = "Pakistan",
     @SerializedName("city")
-    val city:String="",
+    val cityId:String="",
+    val cityName :String = ""
 )

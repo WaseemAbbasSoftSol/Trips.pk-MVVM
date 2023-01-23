@@ -10,6 +10,7 @@ import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
+import com.trips.pk.model.flight.book.Key_Request
 import com.trips.pk.ui.common.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,11 +35,13 @@ class FlightBookViewModel(
     private val _countries = MutableLiveData<List<Countries>>()
     val countries: LiveData<List<Countries>> = _countries
 
+    private val _cities = MutableLiveData<List<Countries>>()
+    val cities: LiveData<List<Countries>> = _cities
+
     init {
-        getAllCountries()
-        getCountries()
-        countriesList.clear()
-        countriesList.addAll(COUNTRIES_LIST)
+        _countries.value= emptyList()
+        _cities.value= emptyList()
+        storeCountries()
     }
 
     fun bookFlight(book:FlightBooker) {
@@ -53,8 +56,7 @@ class FlightBookViewModel(
                 } else {
                     response.errorBody().let {
                         _bookConfirmationMessage.postValue(it.toString())
-                        Log.d("dddd", it!!.toString())
-                        Log.d("wwww", it!!.string())
+                        Log.d(APP_TAG, it!!.toString())
                     }
                 }
                 _state.postValue(RequestState.DONE)
@@ -70,21 +72,48 @@ class FlightBookViewModel(
         }
     }
 
-    fun getAllCountries() {
+    private fun getAllCountries() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _state.postValue(RequestState.LOADING)
                 val response = repository.getAllCountries()
                 if (response.isSuccessful) {
                     response.body().let {
-                        _countries.postValue(it!!.data!!)
-                       // countriesList.value = it.data
+                        prefRepository.deleteCountriesFromPrefRepository()
+                        prefRepository.saveCountries(it!!.data)
                     }
                 } else {
                     response.errorBody().let {
                         _message.postValue(it.toString())
-                        Log.d("dddd", it!!.toString())
-                        Log.d("wwww", it!!.string())
+                        Log.d(APP_TAG, it!!.toString())
+                    }
+                }
+                _state.postValue(RequestState.DONE)
+            } catch (e: Exception) {
+                _state.postValue(RequestState.ERROR)
+                if (_message.value.isNullOrEmpty())_message.postValue(e.message.toString())
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                if (_message.value.isNullOrEmpty()) _message.postValue(t.message.toString())
+                _state.postValue(RequestState.ERROR)
+                t.printStackTrace()
+            }
+        }
+    }
+
+     fun getCitiesByCountryId(key:Key_Request) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _state.postValue(RequestState.LOADING)
+                val response = repository.getCitiesByCountryId(key)
+                if (response.isSuccessful) {
+                    response.body().let {
+                       _cities.postValue(it!!.data!!)
+                    }
+                } else {
+                    response.errorBody().let {
+                        _message.postValue(it.toString())
+                        Log.d(APP_TAG, it!!.toString())
                     }
                 }
                 _state.postValue(RequestState.DONE)
@@ -101,7 +130,15 @@ class FlightBookViewModel(
     }
 
 
-    private fun getCountries(){
-        COUNTRIES_LIST.addAll(prefRepository.getCountries())
+    private fun storeCountries(){
+        if (prefRepository.getCountriesFromPrefRepository()!=null){
+            _countries.value = prefRepository.getCountriesFromPrefRepository()
+            getAllCountries()
+        }
+        else{
+            _countries.value=prefRepository.getCountriesFromResources()
+            getAllCountries()
+        }
+
     }
 }

@@ -16,17 +16,20 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.databinding.FragmentFlightBookNewBinding
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.book.ContactPerson
+import com.trips.pk.model.flight.book.Key_Request
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassportInfo
 import com.trips.pk.ui.common.*
+import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.utils.DatePicker
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class FlightBookNewFragment(val passengerCount:Int):Fragment() {
     private lateinit var binding:FragmentFlightBookNewBinding
-
+    private val mViewModel: FlightBookViewModel by viewModel()
     private var prefRepository:PrefRepository?=null
     private var user:AllUser?=null
     private var index = 0
@@ -48,14 +51,19 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
     private var zip=""
     private var city=""
     private var country=""
-    private var pasNo="0"
+    private var pasNo=""
     private var pasExDate=""
     private var pasCountry=""
 
     private var type=""
 
-    private var countryId=157
+    private var countryId=157 //Pakistan
+    private var countryName = "Pakistan"
     private var passNatId=157
+    private var passNatCountryName = "Pakistan"
+
+    private var cityId = 2851 //Lahore
+    private var cityName = "Lahore"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,8 +73,7 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
         binding= FragmentFlightBookNewBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
         prefRepository=PrefRepository(requireActivity().application)
-        getCountries()
-       // countriesList.addAll(COUNTRIES_LIST)
+
         val bundle = this.arguments
         index=bundle!!.getInt("index")
         user= bundle.getSerializable("user") as? AllUser
@@ -76,17 +83,25 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
             setSpinner(binding.spPrefix, prefixList)
         }
 
-
-        binding.edCountry.setOnClickListener {
-            setCountries(binding.edCountry, countriesList)
-        }
-
         binding.edCountry.onItemClickListener =
             AdapterView.OnItemClickListener { parent, _, position, _ ->
                 val item = parent.getItemAtPosition(position)
                 if (item is Countries) run {
                     val country: Countries = item
                     countryId=country.id
+                    val keyCountryId = Key_Request(countryId.toString())
+                    mViewModel.getCitiesByCountryId(keyCountryId)
+                    countryName=country.name
+                }
+            }
+
+        binding.edCity.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val item = parent.getItemAtPosition(position)
+                if (item is Countries) run {
+                    val country: Countries = item
+                    cityId=country.id
+                    cityName=country.name
                 }
             }
 
@@ -96,14 +111,9 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
                 if (item is Countries) run {
                     val country: Countries = item
                     passNatId=country.id
+                    passNatCountryName=country.name
                 }
             }
-
-       binding.edPassportNatCountry.setOnClickListener {
-           setCountries(binding.edPassportNatCountry, countriesList)
-       }
-
-
 
         binding.tvDob.setOnClickListener {
             DatePicker.showDatePicker(
@@ -130,6 +140,7 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
                     binding.edMiddleName.setText(it.passenger.middleName)
                     binding.edLastName.setText(it.passenger.lastName)
                     binding.tvDob.setText(it.passenger.dob)
+                    binding.edPassportNatCountry.setText(it.passenger.passportInfo.countryName)
                     binding.edPassportNo.setText(it.passenger.passportInfo.passportNumber)
                     binding.tvExpireDate.setText(it.passenger.passportInfo.expirtyDate)
                     if (index == 0){
@@ -138,8 +149,8 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
                         binding.edEmail.setText(it.contactPerson.email)
                         binding.edAddress.setText(it.contactPerson.address)
                         binding.edZipcode.setText(it.contactPerson.zipCode)
-                        binding.edCity.setText(it.contactPerson.city)
-                        binding.edCountry.setText(it.contactPerson.country)
+                        binding.edCity.setText(it.contactPerson.cityName)
+                        binding.edCountry.setText(it.contactPerson.countryName)
                     }
                 }
 
@@ -158,102 +169,150 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
       // else binding.tvEnterInfo.text = "Enter Info about the Traveler\n$type $passengerCount"
        else binding.tvEnterInfo.text = "Enter Info about the Traveler\n$type"
 
+        val key=Key_Request("157")
+        mViewModel.getCitiesByCountryId(key)
+
         return binding.root
     }
 
     @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isNextClicked.observe(viewLifecycleOwner, Observer {
-            if (it){
+        binding.viewModel=mViewModel
+        mViewModel.countries.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                setCountries(binding.edCountry, it)
+                setCountries(binding.edPassportNatCountry, it)
+            }
+        }
+        mViewModel.cities.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                binding.edCity.setText(it[0].name)
+                cityName=it[0].name
+                cityId=it[0].id
+                setCountries(binding.edCity,it)
+            }
+        }
+        isNextClicked.observe(viewLifecycleOwner) {
+            if (it) {
+                gender = binding.spPrefix.text.toString().trim()
+                firstName = binding.edFirstName.text.toString().trim()
+                middleName = binding.edMiddleName.text.toString().trim()
+                lastName = binding.edLastName.text.toString().trim()
+                dob = binding.tvDob.text.toString().trim()
+                contact = binding.edContact.text.toString().trim()
+                email = binding.edEmail.text.toString().trim()
+                address = binding.edAddress.text.toString().trim()
+                zip = binding.edZipcode.text.toString().trim()
+                city = binding.edCity.text.toString().trim()
+                country = binding.edCountry.text.toString().trim()
+                pasNo = binding.edPassportNo.text.toString().trim()
+                pasExDate = binding.tvExpireDate.text.toString().trim()
+                pasCountry = binding.edPassportNatCountry.text.toString().trim()
 
-
-                gender=binding.spPrefix.text.toString().trim()
-                firstName=binding.edFirstName.text.toString().trim()
-                middleName=binding.edMiddleName.text.toString().trim()
-                lastName=binding.edLastName.text.toString().trim()
-                dob=binding.tvDob.text.toString().trim()
-                contact=binding.edContact.text.toString().trim()
-                email=binding.edEmail.text.toString().trim()
-                address=binding.edAddress.text.toString().trim()
-                zip=binding.edZipcode.text.toString().trim()
-                city=binding.edCity.text.toString().trim()
-                country=binding.edCountry.text.toString().trim()
-                pasNo=binding.edPassportNo.text.toString().trim()
-                pasExDate=binding.tvExpireDate.text.toString().trim()
-                pasCountry=binding.edPassportNatCountry.text.toString().trim()
-
-                if(firstName.isNullOrEmpty()){
-                    isNextClicked.value=false
+                if (firstName.isNullOrEmpty()) {
+                    isNextClicked.value = false
                     binding.etFirstName.error = getString(R.string.lbl_field_required)
-                } else if (lastName.isNullOrEmpty()){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (lastName.isNullOrEmpty()) {
+                    isNextClicked.value = false
                     binding.etLastName.error = getString(R.string.lbl_field_required)
-                }
-                else if (dob.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (dob.isNullOrEmpty() && index == 0) {
+                    isNextClicked.value = false
                     binding.etDob.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (contact.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (contact.isNullOrEmpty() && index == 0) {
+                    isNextClicked.value = false
                     binding.etContact.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (email.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (email.isNullOrEmpty() && index == 0) {
+                    isNextClicked.value = false
                     binding.etEmail.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (address.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (address.isNullOrEmpty() && index == 0) {
+                    isNextClicked.value = false
                     binding.etAddress.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (zip.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (zip.isNullOrEmpty() && index == 0) {
+                    isNextClicked.value = false
                     binding.etZipcode.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                else if (city.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
-                    binding.etCity.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (country.isNullOrEmpty() && index==0){
-                    isNextClicked.value=false
-                    binding.etCountry.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (pasNo=="0"){
-                    isNextClicked.value=false
+//                else if (country.isNullOrEmpty() && index == 0) {
+//                    isNextClicked.value = false
+//                    binding.etCountry.error = getString(R.string.lbl_field_required)
+//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//                else if (cityName.isNullOrEmpty() && index == 0) {
+//                    isNextClicked.value = false
+//                    binding.etCity.error = getString(R.string.lbl_field_required)
+//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+                else if (pasNo.isNullOrEmpty()) {
+                    isNextClicked.value = false
                     binding.etPassportNo.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else if (pasExDate.isNullOrEmpty()){
-                    isNextClicked.value=false
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (pasExDate.isNullOrEmpty()) {
+                    isNextClicked.value = false
                     binding.etPassportExpireDate.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                else if (pasCountry.isNullOrEmpty()){
-                    isNextClicked.value=false
-                    binding.etPassportNatCountry.error = getString(R.string.lbl_field_required)
-                      Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    val dateOfBirth=changeStringDateFormat(binding.tvDob.text.toString().trim())
-                    val passExpireDate=changeStringDateFormat(binding.tvExpireDate.text.toString().trim())
-                    val fullName="$gender $firstName $middleName $lastName"
-                    val contactPerson=ContactPerson(fullName,contact,gender,email,zip,address,"2","2")
-                    val passportInfo=PassportInfo(passNatId,passExpireDate,pasNo)
-                    val passenger=Passenger(firstName,middleName,lastName,gender,dateOfBirth,type,passportInfo)
-                    user=AllUser(contactPerson,passenger,index)
-                    isNextClicked.value=false
-                    listener!!.onTempClick("true",user!!)
+//                else if (pasCountry.isNullOrEmpty()) {
+//                    isNextClicked.value = false
+//                    binding.etPassportNatCountry.error = getString(R.string.lbl_field_required)
+//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+                else {
+                    val dateOfBirth = changeStringDateFormat(binding.tvDob.text.toString().trim())
+                    val passExpireDate = changeStringDateFormat(binding.tvExpireDate.text.toString().trim())
+                    val fullName = "$gender $firstName $middleName $lastName"
+                    val contactPerson = ContactPerson(
+                        fullName,
+                        contact,
+                        gender,
+                        email,
+                        zip,
+                        address,
+                        countryId.toString(),
+                        countryName = countryName,
+                        cityId.toString(),
+                        cityName = cityName
+                    )
+                    val passportInfo = PassportInfo(
+                        passNatId,
+                        countryName = passNatCountryName,
+                        passExpireDate,
+                        pasNo
+                    )
+                    val passenger = Passenger(
+                        firstName,
+                        middleName,
+                        lastName,
+                        gender,
+                        dateOfBirth,
+                        type,
+                        passportInfo
+                    )
+                    user = AllUser(contactPerson, passenger, index)
+                    isNextClicked.value = false
+                    listener!!.onTempClick("true", user!!)
                 }
             }
 
-        })
+        }
     }
     fun setListener(listener: TempListener){
         this.listener=listener
@@ -290,10 +349,6 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
         view.setOnClickListener { view.showDropDown() } //show drop down like spinner
     }
 
-    private fun getCountries(){
-      //  COUNTRIES_LIST.addAll(prefRepository!!.getCountries())
-        countriesList.addAll(prefRepository!!.getCountries())
-    }
     private fun changeStringDateFormat(date: String): String{
         var formattedDate=""
         try {
@@ -302,7 +357,9 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
             val myFormat = SimpleDateFormat("yyyy-MM-dd")
             formattedDate =  myFormat.format(fromUser.parse(date))
         }catch (e:Exception){
+            formattedDate = date
             e.printStackTrace()
+            return formattedDate //Already formatted so return again
         }
         return formattedDate
     }

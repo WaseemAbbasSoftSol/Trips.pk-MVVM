@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.ui.common.AIRPORT_LIST
+import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,8 +37,7 @@ class FlightSearchViewModel(
                     }
                 } else {
                     response.errorBody().let {
-                        Log.d("dddd", it!!.toString())
-                        Log.d("wwww", it!!.string())
+                        Log.d(APP_TAG, it!!.toString())
                     }
                 }
                 _state.postValue(RequestState.DONE)
@@ -59,9 +59,9 @@ class FlightSearchViewModel(
         }
         else{
             AIRPORT_LIST.clear()
-            AIRPORT_LIST.addAll(prefRepository.getAirPortsFromResource()!!)
+            AIRPORT_LIST.addAll(prefRepository.getAirPortsFromResource())
             getAllAirports()
         }
-        TODO() //Get airports from prefrepository has exception.
+
     }
 }

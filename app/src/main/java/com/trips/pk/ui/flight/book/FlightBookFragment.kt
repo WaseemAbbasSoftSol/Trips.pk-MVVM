@@ -2,7 +2,6 @@ package com.trips.pk.ui.flight.book
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -108,7 +107,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
 
     override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int, isLast:Boolean) {
         val contact=contactPerson[0]
-        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,contact.zipCode,contact.address,contact.country,contact.city
+        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,contact.zipCode,contact.address,contact.countryId,contact.cityId
             ,passenger,flightDetail!!)
         binding.btnContinue.makeProgressOnButton(R.string.lbl_wait)
         mViewModel.bookFlight(booker)

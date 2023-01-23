@@ -43,7 +43,9 @@ class DashboardFragment:Fragment() {
             findNavController().navigate(R.id.action_dashboard_to_rent_a_car_search_fragment)
         }
 
-        binding.appBarLayout.clVisa.setOnClickListener {  findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment) }
+        binding.appBarLayout.clVisa.setOnClickListener {  findNavController().navigate(R.id.action_dashboard__to_visa_search_fragment) }
+
+        binding.appBarLayout.clInsurance.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)  }
 
         return binding.root
     }

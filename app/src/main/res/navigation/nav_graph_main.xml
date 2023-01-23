@@ -44,6 +44,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard__to_visa_search_fragment"
+            app:destination="@id/visa_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -234,6 +242,13 @@
         android:name="com.trips.pk.ui.rent_a_car.book.RentACarBookingDetailFragment"
         tools:layout="@layout/fragment_rent_a_car_booking_detail"/>
     <!--End of Rent a Car Module-->
+
+    <!--Visa Module-->
+    <fragment
+        android:id="@+id/visa_search_fragment"
+        android:name="com.trips.pk.ui.visa.search.VisaSearchFragment"
+        tools:layout="@layout/fragment_visa_search"/>
+    <!--End of Visa Module-->
 
     <!--Global Navigation-->
     <action

@@ -5,8 +5,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +18,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.trips.pk.R
 import com.trips.pk.model.flight.Countries
-import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.model.flight.PassengerList
 import com.trips.pk.model.flight.book.*
 import com.trips.pk.ui.common.*
 import com.trips.pk.utils.date
@@ -146,8 +142,8 @@ class AdultAdapter(
         }
 
         setSpinner(holder.prefix,prefixList)
-        setCountries(holder.edCountry, countriesList)
-        setCountries(holder.edPassportNatCountry, countriesList)
+//        setCountries(holder.edCountry, countriesList)
+//        setCountries(holder.edPassportNatCountry, countriesList)
 
         holder.dob.setOnClickListener {
             DatePickerDialog(
@@ -273,16 +269,16 @@ class AdultAdapter(
                         val gndr=if (prefix=="Mr") "Male" else "Female"
                         val name="$prefix $firstName $middleName $lastName"
                       if (position==0){
-                        val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, country = "2",city="2")
+                        val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, countryId = "2",cityId="2")
                           mContactPeron.add(contactPerson)
                       }
                         var countryId=0
-                        for ((i,value ) in countriesList.withIndex()){
-                            if (value.name.toString()==country){
-                                countryId=value.id
-                                break
-                            }
-                        }
+//                        for ((i,value ) in countriesList.withIndex()){
+//                            if (value.name.toString()==country){
+//                                countryId=value.id
+//                                break
+//                            }
+//                        }
                         val passexpdate=changeStringDateFormat(passExDate)
                         val passportInfo=PassportInfo(countryId, passexpdate, passportNo)
                         val db=changeStringDateFormat(dob)
