@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:strokeColor="@color/fg_cv"
         app:strokeWidth="@dimen/_1dp"
+        app:rippleColor="@color/btn_color"
         app:cardCornerRadius="@dimen/_10dp"
         app:cardElevation="@dimen/_0dp"
         android:layout_marginTop="@dimen/_10px"

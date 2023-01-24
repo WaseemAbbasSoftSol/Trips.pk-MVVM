@@ -247,7 +247,35 @@
     <fragment
         android:id="@+id/visa_search_fragment"
         android:name="com.trips.pk.ui.visa.search.VisaSearchFragment"
-        tools:layout="@layout/fragment_visa_search"/>
+        tools:layout="@layout/fragment_visa_search">
+        <action
+            android:id="@+id/action_visa_search_to_visa_detail_fratment"
+            app:destination="@id/visa_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/visa_detail_fragment"
+        android:name="com.trips.pk.ui.visa.detail.VisaDetailFragment"
+        tools:layout="@layout/fragment_visa_detail">
+        <action
+            android:id="@+id/action_visa_detail_to_visa_book_fragment"
+            app:destination="@id/visa_book_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/visa_book_fragment"
+        android:name="com.trips.pk.ui.visa.book.VisaBookFragment"
+        tools:layout="@layout/fragment_visa_booking"/>
     <!--End of Visa Module-->
 
     <!--Global Navigation-->

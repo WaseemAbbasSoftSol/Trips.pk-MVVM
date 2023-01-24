@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.trips.pk.R
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.databinding.FragmentFlightBookNewBinding
@@ -27,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FlightBookNewFragment(val passengerCount:Int):Fragment() {
+class FlightBookNewFragment :Fragment() {
     private lateinit var binding:FragmentFlightBookNewBinding
     private val mViewModel: FlightBookViewModel by viewModel()
     private var prefRepository:PrefRepository?=null
@@ -246,18 +245,6 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
                     Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
                         .show()
                 }
-//                else if (country.isNullOrEmpty() && index == 0) {
-//                    isNextClicked.value = false
-//                    binding.etCountry.error = getString(R.string.lbl_field_required)
-//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//                else if (cityName.isNullOrEmpty() && index == 0) {
-//                    isNextClicked.value = false
-//                    binding.etCity.error = getString(R.string.lbl_field_required)
-//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
                 else if (pasNo.isNullOrEmpty()) {
                     isNextClicked.value = false
                     binding.etPassportNo.error = getString(R.string.lbl_field_required)
@@ -269,12 +256,6 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
                     Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
                         .show()
                 }
-//                else if (pasCountry.isNullOrEmpty()) {
-//                    isNextClicked.value = false
-//                    binding.etPassportNatCountry.error = getString(R.string.lbl_field_required)
-//                    Toast.makeText(context, "Some information is missing", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
                 else {
                     val dateOfBirth = changeStringDateFormat(binding.tvDob.text.toString().trim())
                     val passExpireDate = changeStringDateFormat(binding.tvExpireDate.text.toString().trim())
@@ -320,7 +301,6 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
 
     private fun visibilityElements(){
         if (index==0){
-            binding.llDob.visibility=View.VISIBLE
             binding.llContact.visibility=View.VISIBLE
             binding.llEmail.visibility=View.VISIBLE
             binding.llAddress.visibility=View.VISIBLE
@@ -328,7 +308,6 @@ class FlightBookNewFragment(val passengerCount:Int):Fragment() {
             binding.llCity.visibility=View.VISIBLE
             binding.llCountry.visibility=View.VISIBLE
         }else{
-            binding.llDob.visibility=View.GONE
             binding.llContact.visibility=View.GONE
             binding.llEmail.visibility=View.GONE
             binding.llAddress.visibility=View.GONE

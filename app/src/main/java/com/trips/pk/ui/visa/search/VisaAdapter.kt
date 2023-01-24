@@ -47,7 +47,7 @@ class VisaAdapter(
         }
         else return ItemRecyclerViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.item_vehical_type,
+                R.layout.item_visa,
                 parent,
                 false
             )

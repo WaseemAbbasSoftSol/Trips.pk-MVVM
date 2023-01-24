@@ -20,9 +20,11 @@
     <color name="grey_005">#33707070</color>
     <color name="grey_006">#E6848484</color>
     <color name="grey_007">#7E7E7E</color>
+    <color name="grey_008">#838383</color>
     <color name="light_blue">#33CCDBE6</color>
     <color name="light_blue_01">#1ACCDBE6</color>
     <color name="lite_pink">#0DFF5A11</color>
+    <color name="navy">#0890FA</color>
 
     <color name="pink_700">#C2185B</color>
     <color name="pink_lite">#4D185B</color>

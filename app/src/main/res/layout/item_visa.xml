@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeWidth="@dimen/_1dp"
+        app:strokeColor="@color/fg_cv"
+        app:rippleColor="@color/btn_color"
+        android:layout_marginTop="@dimen/_10px"
+        app:cardElevation="@dimen/_0dp"
+        app:cardCornerRadius="@dimen/_10dp"
+      >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10dp">
+
+            <TextView
+                android:id="@+id/tv_visa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tourist Visa"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/_14sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs. 5,000"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/_14sp"
+                android:textColor="@color/primary_color"
+                app:layout_constraintTop_toBottomOf="@id/tv_visa"
+                app:layout_constraintStart_toStartOf="@id/tv_visa"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_money"
+                app:layout_constraintBottom_toBottomOf="@id/tv_money"
+                app:layout_constraintStart_toEndOf="@id/tv_money"
+                android:src="@drawable/ic_info"
+                android:layout_marginBottom="@dimen/_3dp"
+                android:layout_marginStart="@dimen/_5px"/>
+            <TextView
+                android:id="@+id/tv_working_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 working days"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_11sp"
+                android:textColor="@color/grey_008"
+                app:layout_constraintTop_toTopOf="@id/tv_visa"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_book"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                style="@style/AppTheme.ContainedButton"
+                android:text="@string/lbl_apply_now"
+                android:textSize="@dimen/_12sp"
+                android:fontFamily="@font/poppins_medium"
+                app:layout_constraintEnd_toEndOf="@id/tv_working_days"
+                app:layout_constraintTop_toBottomOf="@id/tv_working_days"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

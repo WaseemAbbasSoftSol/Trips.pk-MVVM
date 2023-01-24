@@ -2,7 +2,6 @@ package com.trips.pk.ui.flight.book
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,7 +96,7 @@ class FlightBookHostFragment: Fragment() {
 
         }
 
-        val frag = FlightBookNewFragment(count)
+        val frag = FlightBookNewFragment()
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.setCustomAnimations(animEnter, animExit)
         frag.arguments = bundle
@@ -123,9 +122,9 @@ class FlightBookHostFragment: Fragment() {
                             for ((i,value)in userList.withIndex()){
                                 passengerList.add(value.passenger)
                             }
-                        //    val booker=FlightBooker(contactPerson.name,contactPerson.number,contactPerson.gender,contactPerson.email,contactPerson.zipCode,
-                            //    contactPerson.address,contactPerson.country,contactPerson.city,passengerList,flightDetail!!)
-                           //   mViewModel.bookFlight(booker)
+                            val booker=FlightBooker(contactPerson.name,contactPerson.number,contactPerson.gender,contactPerson.email,contactPerson.zipCode,
+                                contactPerson.address,contactPerson.countryId,contactPerson.cityId,passengerList,flightDetail!!)
+                              mViewModel.bookFlight(booker)
                             Toast.makeText(requireContext(),"to submit",Toast.LENGTH_SHORT).show()
                         }else{
                             getPassengerInfo(R.anim.slide_in_right,R.anim.slide_out_left,getPassengerTypeCount(true))

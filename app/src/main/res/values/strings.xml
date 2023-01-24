@@ -129,5 +129,9 @@
     <string name="lbl_type_country_name">Type a country name…</string>
     <string name="lbl_visa_service">Visa services for various countries for Pakistani Nationals</string>
     <string name="lbl_visa_processing_time">Processing Time (5-15) Working daysComplete documentation and Advice</string>
+    <string name="lbl_turkey_visa_from_pak">Turkey visa from Pakistan</string>
+    <string name="lbl_apply_now">Apply Now</string>
+    <string name="lbl_turkey_visa_service">Turkey Visa Service</string>
+    <string name="lbl_how_many_passenger">How Many Total Passengers?*</string>
 
 </resources>

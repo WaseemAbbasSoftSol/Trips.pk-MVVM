@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:behavior_hideable="true"
-                android:background="#F2F2F2"
                 app:layout_behavior="@string/bottom_sheet_behavior"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -32,12 +31,12 @@
                 app:optRoundCardLeftBottomCorner="false"
                 app:optRoundCardRightBottomCorner="false"
                 >
-
                 <androidx.core.widget.NestedScrollView
                     android:id="@+id/nestedscroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fillViewport="true">
+                    android:fillViewport="true"
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -53,7 +52,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_10dp"
-                            android:text="@string/lbl_rent_a_car_booking"
+                            android:text="@string/lbl_turkey_visa_service"
                             android:textSize="@dimen/_18sp"
                             android:textColor="@color/black"
                             android:fontFamily="@font/poppins_medium"/>
@@ -63,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
-                            android:text="Honda Civic X 2016 by Getcar pk"
+                            android:text="Turkey E-Visa by Ambassador Travels"
                             android:textColor="@color/grey_002"
                             android:textSize="@dimen/_12sp"
                             app:layout_constraintStart_toStartOf="@id/tv_enter_info"
@@ -193,7 +192,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_where"
+                            android:id="@+id/ll_passenger"
                             android:layout_width="@dimen/_0dp"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -214,107 +213,8 @@
                                     style="@style/FieldStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/lbl_where_u_need_car"
-                                    android:focusable="false"
+                                    android:hint="@string/lbl_how_many_passenger"
                                     android:inputType="textNoSuggestions"
-
-                                    />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_pickup_date"
-                            android:layout_width="@dimen/_0dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/guide1"
-                            android:layout_marginEnd="@dimen/_5px"
-                            app:layout_constraintTop_toBottomOf="@id/ll_where"
-                            android:layout_marginTop="@dimen/_16px">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/et_pickup_date"
-                                style="@style/AppTheme.TextInputLayout"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_pickup_date"
-                                    style="@style/FieldStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/lbl_pickup_date"
-                                    android:focusable="false"
-                                    android:inputType="textNoSuggestions"
-
-                                    />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_return_date"
-                            android:layout_width="@dimen/_0dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintStart_toEndOf="@id/guide1"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="@dimen/_5px"
-                            app:layout_constraintTop_toBottomOf="@id/ll_where"
-                            android:layout_marginTop="@dimen/_16px">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/et_return_date"
-                                style="@style/AppTheme.TextInputLayout"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_return_date"
-                                    style="@style/FieldStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/lbl_return_date"
-                                    android:focusable="false"
-                                    android:inputType="textNoSuggestions"
-
-                                    />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ll_desc"
-                            android:layout_width="@dimen/_0dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ll_pickup_date"
-                            android:layout_marginTop="@dimen/_16px">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/et_desc"
-                                style="@style/AppTheme.TextInputLayout"
-                                app:hintTextAppearance="@style/TextInputLayoutHintText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/ed_desc"
-                                    style="@style/FieldStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/lbl_share_detail"
-                                    android:inputType="textNoSuggestions|textMultiLine"
-                                    android:maxLines="4"
                                     />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -329,26 +229,20 @@
                             android:text="@string/lbl_book_now"
                             android:textSize="@dimen/_14sp"
                             android:fontFamily="@font/poppins_semibold"
-                            app:layout_constraintTop_toBottomOf="@id/ll_desc"
-                            android:layout_marginTop="@dimen/_16px" />
+                            app:layout_constraintTop_toBottomOf="@id/ll_passenger"
+                            android:layout_marginTop="@dimen/_16dp" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_5dp"
                             app:layout_constraintTop_toBottomOf="@id/btn_book"/>
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guide1"
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.50" />
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.core.widget.NestedScrollView>
 
+
             </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

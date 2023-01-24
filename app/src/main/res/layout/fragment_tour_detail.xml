@@ -104,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true"
                 android:background="@color/transparent"
-                android:layout_marginTop="-25dp"
+                android:layout_marginTop="-20dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:optRoundCardBackgroundColor="@color/white"
-                        app:optRoundCardCornerRadius="35dp"
+                        app:optRoundCardCornerRadius="20dp"
                         app:optRoundCardLeftBottomCorner="false"
                         app:optRoundCardRightBottomCorner="false">
 
