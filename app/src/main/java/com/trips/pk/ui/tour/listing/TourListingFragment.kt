@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourListingBinding
 import com.trips.pk.ui.common.DummyClickListener
-import com.trips.pk.ui.tour.search.WorldWideAdapter
 
 class TourListingFragment:Fragment(),DummyClickListener {
     private lateinit var binding:FragmentTourListingBinding

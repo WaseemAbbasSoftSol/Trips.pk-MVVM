@@ -15,9 +15,11 @@ import com.trips.pk.R
 import com.trips.pk.databinding.FragmentVisaDetailBinding
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.visa.search.VisaAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VisaDetailFragment: Fragment(),DummyClickListener {
     private lateinit var binding:FragmentVisaDetailBinding
+    private val mViewModel : VisaDetailViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,10 +28,10 @@ class VisaDetailFragment: Fragment(),DummyClickListener {
         binding= FragmentVisaDetailBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
 
-        val adapter= VisaAdapter(requireContext(),this,2,9)
-        val layoutManager=LinearLayoutManager(requireContext())
-        binding.rvVisa.layoutManager=layoutManager
-        binding.rvVisa.adapter=adapter
+//        val adapter= VisaAdapter(requireContext(),this,2,9)
+//        val layoutManager=LinearLayoutManager(requireContext())
+//        binding.rvVisa.layoutManager=layoutManager
+//        binding.rvVisa.adapter=adapter
 
         binding.appbar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             var isShow = false
@@ -43,11 +45,14 @@ class VisaDetailFragment: Fragment(),DummyClickListener {
                     //   setMargins(binding.cl,0,0,0,0)
                     //  binding.cl.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.primary_color))
                     isShow = true
+                    binding.tvToolbar.text = "Turkey Visa from Pakistan"
                     binding.tvToolbar.visibility=View.VISIBLE
+                    binding.tvTour.visibility=View.GONE
                 } else if (isShow) {
                     //  setMargins(binding.cl,0,-50,0,0)
                     //  binding.cl.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.transparent))
                     binding.tvToolbar.visibility=View.GONE
+                    binding.tvTour.visibility=View.VISIBLE
 
                 }
 
@@ -57,6 +62,10 @@ class VisaDetailFragment: Fragment(),DummyClickListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel=mViewModel
+    }
     override fun onDummyClick() {
         findNavController().navigate(R.id.action_visa_detail_to_visa_book_fragment)
     }

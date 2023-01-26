@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.tour.search.TourSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +43,8 @@
                     android:layout_marginEnd="@dimen/_20dp"
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_where"
-                    android:focusable="true"
+                    android:inputType="textNoSuggestions"
+                    android:focusable="false"
                     android:textColorHint="@color/grey"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
@@ -133,7 +134,7 @@
                                 android:layout_marginTop="@dimen/_12px"
                                 tools:listitem="@layout/item_worldwide_trips"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="4"
+                                app:spanCount="3"
                                 android:layout_marginStart="@dimen/_15dp"
                                 android:layout_marginEnd="@dimen/_15dp"
                                 />

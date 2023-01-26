@@ -4,7 +4,7 @@ import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Key_Request
 
-class TripsRepository (private val tripsApi: TripsApi) {
+class FlightRepository (private val tripsApi: TripsApi) {
 
     suspend fun getAllAirports()=tripsApi.getAllAirports()
 

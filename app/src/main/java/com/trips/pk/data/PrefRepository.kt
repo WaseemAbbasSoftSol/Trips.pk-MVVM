@@ -8,8 +8,10 @@ import com.google.gson.reflect.TypeToken
 import com.trips.pk.R
 import com.trips.pk.model.flight.Airport
 import com.trips.pk.model.flight.Countries
+import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.ui.common.KEY_AIRPORT_LIST
 import com.trips.pk.ui.common.KEY_COUNTRIES_LIST
+import com.trips.pk.ui.common.KEY_COUNTRIES_WITH_CITIES
 import com.trips.pk.utils.FileHelper
 import java.lang.reflect.Type
 
@@ -77,4 +79,30 @@ class PrefRepository(private val app: Application) {
         return Gson().fromJson(jsonString, Array<Countries>::class.java).asList()
     }
 
+    fun saveCountriesWithCities(country : List<CountriesWithCities>){
+        val userJson= Gson().toJson(country)
+        prefs.edit().putString(KEY_COUNTRIES_WITH_CITIES, userJson).apply()
+    }
+
+    fun getCountriesWithCitiesFromPrefRepository(): List<CountriesWithCities>? {
+        var countryItems: List<CountriesWithCities>?=null
+        try {
+            val serializedObject=prefs.getString(KEY_COUNTRIES_WITH_CITIES, null)
+            if (serializedObject != null) {
+                val gson = Gson()
+                val type: Type? = object : TypeToken<List<CountriesWithCities?>?>() {}.type
+                countryItems = gson.fromJson<List<CountriesWithCities>>(serializedObject, type)
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return countryItems
+    }
+
+    fun deleteCountriesWithCitiesFromPrefRepository()=prefs.edit().remove(KEY_COUNTRIES_WITH_CITIES).apply()
+
+    fun getCountriesWithPakCitiesFromResources() : List<CountriesWithCities> {
+        val jsonString = FileHelper.getTextFromResources(app, R.raw.countries)
+        return Gson().fromJson(jsonString, Array<CountriesWithCities>::class.java).asList()
+    }
 }

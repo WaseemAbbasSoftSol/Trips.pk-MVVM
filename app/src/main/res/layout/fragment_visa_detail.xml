@@ -5,7 +5,11 @@
     tools:context=".ui.guide.details.GuideDetailFragment">
 
     <data>
-
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.visa.detail.VisaDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +108,6 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true"
                 android:background="@color/transparent"
-                android:layout_marginTop="-20dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
@@ -141,10 +144,11 @@
                                 android:fontFamily="@font/raleway_semiboldd"
                                 android:textSize="@dimen/_20sp"
                                 android:textColor="@color/black"
-                                android:layout_marginTop="@dimen/_25dp"
+                                android:layout_marginTop="@dimen/_10dp"
                                 />
 
                             <TextView
+                                android:visibility="gone"
                                 android:id="@+id/tv_from_city"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -160,10 +164,13 @@
                                 android:id="@+id/rv_visa"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:itemsList="@{viewModel.visa}"
+                                app:itemLayout="@{@layout/item_visa}"
                                 android:nestedScrollingEnabled="false"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 app:layout_constraintTop_toBottomOf="@id/tv_from_city"
                                 tools:listitem="@layout/item_visa"/>
+
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,6 +181,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:elevation="5dp"
+            android:layout_height="wrap_content"
+            app:SpinKit_Color="@color/primary_color"
+            style="@style/SpinKitView.Large.Circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

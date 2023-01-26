@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="obj"
+            type="com.trips.pk.model.visa.Visa" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,7 +29,8 @@
                 android:id="@+id/tv_visa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tourist Visa"
+                tools:text="Tourist Visa"
+                android:text="@{obj.visaTypes.name}"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="@dimen/_14sp"
                 android:textColor="@color/black"
@@ -38,7 +42,8 @@
                 android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 5,000"
+                tools:text="Rs. 5,000"
+                android:text="@{obj.totalPrice}"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="@dimen/_14sp"
                 android:textColor="@color/primary_color"
@@ -60,7 +65,8 @@
                 android:id="@+id/tv_working_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15 working days"
+                tools:text="15 working days"
+                android:text="@{obj.totalWorkingDays}"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="@dimen/_11sp"
                 android:textColor="@color/grey_008"

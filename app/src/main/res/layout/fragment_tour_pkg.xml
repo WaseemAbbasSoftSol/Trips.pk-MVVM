@@ -54,7 +54,7 @@
                             android:layout_marginTop="@dimen/_12px"
                             tools:listitem="@layout/item_worldwide_trips"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:spanCount="4"
+                            app:spanCount="3"
                             android:layout_marginStart="@dimen/_15dp"
                             android:layout_marginEnd="@dimen/_15dp"
                             />

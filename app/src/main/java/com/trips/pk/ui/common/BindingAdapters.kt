@@ -134,23 +134,23 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //
 //    })
 //}
-//
-//@BindingAdapter(
-//    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
-//    requireAll = false
-//)
-//fun <T> setItems(
-//    view: RecyclerView, itemsList: List<T>, layout: Int,
-//    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
-//    onItemViewClick: OnItemViewClickListener<T>?
-//) {
-//    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
-//    view.adapter = mAdapter
-//    mAdapter.setItemClickListener(itemClickListener)
-//    mAdapter.onItemViewClick = onItemViewClick
-//    view.setHasFixedSize(hasFixSize)
-//}
-//
+
+@BindingAdapter(
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
+    requireAll = false
+)
+fun <T> setItems(
+    view: RecyclerView, itemsList: List<T>, layout: Int,
+    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
+    onItemViewClick: OnItemViewClickListener<T>?
+) {
+    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
+    view.adapter = mAdapter
+    mAdapter.setItemClickListener(itemClickListener)
+    mAdapter.onItemViewClick = onItemViewClick
+    view.setHasFixedSize(hasFixSize)
+}
+
 @BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
 fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
     val adapter = ArrayAdapter<T>(

@@ -7,6 +7,7 @@ import java.util.ArrayList
 const val APP_TAG = "Trips"
 const val KEY_AIRPORT_LIST = "airport_list"
 const val KEY_COUNTRIES_LIST = "countries_list"
+const val KEY_COUNTRIES_WITH_CITIES = "countries-cities"
 
 const val VIEW_TYPE_NO_STOP = 1011
 const val VIEW_TYPE_ONE_STOP = 2022
@@ -28,4 +29,7 @@ enum class RequestState{
 
 interface DummyClickListener{
     fun onDummyClick()
+}
+interface LocationSelectedListener<T>{
+    fun onLocationSelected(item:T, position:Int)
 }

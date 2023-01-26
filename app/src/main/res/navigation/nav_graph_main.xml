@@ -52,6 +52,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard__to_insurance_search_fragment"
+            app:destination="@id/insurance_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -277,6 +285,15 @@
         android:name="com.trips.pk.ui.visa.book.VisaBookFragment"
         tools:layout="@layout/fragment_visa_booking"/>
     <!--End of Visa Module-->
+
+    <!--Insurance Module-->
+    <fragment
+        android:id="@+id/insurance_search_fragment"
+        android:name="com.trips.pk.ui.insurance.search.InsuranceSearchFragment"
+        tools:layout="@layout/fragment_insurance_search">
+
+    </fragment>
+    <!--End of Insurance Module-->
 
     <!--Global Navigation-->
     <action

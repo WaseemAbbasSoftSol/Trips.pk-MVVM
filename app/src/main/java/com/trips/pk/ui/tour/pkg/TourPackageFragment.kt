@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourPkgBinding
+import com.trips.pk.model.tour.CountriesWithCities
+import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.tour.search.PakTourPckAdapter
 import com.trips.pk.ui.tour.search.WorldWideAdapter
@@ -33,20 +35,29 @@ class TourPackageFragment:Fragment(),DummyClickListener {
 
         if (tourType=="world"){
             binding.toolbarLayout.tvToolbar.text = "Worldwide Trips"
-            val adapter= WorldWideAdapter(requireContext(),40,this)
-            val layoutManager= GridLayoutManager(requireContext(),4)
+            val list = arrayListOf<CountriesWithCities>()
+            list.addAll(COUNTRIES_WITH_PAK_CITIES)
+            list.sortByDescending { it.name }
+            list.reverse()
+            val adapter= WorldWideAdapter(requireContext(), COUNTRIES_WITH_PAK_CITIES.size,this, list)
+            val layoutManager= GridLayoutManager(requireContext(),3)
             binding.rvWorldwideTrip.layoutManager=layoutManager
             binding.rvWorldwideTrip.adapter=adapter
             binding.rvPakPackages.visibility=View.GONE
             binding.rvWorldwideTrip.visibility=View.VISIBLE
         }else{
-            binding.toolbarLayout.tvToolbar.text = "Tour packages for Pakistan"
-            val pakTourAdpater= PakTourPckAdapter(requireContext(),40,this)
-            val layoutManager1=GridLayoutManager(requireContext(),2)
-            binding.rvPakPackages.layoutManager=layoutManager1
-            binding.rvPakPackages.adapter=pakTourAdpater
-            binding.rvPakPackages.visibility=View.VISIBLE
-            binding.rvWorldwideTrip.visibility=View.GONE
+            for (item in COUNTRIES_WITH_PAK_CITIES){
+                if (item.id == 157){
+                    binding.toolbarLayout.tvToolbar.text = "Tour packages for Pakistan"
+                    val pakTourAdpater= PakTourPckAdapter(requireContext(),item.cities.size,this,item)
+                    val layoutManager1=GridLayoutManager(requireContext(),2)
+                    binding.rvPakPackages.layoutManager=layoutManager1
+                    binding.rvPakPackages.adapter=pakTourAdpater
+                    binding.rvPakPackages.visibility=View.VISIBLE
+                    binding.rvWorldwideTrip.visibility=View.GONE
+                }
+            }
+
         }
 
         return binding.root

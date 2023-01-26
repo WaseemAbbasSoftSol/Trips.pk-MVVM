@@ -34,6 +34,9 @@ class VisaSearchFragment:Fragment(),DummyClickListener {
         binding.rvCountry.layoutManager=layoutManager1
         binding.rvCountry.adapter=adapter1
 
+        binding.edEnterCountry.setOnClickListener {
+
+        }
         return binding.root
     }
 

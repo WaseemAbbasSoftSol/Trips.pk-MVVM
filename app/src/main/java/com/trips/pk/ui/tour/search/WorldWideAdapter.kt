@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.trips.pk.R
 import com.trips.pk.model.flight.ItinerariesDetail
+import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.common.OnListItemClickListener
 import java.text.NumberFormat
@@ -19,12 +20,13 @@ import java.text.NumberFormat
 class WorldWideAdapter(
     val context: Context,
     val size:Int,
-    val listener:DummyClickListener
+    val listener:DummyClickListener,
+    val list : List<CountriesWithCities>?=null
 ) :
     RecyclerView.Adapter<WorldWideAdapter.ItemRecyclerViewHolder>() {
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        val countryName = itemView.findViewById<TextView>(R.id.tv_country)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
@@ -40,6 +42,10 @@ class WorldWideAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
         try {
+            if (list!=null){
+                val obj = list[position]
+                holder.countryName.text = obj.name
+            }
             holder.itemView.setOnClickListener {
                 listener.onDummyClick()
             }

@@ -133,5 +133,9 @@
     <string name="lbl_apply_now">Apply Now</string>
     <string name="lbl_turkey_visa_service">Turkey Visa Service</string>
     <string name="lbl_how_many_passenger">How Many Total Passengers?*</string>
+    <string name="lbl_location">Location</string>
+    <string name="lbl_company">Company</string>
+    <string name="lbl_group">Group</string>
+    <string name="lbl_duration">Duration</string>
 
 </resources>

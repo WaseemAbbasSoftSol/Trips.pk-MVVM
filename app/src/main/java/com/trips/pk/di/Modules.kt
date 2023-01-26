@@ -1,29 +1,37 @@
 package com.trips.pk.di
 
-import com.trips.pk.R
-import com.trips.pk.data.OAuthInterceptor
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsApi
-import com.trips.pk.data.TripsRepository
+import com.trips.pk.data.FlightRepository
+import com.trips.pk.data.TourRepository
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.tour.search.TourSearchViewModel
+import com.trips.pk.ui.visa.detail.VisaDetailViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val BASE_URL = "https://flightapis.green.pk/api/"
+private const val FLIGHT_BASE_URL = "https://flightapis.green.pk/api/"
+private const val TOUR_BASE_URL = "https://api.gotravel.pk/"
 
 val viewModelsModule= module {
+    //Flight
     viewModel { FlightSearchViewModel(get(), get()) }
     viewModel { FlightListingViewModel(get()) }
     viewModel { FlightBookViewModel(get(), get()) }
+
+    //Tour
+    viewModel { TourSearchViewModel(get(),get()) }
+
+    //Visa
+    viewModel { VisaDetailViewModel(get(), get()) }
     }
 
   val repositoriesModule = module {
@@ -39,16 +47,24 @@ val viewModelsModule= module {
             .build()
     }
 
-    fun createApi(factory: GsonConverterFactory, client: OkHttpClient) = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+    fun createFlightApi(factory: GsonConverterFactory, client: OkHttpClient) = Retrofit.Builder()
+        .baseUrl(FLIGHT_BASE_URL)
         .addConverterFactory(factory)
         .client(client)
         .build()
         .create(TripsApi::class.java)
+
+      fun createTourApi(factory: GsonConverterFactory, client: OkHttpClient) = Retrofit.Builder()
+          .baseUrl(TOUR_BASE_URL)
+          .addConverterFactory(factory)
+          .client(client)
+          .build()
+          .create(TripsApi::class.java)
+
    // single { OAuthInterceptor(androidContext().resources.getString(R.string.access_token)) }
     single { provideHttpClient() }
     single { GsonConverterFactory.create() }
-    single { createApi(get(), get()) }
-    single { TripsRepository(get()) }
+    single { FlightRepository(createFlightApi(get(),get())) }
+    single { TourRepository(createTourApi(get(),get())) }
     single { PrefRepository(androidApplication()) }
 }
