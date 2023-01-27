@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.visa.search.VisaSearchViewModel" />
+        <variable
+            name="itemClickListener"
+            type="com.trips.pk.ui.visa.search.VisaSearchFragment.OnVisaItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,6 +94,10 @@
                             android:id="@+id/rv_visa_by_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            itemLayout="@{@layout/item_visa_by_country}"
+                            itemsList="@{viewModel.visaPromoted}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{itemClickListener}"
                             android:nestedScrollingEnabled="false"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_8px"
@@ -134,7 +142,11 @@
                             android:nestedScrollingEnabled="false"
                             app:layout_constraintTop_toBottomOf="@id/tv_visa_service"
                             android:layout_marginTop="@dimen/_10px"
-                            tools:listitem="@layout/item_rent_a_car_company"
+                            tools:listitem="@layout/item_country"
+                            itemLayout="@{@layout/item_country}"
+                            itemsList="@{viewModel.visa}"
+                            itemClickListener="@{itemClickListener}"
+                            hasFixSize="@{true}"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="4"
                             />
@@ -157,6 +169,17 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:elevation="5dp"
+            android:layout_height="wrap_content"
+            app:SpinKit_Color="@color/primary_color"
+            style="@style/SpinKitView.Large.Circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

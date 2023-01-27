@@ -9,7 +9,9 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.FlightRepository
 import com.trips.pk.data.TourRepository
 import com.trips.pk.model.flight.Countries
+import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
+import com.trips.pk.model.tour.CountryAndCityTogether
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
 import com.trips.pk.ui.common.RequestState
@@ -27,8 +29,12 @@ class TourSearchViewModel(
     private val _countries = MutableLiveData<List<CountriesWithCities>>()
     val countries: LiveData<List<CountriesWithCities>> = _countries
 
+    private val _cities = MutableLiveData<List<City>>()
+    val cities: LiveData<List<City>> = _cities
+
     init {
         _countries.value= emptyList()
+        _cities.value= emptyList()
         storeCountries()
     }
     private fun getCountriesWithPakCities() {
@@ -68,6 +74,20 @@ class TourSearchViewModel(
             COUNTRIES_WITH_PAK_CITIES.addAll(prefRepository.getCountriesWithPakCitiesFromResources())
            getCountriesWithPakCities()
         }
-        _countries.value = COUNTRIES_WITH_PAK_CITIES
+        val tempList= arrayListOf<CountriesWithCities>()
+        tempList.addAll(COUNTRIES_WITH_PAK_CITIES)
+        tempList.sortByDescending { it.name }
+        tempList.reverse()
+        _countries.value = tempList.take(9)
+
+        val tempList1= arrayListOf<City>()
+        for (item in COUNTRIES_WITH_PAK_CITIES){
+            if (item.id==157){
+                tempList1.addAll(item.cities)
+            }
+            tempList1.sortByDescending { it.name }
+            tempList1.reverse()
+            _cities.value=tempList1.take(8)
+        }
     }
 }

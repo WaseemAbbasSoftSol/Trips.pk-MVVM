@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="obj"
+            type="com.trips.pk.model.tour.TourDetail" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -11,6 +14,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_5dp"
         app:cardElevation="@dimen/_0dp"
+        app:rippleColor="@color/btn_color"
         android:layout_marginTop="@dimen/_10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +34,8 @@
                 android:id="@+id/tv_tour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lbl_europe_tour"
+                tools:text="@string/lbl_europe_tour"
+              android:text="@{obj.name}"
                 android:fontFamily="@font/raleway_semiboldd"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp"

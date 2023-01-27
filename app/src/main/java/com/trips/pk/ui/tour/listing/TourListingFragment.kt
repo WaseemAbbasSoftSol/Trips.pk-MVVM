@@ -9,10 +9,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourListingBinding
+import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.ui.common.DummyClickListener
+import com.trips.pk.ui.common.OnListItemClickListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TourListingFragment:Fragment(),DummyClickListener {
+class TourListingFragment:Fragment() {
     private lateinit var binding:FragmentTourListingBinding
+    private val mViewModel:TourListingViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,16 +25,19 @@ class TourListingFragment:Fragment(),DummyClickListener {
         binding= FragmentTourListingBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
 
-        binding.tvToolbar.text = "Malaysia"
-        val adapter= TourListingAdapter(requireContext(),9,this)
-        val layoutManager= LinearLayoutManager(requireContext())
-        binding.rvTourListing.layoutManager=layoutManager
-        binding.rvTourListing.adapter=adapter
-
+        binding.itemClickListener=OnTourItemClickListener()
         return binding.root
     }
 
-    override fun onDummyClick() {
-        findNavController().navigate(R.id.action_tour_listing_to_tour_detail)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel=mViewModel
+    }
+
+    inner class OnTourItemClickListener : OnListItemClickListener<TourDetail>{
+        override fun onItemClick(item: TourDetail, pos: Int) {
+            findNavController().navigate(R.id.action_tour_listing_to_tour_detail)
+        }
+
     }
 }

@@ -8,6 +8,12 @@
         <variable
             name="viewModel"
             type="com.trips.pk.ui.tour.search.TourSearchViewModel" />
+        <variable
+            name="countryClickListener"
+            type="com.trips.pk.ui.tour.search.TourSearchFragment.OnCountryItemClickListener" />
+        <variable
+            name="cityClickListener"
+            type="com.trips.pk.ui.tour.search.TourSearchFragment.OnPakCityClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,6 +136,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:nestedScrollingEnabled="false"
+                                itemsList="@{viewModel.countries}"
+                                itemLayout="@{@layout/item_worldwide_trips}"
+                                hasFixSize="@{true}"
+                                itemClickListener="@{countryClickListener}"
                                 app:layout_constraintTop_toBottomOf="@id/tv_worldwide_trip"
                                 android:layout_marginTop="@dimen/_12px"
                                 tools:listitem="@layout/item_worldwide_trips"
@@ -172,6 +182,10 @@
                                 tools:listitem="@layout/item_pak_tour_pkg"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                                 app:spanCount="2"
+                                itemsList="@{viewModel.cities}"
+                                itemLayout="@{@layout/item_pak_tour_pkg}"
+                                hasFixSize="@{true}"
+                                itemClickListener="@{cityClickListener}"
                                 android:nestedScrollingEnabled="false"
                                 android:layout_marginStart="@dimen/_15dp"
                                 android:layout_marginEnd="@dimen/_15dp"

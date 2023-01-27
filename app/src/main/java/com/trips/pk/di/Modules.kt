@@ -7,8 +7,11 @@ import com.trips.pk.data.TourRepository
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.tour.listing.TourListingViewModel
+import com.trips.pk.ui.tour.pkg.TourPackageViewModel
 import com.trips.pk.ui.tour.search.TourSearchViewModel
 import com.trips.pk.ui.visa.detail.VisaDetailViewModel
+import com.trips.pk.ui.visa.search.VisaSearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -29,9 +32,12 @@ val viewModelsModule= module {
 
     //Tour
     viewModel { TourSearchViewModel(get(),get()) }
+    viewModel { TourPackageViewModel() }
+    viewModel { TourListingViewModel(get()) }
 
     //Visa
-    viewModel { VisaDetailViewModel(get(), get()) }
+    viewModel { VisaDetailViewModel(get()) }
+    viewModel { VisaSearchViewModel(get()) }
     }
 
   val repositoriesModule = module {

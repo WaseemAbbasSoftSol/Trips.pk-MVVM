@@ -7,7 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.tour.pkg.TourPackageViewModel" />
+        <variable
+            name="countryClickListener"
+            type="com.trips.pk.ui.tour.pkg.TourPackageFragment.OnCountryItemClickListener" />
+        <variable
+            name="cityClickListener"
+            type="com.trips.pk.ui.tour.pkg.TourPackageFragment.OnPakCityClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,6 +58,10 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_12px"
+                            itemsList="@{viewModel.countries}"
+                            itemLayout="@{@layout/item_worldwide_trips}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{countryClickListener}"
                             tools:listitem="@layout/item_worldwide_trips"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="3"
@@ -69,6 +79,10 @@
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="2"
                             android:visibility="gone"
+                            itemsList="@{viewModel.cities}"
+                            itemLayout="@{@layout/item_pak_tour_pkg}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{cityClickListener}"
                             android:layout_marginStart="@dimen/_15dp"
                             android:layout_marginEnd="@dimen/_15dp"
                             android:layout_marginTop="@dimen/_12px"

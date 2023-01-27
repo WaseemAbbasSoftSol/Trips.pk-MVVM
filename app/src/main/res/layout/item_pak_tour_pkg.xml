@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="obj"
+            type="com.trips.pk.model.tour.City" />
     </data>
 
         <com.google.android.material.card.MaterialCardView
@@ -26,7 +29,8 @@
              android:id="@+id/tv_city"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="Skardu"
+             tools:text="Skardu"
+             android:text="@{obj.name}"
              android:textColor="@color/black"
              android:textSize="@dimen/_13sp"
              android:fontFamily="@font/poppins_regular"

@@ -1,4 +1,4 @@
-package com.trips.pk.ui.visa.detail
+package com.trips.pk.ui.visa.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,32 +10,43 @@ import com.trips.pk.ui.common.RequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class VisaDetailViewModel(
+class VisaSearchViewModel(
     private val repository: TourRepository
 ):ViewModel() {
 
     private val _state = MutableLiveData<RequestState>()
-    val state:LiveData<RequestState> = _state
+    val state: LiveData<RequestState> = _state
 
     private val _visa = MutableLiveData<List<Visa>>()
-    val visa:LiveData<List<Visa>> = _visa
+    val visa: LiveData<List<Visa>> = _visa
 
-    private val _message=MutableLiveData<String>()
-    val message:LiveData<String> = _message
+    private val _visaPromoted = MutableLiveData<List<Visa>>()
+    val visaPromoted: LiveData<List<Visa>> = _visaPromoted
+
+    private val _message= MutableLiveData<String>()
+    val message: LiveData<String> = _message
 
     init {
         _visa.value= emptyList()
-        getListOfVisaByCountryId()
+        _visaPromoted.value= emptyList()
+        getListOfVisa()
     }
 
-    private fun getListOfVisaByCountryId(){
+    private fun getListOfVisa(){
         viewModelScope.launch(Dispatchers.IO){
             try {
                 _state.postValue(RequestState.LOADING)
-                val response = repository.getListOfVisaByCountryId(157)
+                val response = repository.getListOfVisa()
                 if (response.isSuccessful){
                     response.body().let {
                         _visa.postValue(it!!.data!!)
+                        val tempList= arrayListOf<Visa>()
+                        for (item in it.data){
+                            if (item.promoted){
+                                tempList.add(item)
+                            }
+                        }
+                        _visaPromoted.postValue(tempList)
                     }
                 }else{
                     response.errorBody().let {

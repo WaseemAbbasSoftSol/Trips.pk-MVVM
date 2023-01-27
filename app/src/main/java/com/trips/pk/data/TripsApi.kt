@@ -8,6 +8,7 @@ import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Key_Request
 import com.trips.pk.model.tour.CountriesWithCities
+import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.model.visa.Visa
 import retrofit2.Response
 import retrofit2.http.*
@@ -41,11 +42,22 @@ interface TripsApi {
         @Body params: FlightBooker
     ):Response<BaseResponse<String>>
 
+    @GET("GetListOfVisas")
+    @Headers("Content-Type:application/json")
+    suspend fun getListOfVisa(
+    ):Response<BaseResponse<List<Visa>>>
+
     @POST("GetListOfVisasByCountry")
     @Headers("Content-Type:application/json")
     suspend fun getListOfVisaByCountryId(
         @Header("id") id:Int
     ):Response<BaseResponse<List<Visa>>>
+
+    @POST("GetListOfToursForSpacificPlace")
+    @Headers("Content-Type:application/json")
+    suspend fun getListOfToursByPlaceName(
+        @Header("name") name:String
+    ):Response<BaseResponse<List<TourDetail>>>
 
     //To be add in future
     /*

@@ -4,10 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.tour.listing.TourListingViewModel" />
+        <variable
+            name="itemClickListener"
+            type="com.trips.pk.ui.tour.listing.TourListingFragment.OnTourItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,11 +115,27 @@
                         android:id="@+id/rv_tour_listing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        itemsList="@{viewModel.tour}"
+                        itemLayout="@{@layout/item_tour_listing}"
+                        hasFixSize="@{true}"
+                        itemClickListener="@{itemClickListener}"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:listitem="@layout/item_tour_listing"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
                         />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
+                        android:layout_width="wrap_content"
+                        android:elevation="5dp"
+                        android:layout_height="wrap_content"
+                        app:SpinKit_Color="@color/primary_color"
+                        style="@style/SpinKitView.Large.Circle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
