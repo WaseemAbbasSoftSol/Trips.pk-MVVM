@@ -8,16 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
-import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourDetailBinding
+import com.trips.pk.model.tour.TourPackagePrices
+import com.trips.pk.ui.common.mTourPackagePrices
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TourDetailFragment:Fragment() {
     private lateinit var binding:FragmentTourDetailBinding
+    private val mViewModel : TourDetailViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,11 +52,31 @@ class TourDetailFragment:Fragment() {
         })
 
         binding.btnBook.setOnClickListener {
-            findNavController().navigate(R.id.action_tour_detail_to_book_list)
+        //    findNavController().navigate(R.id.action_tour_detail_to_book_list)
+
+            findNavController().navigate(TourDetailFragmentDirections.actionTourDetailToBookList())
         }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = mViewModel
+        mViewModel.tour.observe(viewLifecycleOwner){
+            if (it != null){
+                binding.tvFromCity.text = "${it.noOfDays} days trip to BERNE"
+                mTourPackagePrices.clear()
+                mTourPackagePrices.addAll(it.priceDetails)
+                binding.wvTourDetail.loadDataWithBaseURL(
+                    null,
+                    it.essentialDetail,
+                    "text/html; charset=utf-8",
+                    "UTF-8",
+                    null
+                )
+            }
+        }
+    }
     fun Activity.makeStatusBarTransparent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.apply {

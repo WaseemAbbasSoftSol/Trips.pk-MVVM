@@ -7,6 +7,8 @@ import com.trips.pk.data.TourRepository
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.tour.book.TourBookListViewModel
+import com.trips.pk.ui.tour.detail.TourDetailViewModel
 import com.trips.pk.ui.tour.listing.TourListingViewModel
 import com.trips.pk.ui.tour.pkg.TourPackageViewModel
 import com.trips.pk.ui.tour.search.TourSearchViewModel
@@ -21,7 +23,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val FLIGHT_BASE_URL = "https://flightapis.green.pk/api/"
+//private const val FLIGHT_BASE_URL = "https://flightapis.green.pk/api/"
+private const val FLIGHT_BASE_URL = "https://api.gotravel.pk/"
 private const val TOUR_BASE_URL = "https://api.gotravel.pk/"
 
 val viewModelsModule= module {
@@ -34,10 +37,12 @@ val viewModelsModule= module {
     viewModel { TourSearchViewModel(get(),get()) }
     viewModel { TourPackageViewModel() }
     viewModel { TourListingViewModel(get()) }
+    viewModel { TourDetailViewModel(get()) }
+    viewModel { TourBookListViewModel() }
 
     //Visa
-    viewModel { VisaDetailViewModel(get()) }
     viewModel { VisaSearchViewModel(get()) }
+    viewModel { VisaDetailViewModel(get()) }
     }
 
   val repositoriesModule = module {

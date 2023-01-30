@@ -61,12 +61,12 @@ class TourPackageFragment:Fragment() {
 
     inner class OnCountryItemClickListener: OnListItemClickListener<CountriesWithCities> {
         override fun onItemClick(item: CountriesWithCities, pos: Int) {
-            findNavController().navigate(R.id.action_tour_pkg_to_tour_listing)
+            findNavController().navigate(TourPackageFragmentDirections.actionTourPkgToTourListing(item.name))
         }
     }
     inner class OnPakCityClickListener : OnListItemClickListener<City> {
         override fun onItemClick(item: City, pos: Int) {
-            findNavController().navigate(R.id.action_tour_pkg_to_tour_listing)
+            findNavController().navigate(TourPackageFragmentDirections.actionTourPkgToTourListing(item.name))
         }
 
     }

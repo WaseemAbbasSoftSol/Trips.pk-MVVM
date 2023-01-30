@@ -6,7 +6,7 @@ import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
-import com.trips.pk.model.flight.book.Key_Request
+import com.trips.pk.model.flight.book.KeyRequestId
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.model.visa.Visa
@@ -30,7 +30,7 @@ interface TripsApi {
 
     @POST("GetCityByCountryID")
     @Headers("Content-Type:application/json")
-    suspend fun getCityByCountryId(@Body params: Key_Request):Response<BaseResponse<List<Countries>>>
+    suspend fun getCityByCountryId(@Body params: KeyRequestId):Response<BaseResponse<List<Countries>>>
 
     @GET("GetListOfCountryPakCity")
     @Headers("Content-Type:application/json")
@@ -58,6 +58,13 @@ interface TripsApi {
     suspend fun getListOfToursByPlaceName(
         @Header("name") name:String
     ):Response<BaseResponse<List<TourDetail>>>
+
+    @POST("GetTourByID")
+    @Headers("Content-Type:application/json")
+    suspend fun getTourDetailByTourId(
+        @Header("id") id: Int
+    ):Response<BaseResponse<TourDetail>>
+
 
     //To be add in future
     /*

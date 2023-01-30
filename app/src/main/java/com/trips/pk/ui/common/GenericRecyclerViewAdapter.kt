@@ -30,7 +30,7 @@ class GenericRecyclerViewAdapter<T>(val items: List<T>, private val layout: Int)
         holder.binding.root.setOnClickListener {
             itemClickListener?.onItemClick(obj, position)
         }
-     //   holder.binding.setVariable(BR.onViewClick, onItemViewClick)
+        holder.binding.setVariable(BR.onViewClick, onItemViewClick)
     }
 
     fun setItemClickListener(listener: OnListItemClickListener<T>?) {

@@ -125,7 +125,7 @@ class FlightBookHostFragment: Fragment() {
                             val booker=FlightBooker(contactPerson.name,contactPerson.number,contactPerson.gender,contactPerson.email,contactPerson.zipCode,
                                 contactPerson.address,contactPerson.countryId,contactPerson.cityId,passengerList,flightDetail!!)
                               mViewModel.bookFlight(booker)
-                            Toast.makeText(requireContext(),"to submit",Toast.LENGTH_SHORT).show()
+                           // Toast.makeText(requireContext(),"to submit",Toast.LENGTH_SHORT).show()
                         }else{
                             getPassengerInfo(R.anim.slide_in_right,R.anim.slide_out_left,getPassengerTypeCount(true))
                             previewButton()

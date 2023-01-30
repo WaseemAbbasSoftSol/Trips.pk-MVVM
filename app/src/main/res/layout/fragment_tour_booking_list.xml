@@ -7,7 +7,10 @@
 
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.tour.book.TourBookListViewModel" />
+        <variable
+            name="buttonClickListener"
+            type="com.trips.pk.ui.tour.book.TourBookListFragment.TourBookButtonClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,20 +114,32 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
-             <include
-                 android:id="@+id/lay1"
-                 layout="@layout/tour_book_list_layout"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:layout_constraintTop_toBottomOf="@id/tv_price"/>
-
-                <include
-                    android:id="@+id/lay2"
-                    layout="@layout/tour_book_list_layout"
-                    android:layout_marginTop="@dimen/_10dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_tour_prices"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/lay1"/>
+                    android:layout_height="@dimen/_0dp"
+                    itemsList="@{viewModel.tourPricePackages}"
+                    itemLayout="@{@layout/item_tour_book_list}"
+                    hasFixSize="@{true}"
+                    onItemViewClick="@{buttonClickListener}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_tour_book_list"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+<!--             <include-->
+<!--                 android:id="@+id/lay1"-->
+<!--                 layout="@layout/tour_book_list_layout"-->
+<!--                 android:layout_width="match_parent"-->
+<!--                 android:layout_height="wrap_content"-->
+<!--                 app:layout_constraintTop_toBottomOf="@id/tv_price"/>-->
+
+<!--                <include-->
+<!--                    android:id="@+id/lay2"-->
+<!--                    layout="@layout/tour_book_list_layout"-->
+<!--                    android:layout_marginTop="@dimen/_10dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/lay1"/>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

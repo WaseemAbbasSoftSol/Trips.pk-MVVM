@@ -10,7 +10,7 @@ import com.trips.pk.data.FlightRepository
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
-import com.trips.pk.model.flight.book.Key_Request
+import com.trips.pk.model.flight.book.KeyRequestId
 import com.trips.pk.ui.common.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -101,7 +101,7 @@ class FlightBookViewModel(
         }
     }
 
-     fun getCitiesByCountryId(key:Key_Request) {
+     fun getCitiesByCountryId(key:KeyRequestId) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _state.postValue(RequestState.LOADING)

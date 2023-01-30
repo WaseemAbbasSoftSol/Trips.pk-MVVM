@@ -72,7 +72,8 @@
                     android:paddingStart="@dimen/_12dp"
                     android:paddingEnd="@dimen/_12dp"
                     android:paddingTop="@dimen/_4dp"
-                    android:text="On Sale"
+                    tools:text="On Sale"
+                    android:text="@{obj.tourStatus.name}"
                     android:textSize="@dimen/_11sp"
                     android:textColor="#00A65A"
                     android:fontFamily="@font/poppins_medium"/>

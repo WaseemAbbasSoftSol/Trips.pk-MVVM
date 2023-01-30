@@ -2,6 +2,9 @@ package com.trips.pk.model.tour
 
 
 import com.google.gson.annotations.SerializedName
+import com.trips.pk.utils.changeStringDateFormat
+import com.trips.pk.utils.splitTimeAndDate
+import java.text.SimpleDateFormat
 
 data class TourPackagePrices(
     @SerializedName("adult_Discount")
@@ -28,4 +31,26 @@ data class TourPackagePrices(
     val tourPackageID: Int,
     @SerializedName("tourPackages")
     val tourPackages: Any
-)
+){
+
+    fun getStartAndEndDate():String{
+        val sDate= changeDateFormat(splitTimeAndDate(startDate))
+        val eDate= changeDateFormat(splitTimeAndDate(endDate))
+        return  "$sDate | $eDate"
+    }
+
+    val adultTotalPrice:String get() = "Rs. $adultPrice"
+    val childTotalPrice:String get() = "Rs. $childPrice"
+
+   private fun changeDateFormat(date:kotlin.String):kotlin.String{
+        var formattedDate=""
+        try {
+            val fromUser = SimpleDateFormat("yyyy-MM-dd")
+            val myFormat = SimpleDateFormat("dd-MM-yyyy")
+            formattedDate =  myFormat.format(fromUser.parse(date))
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return formattedDate
+    }
+}

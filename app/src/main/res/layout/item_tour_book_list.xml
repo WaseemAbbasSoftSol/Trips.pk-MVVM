@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="obj"
+            type="com.trips.pk.model.tour.TourPackagePrices"/>
+        <variable
+            name="onViewClick"
+            type="com.trips.pk.ui.common.OnItemViewClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10px">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -33,7 +40,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/btn_book"
                     app:layout_constraintBottom_toBottomOf="@id/btn_book"
-                    android:text="01-Jul-2022  I  15-Jul-2022"
+                    tools:text="01-Jul-2022  I  15-Jul-2022"
+                    android:text="@{obj.getStartAndEndDate()}"
                     android:textSize="@dimen/_14sp"
                     android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/black"
@@ -47,6 +55,7 @@
                     android:paddingEnd="@dimen/_30dp"
                     style="@style/AppTheme.ContainedButton"
                     android:text="BOOK"
+                    android:onClick="@{(view) -> onViewClick.onClick(view, obj)}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
@@ -71,7 +80,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Triple Sharing Per Head Kid (5 to 11 years old)"
+                    tools:text="Triple Sharing Per Head Kid (5 to 11 years old)"
+                    android:text="@{obj.note}"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@color/black"
@@ -109,7 +119,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Rs:200,000"
+                    tools:text="Rs:200,000"
+                    android:text="@{obj.adultTotalPrice}"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@color/primary_color"
@@ -146,7 +157,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Rs:150,000"
+                    tools:text="Rs:150,000"
+                    android:text="@{obj.childTotalPrice}"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@color/primary_color"

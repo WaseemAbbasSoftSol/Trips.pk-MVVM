@@ -15,7 +15,7 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.databinding.FragmentFlightBookNewBinding
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.book.ContactPerson
-import com.trips.pk.model.flight.book.Key_Request
+import com.trips.pk.model.flight.book.KeyRequestId
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassportInfo
 import com.trips.pk.ui.common.*
@@ -88,7 +88,7 @@ class FlightBookNewFragment :Fragment() {
                 if (item is Countries) run {
                     val country: Countries = item
                     countryId=country.id
-                    val keyCountryId = Key_Request(countryId.toString())
+                    val keyCountryId = KeyRequestId(countryId.toString())
                     mViewModel.getCitiesByCountryId(keyCountryId)
                     countryName=country.name
                 }
@@ -168,7 +168,7 @@ class FlightBookNewFragment :Fragment() {
       // else binding.tvEnterInfo.text = "Enter Info about the Traveler\n$type $passengerCount"
        else binding.tvEnterInfo.text = "Enter Info about the Traveler\n$type"
 
-        val key=Key_Request("157")
+        val key=KeyRequestId("157")
         mViewModel.getCitiesByCountryId(key)
 
         return binding.root

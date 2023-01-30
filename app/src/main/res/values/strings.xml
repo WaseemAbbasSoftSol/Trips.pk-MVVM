@@ -137,5 +137,6 @@
     <string name="lbl_company">Company</string>
     <string name="lbl_group">Group</string>
     <string name="lbl_duration">Duration</string>
+    <string name="lbl_itenrary">Itenrary</string>
 
 </resources>

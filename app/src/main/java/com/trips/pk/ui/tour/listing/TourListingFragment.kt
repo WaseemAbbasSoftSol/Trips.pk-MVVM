@@ -17,6 +17,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class TourListingFragment:Fragment() {
     private lateinit var binding:FragmentTourListingBinding
     private val mViewModel:TourListingViewModel by viewModel()
+    private var placeName = ""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            val args=TourListingFragmentArgs.fromBundle(it!!)
+            placeName = args.name
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,7 +32,7 @@ class TourListingFragment:Fragment() {
     ): View? {
         binding= FragmentTourListingBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
-
+        binding.tvToolbar.text = placeName
         binding.itemClickListener=OnTourItemClickListener()
         return binding.root
     }

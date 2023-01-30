@@ -77,6 +77,16 @@ fun Button.hideProgressOnButton(text:String) {
     hideProgress(text)
 }
 
+fun splitTimeAndDate(date : String) :String {
+    var d=""
+    try {
+        d= date.substring(0, date.indexOf('T'))
+    }catch (e:Exception){
+        e.printStackTrace()
+    }
+    return d
+}
+
 object Helpers {
 
     fun makeBottomSheetRounded(view: View, dialog: Dialog){

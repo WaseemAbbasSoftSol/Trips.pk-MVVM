@@ -10,6 +10,7 @@ import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.model.tour.CountriesWithCities
+import com.trips.pk.model.tour.TourPackagePrices
 import com.trips.pk.ui.flight.book.newpck.AllUser
 import java.util.ArrayList
 
@@ -49,6 +50,9 @@ var isNextClicked=MutableLiveData<Boolean>()
 var whichAdult=1
 var whichChild=0
 var whichInfant=0
+
+//Tour section
+val mTourPackagePrices= arrayListOf<TourPackagePrices>()
 
 
 

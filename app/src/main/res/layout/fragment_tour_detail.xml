@@ -5,8 +5,12 @@
     tools:context=".ui.guide.details.GuideDetailFragment">
 
     <data>
-
-        </data>
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.tour.detail.TourDetailViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cl_book"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.AppBarLayout
@@ -78,7 +82,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/raleway_semiboldd"
-                                android:text="Dashboard"
+                                android:text="BERNE Tour Package"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_20sp"
                                 android:maxLines="1"
@@ -135,7 +139,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:text="@string/lbl_europe_tour"
+                                tools:text="@string/lbl_europe_tour"
+                                android:text="@{viewModel.tour.name}"
                                 android:fontFamily="@font/raleway_semiboldd"
                                 android:textSize="@dimen/_20sp"
                                 android:textColor="@color/black"
@@ -242,7 +247,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintTop_toBottomOf="@id/tv_highlight"
-                                android:text="@string/lbl_highlight_desc"
+                                tools:text="@string/lbl_highlight_desc"
+                               android:text="@{viewModel.tour.essentialHeading}"
                                 android:fontFamily="@font/poppins_regular"
                                 android:textSize="@dimen/_14sp"
                                 android:textColor="@color/black"
@@ -269,7 +275,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintTop_toBottomOf="@id/tv_des"
-                                android:text="@string/lbl_full_desc"
+                                tools:text="@string/lbl_full_desc"
+                                android:text="@{viewModel.tour.description}"
                                 android:fontFamily="@font/poppins_regular"
                                 android:textSize="@dimen/_14sp"
                                 android:textColor="@color/black"
@@ -278,6 +285,28 @@
                                 android:layout_marginEnd="@dimen/_20dp"
                                 android:layout_marginTop="@dimen/_8px"
                                 />
+
+                            <TextView
+                                android:id="@+id/tv_itenrary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/tv_full_desc"
+                                android:text="@string/lbl_itenrary"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textSize="@dimen/_17sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:layout_marginEnd="@dimen/_20dp"
+                                android:layout_marginTop="@dimen/_13px"
+                                />
+                            <WebView
+                                android:id="@+id/wv_tour_detail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/tv_itenrary"
+
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:layout_marginEnd="@dimen/_20dp"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.github.captain_miao.optroundcardview.OptRoundCardView>
@@ -285,7 +314,17 @@
 
                 </androidx.core.widget.NestedScrollView>
 
-
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
+                    android:layout_width="wrap_content"
+                    android:elevation="5dp"
+                    android:layout_height="wrap_content"
+                    app:SpinKit_Color="@color/primary_color"
+                    style="@style/SpinKitView.Large.Circle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

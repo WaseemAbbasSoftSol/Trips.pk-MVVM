@@ -176,6 +176,9 @@
         android:id="@+id/tour_listing_fragment"
         android:name="com.trips.pk.ui.tour.listing.TourListingFragment"
         tools:layout="@layout/fragment_tour_listing">
+        <argument
+            android:name="name"
+            app:argType="string"/>
         <action
             android:id="@+id/action_tour_listing_to_tour_detail"
             app:destination="@id/tour_detail_fragment"
@@ -204,6 +207,7 @@
         android:id="@+id/tour_book_list_fragment"
         android:name="com.trips.pk.ui.tour.book.TourBookListFragment"
         tools:layout="@layout/fragment_tour_booking_list">
+
         <action
             android:id="@+id/action_tour_book_list_to_book_detail"
             app:destination="@id/tour_book_detail_fragment"

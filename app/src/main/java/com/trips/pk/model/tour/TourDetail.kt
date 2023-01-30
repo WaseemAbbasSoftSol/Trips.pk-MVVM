@@ -9,7 +9,7 @@ data class TourDetail(
     @SerializedName("name")
     val name:String,
     @SerializedName("tourPackagePrices")
-    val price:List<TourPackagePrices>,
+    val priceDetails:List<TourPackagePrices>,
     @SerializedName("thumbnailImage")
     val thumbnail:String,
     @SerializedName("")
@@ -20,6 +20,8 @@ data class TourDetail(
     val tourOrigin:String,
     @SerializedName("description")
     val description:String,
+    @SerializedName("essentialHeading")
+    val essentialHeading:String,
     @SerializedName("essentialDetail")
     val essentialDetail:String,
     @SerializedName("isActive")
@@ -28,6 +30,8 @@ data class TourDetail(
     val sortOrder:Int,
     @SerializedName("country_ID")
     val countryId:Int,
+    @SerializedName("tourStatus")
+    val tourStatus:TourStatus,
     @SerializedName("countries")
     val country:Countries,
     @SerializedName("city_ID")
@@ -36,6 +40,6 @@ data class TourDetail(
     val city:City,
     @SerializedName("tourItineraryDetails")
     val tourItineraryDetails: List<TourItineraryDetails>,
-
-) {
+    ){
+    val thumbnailLink:String get() = "adminapi.gotravel.pk$thumbnail"
 }

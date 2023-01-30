@@ -2,7 +2,7 @@ package com.trips.pk.data
 
 import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.book.FlightBooker
-import com.trips.pk.model.flight.book.Key_Request
+import com.trips.pk.model.flight.book.KeyRequestId
 
 class FlightRepository (private val tripsApi: TripsApi) {
 
@@ -12,7 +12,7 @@ class FlightRepository (private val tripsApi: TripsApi) {
 
     suspend fun getAllCountries()=tripsApi.getAllCountries()
 
-    suspend fun getCitiesByCountryId(key:Key_Request)=tripsApi.getCityByCountryId(key)
+    suspend fun getCitiesByCountryId(key:KeyRequestId)=tripsApi.getCityByCountryId(key)
 
     suspend fun bookFlight(book:FlightBooker)=tripsApi.bookFlight(book)
 }
