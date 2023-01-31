@@ -6,7 +6,7 @@
     <data>
         <variable
             name="obj"
-            type="com.trips.pk.model.tour.CountriesWithCities" />
+            type="com.trips.pk.model.flight.Countries" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

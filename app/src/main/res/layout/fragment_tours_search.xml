@@ -39,7 +39,7 @@
                >
 
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ed_search"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50dp"
@@ -50,7 +50,6 @@
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_where"
                     android:inputType="textNoSuggestions"
-                    android:focusable="false"
                     android:textColorHint="@color/grey"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
@@ -119,6 +118,7 @@
                                 />
 
                             <TextView
+                                android:visibility="gone"
                                 android:id="@+id/tv_view_worldwide"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -131,12 +131,12 @@
                                 android:textColor="@color/btn_color"
                                 android:layout_marginEnd="@dimen/_20dp"/>
 
-                            <androidx.recyclerview.widget.RecyclerView
+                            <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                                 android:id="@+id/rv_worldwide_trip"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:nestedScrollingEnabled="false"
-                                itemsList="@{viewModel.countries}"
+                                itemsList="@{viewModel.promotedCountries}"
                                 itemLayout="@{@layout/item_worldwide_trips}"
                                 hasFixSize="@{true}"
                                 itemClickListener="@{countryClickListener}"
@@ -145,6 +145,11 @@
                                 tools:listitem="@layout/item_worldwide_trips"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                                 app:spanCount="3"
+                                app:shimmer_demo_angle="10"
+                                app:shimmer_demo_grid_child_count="3"
+                                app:shimmer_demo_child_count="8"
+                                app:shimmer_demo_layout="@layout/item_worldwide_trips"
+                                app:shimmer_demo_layout_manager_type="grid"
                                 android:layout_marginStart="@dimen/_15dp"
                                 android:layout_marginEnd="@dimen/_15dp"
                                 />
@@ -163,6 +168,7 @@
                                 android:layout_marginTop="@dimen/_12px"/>
 
                             <TextView
+                                android:visibility="gone"
                                 android:id="@+id/tv_view_pak"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -182,7 +188,7 @@
                                 tools:listitem="@layout/item_pak_tour_pkg"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                                 app:spanCount="2"
-                                itemsList="@{viewModel.cities}"
+                                itemsList="@{viewModel.promotedCities}"
                                 itemLayout="@{@layout/item_pak_tour_pkg}"
                                 hasFixSize="@{true}"
                                 itemClickListener="@{cityClickListener}"

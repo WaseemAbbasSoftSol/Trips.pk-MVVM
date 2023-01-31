@@ -51,17 +51,17 @@
                         android:layout_marginTop="@dimen/_5dp"
                         >
 
-
+<!--    itemsList="@{viewModel.countries}"
+                            itemLayout="@{@layout/item_worldwide_trips}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{countryClickListener}"-->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_worldwide_trip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_12px"
-                            itemsList="@{viewModel.countries}"
-                            itemLayout="@{@layout/item_worldwide_trips}"
-                            hasFixSize="@{true}"
-                            itemClickListener="@{countryClickListener}"
+
                             tools:listitem="@layout/item_worldwide_trips"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="3"
@@ -70,6 +70,10 @@
                             />
 
 
+                        <!--     itemsList="@{viewModel.cities}"
+                            itemLayout="@{@layout/item_pak_tour_pkg}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{cityClickListener}"-->
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_pak_packages"
@@ -79,10 +83,7 @@
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="2"
                             android:visibility="gone"
-                            itemsList="@{viewModel.cities}"
-                            itemLayout="@{@layout/item_pak_tour_pkg}"
-                            hasFixSize="@{true}"
-                            itemClickListener="@{cityClickListener}"
+
                             android:layout_marginStart="@dimen/_15dp"
                             android:layout_marginEnd="@dimen/_15dp"
                             android:layout_marginTop="@dimen/_12px"

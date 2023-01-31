@@ -6,7 +6,7 @@
     <data>
         <variable
             name="obj"
-            type="com.trips.pk.model.tour.City" />
+            type="com.trips.pk.model.flight.Countries" />
     </data>
 
         <com.google.android.material.card.MaterialCardView

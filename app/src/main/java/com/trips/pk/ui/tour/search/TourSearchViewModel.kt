@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
-import com.trips.pk.data.FlightRepository
-import com.trips.pk.data.TourRepository
+import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
-import com.trips.pk.model.tour.CountryAndCityTogether
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
 import com.trips.pk.ui.common.RequestState
@@ -19,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TourSearchViewModel(
-    private val repository: TourRepository,
+    private val repository: TripsRepository,
     private val prefRepository: PrefRepository
 ):ViewModel(){
 
@@ -29,13 +27,23 @@ class TourSearchViewModel(
     private val _countries = MutableLiveData<List<CountriesWithCities>>()
     val countries: LiveData<List<CountriesWithCities>> = _countries
 
+    private val _promotedCountries = MutableLiveData<List<Countries>>()
+    val promotedCountries: LiveData<List<Countries>> = _promotedCountries
+
     private val _cities = MutableLiveData<List<City>>()
     val cities: LiveData<List<City>> = _cities
+
+    private val _promotedCities = MutableLiveData<List<Countries>>()
+    val promotedCities: LiveData<List<Countries>> = _promotedCities
 
     init {
         _countries.value= emptyList()
         _cities.value= emptyList()
+        _promotedCountries.value= emptyList()
+        _promotedCities.value= emptyList()
         storeCountries()
+        getPromotedCountries()
+        getPromotedCities()
     }
     private fun getCountriesWithPakCities() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -46,6 +54,56 @@ class TourSearchViewModel(
                     response.body().let {
                         prefRepository.deleteCountriesWithCitiesFromPrefRepository()
                         prefRepository.saveCountriesWithCities(it!!.data)
+                    }
+                } else {
+                    response.errorBody().let {
+                        Log.d(APP_TAG, it!!.toString())
+                    }
+                }
+                _state.postValue(RequestState.DONE)
+            } catch (e: Exception) {
+                _state.postValue(RequestState.ERROR)
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                _state.postValue(RequestState.ERROR)
+                t.printStackTrace()
+            }
+        }
+    }
+
+    private fun getPromotedCountries() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _state.postValue(RequestState.LOADING)
+                val response = repository.getPromotedCountries("PromoteForTour")
+                if (response.isSuccessful) {
+                    response.body().let {
+                        _promotedCountries.postValue(it!!.data!!)
+                    }
+                } else {
+                    response.errorBody().let {
+                        Log.d(APP_TAG, it!!.toString())
+                    }
+                }
+                _state.postValue(RequestState.DONE)
+            } catch (e: Exception) {
+                _state.postValue(RequestState.ERROR)
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                _state.postValue(RequestState.ERROR)
+                t.printStackTrace()
+            }
+        }
+    }
+
+    private fun getPromotedCities() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _state.postValue(RequestState.LOADING)
+                val response = repository.getPromotedCities("PromoteForTour")
+                if (response.isSuccessful) {
+                    response.body().let {
+                        _promotedCities.postValue(it!!.data!!)
                     }
                 } else {
                     response.errorBody().let {

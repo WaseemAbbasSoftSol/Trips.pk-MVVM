@@ -22,6 +22,7 @@ import com.trips.pk.ui.common.OnListItemClickListener
 import com.trips.pk.ui.flight.dialogs.origin.SearchOriginDestinationAdapter
 import com.trips.pk.utils.Helpers
 
+@Deprecated("This class is deprecated")
 class SearchTourPlacesBottomSheet: BottomSheetDialogFragment(),OnListItemClickListener<CountryAndCityTogether> {
 
     private lateinit var binding:BottomSheetOriginLayoutBinding

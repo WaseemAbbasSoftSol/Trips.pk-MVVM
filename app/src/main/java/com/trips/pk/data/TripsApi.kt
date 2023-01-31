@@ -65,6 +65,17 @@ interface TripsApi {
         @Header("id") id: Int
     ):Response<BaseResponse<TourDetail>>
 
+    @GET("GetPromotedCountries")
+    @Headers("Content-Type:application/json")
+    suspend fun getPromotedCountries(
+        @Header("sessionName") sessionName: String
+    ):Response<BaseResponse<List<Countries>>>
+
+    @GET("GetPromotedCities")
+    @Headers("Content-Type:application/json")
+    suspend fun getPromotedCities(
+        @Header("sessionName") sessionName: String
+    ):Response<BaseResponse<List<Countries>>>
 
     //To be add in future
     /*

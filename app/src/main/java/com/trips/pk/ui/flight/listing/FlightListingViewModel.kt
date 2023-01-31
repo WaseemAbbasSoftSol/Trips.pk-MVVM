@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.trips.pk.data.FlightRepository
+import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.ItinerariesDetail
@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FlightListingViewModel(
-    private val repository: FlightRepository
+    private val repository: TripsRepository
 ):ViewModel() {
 
     private val _state = MutableLiveData<RequestState>()

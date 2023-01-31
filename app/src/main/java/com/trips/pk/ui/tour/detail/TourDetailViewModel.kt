@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.trips.pk.data.TourRepository
+import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TourDetailViewModel(
-    private val repository:TourRepository
+    private val repository: TripsRepository
 ):ViewModel() {
 
     private val _state = MutableLiveData<RequestState>()

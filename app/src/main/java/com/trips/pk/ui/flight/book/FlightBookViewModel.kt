@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
-import com.trips.pk.data.FlightRepository
+import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FlightBookViewModel(
-    val repository: FlightRepository,
+    val repository: TripsRepository,
     val  prefRepository: PrefRepository
 ):ViewModel() {
 

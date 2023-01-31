@@ -20,6 +20,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.mikelau.views.shimmer.ShimmerRecyclerViewX
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -150,7 +151,26 @@ fun <T> setItems(
     mAdapter.onItemViewClick = onItemViewClick
     view.setHasFixedSize(hasFixSize)
 }
+@BindingAdapter(
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
+    requireAll = false
+)
+fun <T> setItems(
+    view: ShimmerRecyclerViewX, itemsList: List<T>, layout: Int,
+    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
+    onItemViewClick: OnItemViewClickListener<T>?
+) {
 
+
+    if (itemsList.isNotEmpty()){
+        val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
+        view.adapter = mAdapter
+        mAdapter.setItemClickListener(itemClickListener)
+        mAdapter.onItemViewClick = onItemViewClick
+        view.setHasFixedSize(hasFixSize)
+    }
+   else view.showShimmerAdapter()
+}
 @BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
 fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
     val adapter = ArrayAdapter<T>(

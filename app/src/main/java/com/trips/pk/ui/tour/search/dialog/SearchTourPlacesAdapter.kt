@@ -14,6 +14,7 @@ import com.trips.pk.model.tour.CountryAndCityTogether
 import com.trips.pk.ui.common.OnListItemClickListener
 import java.util.*
 
+@Deprecated("This class is deprecated")
 class SearchTourPlacesAdapter(
     private val context: Context
 ) :
