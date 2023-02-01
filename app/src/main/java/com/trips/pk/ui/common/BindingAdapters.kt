@@ -2,6 +2,7 @@ package com.trips.pk.ui.common
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
@@ -20,6 +21,7 @@ import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mikelau.views.shimmer.ShimmerRecyclerViewX
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -31,6 +33,10 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
     }
 }
 
+@BindingAdapter("drawLineOverTextView")
+fun drawLine(view: TextView, isFlag:Boolean) {
+   if (isFlag)view.paintFlags= view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+}
 //@BindingAdapter("imageTint")
 //fun setImage(view: ImageView, colorResource: Int) {
 //    view.setColorFilter(
@@ -59,12 +65,18 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //        Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
 //    }
 //}
-//
-//@BindingAdapter("imageUri")
-//fun loadImage(view: ImageView, imageUrl: Uri?) {
-//    Glide.with(view.context).load(imageUrl).into(view)
-//}
-//
+
+
+
+@BindingAdapter(value = ["imageUrl", "default"], requireAll = false)
+fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
+    if (default == null) {
+        Glide.with(view.context).load(imageUrl).into(view)
+    } else {
+        Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
+    }
+}
+
 //@BindingAdapter(value = ["imageUrl", "default", "borderColor"], requireAll = false)
 //fun loadImage(
 //    view: CircleImageView,
@@ -160,8 +172,6 @@ fun <T> setItems(
     itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
     onItemViewClick: OnItemViewClickListener<T>?
 ) {
-
-
     if (itemsList.isNotEmpty()){
         val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
         view.adapter = mAdapter

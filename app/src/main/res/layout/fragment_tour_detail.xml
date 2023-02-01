@@ -41,7 +41,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/guideDetailImage"
                         android:layout_width="match_parent"
-                        android:layout_height="320dp"
+                        android:layout_height="230dp"
                         android:scaleType="fitXY"
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/im_nathia_gali"/>
@@ -380,7 +380,8 @@
                         android:layout_marginTop="@dimen/_15dp"
                         android:fontFamily="@font/poppins_regular"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/view"/>
+                        app:layout_constraintTop_toBottomOf="@id/view"
+                        app:layout_constraintBottom_toTopOf="@id/tv_total_price"/>
 
                     <TextView
                         android:id="@+id/tv_total_price"
@@ -391,8 +392,20 @@
                         android:textSize="@dimen/_24sp"
                         android:fontFamily="@font/poppins_semibold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_price"/>
+                        android:layout_marginBottom="-5dp"
+                        app:layout_constraintBottom_toTopOf="@id/tv_discount"/>
 
+                    <TextView
+                        android:id="@+id/tv_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_money"
+                        android:textColor="@color/grey_002"
+                        android:textSize="@dimen/_12sp"
+                        drawLineOverTextView="@{true}"
+                        android:fontFamily="@font/poppins_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guide1"

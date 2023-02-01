@@ -8,7 +8,8 @@ data class Countries(
     @SerializedName("name")
     val name:String,
     @SerializedName("code")
-    val code:String
+    val code:String,
+    val flag:String = ""
 ){
     override fun toString(): String = name
 }

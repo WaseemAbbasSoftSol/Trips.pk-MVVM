@@ -42,4 +42,45 @@ data class TourDetail(
     val tourItineraryDetails: List<TourItineraryDetails>,
     ){
     val thumbnailLink:String get() = "adminapi.gotravel.pk$thumbnail"
+
+    fun getTotalPrices():String{
+        var tPrice = 0
+        val allPrices= arrayListOf<Int>()
+        try {
+            for (item in priceDetails){
+                allPrices.add(item.adultPrice+item.childPrice)
+            }
+
+            //Now get least price and return
+            tPrice = (allPrices.minOrNull() ?: 0)
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        val p = "Rs. $tPrice"
+        return p
+    }
+
+    fun getDiscountedPrice():String{
+        var dPrice = 0
+        var tPrice = 0
+        val discountedPrices= arrayListOf<Int>()
+        val allPrices = arrayListOf<Int>()
+        try {
+            for (item in priceDetails){
+                discountedPrices.add(item.adultDiscount+item.childDiscount)
+                allPrices.add(item.adultPrice+item.childPrice)
+            }
+
+            //Now get least price and return
+            dPrice = (discountedPrices.minOrNull() ?: 0)
+            tPrice = (allPrices.minOrNull() ?: 0)
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        val p = tPrice - dPrice
+        return "Rs.$p"
+    }
+
 }

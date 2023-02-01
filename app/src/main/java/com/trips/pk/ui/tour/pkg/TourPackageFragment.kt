@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourPkgBinding
+import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
@@ -59,13 +60,13 @@ class TourPackageFragment:Fragment() {
     }
 
 
-    inner class OnCountryItemClickListener: OnListItemClickListener<CountriesWithCities> {
-        override fun onItemClick(item: CountriesWithCities, pos: Int) {
+    inner class OnCountryItemClickListener: OnListItemClickListener<Countries> {
+        override fun onItemClick(item: Countries, pos: Int) {
             findNavController().navigate(TourPackageFragmentDirections.actionTourPkgToTourListing(item.name))
         }
     }
-    inner class OnPakCityClickListener : OnListItemClickListener<City> {
-        override fun onItemClick(item: City, pos: Int) {
+    inner class OnPakCityClickListener : OnListItemClickListener<Countries> {
+        override fun onItemClick(item: Countries, pos: Int) {
             findNavController().navigate(TourPackageFragmentDirections.actionTourPkgToTourListing(item.name))
         }
 

@@ -33,7 +33,6 @@ class TourSearchFragment: Fragment() {
         binding= FragmentToursSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
         binding.toolbarLayout.tvToolbar.text="Tours Search"
-        binding.rvWorldwideTrip.showShimmerAdapter()
         binding.tvViewWorldwide.setOnClickListener {
             findNavController().navigate(TourSearchFragmentDirections.actionTourSearchToTourPkg("world"))
         }

@@ -22,6 +22,8 @@ class TripsRepository (private val tripsApi: TripsApi) {
 
     suspend fun getListOfVisaByCountryId(id:Int) = tripsApi.getListOfVisaByCountryId(id)
 
+    suspend fun getListOfTour() = tripsApi.getListOfTours()
+
     suspend fun getListOfToursByPlaceName(name:String) = tripsApi.getListOfToursByPlaceName(name)
 
     suspend fun getTourDetailByTourId(id:Int) = tripsApi.getTourDetailByTourId(id)

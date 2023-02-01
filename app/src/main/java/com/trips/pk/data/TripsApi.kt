@@ -53,6 +53,12 @@ interface TripsApi {
         @Header("id") id:Int
     ):Response<BaseResponse<List<Visa>>>
 
+
+    @GET("GetListOfTours")
+    @Headers("Content-Type:application/json")
+    suspend fun getListOfTours(
+    ):Response<BaseResponse<List<TourDetail>>>
+
     @POST("GetListOfToursForSpacificPlace")
     @Headers("Content-Type:application/json")
     suspend fun getListOfToursByPlaceName(

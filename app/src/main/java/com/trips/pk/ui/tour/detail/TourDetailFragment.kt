@@ -74,6 +74,8 @@ class TourDetailFragment:Fragment() {
                     "UTF-8",
                     null
                 )
+                binding.tvDiscount.text= mViewModel.getTotalPrices(it.priceDetails)
+             binding.tvTotalPrice.text=   mViewModel.getDiscountedPrice(it.priceDetails)
             }
         }
     }

@@ -118,7 +118,6 @@
                                 />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/tv_view_worldwide"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -168,7 +167,6 @@
                                 android:layout_marginTop="@dimen/_12px"/>
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/tv_view_pak"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -181,7 +179,7 @@
                                 android:textColor="@color/btn_color"
                                 android:layout_marginEnd="@dimen/_20dp"/>
 
-                            <androidx.recyclerview.widget.RecyclerView
+                            <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                                 android:id="@+id/rv_pak_packages"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -193,6 +191,11 @@
                                 hasFixSize="@{true}"
                                 itemClickListener="@{cityClickListener}"
                                 android:nestedScrollingEnabled="false"
+                                app:shimmer_demo_angle="10"
+                                app:shimmer_demo_grid_child_count="2"
+                                app:shimmer_demo_child_count="8"
+                                app:shimmer_demo_layout="@layout/item_pak_tour_pkg_shimmer"
+                                app:shimmer_demo_layout_manager_type="grid"
                                 android:layout_marginStart="@dimen/_15dp"
                                 android:layout_marginEnd="@dimen/_15dp"
                                 android:layout_marginTop="@dimen/_12px"

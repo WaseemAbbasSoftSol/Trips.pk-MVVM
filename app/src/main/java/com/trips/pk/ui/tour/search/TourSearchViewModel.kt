@@ -10,6 +10,7 @@ import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
+import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
 import com.trips.pk.ui.common.RequestState
@@ -45,6 +46,7 @@ class TourSearchViewModel(
         getPromotedCountries()
         getPromotedCities()
     }
+
     private fun getCountriesWithPakCities() {
         viewModelScope.launch(Dispatchers.IO) {
             try {

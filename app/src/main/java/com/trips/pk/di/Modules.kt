@@ -33,7 +33,7 @@ val viewModelsModule= module {
 
     //Tour
     viewModel { TourSearchViewModel(get(),get()) }
-    viewModel { TourPackageViewModel() }
+    viewModel { TourPackageViewModel(get()) }
     viewModel { TourListingViewModel(get()) }
     viewModel { TourDetailViewModel(get()) }
     viewModel { TourBookListViewModel() }

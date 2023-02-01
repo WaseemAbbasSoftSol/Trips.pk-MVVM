@@ -53,4 +53,24 @@ data class TourPackagePrices(
         }
         return formattedDate
     }
+
+    fun getAdultDiscounts() : String{
+        var p = 0
+        try {
+          p = adultPrice-adultDiscount
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return "Rs.$p"
+    }
+
+    fun getChildDiscounts() : String{
+        var p = 0
+        try {
+            p = childPrice-childDiscount
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return "Rs.$p"
+    }
 }

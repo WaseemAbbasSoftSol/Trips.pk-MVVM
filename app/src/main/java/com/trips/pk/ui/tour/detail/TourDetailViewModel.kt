@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.tour.TourDetail
+import com.trips.pk.model.tour.TourPackagePrices
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
 import kotlinx.coroutines.Dispatchers
@@ -56,4 +57,43 @@ class TourDetailViewModel(
         }
     }
 
+    fun getTotalPrices(priceDetails:List<TourPackagePrices>):String{
+        var tPrice = 0
+        val allPrices= arrayListOf<Int>()
+        try {
+            for (item in priceDetails){
+                allPrices.add(item.adultPrice+item.childPrice)
+            }
+
+            //Now get least price and return
+            tPrice = (allPrices.minOrNull() ?: 0)
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        val p = "Rs. $tPrice"
+        return p
+    }
+
+    fun getDiscountedPrice(priceDetails:List<TourPackagePrices>):String{
+        var dPrice = 0
+        var tPrice = 0
+        val discountedPrices= arrayListOf<Int>()
+        val allPrices = arrayListOf<Int>()
+        try {
+            for (item in priceDetails){
+                discountedPrices.add(item.adultDiscount+item.childDiscount)
+                allPrices.add(item.adultPrice+item.childPrice)
+            }
+
+            //Now get least price and return
+            dPrice = (discountedPrices.minOrNull() ?: 0)
+            tPrice = (allPrices.minOrNull() ?: 0)
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        val p = tPrice - dPrice
+        return "Rs.$p"
+    }
 }
