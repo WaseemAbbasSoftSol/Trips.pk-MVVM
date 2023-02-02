@@ -4,20 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentRentACarSearchBinding
-import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.common.DummyClickListener
+import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.ui.common.*
 import com.trips.pk.ui.rent_a_car.dialogs.CarCategoryBottomsheet
 import com.trips.pk.ui.rent_a_car.dialogs.CarOptionsBottomsheet
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RentCarSearchFragment: Fragment(), DummyClickListener {
     private lateinit var binding:FragmentRentACarSearchBinding
+    private val mViewModel : RentCarSearchViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,10 +36,10 @@ class RentCarSearchFragment: Fragment(), DummyClickListener {
         binding.rvCarCompany.layoutManager=layoutManager1
         binding.rvCarCompany.adapter=adCompany
 
-        val adType=CarsVarietyAdapter(requireContext(),this,2,3)
+       /* val adType=CarsVarietyAdapter(requireContext(),this,2,3)
         val layoutManager2 = GridLayoutManager(requireContext(),3)
-        binding.rvVehicalType.layoutManager=layoutManager2
-        binding.rvVehicalType.adapter=adType
+        binding.rvVehicalCategory.layoutManager=layoutManager2
+        binding.rvVehicalCategory.adapter=adType*/
 
         binding.tvViewAll.setOnClickListener {
             findNavController().navigate(R.id.action_rent_a_car_search_to_rent_a_car_list_fragment)
@@ -48,11 +48,33 @@ class RentCarSearchFragment: Fragment(), DummyClickListener {
             val dialog=CarCategoryBottomsheet()
             dialog.show(parentFragmentManager, APP_TAG)
         }
+        binding.vehicleCategoryClickListener = OnVehicleCategoryClickListener()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel=mViewModel
+        mViewModel.vehicleCategory.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                mVehicleCategories.clear()
+                mVehicleCategories.addAll(it)
+            }
+        }
+    }
+
+    inner class OnVehicleCategoryClickListener : OnListItemClickListener<VehicleCategory> {
+        override fun onItemClick(item: VehicleCategory, pos: Int) {
+            val dialog=CarOptionsBottomsheet()
+            mVehicleModels.clear()
+            mVehicleModels.addAll(item.vehiclesModels)
+            dialog.show(parentFragmentManager, APP_TAG)
+        }
     }
 
     override fun onDummyClick() {
        val dialog=CarOptionsBottomsheet()
         dialog.show(parentFragmentManager, APP_TAG)
     }
+
 }

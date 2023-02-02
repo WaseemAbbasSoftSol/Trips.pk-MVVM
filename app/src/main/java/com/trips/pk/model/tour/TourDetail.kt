@@ -41,7 +41,8 @@ data class TourDetail(
     @SerializedName("tourItineraryDetails")
     val tourItineraryDetails: List<TourItineraryDetails>,
     ){
-    val thumbnailLink:String get() = "adminapi.gotravel.pk$thumbnail"
+  //  val thumbnailLink:String get() = "adminapi.gotravel.pk$thumbnail"
+    val thumbnailLink:String get() = "https://adminapi.gotravel.pk/$thumbnail"
 
     fun getTotalPrices():String{
         var tPrice = 0

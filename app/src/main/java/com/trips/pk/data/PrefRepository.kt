@@ -12,6 +12,7 @@ import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.ui.common.KEY_AIRPORT_LIST
 import com.trips.pk.ui.common.KEY_COUNTRIES_LIST
 import com.trips.pk.ui.common.KEY_COUNTRIES_WITH_CITIES
+import com.trips.pk.ui.common.KEY_TOKEN
 import com.trips.pk.utils.FileHelper
 import java.lang.reflect.Type
 
@@ -105,4 +106,18 @@ class PrefRepository(private val app: Application) {
         val jsonString = FileHelper.getTextFromResources(app, R.raw.countries)
         return Gson().fromJson(jsonString, Array<CountriesWithCities>::class.java).asList()
     }
+
+    fun saveBearerToken(token:String){
+        prefs.edit().putString(KEY_TOKEN, token).apply()
+    }
+    fun getBearerToken(): String {
+        var token:String = ""
+        try {
+            token= prefs.getString(KEY_TOKEN, null).toString()
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return token
+    }
+    fun deleteBearerToken()=prefs.edit().remove(KEY_TOKEN).apply()
 }

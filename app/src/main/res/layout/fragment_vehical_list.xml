@@ -8,7 +8,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.listing.FlightListingViewModel" />
+            type="com.trips.pk.ui.rent_a_car.listing.VehicleListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,6 +120,9 @@
                 tools:listitem="@layout/item_vehical_type"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
+                itemsList="@{viewModel.vehicleCategory}"
+                itemLayout="@{@layout/item_vehical_type}"
+                hasFixSize="@{true}"
                 android:layout_marginTop="@dimen/_20dp"
                 android:layout_marginStart="@dimen/_15dp"
                 android:layout_marginEnd="@dimen/_15dp"/>

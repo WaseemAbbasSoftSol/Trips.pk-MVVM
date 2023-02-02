@@ -11,9 +11,7 @@ import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourDetail
-import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
-import com.trips.pk.ui.common.RequestState
+import com.trips.pk.ui.common.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -43,8 +41,74 @@ class TourSearchViewModel(
         _promotedCountries.value= emptyList()
         _promotedCities.value= emptyList()
         storeCountries()
-        getPromotedCountries()
-        getPromotedCities()
+        getCountriesForTour()
+        getCitiesForTour()
+        //getPromotedCountriess()
+       // getPromotedCitiess()
+    }
+
+    private fun getCountriesForTour() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _state.postValue(RequestState.LOADING)
+                val response = repository.getCountriesForTour()
+                if (response.isSuccessful) {
+                    response.body().let {
+                        mTourCountries.addAll(it!!.data)
+                        val tempList= arrayListOf<Countries>()
+                        for (item in it.data){
+                            if (item.isPromoted){
+                                tempList.add(item)
+                            }
+                        }
+                        _promotedCountries.postValue(tempList)
+                    }
+                } else {
+                    response.errorBody().let {
+                        Log.d(APP_TAG, it!!.toString())
+                    }
+                }
+                _state.postValue(RequestState.DONE)
+            } catch (e: Exception) {
+                _state.postValue(RequestState.ERROR)
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                _state.postValue(RequestState.ERROR)
+                t.printStackTrace()
+            }
+        }
+    }
+
+    private fun getCitiesForTour() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _state.postValue(RequestState.LOADING)
+                val response = repository.getCitiesForTour()
+                if (response.isSuccessful) {
+                    response.body().let {
+                        mTourCities.addAll(it!!.data)
+                        val tempList= arrayListOf<Countries>()
+                        for (item in it.data){
+                            if (item.isPromoted){
+                                tempList.add(item)
+                            }
+                        }
+                        _promotedCities.postValue(tempList)
+                    }
+                } else {
+                    response.errorBody().let {
+                        Log.d(APP_TAG, it!!.toString())
+                    }
+                }
+                _state.postValue(RequestState.DONE)
+            } catch (e: Exception) {
+                _state.postValue(RequestState.ERROR)
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                _state.postValue(RequestState.ERROR)
+                t.printStackTrace()
+            }
+        }
     }
 
     private fun getCountriesWithPakCities() {
@@ -73,7 +137,7 @@ class TourSearchViewModel(
         }
     }
 
-    private fun getPromotedCountries() {
+    private fun getPromotedCountriess() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _state.postValue(RequestState.LOADING)
@@ -98,7 +162,7 @@ class TourSearchViewModel(
         }
     }
 
-    private fun getPromotedCities() {
+    private fun getPromotedCitiess() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _state.postValue(RequestState.LOADING)

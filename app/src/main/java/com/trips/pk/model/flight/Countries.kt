@@ -9,7 +9,10 @@ data class Countries(
     val name:String,
     @SerializedName("code")
     val code:String,
-    val flag:String = ""
+    @SerializedName("flag")
+    val flag:String = "",
+    @SerializedName("promoted")
+    val isPromoted:Boolean = false
 ){
     override fun toString(): String = name
 }

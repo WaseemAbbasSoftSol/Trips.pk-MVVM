@@ -9,11 +9,13 @@ import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
+import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.model.rent_a_car.VehiclesModel
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourPackagePrices
 import com.trips.pk.ui.flight.book.newpck.AllUser
-import java.util.ArrayList
 
+var tempToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjE4MmZkOTQ2LTU3ZWUtNDkzNC1iZmE2LWI1MDYyNWI4YTAwYyIsInN1YiI6IlJpendhbmJybyIsImVtYWlsIjoiUml6d2FuYnJvIiwianRpIjoiYWU2NGQ3NDMtZTAxZC00ZjY0LWJjYzYtZjg3MTY1M2MyODZhIiwibmJmIjoxNjc1MzMwMjczLCJleHAiOjE2NzUzMzA1NzMsImlhdCI6MTY3NTMzMDI3MywiaXNzIjoiaHR0cHM6Ly9hcGkuZ290cmF2ZWwucGsvIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZ290cmF2ZWwucGsvIn0.PH5u8wGs0hmJjjVH0kevw2xiS1HX2e9G_tsEGUt9_BV8E1Ocx-dU1XZ6Vi6bx9FtV3zxR7P-bz3lVWOAVVMzJQ"
 val AIRPORT_LIST = arrayListOf<Airport>()
 val COUNTRIES_WITH_PAK_CITIES = arrayListOf<CountriesWithCities>()
 
@@ -51,7 +53,13 @@ var whichAdult=1
 var whichChild=0
 var whichInfant=0
 
+//Rent a car
+val mVehicleCategories = arrayListOf<VehicleCategory>()
+val mVehicleModels = arrayListOf<VehiclesModel>()
+
 //Tour section
+var mTourCountries = arrayListOf<Countries>()
+var mTourCities = arrayListOf<Countries>()
 val mTourPackagePrices= arrayListOf<TourPackagePrices>()
 
 

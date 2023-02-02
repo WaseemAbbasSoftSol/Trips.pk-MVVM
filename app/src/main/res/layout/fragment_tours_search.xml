@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primary_color">
+        android:background="@color/white">
 
         <include
             android:id="@+id/toolbar_layout"
@@ -37,7 +37,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                >
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_0dp"
+                    android:background="@color/primary_color"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/cl_round"/>
 
                 <AutoCompleteTextView
                     android:id="@+id/ed_search"
@@ -83,134 +88,148 @@
                     app:layout_constraintEnd_toEndOf="@id/btn_search"
                     />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_round"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/bottom_sheet_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvfind_on_a_location"
+                    app:layout_constraintVertical_bias="0.0">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_55dp"
+                        android:background="@color/primary_color"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
                     <com.github.captain_miao.optroundcardview.OptRoundCardView
                         android:id="@+id/roundview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:behavior_hideable="true"
-                        android:background="#F2F2F2"
-                        app:layout_behavior="@string/bottom_sheet_behavior"
-                        app:layout_constraintTop_toBottomOf="@id/tvfind_on_a_location"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="@dimen/_25px"
+                        android:background="#F2F2F2"
+                        app:behavior_hideable="true"
+
                         app:optRoundCardBackgroundColor="@color/white"
                         app:optRoundCardCornerRadius="35dp"
                         app:optRoundCardLeftBottomCorner="false"
-                        app:optRoundCardRightBottomCorner="false">
+                        app:optRoundCardRightBottomCorner="false"
+                        tools:layout_editor_absoluteX="0dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_20dp"
-                            >
+                            android:layout_marginTop="@dimen/_20dp">
 
                             <TextView
                                 android:id="@+id/tv_worldwide_trip"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:fontFamily="@font/poppins_medium"
                                 android:text="@string/lbl_worldwide_trips"
                                 android:textColor="@color/black"
-                                android:fontFamily="@font/poppins_medium"
                                 android:textSize="17sp"
-                                android:layout_marginStart="@dimen/_20dp"
-                                />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/tv_view_worldwide"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/tv_worldwide_trip"
-                                app:layout_constraintBottom_toBottomOf="@id/tv_worldwide_trip"
-                                android:text="@string/lbl_view_all"
+                                android:layout_marginEnd="@dimen/_20dp"
                                 android:fontFamily="@font/poppins_semibold"
-                                android:textSize="@dimen/_11sp"
+                                android:text="@string/lbl_view_all"
                                 android:textColor="@color/btn_color"
-                                android:layout_marginEnd="@dimen/_20dp"/>
+                                android:textSize="@dimen/_11sp"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_worldwide_trip"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_worldwide_trip" />
 
                             <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                                 android:id="@+id/rv_worldwide_trip"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:nestedScrollingEnabled="false"
-                                itemsList="@{viewModel.promotedCountries}"
-                                itemLayout="@{@layout/item_worldwide_trips}"
                                 hasFixSize="@{true}"
                                 itemClickListener="@{countryClickListener}"
-                                app:layout_constraintTop_toBottomOf="@id/tv_worldwide_trip"
+                                itemLayout="@{@layout/item_worldwide_trips}"
+                                itemsList="@{viewModel.promotedCountries}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15dp"
                                 android:layout_marginTop="@dimen/_12px"
-                                tools:listitem="@layout/item_worldwide_trips"
+                                android:layout_marginEnd="@dimen/_15dp"
+                                android:nestedScrollingEnabled="false"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="3"
+                                app:layout_constraintTop_toBottomOf="@id/tv_worldwide_trip"
                                 app:shimmer_demo_angle="10"
-                                app:shimmer_demo_grid_child_count="3"
                                 app:shimmer_demo_child_count="8"
+                                app:shimmer_demo_grid_child_count="3"
                                 app:shimmer_demo_layout="@layout/item_worldwide_trips"
                                 app:shimmer_demo_layout_manager_type="grid"
-                                android:layout_marginStart="@dimen/_15dp"
-                                android:layout_marginEnd="@dimen/_15dp"
-                                />
+                                app:spanCount="3"
+                                tools:listitem="@layout/item_worldwide_trips" />
 
                             <TextView
                                 android:id="@+id/tv_pakistan_trip"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/rv_worldwide_trip"
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:layout_marginTop="@dimen/_12px"
+                                android:fontFamily="@font/poppins_medium"
                                 android:text="@string/lbl_tour_pak"
                                 android:textColor="@color/black"
-                                android:fontFamily="@font/poppins_medium"
                                 android:textSize="17sp"
-                                android:layout_marginStart="@dimen/_20dp"
-                                android:layout_marginTop="@dimen/_12px"/>
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/rv_worldwide_trip" />
 
                             <TextView
                                 android:id="@+id/tv_view_pak"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/tv_pakistan_trip"
-                                app:layout_constraintBottom_toBottomOf="@id/tv_pakistan_trip"
-                                android:text="@string/lbl_view_all"
+                                android:layout_marginEnd="@dimen/_20dp"
                                 android:fontFamily="@font/poppins_semibold"
-                                android:textSize="@dimen/_11sp"
+                                android:text="@string/lbl_view_all"
                                 android:textColor="@color/btn_color"
-                                android:layout_marginEnd="@dimen/_20dp"/>
+                                android:textSize="@dimen/_11sp"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_pakistan_trip"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_pakistan_trip" />
 
                             <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                                 android:id="@+id/rv_pak_packages"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                tools:listitem="@layout/item_pak_tour_pkg"
-                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="2"
-                                itemsList="@{viewModel.promotedCities}"
-                                itemLayout="@{@layout/item_pak_tour_pkg}"
                                 hasFixSize="@{true}"
                                 itemClickListener="@{cityClickListener}"
+                                itemLayout="@{@layout/item_pak_tour_pkg}"
+                                itemsList="@{viewModel.promotedCities}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15dp"
+                                android:layout_marginTop="@dimen/_12px"
+                                android:layout_marginEnd="@dimen/_15dp"
                                 android:nestedScrollingEnabled="false"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:layout_constraintTop_toBottomOf="@id/tv_pakistan_trip"
                                 app:shimmer_demo_angle="10"
-                                app:shimmer_demo_grid_child_count="2"
                                 app:shimmer_demo_child_count="8"
+                                app:shimmer_demo_grid_child_count="2"
                                 app:shimmer_demo_layout="@layout/item_pak_tour_pkg_shimmer"
                                 app:shimmer_demo_layout_manager_type="grid"
-                                android:layout_marginStart="@dimen/_15dp"
-                                android:layout_marginEnd="@dimen/_15dp"
-                                android:layout_marginTop="@dimen/_12px"
-                                app:layout_constraintTop_toBottomOf="@id/tv_pakistan_trip"/>
+                                app:spanCount="2"
+                                tools:listitem="@layout/item_pak_tour_pkg" />
+
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_10dp"
                                 android:background="@color/white"
-                                app:layout_constraintTop_toBottomOf="@id/rv_pak_packages"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                              />
+                                app:layout_constraintTop_toBottomOf="@id/rv_pak_packages" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

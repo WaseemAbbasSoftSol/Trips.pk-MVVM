@@ -12,13 +12,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.trips.pk.R
 import com.trips.pk.databinding.BottomSheetCarOptionBinding
+import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.model.rent_a_car.VehiclesModel
 import com.trips.pk.ui.common.DummyClickListener
+import com.trips.pk.ui.common.mVehicleModels
 import com.trips.pk.utils.Helpers
 
 class CarOptionsBottomsheet: BottomSheetDialogFragment(),DummyClickListener {
 
     private lateinit var binding: BottomSheetCarOptionBinding
 
+    private var vehicleModels= arrayListOf<VehiclesModel>()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +32,20 @@ class CarOptionsBottomsheet: BottomSheetDialogFragment(),DummyClickListener {
         binding = BottomSheetCarOptionBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         Helpers.makeBottomSheetRounded(binding.root, dialog!!)
+        vehicleModels.addAll(mVehicleModels)
+        if (vehicleModels.size>=1){
+            var adapter=CarOptionsAdapter(requireContext(),this,111,vehicleModels.size,vehicleModels)
+            val layoutManager=GridLayoutManager(requireContext(),2)
+            binding.rvCarOption.layoutManager=layoutManager
+            binding.rvCarOption.adapter=adapter
+        }else{
+            var adapter=CarOptionsAdapter(requireContext(),this,0,9)
+            val layoutManager=GridLayoutManager(requireContext(),2)
+            binding.rvCarOption.layoutManager=layoutManager
+            binding.rvCarOption.adapter=adapter
+        }
 
-        var adapter=CarOptionsAdapter(requireContext(),this,0,9)
-        val layoutManager=GridLayoutManager(requireContext(),2)
-        binding.rvCarOption.layoutManager=layoutManager
-        binding.rvCarOption.adapter=adapter
+
 
         return binding.root
     }

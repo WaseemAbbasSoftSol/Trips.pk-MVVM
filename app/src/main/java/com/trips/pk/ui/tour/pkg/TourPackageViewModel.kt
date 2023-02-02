@@ -10,9 +10,7 @@ import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.tour.City
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourDetail
-import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.common.COUNTRIES_WITH_PAK_CITIES
-import com.trips.pk.ui.common.RequestState
+import com.trips.pk.ui.common.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,14 +30,13 @@ class TourPackageViewModel(
     private val _cities = MutableLiveData<List<Countries>>()
     val cities: LiveData<List<Countries>> = _cities
 
-    private val tempCountryList= arrayListOf<CountriesWithCities>()
-    private var tempCityList= arrayListOf<City>()
-
     init {
         _tour.value= emptyList()
         _countries.value= emptyList()
         _cities.value= emptyList()
-        getListOfTour()
+        _countries.value = mTourCountries
+        _cities.value = mTourCities
+    //    getListOfTour()
 
  /*       tempCountryList.addAll(COUNTRIES_WITH_PAK_CITIES)
         for (item in COUNTRIES_WITH_PAK_CITIES){
