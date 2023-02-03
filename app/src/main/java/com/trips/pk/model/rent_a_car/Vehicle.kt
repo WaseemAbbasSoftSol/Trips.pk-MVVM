@@ -2,6 +2,7 @@ package com.trips.pk.model.rent_a_car
 
 
 import com.google.gson.annotations.SerializedName
+import com.trips.pk.ui.common.ADMIN_BASE_URL
 
 data class Vehicle(
     @SerializedName("cities")
@@ -32,4 +33,7 @@ data class Vehicle(
     val vehiclesModels: Any,
     @SerializedName("vehiclesPrices")
     val vehiclesPrices: List<VehiclesPrice>
-)
+):java.io.Serializable
+{
+    val imageLink:String get() =  if (image.isNullOrEmpty() || image=="N/A") "" else "$ADMIN_BASE_URL$image"
+}

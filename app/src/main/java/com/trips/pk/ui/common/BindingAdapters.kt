@@ -1,29 +1,16 @@
 package com.trips.pk.ui.common
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Build
-import android.text.Editable
-import android.text.Html
-import android.text.TextWatcher
-import android.view.MotionEvent
-import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mikelau.views.shimmer.ShimmerRecyclerViewX
-import de.hdodenhof.circleimageview.CircleImageView
+import com.trips.pk.R
+import com.trips.pk.utils.Helpers
 
 
 @BindingAdapter("navigation")
@@ -71,9 +58,11 @@ fun drawLine(view: TextView, isFlag:Boolean) {
 @BindingAdapter(value = ["imageUrl", "default"], requireAll = false)
 fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
     if (default == null) {
-        Glide.with(view.context).load(imageUrl).into(view)
+        if (imageUrl!!.isNotEmpty()) Glide.with(view.context).load(imageUrl).into(view)
+        else Glide.with(view.context).load(R.drawable.image_placeholder).into(view)
     } else {
-        Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
+       if (imageUrl!!.isNotEmpty()) Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
+        else Glide.with(view.context).load(R.drawable.image_placeholder).placeholder(default).into(view)
     }
 }
 
@@ -149,37 +138,41 @@ fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
 //}
 
 @BindingAdapter(
-    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick","hasMargin"],
     requireAll = false
 )
 fun <T> setItems(
     view: RecyclerView, itemsList: List<T>, layout: Int,
     itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
-    onItemViewClick: OnItemViewClickListener<T>?
+    onItemViewClick: OnItemViewClickListener<T>?, hasMargin:Boolean
 ) {
-    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
+    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout, hasMargin)
     view.adapter = mAdapter
     mAdapter.setItemClickListener(itemClickListener)
     mAdapter.onItemViewClick = onItemViewClick
     view.setHasFixedSize(hasFixSize)
 }
 @BindingAdapter(
-    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick","hasMargin"],
     requireAll = false
 )
 fun <T> setItems(
     view: ShimmerRecyclerViewX, itemsList: List<T>, layout: Int,
     itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
-    onItemViewClick: OnItemViewClickListener<T>?
+    onItemViewClick: OnItemViewClickListener<T>?, hasMargin: Boolean
 ) {
     if (itemsList.isNotEmpty()){
-        val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
+        val mAdapter = GenericRecyclerViewAdapter(itemsList, layout,hasMargin)
         view.adapter = mAdapter
         mAdapter.setItemClickListener(itemClickListener)
         mAdapter.onItemViewClick = onItemViewClick
         view.setHasFixedSize(hasFixSize)
+        Helpers.setMargins(view,0,0,0,0)
     }
-   else view.showShimmerAdapter()
+   else {
+       view.showShimmerAdapter()
+        Helpers.setMargins(view,30,0,0,0)
+    }
 }
 @BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
 fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {

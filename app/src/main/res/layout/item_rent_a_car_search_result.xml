@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="obj"
+            type="com.trips.pk.model.rent_a_car.Vehicle" />
+        <variable
+            name="onViewClick"
+            type="com.trips.pk.ui.common.OnItemViewClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -23,6 +29,7 @@
             android:paddingBottom="@dimen/_10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:visibility="gone"
                 android:id="@+id/car_company_logo"
                 android:layout_width="@dimen/_40dp"
                 android:layout_height="@dimen/_40dp"
@@ -33,6 +40,7 @@
                 />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_company"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -51,6 +59,7 @@
                 />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,6 +75,7 @@
             />
 
             <View
+                android:visibility="gone"
                 android:id="@+id/view"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_1dp"
@@ -83,27 +93,42 @@
                 android:paddingEnd="@dimen/_30dp"
                 style="@style/AppTheme.ContainedButton"
                 android:text="BOOK"
+                android:onClick="@{(view) -> onViewClick.onClick(view, obj)}"
+                android:layout_marginEnd="@dimen/_15dp"
                 android:layout_marginTop="@dimen/_15px"
-                app:layout_constraintTop_toBottomOf="@id/view"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_city"
-                app:layout_constraintBottom_toBottomOf="@id/iv_car"
+                app:layout_constraintBottom_toBottomOf="@id/cv_car"
                 />
 
-            <ImageView
-                android:id="@+id/iv_car"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_car"
                 android:layout_width="@dimen/_55dp"
                 android:layout_height="@dimen/_30dp"
+                android:layout_marginStart="@dimen/_15dp"
                 app:layout_constraintStart_toStartOf="@id/car_company_logo"
-                app:layout_constraintTop_toTopOf="@id/btn_book"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/btn_book"
-                android:src="@drawable/honda_civic"
-                />
+                app:cardElevation="@dimen/_0dp"
+                app:cardCornerRadius="@dimen/_5dp"
+                android:src="@drawable/honda_civic">
+                <ImageView
+                    android:id="@+id/iv_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    imageUrl="@{obj.imageLink}"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/honda_civic"
+                    />
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/tv_car_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Toyota Vitz F 1.0"
+                tools:text="Toyota Vitz F 1.0"
+                android:text="@{obj.name}"
                 android:fontFamily="@font/raleway_semiboldd"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sp"
@@ -111,9 +136,9 @@
                 android:layout_marginEnd="@dimen/_8px"
                 android:maxLines="2"
                 android:ellipsize="end"
-                app:layout_constraintTop_toTopOf="@id/btn_book"
-                app:layout_constraintBottom_toBottomOf="@id/btn_book"
-                app:layout_constraintStart_toEndOf="@id/iv_car"
+                app:layout_constraintTop_toTopOf="@id/cv_car"
+                app:layout_constraintBottom_toBottomOf="@id/cv_car"
+                app:layout_constraintStart_toEndOf="@id/cv_car"
                 app:layout_constraintEnd_toStartOf="@id/btn_book"/>
             />
 

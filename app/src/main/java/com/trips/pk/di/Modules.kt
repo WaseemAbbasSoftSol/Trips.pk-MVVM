@@ -8,6 +8,7 @@ import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultViewModel
 import com.trips.pk.ui.rent_a_car.listing.VehicleListViewModel
 import com.trips.pk.ui.rent_a_car.search.RentCarSearchViewModel
 import com.trips.pk.ui.tour.book.TourBookListViewModel
@@ -45,6 +46,7 @@ val viewModelsModule= module {
     //Rent a Car
     viewModel { RentCarSearchViewModel(get()) }
     viewModel { (vehicleList : List<VehicleCategory>) -> VehicleListViewModel(vehicleList) }
+    viewModel { RentACarSearchResultViewModel() }
 
     //Visa
     viewModel { VisaSearchViewModel(get()) }

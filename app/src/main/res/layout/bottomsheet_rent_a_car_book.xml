@@ -43,6 +43,7 @@
                     android:layout_height="6dp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:visibility="gone"
                     android:id="@+id/car_company_logo"
                     android:layout_width="@dimen/_40dp"
                     android:layout_height="@dimen/_40dp"
@@ -53,6 +54,7 @@
                     />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_company"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
                 />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,6 +87,7 @@
                 />
 
                 <View
+                    android:visibility="gone"
                     android:id="@+id/view1"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1dp"
@@ -94,16 +98,27 @@
                     android:background="@color/grey_005"/>
 
 
-
-                <ImageView
-                    android:id="@+id/iv_car"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_car"
                     android:layout_width="@dimen/_55dp"
                     android:layout_height="@dimen/_30dp"
+                    app:cardCornerRadius="@dimen/_5dp"
+                    app:cardElevation="@dimen/_0dp"
                     app:layout_constraintStart_toStartOf="@id/car_company_logo"
                     app:layout_constraintTop_toBottomOf="@id/view1"
-                    android:layout_marginTop="@dimen/_15px"
-                    android:src="@drawable/honda_civic"
-                    />
+                    android:layout_marginTop="@dimen/_20px">
+
+                    <ImageView
+                        android:id="@+id/iv_car"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/honda_civic"
+                        android:scaleType="fitXY"
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+
 
                 <TextView
                     android:id="@+id/tv_car_name"
@@ -117,8 +132,8 @@
                     android:layout_marginEnd="@dimen/_8px"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    app:layout_constraintTop_toTopOf="@id/iv_car"
-                    app:layout_constraintStart_toEndOf="@id/iv_car"/>
+                    app:layout_constraintTop_toTopOf="@id/cv_car"
+                    app:layout_constraintStart_toEndOf="@id/cv_car"/>
                 <TextView
                     android:id="@+id/tv_in_city"
                     android:layout_width="wrap_content"
@@ -132,11 +147,12 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:layout_marginTop="@dimen/_15px"
-                    app:layout_constraintTop_toBottomOf="@id/iv_car"
-                    app:layout_constraintStart_toStartOf="@id/iv_car"
+                    app:layout_constraintTop_toBottomOf="@id/cv_car"
+                    app:layout_constraintStart_toStartOf="@id/cv_car"
                     />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_out_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -149,7 +165,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     app:layout_constraintTop_toBottomOf="@id/tv_in_city"
-                    app:layout_constraintStart_toStartOf="@id/iv_car"
+                    app:layout_constraintStart_toStartOf="@id/cv_car"
                     />
 
                 <androidx.appcompat.widget.AppCompatButton

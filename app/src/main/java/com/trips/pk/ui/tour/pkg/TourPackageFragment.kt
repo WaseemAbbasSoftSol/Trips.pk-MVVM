@@ -40,13 +40,13 @@ class TourPackageFragment:Fragment() {
             binding.rvPakPackages.visibility=View.GONE
             binding.rvWorldwideTrip.visibility=View.VISIBLE
         }else{
-            for (item in COUNTRIES_WITH_PAK_CITIES){
-                if (item.id == 157){
+//            for (item in COUNTRIES_WITH_PAK_CITIES){
+//                if (item.id == 157){
                     binding.toolbarLayout.tvToolbar.text = "Tour packages for Pakistan"
                     binding.rvPakPackages.visibility=View.VISIBLE
                     binding.rvWorldwideTrip.visibility=View.GONE
-                }
-            }
+//                }
+//            }
 
         }
         binding.countryClickListener=OnCountryItemClickListener()

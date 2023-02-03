@@ -6,9 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.trips.pk.BR
+import com.trips.pk.utils.Helpers
 
 
-class GenericRecyclerViewAdapter<T>(val items: List<T>, private val layout: Int) :
+class GenericRecyclerViewAdapter<T>(val items: List<T>, private val layout: Int,private val hasMargin:Boolean = false) :
     RecyclerView.Adapter<GenericRecyclerViewAdapter.GenericViewHolder>() {
 
     private var itemClickListener: OnListItemClickListener<T>? = null
@@ -31,6 +32,9 @@ class GenericRecyclerViewAdapter<T>(val items: List<T>, private val layout: Int)
             itemClickListener?.onItemClick(obj, position)
         }
         holder.binding.setVariable(BR.onViewClick, onItemViewClick)
+        if (hasMargin && position == 0){//For horizontal recyclerview to set margin from sides.
+            Helpers.setMargins(holder.itemView,30,0,0,0)
+        }
     }
 
     fun setItemClickListener(listener: OnListItemClickListener<T>?) {

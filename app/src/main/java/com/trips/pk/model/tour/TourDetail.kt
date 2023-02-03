@@ -2,6 +2,7 @@ package com.trips.pk.model.tour
 
 import com.google.gson.annotations.SerializedName
 import com.trips.pk.model.flight.Countries
+import com.trips.pk.ui.common.ADMIN_BASE_URL
 
 data class TourDetail(
     @SerializedName("id")
@@ -41,8 +42,7 @@ data class TourDetail(
     @SerializedName("tourItineraryDetails")
     val tourItineraryDetails: List<TourItineraryDetails>,
     ){
-  //  val thumbnailLink:String get() = "adminapi.gotravel.pk$thumbnail"
-    val thumbnailLink:String get() = "https://adminapi.gotravel.pk/$thumbnail"
+    val thumbnailLink:String get() = if (thumbnail.isNullOrEmpty() || thumbnail=="N/A") "" else "$ADMIN_BASE_URL$thumbnail"
 
     fun getTotalPrices():String{
         var tPrice = 0

@@ -7,7 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.flight.search.FlightSearchViewModel" />
+            type="com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultViewModel" />
+        <variable
+            name="vehicleClickListener"
+            type="com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultFragment.OnVehicleClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +49,10 @@
                     android:id="@+id/rv_rent_a_car_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    itemLayout="@{@layout/item_rent_a_car_search_result}"
+                    itemsList="@{viewModel.vehicle}"
+                    onItemViewClick="@{vehicleClickListener}"
+                    hasFixSize="@{true}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_rent_a_car_search_result"/>

@@ -2,6 +2,7 @@ package com.trips.pk.model.rent_a_car
 
 
 import com.google.gson.annotations.SerializedName
+import com.trips.pk.ui.common.ADMIN_BASE_URL
 
 data class VehiclesModel(
     @SerializedName("category_ID")
@@ -26,4 +27,33 @@ data class VehiclesModel(
     val vehiclesCategories: Any,
     @SerializedName("vehiclesCompanies")
     val vehiclesCompanies: Any
-):java.io.Serializable
+):java.io.Serializable{
+
+    val carImage : String get() =  if (image.isNullOrEmpty() || image=="N/A") "" else "$ADMIN_BASE_URL$image"
+
+    fun getLeastPrice(which:Int):String{
+        var p = 0
+        var duration = ""
+        try {
+            for (item in vehicles){
+                for (sub in item.vehiclesPrices){
+                    if (p==0){
+                        p=sub.price
+                        duration=sub.duration
+                    }
+                    else if (sub.price<p){
+                        p=sub.price
+                        duration=sub.duration
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return when(which){
+            1 ->  "Rs.$p"
+            else -> duration
+        }
+
+    }
+}

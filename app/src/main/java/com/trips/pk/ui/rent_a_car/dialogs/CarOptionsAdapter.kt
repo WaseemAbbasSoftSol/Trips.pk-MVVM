@@ -19,7 +19,8 @@ class CarOptionsAdapter(
     val listener: DummyClickListener,
     val type :Int,
     val size:Int,
-    val list:List<VehiclesModel>?=null
+    val list:List<VehiclesModel>?=null,
+val modelListener:VehicleModelClickListener?=null
 ) :
     RecyclerView.Adapter<CarOptionsAdapter.ItemRecyclerViewHolder>() {
 
@@ -54,6 +55,9 @@ class CarOptionsAdapter(
             if (type==111){
                 val obj = list!![position]
                 holder.car.text = obj.name
+                holder.itemView.setOnClickListener {
+                    modelListener!!.onModelClick(obj,position)
+                }
             }
            if (type==1){
                holder.btnbook=holder.itemView.findViewById(R.id.btn_book)
@@ -65,9 +69,12 @@ class CarOptionsAdapter(
                 View.VISIBLE
                 Helpers.setMargins(holder.car,25,0,0,0)
             }
-            holder.itemView.setOnClickListener {
-                listener.onDummyClick()
+            if (type!=111){
+                holder.itemView.setOnClickListener {
+                    listener.onDummyClick()
+                }
             }
+
         }catch (e:Exception){
             e.printStackTrace()
         }
@@ -76,4 +83,7 @@ class CarOptionsAdapter(
         return size
     }
 
+    interface VehicleModelClickListener{
+        fun onModelClick(item:VehiclesModel, position: Int)
+    }
 }

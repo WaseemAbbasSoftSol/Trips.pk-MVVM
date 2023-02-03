@@ -74,7 +74,7 @@
                     android:id="@+id/tv_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rs.1400"
+                    tools:text="Rs.1400"
                     android:textColor="@color/btn_color"
                     android:textSize="@dimen/_11sp"
                     app:layout_constraintEnd_toStartOf="@id/tv_per_day"

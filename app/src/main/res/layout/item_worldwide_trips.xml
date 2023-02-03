@@ -36,7 +36,8 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/flag_malaysia"/>
+                    imageUrl="@{obj.countryFlag}"
+                    android:src="@drawable/image_placeholder"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

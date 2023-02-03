@@ -9,8 +9,10 @@ import com.trips.pk.model.flight.OriginDestination
 import com.trips.pk.model.flight.book.ContactPerson
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
+import com.trips.pk.model.rent_a_car.Vehicle
 import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.model.rent_a_car.VehiclesModel
+import com.trips.pk.model.rent_a_car.VehiclesPrice
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourPackagePrices
 import com.trips.pk.ui.flight.book.newpck.AllUser
@@ -19,6 +21,7 @@ var tempToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjE4MmZkOTQ2LTU3ZW
 val AIRPORT_LIST = arrayListOf<Airport>()
 val COUNTRIES_WITH_PAK_CITIES = arrayListOf<CountriesWithCities>()
 
+//Flight section
 var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
 var mTourType = "round"
@@ -44,10 +47,6 @@ var mNoOfInfent=0
 
 var mTotalPassenger= arrayListOf<PassengerType>()
 
-interface TempListener{
-    fun onTempClick(which:String, user: AllUser)
-}
-
 var isNextClicked=MutableLiveData<Boolean>()
 var whichAdult=1
 var whichChild=0
@@ -56,12 +55,17 @@ var whichInfant=0
 //Rent a car
 val mVehicleCategories = arrayListOf<VehicleCategory>()
 val mVehicleModels = arrayListOf<VehiclesModel>()
+val mVehicles = arrayListOf<Vehicle>()
+var mVehiclePrice : Vehicle?=null
 
 //Tour section
 var mTourCountries = arrayListOf<Countries>()
 var mTourCities = arrayListOf<Countries>()
 val mTourPackagePrices= arrayListOf<TourPackagePrices>()
 
+interface TempListener{
+    fun onTempClick(which:String, user: AllUser)
+}
 
 
 
