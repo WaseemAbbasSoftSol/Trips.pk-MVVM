@@ -247,7 +247,16 @@
     <fragment
         android:id="@+id/rent_a_car_searh_result_fragment"
         android:name="com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultFragment"
-        tools:layout="@layout/fragment_rent_a_car_search_result"/>
+        tools:layout="@layout/fragment_rent_a_car_search_result">
+        <argument
+            android:name="categoryId"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <argument
+            android:name="cityId"
+            app:argType="integer"
+            android:defaultValue="0"/>
+    </fragment>
 
     <fragment
         android:id="@+id/rent_a_car_booking_detail_fragment"
@@ -274,6 +283,10 @@
         android:id="@+id/visa_detail_fragment"
         android:name="com.trips.pk.ui.visa.detail.VisaDetailFragment"
         tools:layout="@layout/fragment_visa_detail">
+        <argument
+            android:name="countryId"
+            app:argType="integer"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/action_visa_detail_to_visa_book_fragment"
             app:destination="@id/visa_book_fragment"

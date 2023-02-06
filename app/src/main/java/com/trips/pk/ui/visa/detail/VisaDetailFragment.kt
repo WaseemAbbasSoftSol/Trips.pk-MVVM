@@ -4,22 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentVisaDetailBinding
+import com.trips.pk.model.visa.Visa
 import com.trips.pk.ui.common.DummyClickListener
-import com.trips.pk.ui.visa.search.VisaAdapter
+import com.trips.pk.ui.common.OnItemViewClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VisaDetailFragment: Fragment(),DummyClickListener {
+class VisaDetailFragment: Fragment() {
     private lateinit var binding:FragmentVisaDetailBinding
     private val mViewModel : VisaDetailViewModel by viewModel()
+    private var countryId = 0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            val args=VisaDetailFragmentArgs.fromBundle(it!!)
+            if (args.countryId!=0){
+                countryId = args.countryId
+                mViewModel.getListOfVisaByCountryId(countryId)
+            }
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +67,7 @@ class VisaDetailFragment: Fragment(),DummyClickListener {
             }
         })
 
+        binding.clickListener = OnApplyVisaClick()
         return binding.root
     }
 
@@ -66,7 +75,10 @@ class VisaDetailFragment: Fragment(),DummyClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel=mViewModel
     }
-    override fun onDummyClick() {
-        findNavController().navigate(R.id.action_visa_detail_to_visa_book_fragment)
+
+    inner class OnApplyVisaClick : OnItemViewClickListener<Visa>{
+        override fun onClick(view: View, item: Visa) {
+            findNavController().navigate(R.id.action_visa_detail_to_visa_book_fragment)
+        }
     }
 }

@@ -125,7 +125,7 @@
                             android:focusable="false"
                             android:hint="@string/lbl_origin"
                             android:layout_weight="1"
-                            android:textColorHint="@color/grey_001"
+                            android:textColorHint="@color/grey_003"
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
                             android:padding="@dimen/_10dp"/>
@@ -145,7 +145,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
                             android:layout_weight="1"
-                            android:textColorHint="@color/grey_001"
+                            android:textColorHint="@color/grey_003"
                             android:padding="@dimen/_10dp"
                             />
                     </LinearLayout>
@@ -188,7 +188,7 @@
                             android:background="@null"
                             android:focusable="false"
                             android:hint="@string/lbl_from_date"
-                            android:textColorHint="@color/grey_001"
+                            android:textColorHint="@color/grey_003"
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
                             android:padding="@dimen/_10dp"/>
@@ -206,7 +206,7 @@
                             android:focusable="false"
                             android:fontFamily="@font/poppins_regular"
                             android:textSize="14sp"
-                            android:textColorHint="@color/grey_001"
+                            android:textColorHint="@color/grey_003"
                             android:padding="@dimen/_10dp"
                             />
 
@@ -233,7 +233,7 @@
                         android:hint="@string/lbl_0_adult"
                         android:text="1 Adult"
                         android:focusable="false"
-                        android:textColorHint="@color/grey_001"
+                        android:textColorHint="@color/grey_003"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="14sp"
                         android:padding="@dimen/_10dp"
@@ -250,7 +250,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/lbl_0_child"
-                        android:textColorHint="@color/grey_001"
+                        android:textColorHint="@color/grey_003"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="14sp"
                         android:focusable="false"
@@ -269,7 +269,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/lbl_0_infant"
-                        android:textColorHint="@color/grey_001"
+                        android:textColorHint="@color/grey_003"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="14sp"
                         android:focusable="false"

@@ -46,7 +46,7 @@
                     app:layout_constraintBottom_toTopOf="@id/cl_round"
                     android:background="@color/primary_color"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ed_enter_pickup_locaton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50dp"
@@ -57,14 +57,14 @@
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_enter_pickup_location"
                     android:focusable="true"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="@color/grey_003"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
                     android:padding="@dimen/_10dp"
                     />
 
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ed_enter_category"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50dp"
@@ -74,8 +74,7 @@
                     android:layout_marginEnd="@dimen/_20dp"
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_enter_category"
-                    android:focusable="false"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="@color/grey_003"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
                     android:padding="@dimen/_10dp"

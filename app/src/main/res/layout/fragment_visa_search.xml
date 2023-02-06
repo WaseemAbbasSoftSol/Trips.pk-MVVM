@@ -37,7 +37,7 @@
                 >
 
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ed_enter_country"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50dp"
@@ -47,8 +47,7 @@
                     android:layout_marginEnd="@dimen/_20dp"
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_type_country_name"
-                    android:focusable="true"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="@color/grey_003"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
                     android:padding="@dimen/_10dp"
@@ -90,7 +89,7 @@
                         android:layout_marginEnd="@dimen/_20dp"
                         >
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                             android:id="@+id/rv_visa_by_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -101,6 +100,10 @@
                             android:nestedScrollingEnabled="false"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_8px"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_child_count="2"
+                            app:shimmer_demo_layout="@layout/item_visa_by_country_shimmer"
+                            app:shimmer_demo_layout_manager_type="linear_vertical"
                             tools:listitem="@layout/item_visa_by_country"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             />
@@ -123,6 +126,7 @@
                             app:layout_constraintTop_toBottomOf="@id/rv_visa_by_country" />
 
                         <TextView
+                            android:visibility="gone"
                             android:id="@+id/tv_view_all"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,7 +139,7 @@
                             android:textColor="@color/btn_color"
                            />
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                             android:id="@+id/rv_country"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -143,12 +147,17 @@
                             app:layout_constraintTop_toBottomOf="@id/tv_visa_service"
                             android:layout_marginTop="@dimen/_10px"
                             tools:listitem="@layout/item_country"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="4"
                             itemLayout="@{@layout/item_country}"
                             itemsList="@{viewModel.visa}"
                             itemClickListener="@{itemClickListener}"
                             hasFixSize="@{true}"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:spanCount="4"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_grid_child_count="4"
+                            app:shimmer_demo_child_count="4"
+                            app:shimmer_demo_layout="@layout/item_worldwide_trips"
+                            app:shimmer_demo_layout_manager_type="grid"
                             />
 
                         <View
@@ -168,18 +177,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
-            android:layout_width="wrap_content"
-            android:elevation="5dp"
-            android:layout_height="wrap_content"
-            app:SpinKit_Color="@color/primary_color"
-            style="@style/SpinKitView.Large.Circle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

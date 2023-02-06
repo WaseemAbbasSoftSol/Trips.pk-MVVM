@@ -7,6 +7,9 @@
         <variable
             name="obj"
             type="com.trips.pk.model.visa.Visa" />
+        <variable
+            name="onViewClick"
+            type="com.trips.pk.ui.common.OnItemViewClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -78,6 +81,7 @@
                 android:id="@+id/btn_book"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
+                android:onClick="@{(view) -> onViewClick.onClick(view, obj)}"
                 style="@style/AppTheme.ContainedButton"
                 android:text="@string/lbl_apply_now"
                 android:textSize="@dimen/_12sp"

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.trips.pk.model.visa.Visa" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/fg_cv"
+        app:strokeWidth="@dimen/_1dp"
+        app:rippleColor="@color/btn_color"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_0dp"
+        android:layout_marginTop="@dimen/_10px"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="190px">
+
+            <ImageView
+                android:id="@+id/iv_country"
+                android:layout_width="200px"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/image_placeholder"/>
+
+            <TextView
+              android:visibility="invisible"
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_country"
+                android:layout_marginStart="@dimen/_10px"
+                android:layout_marginTop="@dimen/_10px"
+                android:text="Turkey"
+                android:fontFamily="@font/raleway_semiboldd"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/black"/>
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/tv_country"
+                app:layout_constraintStart_toStartOf="@id/tv_country"
+                app:layout_constraintEnd_toEndOf="@id/tv_country"
+                app:layout_constraintBottom_toBottomOf="@id/tv_country"
+                app:realtimeBlurRadius="30dp"
+                android:layout_marginBottom="@dimen/_2dp"
+                app:realtimeOverlayColor="@color/grey"
+                android:layout_marginEnd="@dimen/_5dp"/>
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tv_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_country"
+                app:layout_constraintStart_toStartOf="@id/tv_country"
+                android:text="This is dummy text for loading"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_12sp"
+                android:textColor="@color/grey_007"/>
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/tv_des"
+                app:layout_constraintStart_toStartOf="@id/tv_des"
+                app:layout_constraintEnd_toEndOf="@id/tv_des"
+                app:layout_constraintBottom_toBottomOf="@id/tv_des"
+                app:realtimeBlurRadius="30dp"
+                app:realtimeOverlayColor="@color/grey"
+                android:layout_marginEnd="@dimen/_5dp"/>
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs.1400"
+                android:textColor="@color/btn_color"
+                android:textSize="@dimen/_16sp"
+               app:layout_constraintStart_toStartOf="@id/tv_country"
+                app:layout_constraintTop_toBottomOf="@id/tv_des"
+                android:fontFamily="@font/poppins_semibold" />
+
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/tv_money"
+                app:layout_constraintStart_toStartOf="@id/tv_money"
+                app:layout_constraintEnd_toEndOf="@id/tv_money"
+                app:layout_constraintBottom_toBottomOf="@id/tv_money"
+                android:layout_marginTop="@dimen/_2dp"
+                app:realtimeBlurRadius="30dp"
+                app:realtimeOverlayColor="@color/grey"
+                android:layout_marginEnd="@dimen/_5dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

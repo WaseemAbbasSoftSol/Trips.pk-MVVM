@@ -83,7 +83,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/raleway_semiboldd"
                                 android:text="BERNE Tour Package"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_20sp"
                                 android:maxLines="1"
                                 android:ellipsize="end"

@@ -57,11 +57,16 @@ val mVehicleCategories = arrayListOf<VehicleCategory>()
 val mVehicleModels = arrayListOf<VehiclesModel>()
 val mVehicles = arrayListOf<Vehicle>()
 var mVehiclePrice : Vehicle?=null
+var VEHICLE_CITIES = arrayListOf<Countries>()
+var VEHICLE_CATEGORIES = arrayListOf<VehicleCategory>()
 
 //Tour section
 var mTourCountries = arrayListOf<Countries>()
 var mTourCities = arrayListOf<Countries>()
 val mTourPackagePrices= arrayListOf<TourPackagePrices>()
+
+//Visa
+var VISA_COUNTRIES = arrayListOf<Countries>()
 
 interface TempListener{
     fun onTempClick(which:String, user: AllUser)

@@ -10,6 +10,9 @@
         <variable
             name="viewModel"
             type="com.trips.pk.ui.visa.detail.VisaDetailViewModel" />
+        <variable
+            name="clickListener"
+            type="com.trips.pk.ui.visa.detail.VisaDetailFragment.OnApplyVisaClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,7 +86,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/raleway_semiboldd"
                                 android:text="Dashboard"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_20sp"
                                 android:maxLines="1"
                                 android:ellipsize="end"
@@ -107,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
+                android:layout_marginTop="-20dp"
                 android:background="@color/transparent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 <androidx.core.widget.NestedScrollView
@@ -166,6 +170,8 @@
                                 android:layout_height="wrap_content"
                                 app:itemsList="@{viewModel.visa}"
                                 app:itemLayout="@{@layout/item_visa}"
+                                hasFixSize="@{true}"
+                                onItemViewClick="@{clickListener}"
                                 android:nestedScrollingEnabled="false"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 app:layout_constraintTop_toBottomOf="@id/tv_from_city"

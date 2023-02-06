@@ -18,6 +18,8 @@ data class VehicleCategory(
     val vehiclesModels: List<VehiclesModel>
 ):java.io.Serializable{
 
+    override fun toString(): String = name
+
     val fullImage:String get() = "https://adminapi.gotravel.pk/$logoURL"
 
     fun getLeastPrice():String{

@@ -22,7 +22,7 @@ interface TripsApi {
    @Field("Password") password:String
     ):Response<BaseResponse<String>>
 
-
+   //Flight
     @GET("GetListOfAirports")
     @Headers("Content-Type:application/json")
     suspend fun getAllAirports():Response<BaseResponse<List<Airport>>>
@@ -51,18 +51,7 @@ interface TripsApi {
         @Body params: FlightBooker
     ):Response<BaseResponse<String>>
 
-    @GET("GetListOfVisas")
-    @Headers("Content-Type:application/json")
-    suspend fun getListOfVisa(
-    ):Response<BaseResponse<List<Visa>>>
-
-    @POST("GetListOfVisasByCountry")
-    @Headers("Content-Type:application/json")
-    suspend fun getListOfVisaByCountryId(
-        @Header("id") id:Int
-    ):Response<BaseResponse<List<Visa>>>
-
-
+    //Tour
     @GET("GetListOfTours")
     @Headers("Content-Type:application/json")
     suspend fun getListOfTours(
@@ -107,6 +96,40 @@ interface TripsApi {
     @Headers("Content-Type:application/json")
     suspend fun getVehicleCategories(
     ):Response<BaseResponse<List<VehicleCategory>>>
+
+    @GET("VehicalCategorieshaveVehicles")
+    @Headers("Content-Type:application/json")
+    suspend fun getAllVehicleCategories(
+    ):Response<BaseResponse<List<VehicleCategory>>>
+
+    @GET("GetCitieshavevehicles")
+    @Headers("Content-Type:application/json")
+    suspend fun getCitiesHaveVehicle(
+    ):Response<BaseResponse<List<Countries>>>
+
+    @POST("GetListOfVehiclesBasedonForm")
+    @Headers("Content-Type:application/json")
+    suspend fun searchVehicle(
+        @Header("categoryID") catId:Int,
+        @Header("cityID") cityId: Int
+    ):Response<BaseResponse<List<VehicleCategory>>>
+
+    //Visa
+    @GET("GetListOfVisas")
+    @Headers("Content-Type:application/json")
+    suspend fun getListOfVisa(
+    ):Response<BaseResponse<List<Visa>>>
+
+    @POST("GetListOfVisasByCountry")
+    @Headers("Content-Type:application/json")
+    suspend fun getListOfVisaByCountryId(
+        @Header("id") id:Int
+    ):Response<BaseResponse<List<Visa>>>
+
+    @GET("GetCountrieswithVisas")
+    @Headers("Content-Type:application/json")
+    suspend fun getVisaCountries(
+    ):Response<BaseResponse<List<Countries>>>
 
     //To be add in future
     /*

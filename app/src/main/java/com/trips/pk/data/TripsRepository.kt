@@ -8,6 +8,7 @@ class TripsRepository (private val tripsApi: TripsApi) {
 
     suspend fun getBearerToken(userName:String="Rizwanbro", pass:String ="Rizwan@321") = tripsApi.getToken(userName,pass)
 
+    //Flight
     suspend fun getAllAirports()=tripsApi.getAllAirports()
 
     suspend fun searchFlights(search: FlightSearch)=tripsApi.searchFlights(search)
@@ -18,11 +19,8 @@ class TripsRepository (private val tripsApi: TripsApi) {
 
     suspend fun bookFlight(book:FlightBooker)=tripsApi.bookFlight(book)
 
+    //Tour
     suspend fun getCountriesWithPakCities() = tripsApi.getCountriesWithPakCities()
-
-    suspend fun getListOfVisa()=tripsApi.getListOfVisa()
-
-    suspend fun getListOfVisaByCountryId(id:Int) = tripsApi.getListOfVisaByCountryId(id)
 
     suspend fun getListOfTour() = tripsApi.getListOfTours()
 
@@ -40,4 +38,17 @@ class TripsRepository (private val tripsApi: TripsApi) {
 
     //Vehicle
     suspend fun getVehicleCategories() = tripsApi.getVehicleCategories()
+
+    suspend fun getAllVehicleCategories() = tripsApi.getAllVehicleCategories()
+
+    suspend fun getCitiesHaveVehicle() = tripsApi.getCitiesHaveVehicle()
+
+    suspend fun searchVehicle(categoryId:Int, cityId:Int)=tripsApi.searchVehicle(categoryId,cityId)
+
+    //Visa
+    suspend fun getListOfVisa()=tripsApi.getListOfVisa()
+
+    suspend fun getListOfVisaByCountryId(id:Int) = tripsApi.getListOfVisaByCountryId(id)
+
+    suspend fun getVisaCountries() = tripsApi.getVisaCountries()
 }

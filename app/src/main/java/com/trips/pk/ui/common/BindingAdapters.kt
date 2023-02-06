@@ -167,11 +167,11 @@ fun <T> setItems(
         mAdapter.setItemClickListener(itemClickListener)
         mAdapter.onItemViewClick = onItemViewClick
         view.setHasFixedSize(hasFixSize)
-        Helpers.setMargins(view,0,0,0,0)
+       if (hasMargin) Helpers.setMargins(view,0,0,0,0)
     }
    else {
        view.showShimmerAdapter()
-        Helpers.setMargins(view,30,0,0,0)
+        if (hasMargin)Helpers.setMargins(view,30,0,0,0)
     }
 }
 @BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)

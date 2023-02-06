@@ -25,14 +25,13 @@ class VisaDetailViewModel(
 
     init {
         _visa.value= emptyList()
-        getListOfVisaByCountryId()
     }
 
-    private fun getListOfVisaByCountryId(){
+    fun getListOfVisaByCountryId(countryId:Int){
         viewModelScope.launch(Dispatchers.IO){
             try {
                 _state.postValue(RequestState.LOADING)
-                val response = repository.getListOfVisaByCountryId(157)
+                val response = repository.getListOfVisaByCountryId(countryId)
                 if (response.isSuccessful){
                     response.body().let {
                         _visa.postValue(it!!.data!!)

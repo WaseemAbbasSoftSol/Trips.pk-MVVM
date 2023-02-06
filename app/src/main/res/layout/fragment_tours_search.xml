@@ -54,8 +54,9 @@
                     android:layout_marginEnd="@dimen/_20dp"
                     android:background="@drawable/bg_rounded_edittext"
                     android:hint="@string/lbl_where"
+
                     android:inputType="textNoSuggestions"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="@color/grey_003"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="14sp"
                     android:padding="@dimen/_10dp"
@@ -153,6 +154,7 @@
                                 itemClickListener="@{countryClickListener}"
                                 itemLayout="@{@layout/item_worldwide_trips}"
                                 itemsList="@{viewModel.promotedCountries}"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_15dp"
@@ -201,6 +203,7 @@
                                 itemClickListener="@{cityClickListener}"
                                 itemLayout="@{@layout/item_pak_tour_pkg}"
                                 itemsList="@{viewModel.promotedCities}"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_15dp"

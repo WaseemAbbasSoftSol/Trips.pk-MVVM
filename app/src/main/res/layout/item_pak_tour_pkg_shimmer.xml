@@ -26,14 +26,23 @@
             >
 
          <TextView
+             android:visibility="invisible"
              android:id="@+id/tv_city"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="@string/lbl_loading"
+             android:text="Skardu"
              android:textColor="@color/black"
              android:textSize="@dimen/_13sp"
              android:fontFamily="@font/poppins_regular"
              android:layout_gravity="center"/>
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="@dimen/_70dp"
+                android:layout_height="@dimen/_10dp"
+                app:realtimeBlurRadius="30dp"
+                android:layout_gravity="center"
+                app:realtimeOverlayColor="@color/grey"
+               />
 
         </com.google.android.material.card.MaterialCardView>
 

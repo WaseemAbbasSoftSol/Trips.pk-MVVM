@@ -24,7 +24,7 @@ import com.trips.pk.utils.Helpers
 class RentACarBookBottomsheet: BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomsheetRentACarBookBinding
-
+    private var listener:ButtonClickListener?=null
     private var vehiclePrices:Vehicle?=null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -58,10 +58,16 @@ class RentACarBookBottomsheet: BottomSheetDialogFragment() {
         }
 
         binding.btnBook.setOnClickListener {
-            findNavController().navigate(R.id.action_global_to_rent_a_car_booking_detail_fragment)
+            listener!!.onClicked(true)
             dismiss()
         }
         return binding.root
     }
 
+    interface ButtonClickListener{
+    fun onClicked(which:Boolean)
+    }
+    fun setButtonListener(listener: ButtonClickListener){
+        this.listener=listener
+    }
 }

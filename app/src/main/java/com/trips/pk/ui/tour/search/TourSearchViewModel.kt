@@ -54,6 +54,7 @@ class TourSearchViewModel(
                 val response = repository.getCountriesForTour()
                 if (response.isSuccessful) {
                     response.body().let {
+                        mTourCountries.clear()
                         mTourCountries.addAll(it!!.data)
                         val tempList= arrayListOf<Countries>()
                         for (item in it.data){
@@ -86,6 +87,7 @@ class TourSearchViewModel(
                 val response = repository.getCitiesForTour()
                 if (response.isSuccessful) {
                     response.body().let {
+                        mTourCities.clear()
                         mTourCities.addAll(it!!.data)
                         val tempList= arrayListOf<Countries>()
                         for (item in it.data){

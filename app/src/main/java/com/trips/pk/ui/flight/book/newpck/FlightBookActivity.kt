@@ -1,39 +1,33 @@
 package com.trips.pk.ui.flight.book.newpck
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.razir.progressbutton.hideProgress
 import com.trips.pk.R
-import com.trips.pk.databinding.FragmentFlightBookBinding
+import com.trips.pk.databinding.ActivityFlightBookBinding
 import com.trips.pk.model.flight.ItinerariesDetail
 import com.trips.pk.model.flight.book.ContactPerson
-import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.Passenger
 import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.ui.common.*
-import com.trips.pk.ui.flight.book.AdultAdapter
-import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.utils.makeProgressOnButton
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FlightBookActivity : AppCompatActivity(),AdultAdapter.AdultTextGetter{
-    private lateinit var binding:FragmentFlightBookBinding
+class FlightBookActivity : AppCompatActivity(),FlightBookAdapter.AdultTextGetter{
+    private lateinit var binding:ActivityFlightBookBinding
 
    // private val mViewModel: FlightBookViewModel by viewModel()
     private var booker= arrayListOf<Passenger>()
-    private var adapter: AdultAdapter?=null
+    private var adapter: FlightBookAdapter?=null
     private var flightDetail: ItinerariesDetail?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentFlightBookBinding.inflate(layoutInflater)
+        binding = ActivityFlightBookBinding.inflate(layoutInflater)
+        binding.lifecycleOwner=this
         setContentView(binding.root)
+
    Toast.makeText(this,"entered in acitivyt",Toast.LENGTH_SHORT).show()
 
         binding.btnContinue.setOnClickListener {
@@ -42,21 +36,23 @@ class FlightBookActivity : AppCompatActivity(),AdultAdapter.AdultTextGetter{
             mIsValid =true
             isButtonClick.value=true
 
-            var siz= mNoOfAdult + mNoOfChildern + mNoOfInfent
-            mTotalPassenger.clear()
-            for (i in 0..siz-1){
-                mTotalPassenger.add(PassengerType(1))//Here 1 in passengertype is useless.
-            }
+
+        }
+
+        var siz= mNoOfAdult + mNoOfChildern + mNoOfInfent
+        mTotalPassenger.clear()
+        for (i in 0..siz-1){
+            mTotalPassenger.add(PassengerType(1))//Here 1 in passengertype is useless.
         }
 
         val layoutManager1 = LinearLayoutManager(applicationContext)
-        binding.rvAdult.layoutManager = layoutManager1
-        adapter=AdultAdapter(applicationContext, this, layoutManager1)
-        binding.rvAdult.setHasFixedSize(true)
-        binding.rvAdult.isNestedScrollingEnabled=false
-        binding.rvAdult.adapter = adapter
+        binding.rvBook.layoutManager = layoutManager1
+        adapter= FlightBookAdapter(applicationContext,this)
+        binding.rvBook.setHasFixedSize(true)
+        binding.rvBook.isNestedScrollingEnabled=false
+        binding.rvBook.adapter = adapter
 
-       // binding.viewModel=mViewModel
+//        binding.viewModel=mViewModel
 //        mViewModel.bookConfirmationMessage.observe(this, androidx.lifecycle.Observer {
 //            if (it == FLIGHT_BOOKED_SUCCESSFULLY){
 //                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
@@ -79,5 +75,11 @@ class FlightBookActivity : AppCompatActivity(),AdultAdapter.AdultTextGetter{
         //    ,passenger,flightDetail!!)
         binding.btnContinue.makeProgressOnButton(R.string.lbl_wait)
       //  mViewModel.bookFlight(booker)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "finish ", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

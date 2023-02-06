@@ -46,7 +46,7 @@ val viewModelsModule= module {
     //Rent a Car
     viewModel { RentCarSearchViewModel(get()) }
     viewModel { (vehicleList : List<VehicleCategory>) -> VehicleListViewModel(vehicleList) }
-    viewModel { RentACarSearchResultViewModel() }
+    viewModel { RentACarSearchResultViewModel(get()) }
 
     //Visa
     viewModel { VisaSearchViewModel(get()) }
