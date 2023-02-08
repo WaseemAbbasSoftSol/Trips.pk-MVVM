@@ -267,10 +267,10 @@ class FlightBookAdapter(
                     Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    val gndr=if (prefix=="Mr") "Male" else "Female"
+                    val gndr= prefix=="Mr"
                     val name="$prefix $firstName $middleName $lastName"
                     if (position==0){
-                        val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, countryId = "2",cityId="2")
+                        val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, countryId = 2,cityId=2)
                         mContactPeron.add(contactPerson)
                     }
                     var countryId=0

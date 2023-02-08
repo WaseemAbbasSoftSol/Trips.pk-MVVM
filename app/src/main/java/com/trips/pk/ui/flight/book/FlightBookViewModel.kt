@@ -55,7 +55,7 @@ class FlightBookViewModel(
                     }
                 } else {
                     response.errorBody().let {
-                        _bookConfirmationMessage.postValue(it.toString())
+                        _bookConfirmationMessage.postValue(it!!.string())
                         Log.d(APP_TAG, it!!.toString())
                     }
                 }
@@ -133,10 +133,14 @@ class FlightBookViewModel(
     private fun storeCountries(){
         if (prefRepository.getCountriesFromPrefRepository()!=null){
             _countries.value = prefRepository.getCountriesFromPrefRepository()
+            FLIGHT_COUNTRIES.clear()
+            FLIGHT_COUNTRIES.addAll(prefRepository.getCountriesFromPrefRepository()!!)
             getAllCountries()
         }
         else{
             _countries.value=prefRepository.getCountriesFromResources()
+            FLIGHT_COUNTRIES.clear()
+            FLIGHT_COUNTRIES.addAll(prefRepository.getCountriesFromResources())
             getAllCountries()
         }
 

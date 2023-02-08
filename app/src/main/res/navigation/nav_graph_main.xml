@@ -112,8 +112,8 @@
 
     <fragment
         android:id="@+id/flight_book_fragment"
-        android:name="com.trips.pk.ui.flight.book.FlightBookHostFragment"
-        tools:layout="@layout/fragment_flight_booking_container">
+        android:name="com.trips.pk.ui.flight.book.FlightBookFragment"
+        tools:layout="@layout/fragment_flight_book">
 
         <action
             android:id="@+id/action_flight_book_to_confirmation_fragment"

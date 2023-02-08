@@ -9,7 +9,7 @@ data class FlightBooker(
     @SerializedName("Number")
     val number:String,
     @SerializedName("Gender")
-    val gender:String,
+    val gender:Boolean,
     @SerializedName("Email")
     val email:String,
     @SerializedName("zip")
@@ -17,9 +17,9 @@ data class FlightBooker(
     @SerializedName("Address")
     val address:String,
     @SerializedName("country")
-    val country:String,
+    val country:Int,
     @SerializedName("city")
-    val city:String,
+    val city:Int,
     @SerializedName("Passengers")
     val passengerList:List<Passenger>,
     @SerializedName("FlightDetail")

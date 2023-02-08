@@ -13,25 +13,25 @@ import com.github.razir.progressbutton.hideProgress
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightBookBinding
 import com.trips.pk.model.flight.ItinerariesDetail
-import com.trips.pk.model.flight.book.ContactPerson
-import com.trips.pk.model.flight.book.FlightBooker
-import com.trips.pk.model.flight.book.Passenger
-import com.trips.pk.model.flight.book.PassengerType
+import com.trips.pk.model.flight.book.*
 import com.trips.pk.ui.common.*
 import com.trips.pk.utils.makeProgressOnButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.List
 
 
-class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
+class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter,AdultAdapter.ValidaterListener {
     private lateinit var binding:FragmentFlightBookBinding
     private val mViewModel:FlightBookViewModel by viewModel()
     private var booker= arrayListOf<Passenger>()
     private var adapter:AdultAdapter?=null
     private var flightDetail:ItinerariesDetail?=null
 
+    private var holder = arrayListOf<AdultAdapter.ItemRecyclerViewHolder>()
+    private var position = -1
 
     private val myCalendar: Calendar = Calendar.getInstance()
 
@@ -49,6 +49,11 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
             mContactPeron.clear()
             mIsValid=true
             isButtonClick.value=true
+
+            for ((i,value ) in mTotalPassenger.withIndex()){
+
+            }
+            adapter!!.validateEditText(holder!!,position)
         }
     /*    val adultView=View.inflate(requireContext(), R.layout.adult_layout, null)
         binding.clAdult.addView(adultView)
@@ -64,7 +69,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
 
         val layoutManager1 = LinearLayoutManager(requireContext())
         binding.rvAdult.layoutManager = layoutManager1
-        adapter=AdultAdapter(requireContext(), this, layoutManager1)
+        adapter=AdultAdapter(requireContext(), this, layoutManager1, this)
         binding.rvAdult.setHasFixedSize(true)
         binding.rvAdult.isNestedScrollingEnabled=false
         binding.rvAdult.adapter = adapter
@@ -87,7 +92,8 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
             ).show()
 
         }*/
-
+        val key= KeyRequestId("157")
+        mViewModel.getCitiesByCountryId(key)
         return binding.root
     }
 
@@ -105,11 +111,12 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
         })
     }
 
-    override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int, isLast:Boolean) {
+    override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>) {
         val contact=contactPerson[0]
         val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,contact.zipCode,contact.address,contact.countryId,contact.cityId
             ,passenger,flightDetail!!)
         binding.btnContinue.makeProgressOnButton(R.string.lbl_wait)
+        Toast.makeText(requireContext(),"good",Toast.LENGTH_SHORT).show()
         mViewModel.bookFlight(booker)
 
     }
@@ -127,5 +134,10 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter {
         val dateFormatForServer = SimpleDateFormat(serverFormat, Locale.US)
        // dob=dateFormatForServer.format(myCalendar.time)
        // binding.tvDob.setText(dateFormat.format(myCalendar.time))
+    }
+
+    override fun onValidatorListenerClick(holder: kotlin.collections.List<AdultAdapter.ItemRecyclerViewHolder>, position: Int) {
+       this.holder = holder as ArrayList<AdultAdapter.ItemRecyclerViewHolder>
+        this.position = position
     }
 }

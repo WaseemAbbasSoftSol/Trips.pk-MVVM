@@ -11,7 +11,7 @@ data class Passenger(
     @SerializedName("LastName")
     val lastName: String="",
     @SerializedName("Gender")
-    val gender: String="",
+    val gender: Boolean=true,
     @SerializedName("DateOfBirth")
     val dob: String="",
     @SerializedName("PassengerType")

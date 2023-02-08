@@ -133,7 +133,7 @@ class FlightBookNewFragment :Fragment() {
         user.let {
             if (it!=null){
                 if (it.index == index){
-                    val prefix=if (it.passenger.gender == "Female") "Mrs" else "Mr"
+                    val prefix=if (it.passenger.gender) "Mr" else "Mrs"
                     binding.spPrefix.setText(prefix)
                     binding.edFirstName.setText(it.passenger.firstName)
                     binding.edMiddleName.setText(it.passenger.middleName)
@@ -260,16 +260,17 @@ class FlightBookNewFragment :Fragment() {
                     val dateOfBirth = changeStringDateFormat(binding.tvDob.text.toString().trim())
                     val passExpireDate = changeStringDateFormat(binding.tvExpireDate.text.toString().trim())
                     val fullName = "$gender $firstName $middleName $lastName"
+                    val sex = gender=="Male"
                     val contactPerson = ContactPerson(
                         fullName,
                         contact,
-                        gender,
+                        sex,
                         email,
                         zip,
                         address,
-                        countryId.toString(),
+                        countryId,
                         countryName = countryName,
-                        cityId.toString(),
+                        cityId,
                         cityName = cityName
                     )
                     val passportInfo = PassportInfo(
@@ -282,7 +283,7 @@ class FlightBookNewFragment :Fragment() {
                         firstName,
                         middleName,
                         lastName,
-                        gender,
+                        sex,
                         dateOfBirth,
                         type,
                         passportInfo

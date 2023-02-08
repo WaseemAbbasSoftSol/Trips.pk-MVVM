@@ -31,8 +31,9 @@ const val VIEW_TYPE_INFANT=3
 
 class AdultAdapter(
     val context: Context,
-    var listener:AdultTextGetter,
-    var layoutManager:LinearLayoutManager?=null,
+    var listener: AdultTextGetter,
+    var layoutManager: LinearLayoutManager? = null,
+    var dumbListener: ValidaterListener
 ) :
     RecyclerView.Adapter<AdultAdapter.ItemRecyclerViewHolder>() {
 
@@ -57,7 +58,7 @@ class AdultAdapter(
     var passNat = ""
 
 
-
+    val hol = arrayListOf<ItemRecyclerViewHolder>()
 
     class ItemRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val prefix=itemView.findViewById<MaterialAutoCompleteTextView>(R.id.sp_prefix)
@@ -112,6 +113,8 @@ class AdultAdapter(
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ItemRecyclerViewHolder, position: Int) {
 
+        hol.add(position, ItemRecyclerViewHolder(holder.itemView))
+         dumbListener.onValidatorListenerClick(hol,position)
         if (position==0){
             holder.llContact.visibility=View.VISIBLE
             holder.llemail.visibility=View.VISIBLE
@@ -142,8 +145,8 @@ class AdultAdapter(
         }
 
         setSpinner(holder.prefix,prefixList)
-//        setCountries(holder.edCountry, countriesList)
-//        setCountries(holder.edPassportNatCountry, countriesList)
+        setCountries(holder.edCountry, FLIGHT_COUNTRIES)
+        setCountries(holder.edPassportNatCountry, FLIGHT_COUNTRIES)
 
         holder.dob.setOnClickListener {
             DatePickerDialog(
@@ -167,7 +170,7 @@ class AdultAdapter(
             sharedExpireDate=holder.edPassportExpireDate
         }
 
-        isButtonClick.observe(holder.itemView.context as LifecycleOwner) {
+        /*isButtonClick.observe(holder.itemView.context as LifecycleOwner) {
             if (it) {
 
                 prefix = holder.prefix.text.toString().trim()
@@ -288,7 +291,7 @@ class AdultAdapter(
                      if (position== mTotalPassenger.size-1 && mIsValid){
                          listener.onTextChanged(
                              mContactPeron!!,
-                             mPassengerList!!, position, position==mTotalPassenger.size-1)
+                             mPassengerList!!, position)
                          isButtonClick.value=false
                      }
 
@@ -297,8 +300,7 @@ class AdultAdapter(
 
 
             }
-        }
-
+        }*/
 
     }
 
@@ -319,7 +321,7 @@ class AdultAdapter(
     }
 
     interface AdultTextGetter{
-        fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>, position: Int,isLast:Boolean)
+        fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>)
     }
 
 
@@ -345,20 +347,120 @@ class AdultAdapter(
         }
         return formattedDate
     }
-private fun clearAllText(){
-    prefix = ""
-    firstName = ""
-    middleName= ""
-    lastName = ""
-    dob = ""
-    contact = ""
-    email = ""
-    address = ""
-    zipCode = ""
-    city = ""
-    country = ""
-    passportNo = ""
-    passExDate = ""
-    passNat = ""
- }
+
+    fun validateEditText(holder : List<ItemRecyclerViewHolder>,position:Int){
+
+        for ((i,value ) in holder.withIndex()) {
+            prefix = holder[i].prefix.text.toString().trim()
+            firstName = holder[i].firstName.text.toString().trim()
+            middleName = holder[i].middleName.text.toString().trim()
+            lastName = holder[i].lastName.text.toString().trim()
+            dob=holder[i].dob.text.toString().trim()
+            contact=holder[i].edContact.text.toString().toString()
+            email=holder[i].edEmail.text.toString().trim()
+            address=holder[i].edAddress.text.toString().trim()
+            zipCode=holder[i].edZipCode.text.toString().trim()
+            city=holder[i].edCity.text.toString().trim()
+            country=holder[i].edCountry.text.toString().toString()
+            passportNo=holder[i].edPassportNo.text.toString().trim()
+            passExDate=holder[i].edPassportExpireDate.text.toString().trim()
+            passNat=holder[i].edPassportNatCountry.text.toString().trim()
+
+
+            if (holder[i].firstName.text.toString().isNullOrEmpty()) {
+                holder[i].etFirstName.error = context.getString(R.string.lbl_field_required)
+                Toast.makeText(context, "Some information  is missing", Toast.LENGTH_SHORT).show()
+                return
+
+            }
+        else if (holder[i].lastName.text.toString().isNullOrEmpty()){
+                holder[i].etLastName.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].dob.text.toString().isNullOrEmpty()){
+            holder[i].etDob.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edContact.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etContact.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edEmail.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etEmail.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edAddress.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etAddress.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edZipCode.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etZipCode.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edCity.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etCity.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edCountry.text.toString().isNullOrEmpty() && i==0){
+            holder[i].etCountry.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edPassportNo.text.toString().isNullOrEmpty()){
+            holder[i].etPassportNo.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edPassportExpireDate.text.toString().isNullOrEmpty()){
+            holder[i].etPassportExpireDate.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+        else if (holder[i].edPassportNatCountry.text.toString().isNullOrEmpty()){
+            holder[i].etPassportNatCountry.error = context.getString(R.string.lbl_field_required)
+            Toast.makeText(context, "Some information is missing",Toast.LENGTH_SHORT).show()
+                return
+        }
+            else {
+              //////////////////////////
+
+                val gndr= prefix=="Mr"
+                val name="$prefix $firstName $middleName $lastName"
+                if (i==0){
+                    val   contactPerson= ContactPerson(name, contact, gndr, email,zipCode,address, countryId = 157,cityId=2836)
+                    mContactPeron.add(contactPerson)
+                }
+                var countryId=157
+//                        for ((i,value ) in countriesList.withIndex()){
+//                            if (value.name.toString()==country){
+//                                countryId=value.id
+//                                break
+//                            }
+//                        }
+                val passexpdate=changeStringDateFormat(passExDate)
+                val passportInfo=PassportInfo(countryID = countryId, expirtyDate = passexpdate, passportNumber = passportNo)
+                val db=changeStringDateFormat(dob)
+                val passengerType=if (holder[i].itemViewType== VIEW_TYPE_ADULT)"Adult" else if (holder[i].itemViewType== VIEW_TYPE_CHILD)"Child" else "Infant"
+                val passenger=Passenger(firstName, middleName, lastName,gndr, db,passengerType, passportInfo)
+                mPassengerList.add(passenger)
+                if (i == mTotalPassenger.size-1){
+                    listener.onTextChanged(
+                        mContactPeron!!,
+                        mPassengerList!!)
+                }
+
+            }
+        }
+    }
+
+    interface ValidaterListener{
+        fun onValidatorListenerClick(holder : List<ItemRecyclerViewHolder>, position: Int)
+    }
 }
