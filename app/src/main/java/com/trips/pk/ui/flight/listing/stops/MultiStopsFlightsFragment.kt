@@ -58,7 +58,7 @@ class MultiStopsFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickLi
     override fun onListClick(flight:ItinerariesDetail, position:Int) {
 
         sItinerariesDetail=flight
-        findNavController().navigate(FlightListingFragmentNewDirections.actionFlightListToFlightDetailFragment())
+        findNavController().navigate(FlightListingFragmentDirections.actionFlightListToFlightDetailFragment())
 
         //  findNavController().navigate(R.id.action_flight_list_to_flight_detail_fragment)
 

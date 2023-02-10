@@ -79,8 +79,8 @@
 
     <fragment
         android:id="@+id/flight_list_fragment"
-        android:name="com.trips.pk.ui.flight.listing.FlightListingFragmentNew"
-        tools:layout="@layout/fragment_flight_listing_new">
+        android:name="com.trips.pk.ui.flight.listing.FlightListingFragment"
+        tools:layout="@layout/fragment_flight_listing">
 
         <argument
             android:name="search"
@@ -89,8 +89,8 @@
         <action
             android:id="@+id/action_flight_list_to_flight_detail_fragment"
             app:destination="@id/flight_detail_fragment"
-            app:enterAnim="@anim/slide_in_right_2"
-            app:exitAnim="@anim/slide_out_left_2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
@@ -103,8 +103,8 @@
         <action
             android:id="@+id/action_flight_detail_to_flight_book_fragment"
             app:destination="@id/flight_book_fragment"
-            app:enterAnim="@anim/slide_in_right_2"
-            app:exitAnim="@anim/slide_out_left_2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />

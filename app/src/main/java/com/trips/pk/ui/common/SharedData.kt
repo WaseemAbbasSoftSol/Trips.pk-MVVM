@@ -12,10 +12,8 @@ import com.trips.pk.model.flight.book.PassengerType
 import com.trips.pk.model.rent_a_car.Vehicle
 import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.model.rent_a_car.VehiclesModel
-import com.trips.pk.model.rent_a_car.VehiclesPrice
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourPackagePrices
-import com.trips.pk.ui.flight.book.newpck.AllUser
 
 var tempToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjE4MmZkOTQ2LTU3ZWUtNDkzNC1iZmE2LWI1MDYyNWI4YTAwYyIsInN1YiI6IlJpendhbmJybyIsImVtYWlsIjoiUml6d2FuYnJvIiwianRpIjoiYWU2NGQ3NDMtZTAxZC00ZjY0LWJjYzYtZjg3MTY1M2MyODZhIiwibmJmIjoxNjc1MzMwMjczLCJleHAiOjE2NzUzMzA1NzMsImlhdCI6MTY3NTMzMDI3MywiaXNzIjoiaHR0cHM6Ly9hcGkuZ290cmF2ZWwucGsvIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZ290cmF2ZWwucGsvIn0.PH5u8wGs0hmJjjVH0kevw2xiS1HX2e9G_tsEGUt9_BV8E1Ocx-dU1XZ6Vi6bx9FtV3zxR7P-bz3lVWOAVVMzJQ"
 val AIRPORT_LIST = arrayListOf<Airport>()
@@ -27,7 +25,6 @@ var sItinerariesDetail:ItinerariesDetail?=null
 var sNoOfStops = 0
 var mTourType = "round"
 var mFromTo=""
-var selectedStop="non stop"
 var sAllFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sNoStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
 var sOneStopsFlights= MutableLiveData<List<ItinerariesDetail>>()
@@ -69,9 +66,7 @@ val mTourPackagePrices= arrayListOf<TourPackagePrices>()
 //Visa
 var VISA_COUNTRIES = arrayListOf<Countries>()
 
-interface TempListener{
-    fun onTempClick(which:String, user: AllUser)
-}
+
 
 
 

@@ -15,7 +15,7 @@ import com.trips.pk.ui.common.sItinerariesDetail
 import com.trips.pk.ui.common.sNoStopsFlights
 import com.trips.pk.ui.flight.listing.AirlinesAndStopsAdapter
 import com.trips.pk.ui.flight.listing.AllStopsAdapter
-import com.trips.pk.ui.flight.listing.FlightListingFragmentNewDirections
+import com.trips.pk.ui.flight.listing.FlightListingFragmentDirections
 
 class NoStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListener,OnListItemClickListener<ItinerariesDetail> {
     private lateinit var binding: FlightMainRvListBinding
@@ -60,7 +60,7 @@ class NoStopFlightsFragment(): Fragment(), AllStopsAdapter.FlightListClickListen
     override fun onListClick(flight:ItinerariesDetail, position:Int) {
 
         sItinerariesDetail=flight
-        findNavController().navigate(FlightListingFragmentNewDirections.actionFlightListToFlightDetailFragment())
+        findNavController().navigate(FlightListingFragmentDirections.actionFlightListToFlightDetailFragment())
 
         //  findNavController().navigate(R.id.action_flight_list_to_flight_detail_fragment)
 

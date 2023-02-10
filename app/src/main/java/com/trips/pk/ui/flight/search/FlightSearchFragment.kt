@@ -53,7 +53,6 @@ class FlightSearchFragment:Fragment() {
         binding= FragmentFlightSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
         binding.toolbarLayout.tvToolbar.text="Flight Search"
-        selectedStop ="all"
         val dialog= SearchOriginDestinationBottomSheet()
         val bundle=Bundle()
 

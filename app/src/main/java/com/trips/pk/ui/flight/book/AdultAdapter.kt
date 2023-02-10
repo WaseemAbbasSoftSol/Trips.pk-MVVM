@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -102,7 +101,7 @@ class AdultAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemRecyclerViewHolder {
         return ItemRecyclerViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.temp,
+                R.layout.item_passenger_flight,
                 parent,
                 false
             )

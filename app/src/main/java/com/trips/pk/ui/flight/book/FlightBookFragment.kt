@@ -49,10 +49,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter,AdultAdapter.V
             mContactPeron.clear()
             mIsValid=true
             isButtonClick.value=true
-
-            for ((i,value ) in mTotalPassenger.withIndex()){
-
-            }
+            
             adapter!!.validateEditText(holder!!,position)
         }
     /*    val adultView=View.inflate(requireContext(), R.layout.adult_layout, null)
