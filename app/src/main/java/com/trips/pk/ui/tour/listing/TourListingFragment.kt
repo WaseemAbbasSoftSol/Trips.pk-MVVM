@@ -13,10 +13,13 @@ import com.trips.pk.model.tour.TourDetail
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.common.OnListItemClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class TourListingFragment:Fragment() {
     private lateinit var binding:FragmentTourListingBinding
-    private val mViewModel:TourListingViewModel by viewModel()
+    private val mViewModel:TourListingViewModel by viewModel{
+        parametersOf(placeName)
+    }
     private var placeName = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,8 @@ class TourListingFragment:Fragment() {
 
     inner class OnTourItemClickListener : OnListItemClickListener<TourDetail>{
         override fun onItemClick(item: TourDetail, pos: Int) {
-            findNavController().navigate(R.id.action_tour_listing_to_tour_detail)
+         //   findNavController().navigate(R.id.action_tour_listing_to_tour_detail)
+            findNavController().navigate(TourListingFragmentDirections.actionTourListingToTourDetail(item.id,placeName))
         }
 
     }

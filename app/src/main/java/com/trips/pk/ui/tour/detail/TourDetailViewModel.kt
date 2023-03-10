@@ -14,7 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TourDetailViewModel(
-    private val repository: TripsRepository
+    private val repository: TripsRepository,
+    private val tourId:Int
 ):ViewModel() {
 
     private val _state = MutableLiveData<RequestState>()
@@ -33,7 +34,7 @@ class TourDetailViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _state.postValue(RequestState.LOADING)
-                val response = repository.getTourDetailByTourId(6)
+                val response = repository.getTourDetailByTourId(tourId)
                 if (response.isSuccessful) {
                     response.body().let {
                         _tour.postValue(it!!.data!!)

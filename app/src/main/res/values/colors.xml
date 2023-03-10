@@ -10,6 +10,7 @@
 
     <color name="transparent">#0000ffff</color>
     <color name="primary_color">#002B81</color>
+    <color name="primary_color_14">#24002B81</color>
     <color name="btn_color">#FF9924</color>
     <color name="btn_color_lite">#73FF9924</color>
     <color name="grey">#DEDCDC</color>

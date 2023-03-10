@@ -7,6 +7,7 @@ import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
 import com.trips.pk.model.flight.book.FlightBooker
 import com.trips.pk.model.flight.book.KeyRequestId
+import com.trips.pk.model.rent_a_car.Vehicle
 import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourDetail
@@ -112,7 +113,7 @@ interface TripsApi {
     suspend fun searchVehicle(
         @Header("categoryID") catId:Int,
         @Header("cityID") cityId: Int
-    ):Response<BaseResponse<List<VehicleCategory>>>
+    ):Response<BaseResponse<List<Vehicle>>>
 
     //Visa
     @GET("GetListOfVisas")

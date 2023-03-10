@@ -39,11 +39,11 @@ fun drawLine(view: TextView, isFlag:Boolean) {
 //    )
 //}
 //
-//@BindingAdapter("imageRes")
-//fun setImageRes(view: ImageView, imageRes: Int) {
-//    view.setImageResource(imageRes)
-//}
-//
+@BindingAdapter("imageRes")
+fun setImageRes(view: ImageView, imageRes: Int) {
+    view.setImageResource(imageRes)
+}
+
 //@BindingAdapter(value = ["imageUrl", "default"], requireAll = false)
 //fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
 //    if (default == null) {

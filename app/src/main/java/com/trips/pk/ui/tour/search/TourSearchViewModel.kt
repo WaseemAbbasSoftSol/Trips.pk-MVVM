@@ -58,9 +58,9 @@ class TourSearchViewModel(
                         mTourCountries.addAll(it!!.data)
                         val tempList= arrayListOf<Countries>()
                         for (item in it.data){
-                            if (item.isPromoted){
+                          //  if (item.isPromoted){
                                 tempList.add(item)
-                            }
+                          //  }
                         }
                         _promotedCountries.postValue(tempList)
                     }

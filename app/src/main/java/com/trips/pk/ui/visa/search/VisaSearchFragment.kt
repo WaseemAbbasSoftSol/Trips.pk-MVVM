@@ -53,7 +53,7 @@ class VisaSearchFragment:Fragment() {
             }
             val bundle = Bundle()
             bundle.putInt("countryId",157)
-            findNavController().navigate(R.id.action_visa_search_to_visa_detail_fratment,bundle)
+            findNavController().navigate(R.id.action_visa_search_to_visa_detail_fragment,bundle)
             binding.edEnterCountry.setText("")
         }
         return binding.root
@@ -68,8 +68,8 @@ class VisaSearchFragment:Fragment() {
     inner class OnVisaItemClickListener:OnListItemClickListener<Visa>{
         override fun onItemClick(item: Visa, pos: Int) {
             val bundle = Bundle()
-            bundle.putInt("countryId",157)
-            findNavController().navigate(R.id.action_visa_search_to_visa_detail_fratment,bundle)
+            bundle.putInt("countryId",item.countryID)
+            findNavController().navigate(R.id.action_visa_search_to_visa_detail_fragment,bundle)
         }
 
     }

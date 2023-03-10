@@ -19,14 +19,14 @@
             app:popExitAnim="@anim/slide_out_right"
             />
 
-        <action
-            android:id="@+id/action_dashboard_to_flight_book_fragment"
-            app:destination="@id/flight_book_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
+<!--        <action-->
+<!--            android:id="@+id/action_dashboard_to_flight_book_fragment"-->
+<!--            app:destination="@id/flight_book_fragment"-->
+<!--            app:enterAnim="@anim/slide_in_right"-->
+<!--            app:exitAnim="@anim/slide_out_left"-->
+<!--            app:popEnterAnim="@anim/slide_in_left"-->
+<!--            app:popExitAnim="@anim/slide_out_right"-->
+<!--            />-->
 
         <action
             android:id="@+id/action_dashboard_to_tours_search_fragment"
@@ -193,6 +193,12 @@
         android:id="@+id/tour_detail_fragment"
         android:name="com.trips.pk.ui.tour.detail.TourDetailFragment"
         tools:layout="@layout/fragment_tour_detail">
+        <argument
+            android:name="tour_id"
+            app:argType="integer"/>
+        <argument
+            android:name="place"
+            app:argType="string"/>
         <action
             android:id="@+id/action_tour_detail_to_book_list"
             app:destination="@id/tour_book_list_fragment"
@@ -270,7 +276,7 @@
         android:name="com.trips.pk.ui.visa.search.VisaSearchFragment"
         tools:layout="@layout/fragment_visa_search">
         <action
-            android:id="@+id/action_visa_search_to_visa_detail_fratment"
+            android:id="@+id/action_visa_search_to_visa_detail_fragment"
             app:destination="@id/visa_detail_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -308,8 +314,35 @@
         android:id="@+id/insurance_search_fragment"
         android:name="com.trips.pk.ui.insurance.search.InsuranceSearchFragment"
         tools:layout="@layout/fragment_insurance_search">
+        <action
+            android:id="@+id/action_insurance_search_to_insurance_agent_list_fragment"
+            app:destination="@id/insurance_agent_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
 
+        <action
+            android:id="@+id/action_insurance_search_to_insurance_list_fragment"
+            app:destination="@id/insurance_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
+
+    <fragment
+        android:id="@+id/insurance_agent_list_fragment"
+        android:name="com.trips.pk.ui.insurance.agent.InsuranceAgentListFragment"
+        tools:layout="@layout/fragment_insurance_agent_list"/>
+
+    <fragment
+        android:id="@+id/insurance_list_fragment"
+        android:name="com.trips.pk.ui.insurance.list.InsurancesListFragment"
+        tools:layout="@layout/fragment_insurances"/>
+
     <!--End of Insurance Module-->
 
     <!--Global Navigation-->

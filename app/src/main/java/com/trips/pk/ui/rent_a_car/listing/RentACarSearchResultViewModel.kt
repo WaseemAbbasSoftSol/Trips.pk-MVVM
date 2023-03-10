@@ -26,8 +26,8 @@ class RentACarSearchResultViewModel(
     private val _vehicle= MutableLiveData<List<Vehicle>>()
     val vehicle: LiveData<List<Vehicle>> = _vehicle
 
-    private val _searchVehicle= MutableLiveData<List<VehicleCategory>>()
-    val searchVehicle: LiveData<List<VehicleCategory>> = _searchVehicle
+    private val _searchVehicle= MutableLiveData<List<Vehicle>>()
+    val searchVehicle: LiveData<List<Vehicle>> = _searchVehicle
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -36,7 +36,7 @@ class RentACarSearchResultViewModel(
         _vehicle.value= emptyList()
         _vehicle.value= mVehicles
         _searchVehicle.value= emptyList()
-        searchVehicle
+
     }
     fun searchVehicle(categoryId: Int,cityId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -45,7 +45,8 @@ class RentACarSearchResultViewModel(
                 val response = repository.searchVehicle(categoryId,cityId)
                 if (response.isSuccessful) {
                     response.body().let {
-                        _searchVehicle.postValue(it!!.data!!)
+                    //    _searchVehicle.postValue(it!!.data!!)
+                        _vehicle.postValue(it!!.data!!)
                         val tempList= arrayListOf<VehiclesModel>()
                     }
                 } else {

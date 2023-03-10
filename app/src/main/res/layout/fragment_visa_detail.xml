@@ -144,7 +144,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:text="@string/lbl_turkey_visa_from_pak"
+                                android:text="Visa from Pakistan"
                                 android:fontFamily="@font/raleway_semiboldd"
                                 android:textSize="@dimen/_20sp"
                                 android:textColor="@color/black"

@@ -8,6 +8,9 @@ import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.insurance.agent.InsuranceAgentListViewModel
+import com.trips.pk.ui.insurance.list.InsurancesListViewModel
+import com.trips.pk.ui.insurance.search.InsuranceSearchViewModel
 import com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultViewModel
 import com.trips.pk.ui.rent_a_car.listing.VehicleListViewModel
 import com.trips.pk.ui.rent_a_car.search.RentCarSearchViewModel
@@ -39,8 +42,8 @@ val viewModelsModule= module {
     //Tour
     viewModel { TourSearchViewModel(get(),get()) }
     viewModel { TourPackageViewModel(get()) }
-    viewModel { TourListingViewModel(get()) }
-    viewModel { TourDetailViewModel(get()) }
+    viewModel { (placeName:String) ->TourListingViewModel(get(),placeName) }
+    viewModel { (tourId:Int) -> TourDetailViewModel(get(),tourId) }
     viewModel { TourBookListViewModel() }
 
     //Rent a Car
@@ -51,6 +54,11 @@ val viewModelsModule= module {
     //Visa
     viewModel { VisaSearchViewModel(get()) }
     viewModel { VisaDetailViewModel(get()) }
+
+    //Insurance
+    viewModel { InsuranceSearchViewModel(get()) }
+    viewModel { InsuranceAgentListViewModel(get()) }
+    viewModel { InsurancesListViewModel(get()) }
     }
 
   val repositoriesModule = module {

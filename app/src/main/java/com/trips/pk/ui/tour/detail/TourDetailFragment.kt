@@ -15,10 +15,23 @@ import com.trips.pk.databinding.FragmentTourDetailBinding
 import com.trips.pk.model.tour.TourPackagePrices
 import com.trips.pk.ui.common.mTourPackagePrices
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class TourDetailFragment:Fragment() {
     private lateinit var binding:FragmentTourDetailBinding
-    private val mViewModel : TourDetailViewModel by viewModel()
+    private val mViewModel : TourDetailViewModel by viewModel{
+        parametersOf(tourId)
+    }
+    private var tourId=0
+    private var placeName=""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            val args=TourDetailFragmentArgs.fromBundle(it!!)
+            tourId=args.tourId
+            placeName=args.place
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,8 +40,7 @@ class TourDetailFragment:Fragment() {
         binding= FragmentTourDetailBinding.inflate(inflater,container,false)
      //   requireActivity().makeStatusBarTransparent()
         binding.lifecycleOwner=this
-
-
+        binding.tvToolbar.text = "$placeName Tour Package"
         binding.appbar.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             var isShow = false
             var scrollRange = -1
