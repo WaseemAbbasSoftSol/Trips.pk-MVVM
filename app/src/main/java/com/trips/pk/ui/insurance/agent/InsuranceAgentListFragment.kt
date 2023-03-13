@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.trips.pk.R
 import com.trips.pk.databinding.FragmentInsuranceAgentListBinding
 import com.trips.pk.model.insurance.Insurance
 import com.trips.pk.ui.common.OnListItemClickListener
@@ -31,7 +33,7 @@ class InsuranceAgentListFragment:Fragment() {
     }
     inner class OnInsuranceAgentClickListener: OnListItemClickListener<Insurance> {
         override fun onItemClick(item: Insurance, pos: Int) {
-            Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_insurance_agent_to_insurance_list_fragment)
         }
     }
 }

@@ -141,5 +141,7 @@
     <string name="lbl_loading">Loading…</string>
     <string name="lbl_trvel_insurace_world">Travel Insurance all over the World</string>
     <string name="lbl_insurance_agents_in_pak">Insurance Agents in Pakistan</string>
+    <string name="lbl_flight_hotel_urmah">Flight | Hotel | Transport | Umrah Service</string>
+    <string name="includes">Includes</string>
 
 </resources>

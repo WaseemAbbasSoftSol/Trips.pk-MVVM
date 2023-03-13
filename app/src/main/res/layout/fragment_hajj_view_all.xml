@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.trips.pk.ui.insurance.list.InsurancesListViewModel" />
+            type="com.trips.pk.ui.hajj.list.view_all.HajjListViewAllViewModel" />
         <variable
-            name="itemClickListener"
-            type="com.trips.pk.ui.insurance.list.InsurancesListFragment.OnInsuranceItemClickListener" />
+            name="agentClickListener"
+            type="com.trips.pk.ui.insurance.agent.InsuranceAgentListFragment.OnInsuranceAgentClickListener" />
 
     </data>
 
@@ -62,8 +62,9 @@
                     android:id="@+id/tv_toolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jublee Travel"
+                    android:text="10 Days"
                     android:textSize="@dimen/_20sp"
+                    android:layout_marginEnd="@dimen/_30dp"
                     android:fontFamily="@font/raleway_semiboldd"
                     android:textColor="@color/white"
                     />
@@ -72,8 +73,9 @@
                     android:id="@+id/tv_departure_return"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Insurance"
+                    android:text="Umrah Package"
                     android:textSize="@dimen/_11sp"
+                    android:layout_marginEnd="@dimen/_30dp"
                     android:textColor="@color/white"
                     />
 
@@ -102,7 +104,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_5dp">
+                android:layout_marginTop="@dimen/_10dp">
 
 
                 <com.mikelau.views.shimmer.ShimmerRecyclerViewX
@@ -111,18 +113,18 @@
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/_20dp"
-                    android:layout_marginEnd="@dimen/_20dp"
-                    itemsList="@{viewModel.agentList}"
-                    itemClickListener="@{itemClickListener}"
-                    itemLayout="@{@layout/item_insurance}"
+                    android:layout_marginStart="@dimen/_15dp"
+                    android:layout_marginEnd="@dimen/_15dp"
+                    itemsList="@{viewModel.dummyList}"
+                    itemLayout="@{@layout/item_hajj_inner_new}"
                     hasFixSize="@{true}"
                     app:shimmer_demo_angle="10"
                     app:shimmer_demo_child_count="2"
                     app:shimmer_demo_grid_child_count="2"
-                    app:shimmer_demo_layout_manager_type="linear_vertical"
-                    tools:listitem="@layout/item_insurance"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:shimmer_demo_layout_manager_type="grid"
+                    tools:listitem="@layout/item_hajj_inner_new"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

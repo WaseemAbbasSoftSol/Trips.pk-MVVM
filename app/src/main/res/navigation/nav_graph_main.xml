@@ -60,6 +60,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard__to_hajj_list_fragment"
+            app:destination="@id/hajj_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -336,7 +344,16 @@
     <fragment
         android:id="@+id/insurance_agent_list_fragment"
         android:name="com.trips.pk.ui.insurance.agent.InsuranceAgentListFragment"
-        tools:layout="@layout/fragment_insurance_agent_list"/>
+        tools:layout="@layout/fragment_insurance_agent_list">
+        <action
+            android:id="@+id/action_insurance_agent_to_insurance_list_fragment"
+            app:destination="@id/insurance_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/insurance_list_fragment"
@@ -344,6 +361,27 @@
         tools:layout="@layout/fragment_insurances"/>
 
     <!--End of Insurance Module-->
+
+    <!--Hajj Module-->
+    <fragment
+        android:id="@+id/hajj_list_fragment"
+        android:name="com.trips.pk.ui.hajj.list.HajjListFragment"
+        tools:layout="@layout/fragment_hajj_list">
+        <action
+            android:id="@+id/action_hajj_list_to_view_all_fragment"
+            app:destination="@id/hajj_list_view_all_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/hajj_list_view_all_fragment"
+        android:name="com.trips.pk.ui.hajj.list.view_all.HajjListViewAllFragment"
+        tools:layout="@layout/fragment_hajj_view_all"/>
+    <!--End of Hajj Module-->
 
     <!--Global Navigation-->
     <action

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15dp"
+      >
+
+        <LinearLayout
+            android:id="@+id/ll_haj_pkg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+
+            android:background="@drawable/bg_hajj_pkg"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginEnd="@dimen/_20dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="8 Days"
+                android:textColor="@color/white"
+                android:fontFamily="@font/raleway_semiboldd"
+                android:textSize="@dimen/_15sp"
+                android:layout_marginStart="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Umrah Packages"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/_10sp"
+                android:padding="@dimen/_8dp"
+                android:layout_marginStart="@dimen/_30dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_view_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/lbl_view_all"
+            android:textColor="@color/btn_color"
+            android:textSize="@dimen/_11sp"
+            android:layout_marginEnd="@dimen/_20dp"
+            app:layout_constraintBottom_toBottomOf="@id/ll_haj_pkg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ll_haj_pkg" />
+
+        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
+            android:id="@+id/rv_hajj_inner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ll_haj_pkg"
+            android:layout_marginTop="@dimen/_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_hajj_inner"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
