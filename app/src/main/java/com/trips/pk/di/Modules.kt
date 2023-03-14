@@ -8,6 +8,7 @@ import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
+import com.trips.pk.ui.hajj.detail.HajjDetailsViewModel
 import com.trips.pk.ui.hajj.list.view_all.HajjListViewAllViewModel
 import com.trips.pk.ui.insurance.agent.InsuranceAgentListViewModel
 import com.trips.pk.ui.insurance.list.InsurancesListViewModel
@@ -63,6 +64,7 @@ val viewModelsModule= module {
 
     //Hajj
     viewModel { HajjListViewAllViewModel() }
+    viewModel { HajjDetailsViewModel() }
     }
 
   val repositoriesModule = module {

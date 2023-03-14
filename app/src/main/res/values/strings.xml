@@ -143,5 +143,8 @@
     <string name="lbl_insurance_agents_in_pak">Insurance Agents in Pakistan</string>
     <string name="lbl_flight_hotel_urmah">Flight | Hotel | Transport | Umrah Service</string>
     <string name="includes">Includes</string>
+    <string name="lbl_5_star_hotel">5 Star Umrah Package with Haramain High Speed Train by Go Umrah</string>
+    <string name="label_mobile_no">Mobile No.</string>
+    <string name="lbl_umrah_duration">Duration of Umrah</string>
 
 </resources>

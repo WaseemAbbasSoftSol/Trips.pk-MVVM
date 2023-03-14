@@ -375,12 +375,39 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_hajj_list_to_detail_fragment"
+            app:destination="@id/hajj_details_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
         android:id="@+id/hajj_list_view_all_fragment"
         android:name="com.trips.pk.ui.hajj.list.view_all.HajjListViewAllFragment"
         tools:layout="@layout/fragment_hajj_view_all"/>
+
+    <fragment
+        android:id="@+id/hajj_details_fragment"
+        android:name="com.trips.pk.ui.hajj.detail.HajjDetailsFragment"
+        tools:layout="@layout/fragment_hajj_details">
+        <action
+            android:id="@+id/action_hajj_detail_to_booking_fragment"
+            app:destination="@id/hajj_booking_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/hajj_booking_fragment"
+        android:name="com.trips.pk.ui.hajj.book.HajjBookFragment"
+        tools:layout="@layout/fragment_hajj_booking"/>
     <!--End of Hajj Module-->
 
     <!--Global Navigation-->
