@@ -146,5 +146,13 @@
     <string name="lbl_5_star_hotel">5 Star Umrah Package with Haramain High Speed Train by Go Umrah</string>
     <string name="label_mobile_no">Mobile No.</string>
     <string name="lbl_umrah_duration">Duration of Umrah</string>
+    <string name="lbl_pak_tour">Pakistan Tours</string>
+    <string name="lbl_intl_tour">International Tours</string>
+    <string name="lbl_select_dream_location">Select your dream location…</string>
+    <string name="lbl_explore_world_with_us">Explore The World with us</string>
+    <string name="lbl_explore_pak_with_us">Explore Pakistan with us</string>
+    <string name="explore_world">Explore World</string>
+    <string name="explore_pak">Explore Pakistan</string>
+    <string name="destination_search">Destinations Search</string>
 
 </resources>

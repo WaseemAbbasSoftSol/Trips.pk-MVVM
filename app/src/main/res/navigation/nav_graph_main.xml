@@ -68,6 +68,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard_to_destination_search"
+            app:destination="@id/destination_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -409,6 +417,33 @@
         android:name="com.trips.pk.ui.hajj.book.HajjBookFragment"
         tools:layout="@layout/fragment_hajj_booking"/>
     <!--End of Hajj Module-->
+
+    <!--Destinations Module-->
+    <fragment
+        android:id="@+id/destination_search_fragment"
+        android:name="com.trips.pk.ui.destination.search.DestinationSearchFragment"
+        tools:layout="@layout/fragment_destination_search">
+        <action
+            android:id="@+id/action_destination_search_to_pkg_fragment"
+            app:destination="@id/destination_pkg_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_pkg_fragment"
+        android:name="com.trips.pk.ui.destination.pkg.DestinationPackageFragment"
+        tools:layout="@layout/fragment_destination_pkg">
+        <argument
+            android:name="tour_type"
+            app:argType="string"/>
+
+    </fragment>
+
+    <!--End of Destinations Module-->
 
     <!--Global Navigation-->
     <action

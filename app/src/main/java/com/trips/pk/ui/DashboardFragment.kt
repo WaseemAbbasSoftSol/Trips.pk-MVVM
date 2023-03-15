@@ -65,6 +65,7 @@ class DashboardFragment:Fragment() {
 
         binding.appBarLayout.clHajj.setOnClickListener { findNavController().navigate(R.id.action_dashboard__to_hajj_list_fragment) }
 
+      binding.appBarLayout.clDestination.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_destination_search)  }
     //    binding.appBarLayout.clDestination.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)  }
 
         return binding.root

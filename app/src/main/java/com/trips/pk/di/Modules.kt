@@ -5,6 +5,8 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsApi
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.ui.destination.pkg.DestinationPackageViewModel
+import com.trips.pk.ui.destination.search.DestinationSearchViewModel
 import com.trips.pk.ui.flight.book.FlightBookViewModel
 import com.trips.pk.ui.flight.listing.FlightListingViewModel
 import com.trips.pk.ui.flight.search.FlightSearchViewModel
@@ -65,6 +67,10 @@ val viewModelsModule= module {
     //Hajj
     viewModel { HajjListViewAllViewModel() }
     viewModel { HajjDetailsViewModel() }
+
+    //Destinations
+    viewModel { DestinationSearchViewModel() }
+    viewModel { DestinationPackageViewModel() }
     }
 
   val repositoriesModule = module {
