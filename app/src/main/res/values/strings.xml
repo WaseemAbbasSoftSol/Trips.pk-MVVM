@@ -154,5 +154,9 @@
     <string name="explore_world">Explore World</string>
     <string name="explore_pak">Explore Pakistan</string>
     <string name="destination_search">Destinations Search</string>
+    <string name="lbl_agent_name">Agent name</string>
+    <string name="lbl_top_travel_agent_in_pak">Top Travel Agents in Pakistan</string>
+    <string name="lbl_travel_agent_in_cities">Travel Agents in Major Cities</string>
+    <string name="offc_address">10-C Commercial, Block C PIA Housing Society, Lahore, 54000</string>
 
 </resources>

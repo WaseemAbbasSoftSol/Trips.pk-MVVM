@@ -76,6 +76,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard_to_agent_search"
+            app:destination="@id/agent_search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -431,6 +439,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_destination_search_to_listing_fragment"
+            app:destination="@id/destination_listing_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
@@ -441,9 +457,42 @@
             android:name="tour_type"
             app:argType="string"/>
 
+        <action
+            android:id="@+id/action_destination_pkg_to_listing_fragment"
+            app:destination="@id/destination_listing_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
+    <fragment
+        android:id="@+id/destination_listing_fragment"
+        android:name="com.trips.pk.ui.destination.listing.DestinationListingFragment"
+        tools:layout="@layout/fragment_destination_listing"/>
     <!--End of Destinations Module-->
+
+
+    <!--Agent Module-->
+    <fragment
+        android:id="@+id/agent_search_fragment"
+        android:name="com.trips.pk.ui.agent.search.AgentSearchFragment"
+        tools:layout="@layout/fragment_agent_search">
+        <action
+            android:id="@+id/action_agent_search_to_listing_fragment"
+            app:destination="@id/agent_listing_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/agent_listing_fragment"
+        android:name="com.trips.pk.ui.agent.listing.AgentListingFragment"
+        tools:layout="@layout/fragment_agent_listing"/>
+    <!--End of Agent Module-->
 
     <!--Global Navigation-->
     <action

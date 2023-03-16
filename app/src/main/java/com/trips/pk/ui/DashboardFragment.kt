@@ -68,6 +68,7 @@ class DashboardFragment:Fragment() {
       binding.appBarLayout.clDestination.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_destination_search)  }
     //    binding.appBarLayout.clDestination.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)  }
 
+        binding.appBarLayout.clAgents.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_agent_search) }
         return binding.root
     }
 

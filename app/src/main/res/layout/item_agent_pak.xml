@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.trips.pk.model.hajj.Temp" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_0dp"
+        app:strokeWidth="@dimen/_1dp"
+        app:strokeColor="@color/primary_color_14"
+        android:layout_marginStart="@dimen/_5dp"
+        android:layout_marginEnd="@dimen/_5dp"
+        android:layout_marginTop="@dimen/_10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_5dp"
+            android:paddingStart="@dimen/_5dp"
+            android:paddingEnd="@dimen/_5dp">
+
+            <ImageView
+                android:id="@+id/iv_agent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/_10dp"
+                android:src="@drawable/im_deluxe_agent"
+                />
+
+            <TextView
+                android:id="@+id/tv_agent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_agent"
+                tools:text="Mashabrum Travels Skardu"
+                android:text="@{obj.name}"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_13sp"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

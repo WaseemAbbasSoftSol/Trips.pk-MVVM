@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentDestinationPkgBinding
 import com.trips.pk.model.flight.Countries
@@ -59,12 +60,12 @@ class DestinationPackageFragment:Fragment() {
     }
     inner class OnWorldDestinationClickListener: OnListItemClickListener<Temp> {
         override fun onItemClick(item: Temp, pos: Int) {
-            Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_destination_pkg_to_listing_fragment)
         }
     }
     inner class OnCityDestinationClickListener : OnListItemClickListener<Countries> {
         override fun onItemClick(item: Countries, pos: Int) {
-            Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_destination_pkg_to_listing_fragment)
         }
     }
 }

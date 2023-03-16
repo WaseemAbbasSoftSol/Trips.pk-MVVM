@@ -39,11 +39,12 @@ class DestinationSearchFragment:Fragment() {
     }
     inner class OnWorldDestinationClickListener:OnListItemClickListener<Temp>{
         override fun onItemClick(item: Temp, pos: Int) {
-            Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_SHORT).show()        }
+           findNavController().navigate(R.id.action_destination_search_to_listing_fragment)
+               }
     }
     inner class OnCityDestinationClickListener : OnListItemClickListener<Countries> {
         override fun onItemClick(item: Countries, pos: Int) {
-            Toast.makeText(requireContext(),"Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_destination_search_to_listing_fragment)
         }
     }
 }

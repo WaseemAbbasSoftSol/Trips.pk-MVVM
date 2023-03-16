@@ -5,6 +5,9 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsApi
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.ui.agent.listing.AgentListingViewModel
+import com.trips.pk.ui.agent.search.AgentSearchViewModel
+import com.trips.pk.ui.destination.listing.DestinationListingViewModel
 import com.trips.pk.ui.destination.pkg.DestinationPackageViewModel
 import com.trips.pk.ui.destination.search.DestinationSearchViewModel
 import com.trips.pk.ui.flight.book.FlightBookViewModel
@@ -71,6 +74,11 @@ val viewModelsModule= module {
     //Destinations
     viewModel { DestinationSearchViewModel() }
     viewModel { DestinationPackageViewModel() }
+    viewModel { DestinationListingViewModel() }
+
+    //Agent
+    viewModel { AgentSearchViewModel() }
+    viewModel { AgentListingViewModel() }
     }
 
   val repositoriesModule = module {
