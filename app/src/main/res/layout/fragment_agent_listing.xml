@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.trips.pk.ui.agent.listing.AgentListingViewModel" />
+        <variable
+            name="itemClickListener"
+            type="com.trips.pk.ui.agent.listing.AgentListingFragment.OnAgentListItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,6 +106,7 @@
                 android:layout_height="wrap_content"
                 itemsList="@{viewModel.tempList}"
                 itemLayout="@{@layout/item_agent_listing}"
+                itemClickListener="@{itemClickListener}"
                 hasFixSize="@{true}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_agent_listing"
