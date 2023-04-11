@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,10 +17,7 @@ import com.trips.pk.R
 import com.trips.pk.databinding.FragmentVisaSearchBinding
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.visa.Visa
-import com.trips.pk.ui.common.DummyClickListener
-import com.trips.pk.ui.common.OnListItemClickListener
-import com.trips.pk.ui.common.VEHICLE_CITIES
-import com.trips.pk.ui.common.VISA_COUNTRIES
+import com.trips.pk.ui.common.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -69,6 +67,7 @@ class VisaSearchFragment:Fragment() {
         override fun onItemClick(item: Visa, pos: Int) {
             val bundle = Bundle()
             bundle.putInt("countryId",item.countryID)
+            tempVisaPlaceName=item.countries.name
             findNavController().navigate(R.id.action_visa_search_to_visa_detail_fragment,bundle)
         }
 
@@ -91,5 +90,10 @@ class VisaSearchFragment:Fragment() {
         val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, tempList)
         binding.edEnterCountry.setAdapter(adapter)
         binding.edEnterCountry.showDropDown()
+
+        binding.edEnterCountry.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+            val selectedItem = parent.getItemAtPosition(position) as Countries
+            tempVisaPlaceName=selectedItem.name
+        }
     }
 }

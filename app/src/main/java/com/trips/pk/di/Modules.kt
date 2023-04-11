@@ -5,6 +5,7 @@ import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsApi
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.rent_a_car.VehicleCategory
+import com.trips.pk.ui.DashboardViewModel
 import com.trips.pk.ui.agent.listing.AgentListingViewModel
 import com.trips.pk.ui.agent.main.pkg.AgentVisaAssistanceViewModel
 import com.trips.pk.ui.agent.search.AgentSearchViewModel
@@ -19,6 +20,7 @@ import com.trips.pk.ui.hajj.list.view_all.HajjListViewAllViewModel
 import com.trips.pk.ui.insurance.agent.InsuranceAgentListViewModel
 import com.trips.pk.ui.insurance.list.InsurancesListViewModel
 import com.trips.pk.ui.insurance.search.InsuranceSearchViewModel
+import com.trips.pk.ui.news.NewsDetailViewModel
 import com.trips.pk.ui.rent_a_car.listing.RentACarSearchResultViewModel
 import com.trips.pk.ui.rent_a_car.listing.VehicleListViewModel
 import com.trips.pk.ui.rent_a_car.search.RentCarSearchViewModel
@@ -41,7 +43,10 @@ import java.util.concurrent.TimeUnit
 private const val BASE_URL = "https://api.gotravel.pk/"
 
 val viewModelsModule= module {
-  //  viewModel { DashboardViewModel(get()) }
+
+    viewModel { DashboardViewModel(get()) }
+    viewModel { (heading:String) -> NewsDetailViewModel(get(), heading) }
+
     //Flight
     viewModel { FlightSearchViewModel(get(), get()) }
     viewModel { FlightListingViewModel(get()) }

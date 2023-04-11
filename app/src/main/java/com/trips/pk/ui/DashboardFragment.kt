@@ -19,13 +19,16 @@ import com.loopj.android.http.TextHttpResponseHandler
 import com.trips.pk.R
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.databinding.FragmentDashboardBinding
+import com.trips.pk.model.News
 import com.trips.pk.model.TokenResponseTemp
+import com.trips.pk.ui.common.OnListItemClickListener
 import com.trips.pk.ui.common.tempToken
 import cz.msebera.android.httpclient.Header
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment:Fragment() {
     private lateinit var binding:FragmentDashboardBinding
-   // private val mViewModel : DashboardViewModel by viewModel()
+   private val mViewModel : DashboardViewModel by viewModel()
     private lateinit var prefRepository: PrefRepository
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,12 +72,16 @@ class DashboardFragment:Fragment() {
     //    binding.appBarLayout.clDestination.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_flight_book_fragment)  }
 
         binding.appBarLayout.clAgents.setOnClickListener { findNavController().navigate(R.id.action_dashboard_to_agent_search) }
+
+        binding.appBarLayout.newsClickListener=OnNewsItemClickListener()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  binding.viewModel=mViewModel
+        binding.viewModel=mViewModel
+        binding.appBarLayout.viewModel=mViewModel
     }
     private fun initDrawerLayout() {
         val button: MaterialButton?
@@ -114,6 +121,14 @@ class DashboardFragment:Fragment() {
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
+        }
+    }
+
+    inner class OnNewsItemClickListener:OnListItemClickListener<News> {
+        override fun onItemClick(item: News, pos: Int) {
+            val heading = item.heading
+            val replacedString = heading.replace(" ", "-").lowercase()
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardToNewsDetailFragment(replacedString))
         }
     }
 

@@ -76,7 +76,7 @@ class TourDetailFragment:Fragment() {
         binding.viewModel = mViewModel
         mViewModel.tour.observe(viewLifecycleOwner){
             if (it != null){
-                binding.tvFromCity.text = "${it.noOfDays} days trip to BERNE"
+                binding.tvFromCity.text = "${it.noOfDays} days trip"
                 mTourPackagePrices.clear()
                 mTourPackagePrices.addAll(it.priceDetails)
                 binding.wvTourDetail.loadDataWithBaseURL(

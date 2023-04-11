@@ -12,6 +12,7 @@ import com.trips.pk.databinding.FragmentVisaDetailBinding
 import com.trips.pk.model.visa.Visa
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.common.OnItemViewClickListener
+import com.trips.pk.ui.common.tempVisaPlaceName
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VisaDetailFragment: Fragment() {
@@ -53,7 +54,7 @@ class VisaDetailFragment: Fragment() {
                     //   setMargins(binding.cl,0,0,0,0)
                     //  binding.cl.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.primary_color))
                     isShow = true
-                    binding.tvToolbar.text = "Turkey Visa from Pakistan"
+                    binding.tvToolbar.text = "$tempVisaPlaceName Visa from Pakistan"
                     binding.tvToolbar.visibility=View.VISIBLE
                     binding.tvTour.visibility=View.GONE
                 } else if (isShow) {

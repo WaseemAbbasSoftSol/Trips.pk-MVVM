@@ -65,6 +65,7 @@ val mTourPackagePrices= arrayListOf<TourPackagePrices>()
 
 //Visa
 var VISA_COUNTRIES = arrayListOf<Countries>()
+var tempVisaPlaceName=""
 
 
 

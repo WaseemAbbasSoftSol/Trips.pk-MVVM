@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.TripsRepository
+import com.trips.pk.model.News
 import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.common.RequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -17,19 +17,48 @@ class DashboardViewModel(
 
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> = _token
+
+    private val _news = MutableLiveData<List<News>>()
+    val news: LiveData<List<News>> = _news
+
     init {
-        getBearerToken()
+        _news.value = emptyList()
+        getNewsList()
+        //  getBearerToken()
     }
+
+    private fun getNewsList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = repository.getNewsList()
+                if (response.isSuccessful) {
+                    response.body().let {
+                        val tempList= arrayListOf<News>()
+                        _news.postValue(it!!.data!!)
+                    }
+                } else {
+                    response.errorBody().let {
+
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } catch (t: Throwable) {
+                t.printStackTrace()
+            }
+        }
+    }
+
 
     private fun getBearerToken() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-            //    _state.postValue(RequestState.LOADING)
+                //    _state.postValue(RequestState.LOADING)
                 val response = repository.getBearerToken()
                 if (response.isSuccessful) {
                     response.body().let {
                         _token.postValue(it!!.data!!)
-                       // mBearerToken = it.data
+                        // mBearerToken = it.data
                     }
                 } else {
                     response.errorBody().let {

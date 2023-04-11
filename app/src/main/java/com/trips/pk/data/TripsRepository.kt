@@ -8,6 +8,10 @@ class TripsRepository (private val tripsApi: TripsApi) {
 
     suspend fun getBearerToken(userName:String="Rizwanbro", pass:String ="Rizwan@321") = tripsApi.getToken(userName,pass)
 
+    suspend fun getNewsList()=tripsApi.getNews()
+
+    suspend fun getNewsDetail(heading:String) = tripsApi.getNewsDetail(heading)
+
     //Flight
     suspend fun getAllAirports()=tripsApi.getAllAirports()
 

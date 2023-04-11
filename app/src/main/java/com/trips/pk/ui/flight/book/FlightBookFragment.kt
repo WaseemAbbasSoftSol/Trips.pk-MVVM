@@ -110,7 +110,7 @@ class FlightBookFragment:Fragment(), AdultAdapter.AdultTextGetter,AdultAdapter.V
 
     override fun onTextChanged(contactPerson: List<ContactPerson>,passenger: List<Passenger>) {
         val contact=contactPerson[0]
-        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,contact.zipCode,contact.address,contact.countryId,contact.cityId
+        val booker=FlightBooker(contact.name,contact.number,contact.gender,contact.email,"444",contact.address,contact.countryId,contact.cityId
             ,passenger,flightDetail!!)
         binding.btnContinue.makeProgressOnButton(R.string.lbl_wait)
         Toast.makeText(requireContext(),"good",Toast.LENGTH_SHORT).show()

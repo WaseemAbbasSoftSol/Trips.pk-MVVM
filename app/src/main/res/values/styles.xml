@@ -10,6 +10,26 @@
         <item name="android:drawableTint" tools:ignore="NewApi">@color/grey_002</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/primary_color</item>
+        <item name="colorAccent">@color/primary_color</item>
+
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="contentInsetStart">-9dp</item>
+        <item name="colorSurface">@color/primary_color</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar">
+     <!--   <item name="android:windowBackground">@drawable/image_placeholder</item>-->
+        <item name="android:windowBackground">@color/primary_color</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+    </style>
+
     <!--    Button Styles-->
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textColor">@android:color/white</item>

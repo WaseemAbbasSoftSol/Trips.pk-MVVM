@@ -84,6 +84,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_dashboard_to_news_detail_fragment"
+            app:destination="@id/news_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <!--Flight Module-->
@@ -507,6 +515,15 @@
         android:name="com.trips.pk.ui.agent.main.AgentBaseFragment"
         tools:layout="@layout/fragment_agent_base"/>
     <!--End of Agent Module-->
+
+    <fragment
+        android:id="@+id/news_detail_fragment"
+        android:name="com.trips.pk.ui.news.NewsDetailFragment"
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="heading"
+            app:argType="string"/>
+    </fragment>
 
     <!--Global Navigation-->
     <action

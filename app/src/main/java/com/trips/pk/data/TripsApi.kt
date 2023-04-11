@@ -2,6 +2,7 @@ package com.trips.pk.data
 
 import com.trips.pk.model.flight.Airport
 import com.trips.pk.model.BaseResponse
+import com.trips.pk.model.News
 import com.trips.pk.model.flight.FlightSearch
 import com.trips.pk.model.flight.Countries
 import com.trips.pk.model.flight.FlightsDetail
@@ -22,6 +23,16 @@ interface TripsApi {
    @Field("UserName") userName:String,
    @Field("Password") password:String
     ):Response<BaseResponse<String>>
+
+    @GET("GetNewsList")
+    @Headers("Content-Type:application/json")
+    suspend fun getNews():Response<BaseResponse<List<News>>>
+
+    @GET("NewsDetail")
+    @Headers("Content-Type:application/json")
+    suspend fun getNewsDetail(
+        @Header("name") heading:String
+    ):Response<BaseResponse<News>>
 
    //Flight
     @GET("GetListOfAirports")
