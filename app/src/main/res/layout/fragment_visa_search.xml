@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.visa.search.VisaSearchViewModel" />
+        <variable
+            name="itemClickListener"
+            type="com.trips.pk.ui.visa.search.VisaSearchFragment.OnVisaItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_color">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/base_toolbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrolview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/ed_enter_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/_10dp"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"
+                    android:background="@drawable/bg_rounded_edittext"
+                    android:hint="@string/lbl_type_country_name"
+                    android:textColorHint="@color/grey_003"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="14sp"
+                    android:padding="@dimen/_10dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.ContainedButton"
+                    android:text="SEARCH"
+                    android:textSize="@dimen/_14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintTop_toBottomOf="@id/ed_enter_country"
+                    android:layout_marginTop="@dimen/_16px"
+                    android:layout_marginStart="@dimen/_20dp"
+                    android:layout_marginEnd="@dimen/_20dp"/>
+
+                <com.github.captain_miao.optroundcardview.OptRoundCardView
+                    android:id="@+id/roundview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:behavior_hideable="true"
+                    android:background="#F2F2F2"
+                    app:layout_behavior="@string/bottom_sheet_behavior"
+                    app:layout_constraintTop_toBottomOf="@id/btn_search"
+                    android:layout_marginTop="@dimen/_50px"
+                    app:optRoundCardBackgroundColor="@color/white"
+                    app:optRoundCardElevation="@dimen/_0dp"
+                    app:optRoundCardCornerRadius="35dp"
+                    app:optRoundCardLeftBottomCorner="false"
+                    app:optRoundCardRightBottomCorner="false">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:layout_marginStart="@dimen/_20dp"
+                        android:layout_marginEnd="@dimen/_20dp"
+                        >
+
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
+                            android:id="@+id/rv_visa_by_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            itemLayout="@{@layout/item_visa_by_country}"
+                            itemsList="@{viewModel.visaPromoted}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{itemClickListener}"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="@dimen/_8px"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_child_count="2"
+                            app:shimmer_demo_layout="@layout/item_visa_by_country_shimmer"
+                            app:shimmer_demo_layout_manager_type="linear_vertical"
+                            tools:listitem="@layout/item_visa_by_country"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_visa_service"
+                            android:layout_width="@dimen/_0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10px"
+                            android:fontFamily="@font/poppins_medium"
+                            android:text="@string/lbl_visa_service"
+                            android:layout_marginEnd="@dimen/_2dp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_17sp"
+                            app:layout_constraintEnd_toStartOf="@id/tv_view_all"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rv_visa_by_country" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/tv_view_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tv_visa_service"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_visa_service"
+                            android:text="@string/lbl_view_all"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="@dimen/_11sp"
+                            android:textColor="@color/btn_color"
+                           />
+
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
+                            android:id="@+id/rv_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_visa_service"
+                            android:layout_marginTop="@dimen/_10px"
+                            tools:listitem="@layout/item_country"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="4"
+                            itemLayout="@{@layout/item_country}"
+                            itemsList="@{viewModel.visa}"
+                            itemClickListener="@{itemClickListener}"
+                            hasFixSize="@{true}"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_grid_child_count="4"
+                            app:shimmer_demo_child_count="4"
+                            app:shimmer_demo_layout="@layout/item_worldwide_trips"
+                            app:shimmer_demo_layout_manager_type="grid"
+                            />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_5dp"
+                            app:layout_constraintTop_toBottomOf="@id/rv_country"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/roundview"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

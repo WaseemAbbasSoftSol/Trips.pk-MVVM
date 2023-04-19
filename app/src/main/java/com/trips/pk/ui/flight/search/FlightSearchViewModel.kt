@@ -1,6 +1,5 @@
 package com.trips.pk.ui.flight.search
 
-import android.provider.SyncStateContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,11 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.PrefRepository
 import com.trips.pk.data.TripsRepository
-import com.trips.pk.model.Airport
 import com.trips.pk.ui.common.AIRPORT_LIST
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
-import com.trips.pk.ui.common.airPortList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -24,14 +21,8 @@ class FlightSearchViewModel(
     private val _state = MutableLiveData<RequestState>()
     val state: LiveData<RequestState> = _state
 
-    private val _airports = MutableLiveData<List<Airport>>()
-    val airports: LiveData<List<Airport>> = _airports
-
     init {
-        getAllAirports()
         storeAirports()
-        _airports.value= AIRPORT_LIST
-        airPortList.addAll(AIRPORT_LIST)
     }
 
     private fun getAllAirports() {
@@ -41,14 +32,12 @@ class FlightSearchViewModel(
                 val response = repository.getAllAirports()
                 if (response.isSuccessful) {
                     response.body().let {
-                      //  _airports.postValue(it)
-                        airPortList.clear()
-                        airPortList.addAll(it!!.data)
+                        prefRepository.deleteAirportsFromPrefRepository()
+                        prefRepository.saveAirports(it!!.data)
                     }
                 } else {
                     response.errorBody().let {
-                        Log.d("dddd", it!!.toString())
-                        Log.d("wwww", it!!.string())
+                        Log.d(APP_TAG, it!!.toString())
                     }
                 }
                 _state.postValue(RequestState.DONE)
@@ -63,6 +52,16 @@ class FlightSearchViewModel(
     }
 
     private fun storeAirports(){
-        AIRPORT_LIST.addAll(prefRepository.getAirPorts())
+        if (prefRepository.getAirportsFromPrefRepository()!=null){
+            AIRPORT_LIST.clear()
+            AIRPORT_LIST.addAll(prefRepository.getAirportsFromPrefRepository()!!)
+            getAllAirports()
+        }
+        else{
+            AIRPORT_LIST.clear()
+            AIRPORT_LIST.addAll(prefRepository.getAirPortsFromResource())
+            getAllAirports()
+        }
+
     }
 }

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:optRoundCardCornerRadius="25dp"
+        app:optRoundCardLeftBottomCorner="false"
+        app:optRoundCardRightBottomCorner="false"
+        android:elevation="@dimen/opt_round_card_view_compat_inset_shadow"
+        app:optRoundCardBackgroundColor="@color/white"
+        android:id="@+id/bottom_sheet"
+        app:behavior_peekHeight="55dp"
+        app:behavior_hideable="true"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20dp"
+                android:layout_marginEnd="@dimen/_20dp"
+                android:paddingBottom="@dimen/_20dp">
+
+                <View
+                    android:id="@+id/view"
+                    android:background="@drawable/bg_bar_view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="66dp"
+                    android:layout_height="6dp" />
+
+              <com.google.android.material.card.MaterialCardView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/_20dp"
+                  app:cardCornerRadius="@dimen/_10dp"
+                  app:cardElevation="@dimen/_0dp"
+                  app:strokeColor="@color/btn_color"
+                  app:strokeWidth="@dimen/_1dp"
+                  app:layout_constraintTop_toBottomOf="@id/view">
+
+                  <androidx.constraintlayout.widget.ConstraintLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+
+
+                      <View
+                          android:id="@+id/view1"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/_0dp"
+                          android:layout_marginBottom="-5dp"
+                          android:background="@color/btn_color"
+                          app:layout_constraintBottom_toBottomOf="@id/tv_money"
+                          app:layout_constraintTop_toTopOf="parent" />
+
+                      <TextView
+                          android:id="@+id/tv_days"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginStart="@dimen/_10dp"
+                          android:layout_marginTop="@dimen/_5dp"
+                          android:fontFamily="@font/poppins_regular"
+                          android:text="8 days"
+                          android:textColor="@color/white"
+                          android:textSize="@dimen/_15sp"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintTop_toTopOf="parent" />
+
+                      <TextView
+                          android:id="@+id/tv_money"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:fontFamily="@font/poppins_semibold"
+                          android:text="@string/lbl_money"
+                          android:textColor="@color/white"
+                          android:textSize="@dimen/_20sp"
+                          app:layout_constraintStart_toStartOf="@id/tv_days"
+                          app:layout_constraintTop_toBottomOf="@id/tv_days" />
+
+                      <androidx.appcompat.widget.AppCompatButton
+                          android:id="@+id/btn_view_detail"
+                          android:layout_width="wrap_content"
+                          android:layout_height="@dimen/_35dp"
+                          style="@style/AppTheme.ContainedButton"
+                          android:text="View Detail"
+                          android:textSize="@dimen/_14sp"
+                          android:fontFamily="@font/poppins_semibold"
+                          app:layout_constraintTop_toTopOf="@id/tv_days"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          android:layout_marginEnd="@dimen/_10dp"
+                          android:backgroundTint="@color/white"
+                          android:padding="@dimen/_8dp"
+                          android:textColor="@color/primary_color"
+                          android:layout_marginTop="@dimen/_16px" />
+
+                      <androidx.constraintlayout.widget.ConstraintLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          app:layout_constraintTop_toBottomOf="@id/view1">
+
+
+                          <ImageView
+                              android:id="@+id/iv_kaba"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginStart="@dimen/_10dp"
+                              android:layout_marginTop="@dimen/_10dp"
+                              android:src="@drawable/ic_kaba"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintTop_toTopOf="parent" />
+
+                          <TextView
+                              android:id="@+id/tv_makkah"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/raleway_semiboldd"
+                              android:text="Makkah"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_14sp"
+                              android:layout_marginStart="@dimen/_10dp"
+                              app:layout_constraintStart_toEndOf="@id/iv_kaba"
+                              app:layout_constraintTop_toTopOf="@id/iv_kaba"
+                              app:layout_constraintBottom_toBottomOf="@id/iv_kaba"/>
+
+
+                          <TextView
+                              android:id="@+id/tv_makkah_hotel"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/raleway_semiboldd"
+                              android:text="Manazil al fateh (650-700 meter)"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_16sp"
+                              app:layout_constraintStart_toStartOf="@id/iv_kaba"
+                              app:layout_constraintTop_toBottomOf="@id/iv_kaba"
+                             />
+
+                          <TextView
+                              android:id="@+id/tv_makkah_service"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/poppins_regular"
+                              android:text="Shutle service every 30 minutes"
+                              android:textColor="@color/grey_007"
+                              android:textSize="@dimen/_12sp"
+                              app:layout_constraintStart_toStartOf="@id/iv_kaba"
+                              app:layout_constraintTop_toBottomOf="@id/tv_makkah_hotel"
+                              app:drawableStartCompat="@drawable/ic_circle_grey"
+                              android:drawablePadding="@dimen/_5dp"/>
+
+                          <ImageView
+                              android:id="@+id/iv_mosque"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_marginStart="@dimen/_10dp"
+                              android:layout_marginTop="@dimen/_10dp"
+                              android:src="@drawable/ic_mosque"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintTop_toBottomOf="@id/tv_makkah_service" />
+
+                          <TextView
+                              android:id="@+id/tv_madinah"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/raleway_semiboldd"
+                              android:text="Madinah"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_14sp"
+                              android:layout_marginStart="@dimen/_10dp"
+                              app:layout_constraintStart_toEndOf="@id/iv_mosque"
+                              app:layout_constraintTop_toTopOf="@id/iv_mosque"
+                              app:layout_constraintBottom_toBottomOf="@id/iv_mosque"/>
+
+                          <TextView
+                              android:id="@+id/tv_madinah_hotel"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/raleway_semiboldd"
+                              android:text="Royal Clock Tower (650-700 meter)"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_16sp"
+                              app:layout_constraintStart_toStartOf="@id/iv_mosque"
+                              app:layout_constraintTop_toBottomOf="@id/iv_mosque"
+                              />
+
+                          <TextView
+                              android:id="@+id/tv_madinah_service"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/poppins_regular"
+                              android:text="Shutle service every 30 minutes"
+                              android:textColor="@color/grey_007"
+                              android:textSize="@dimen/_12sp"
+                              app:layout_constraintStart_toStartOf="@id/iv_mosque"
+                              app:layout_constraintTop_toBottomOf="@id/tv_madinah_hotel"
+                              app:drawableStartCompat="@drawable/ic_circle_grey"
+                              android:drawablePadding="@dimen/_5dp"/>
+
+                          <View
+                              android:id="@+id/view2"
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_1dp"
+                              android:layout_marginTop="25dp"
+                              android:background="@color/grey_005"
+                              app:layout_constraintTop_toBottomOf="@id/tv_madinah_service" />
+
+                          <TextView
+                              android:id="@+id/tv_waiting_time"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/includes"
+                              android:textSize="@dimen/_10sp"
+                              android:background="@drawable/bg_rounded_edittext3"
+                              android:fontFamily="@font/poppins_medium"
+                              android:textColor="@color/primary_color"
+                              android:layout_marginStart="@dimen/_20dp"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintTop_toTopOf="@id/view2"
+                              android:paddingStart="@dimen/_12dp"
+                              android:paddingEnd="@dimen/_12dp"
+                              android:paddingTop="@dimen/_4dp"
+                              app:layout_constraintBottom_toBottomOf="@id/view2" />
+
+                          <TextView
+                              android:id="@+id/tv_all"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:fontFamily="@font/poppins_regular"
+                              android:text="@string/lbl_flight_hotel_urmah"
+                              android:textColor="@color/black"
+                              android:textSize="@dimen/_12sp"
+                              app:layout_constraintStart_toStartOf="@id/iv_mosque"
+                              app:layout_constraintTop_toBottomOf="@id/view2"
+                              android:layout_marginTop="@dimen/_20dp"
+                            />
+
+                          <View
+                              android:layout_width="match_parent"
+                              android:layout_height="@dimen/_10dp"
+                              app:layout_constraintTop_toBottomOf="@id/tv_all" />
+
+                      </androidx.constraintlayout.widget.ConstraintLayout>
+
+                  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+              </com.google.android.material.card.MaterialCardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+
+
+</layout>

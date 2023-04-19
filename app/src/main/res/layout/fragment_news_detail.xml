@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.guide.details.GuideDetailFragment">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.trips.pk.ui.common.RequestState"/>
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.news.NewsDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+          app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+                    app:contentScrim="@color/primary_color"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/im_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="230dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/image_placeholder"/>
+
+                    <!--app:popupTheme="@style/AppTheme.AppBarOverlay"-->
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_collapseMode="pin"
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cv_back"
+                                android:layout_width="@dimen/_40dp"
+                                android:layout_height="@dimen/_40dp"
+                                app:navigation="@{true}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:cardCornerRadius="@dimen/_8dp"
+                                android:backgroundTint="@color/white">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_back_black"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/tv_toolbar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/raleway_semiboldd"
+                                tools:text="BERNE Tour Package"
+                                android:text="@{viewModel.news.heading}"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_20sp"
+                                android:layout_marginStart="@dimen/_5dp"
+                                android:layout_marginEnd="@dimen/_5dp"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@id/cv_back"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.354"
+                                app:layout_constraintStart_toEndOf="@id/cv_back"
+                                app:layout_constraintTop_toTopOf="@id/cv_back"
+                                app:layout_constraintVertical_bias="0.333" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:background="@color/transparent"
+                android:layout_marginTop="-20dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <com.github.captain_miao.optroundcardview.OptRoundCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:behavior_hideable="true"
+                        android:background="@color/primary_color"
+                        app:layout_behavior="@string/bottom_sheet_behavior"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:optRoundCardBackgroundColor="@color/white"
+                        app:optRoundCardCornerRadius="20dp"
+                        app:optRoundCardLeftBottomCorner="false"
+                        app:optRoundCardRightBottomCorner="false">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+
+                            <TextView
+                                android:id="@+id/tv_heading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="@string/lbl_europe_tour"
+                                android:text="@{viewModel.news.heading}"
+                                android:fontFamily="@font/raleway_semiboldd"
+                                android:textSize="@dimen/_20sp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:layout_marginEnd="@dimen/_20dp"
+                                android:layout_marginTop="@dimen/_25dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_full_desc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/tv_heading"
+                                tools:text="@string/lbl_full_desc"
+                                android:text="@{viewModel.news.descriptionText}"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textSize="@dimen/_14sp"
+                                android:textColor="@color/black"
+                                android:justificationMode="inter_word"
+                                android:layout_marginStart="@dimen/_20dp"
+                                android:layout_marginEnd="@dimen/_20dp"
+                                android:layout_marginTop="@dimen/_8px"
+                                />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+
+                </androidx.core.widget.NestedScrollView>
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:visibility="@{viewModel.state==RequestState.LOADING ? View.VISIBLE : View.GONE}"
+                    android:layout_width="wrap_content"
+                    android:elevation="5dp"
+                    android:layout_height="wrap_content"
+                    app:SpinKit_Color="@color/primary_color"
+                    style="@style/SpinKitView.Large.Circle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

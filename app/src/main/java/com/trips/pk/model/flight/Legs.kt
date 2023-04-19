@@ -11,6 +11,4 @@ data class Legs(
     val stops:String,
     @SerializedName("schedules")
     val schedules:List<Schedule>,
-    @SerializedName("baggageInformation")
-    val beggageInformation:BaggageInformation
 )

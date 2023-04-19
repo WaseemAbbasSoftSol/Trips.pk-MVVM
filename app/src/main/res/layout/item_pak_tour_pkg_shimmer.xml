@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.trips.pk.model.flight.Countries" />
+    </data>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45dp"
+            android:foreground="@drawable/fg_cardview_white"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/_10px"
+            android:layout_marginStart="@dimen/_5dp"
+            android:layout_marginEnd="@dimen/_5dp"
+            app:cardCornerRadius="@dimen/_8dp"
+            app:cardElevation="@dimen/_0dp"
+            app:rippleColor="@color/btn_color"
+            app:strokeWidth="@dimen/_1dp"
+            app:strokeColor="@color/grey"
+            >
+
+         <TextView
+             android:visibility="invisible"
+             android:id="@+id/tv_city"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Skardu"
+             android:textColor="@color/black"
+             android:textSize="@dimen/_13sp"
+             android:fontFamily="@font/poppins_regular"
+             android:layout_gravity="center"/>
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:layout_width="@dimen/_70dp"
+                android:layout_height="@dimen/_10dp"
+                app:realtimeBlurRadius="30dp"
+                android:layout_gravity="center"
+                app:realtimeOverlayColor="@color/grey"
+               />
+
+        </com.google.android.material.card.MaterialCardView>
+
+</layout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/_1dp"
+            android:layout_marginStart="@dimen/_5dp"
+            android:layout_marginEnd="@dimen/_5dp"
+            android:layout_marginTop="@dimen/_10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="@dimen/_10dp"
+            app:cardElevation="@dimen/_0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_0dp"
+                    android:layout_marginBottom="-5dp"
+                    android:background="@color/btn_color"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_money"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10dp"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="8 days"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/lbl_money"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_days"
+                    app:layout_constraintTop_toBottomOf="@id/tv_days" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/view">
+
+
+                    <ImageView
+                        android:id="@+id/iv_kaba"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_10dp"
+                        android:src="@drawable/ic_kaba"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_makkah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_semiboldd"
+                        android:text="Makkah"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_marginStart="@dimen/_10dp"
+                        app:layout_constraintStart_toEndOf="@id/iv_kaba"
+                        app:layout_constraintTop_toTopOf="@id/iv_kaba"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_kaba"/>
+
+
+                    <ImageView
+                        android:id="@+id/iv_mosque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10dp"
+                        android:layout_marginTop="@dimen/_5dp"
+                        android:src="@drawable/ic_mosque"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_kaba" />
+
+                    <TextView
+                        android:id="@+id/tv_madinah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_semiboldd"
+                        android:text="Madinah"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sp"
+                        android:layout_marginStart="@dimen/_10dp"
+                        app:layout_constraintStart_toEndOf="@id/iv_mosque"
+                        app:layout_constraintTop_toTopOf="@id/iv_mosque"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_mosque"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_10dp"
+                        android:layout_marginBottom="-5dp"
+                        app:layout_constraintTop_toBottomOf="@id/iv_mosque" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

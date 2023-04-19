@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_10dp"
+            app:cardElevation="@dimen/_1dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/light_blue"
+            android:layout_marginTop="@dimen/_10dp"
+            app:cardMaxElevation="@dimen/_0dp"
+            app:strokeWidth="@dimen/_1dp"
+            app:strokeColor="@color/fg_cv"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_item_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_flight_list_inner"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cv"
+            android:src="@drawable/ic_half_border_right"
+            android:layout_marginBottom="@dimen/_40dp"
+            android:elevation="@dimen/_40dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="@id/cv"
+            android:src="@drawable/ic_half_border_left"
+            android:layout_marginBottom="@dimen/_40dp"
+            android:elevation="@dimen/_50dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</layout>

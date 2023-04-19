@@ -60,8 +60,9 @@
                         android:layout_height="wrap_content"
                         android:text="Rs: 150,000"
                         android:textColor="@color/primary_color"
-                        android:textSize="@dimen/_13sp"
-                        android:fontFamily="@font/poppins_regular"/>
+                        android:textSize="@dimen/_11sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:maxLines="1"/>
 
                 </LinearLayout>
 

@@ -10,8 +10,6 @@ data class ItinerariesDetail(
     val pricingSource:String,
     @SerializedName("pricingInformation")
     val pricingInformation:PricingInformation,
-    @SerializedName("diversitySwapper")
-    val diversitySwapper:String,
     @SerializedName("legs")
     val legs:List<Legs>,
 ): Serializable

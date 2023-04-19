@@ -10,5 +10,7 @@ data class BaggageInformation(
     @SerializedName("provisionType")
     val provisionType:String,
     @SerializedName("airlineLogo")
-    val airlineLogo:String
+    val airlineLogo:String,
+    @SerializedName("airlineName")
+    val airlineName:String
 )

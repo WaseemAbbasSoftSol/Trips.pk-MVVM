@@ -1,37 +1,38 @@
 package com.trips.pk.ui.flight.search
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.aminography.primecalendar.civil.CivilCalendar
 
-import com.aminography.primedatepicker.picker.PrimeDatePicker
-import com.aminography.primedatepicker.picker.callback.RangeDaysPickCallback
-import com.aminography.primedatepicker.picker.theme.LightThemeFactory
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentFlightSearchBinding
-import com.trips.pk.model.Airport
-import com.trips.pk.model.FlightSearch
-import com.trips.pk.ui.common.APP_TAG
-import com.trips.pk.ui.dialogs.origin.DateRangePickerBottomSheet
-import com.trips.pk.ui.dialogs.origin.SearchOriginDestinationBottomSheet
+import com.trips.pk.model.flight.Airport
+import com.trips.pk.model.flight.FlightSearch
+import com.trips.pk.ui.common.*
+import com.trips.pk.ui.flight.dialogs.DateRangePickerBottomSheet
+import com.trips.pk.ui.flight.dialogs.origin.SearchOriginDestinationBottomSheet
+import com.trips.pk.utils.changeStringDateFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.String
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FlightSearchFragment:Fragment() {
     private lateinit var binding:FragmentFlightSearchBinding
     private val mViewModel:FlightSearchViewModel by viewModel()
     private var noOfAdult=1
-    private var noOfChild=1
-    private var noOfInfant=1
+    private var noOfChild=0
+    private var noOfInfant=0
+
 
     private var origin=""
     private var destination=""
@@ -42,6 +43,8 @@ class FlightSearchFragment:Fragment() {
     private var fromDate=""
     private var toDate=""
 
+    private var tourType="round"
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,9 +53,33 @@ class FlightSearchFragment:Fragment() {
         binding= FragmentFlightSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner=this
         binding.toolbarLayout.tvToolbar.text="Flight Search"
-
         val dialog= SearchOriginDestinationBottomSheet()
         val bundle=Bundle()
+
+        binding.radioOneWay.setOnClickListener {
+            tourType="oneway"
+            mTourType="oneway"
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            fromDate=""
+            binding.edToDate.alpha = 0.2f
+        }
+        binding.radioReturn.setOnClickListener {
+            tourType="round"
+            mTourType="round"
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            fromDate=""
+            binding.edToDate.alpha = 1.0f
+        }
+        binding.radioMultiDestination.setOnClickListener {
+            tourType="multi"
+            mTourType="multi"
+            fromDate=""
+            binding.edToDate.text = null
+            binding.edFromDate.text = null
+            binding.edToDate.alpha = 1.0f
+        }
 
         binding.edOrigin.setOnClickListener {
             bundle.putBoolean("isOrigin", true)
@@ -72,11 +99,13 @@ class FlightSearchFragment:Fragment() {
                     binding.edOrigin.setText(airport.airportName)
                     origin=airport.airportCode
                     originName=airport.airportName
+                    binding.edOrigin.error = null
                 }
                 else{
                     destination=airport.airportCode
                     binding.edFinal.setText(airport.airportName)
                     destinationName=airport.airportName
+                    binding.edFinal.error = null
                 }
             }
 
@@ -84,35 +113,55 @@ class FlightSearchFragment:Fragment() {
 
         binding.edFromDate.setOnClickListener {
            //showDateRangePicker()
+            val bundle=Bundle()
+            bundle.putString("tourType", tourType)
             val dialog= DateRangePickerBottomSheet()
+            dialog.arguments=bundle
             dialog.show(parentFragmentManager, APP_TAG)
             dialog.setSelectedRange(object : DateRangePickerBottomSheet.OnDateRangeSelected{
-                override fun selectedRange(start: kotlin.String, end: kotlin.String) {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun selectedRange(start: kotlin.String, end: kotlin.String, isToday:Boolean) {
                     if (start.isNotEmpty()){
                         fromDate=start
-                        binding.edFromDate.setText(start.toString())
+                        val dd= changeStringDateFormat(fromDate)
+                        binding.edFromDate.setText(dd)
+                        binding.edFromDate.error = null
+                        if (isToday)fromDate=fromDate+"T"+getCurrentTimeAheadThreeMinutes()
                     }
                     if (end.isNotEmpty()){
                         toDate=end
-                        binding.edToDate.setText(end.toString())
+                        val dd= changeStringDateFormat(toDate)
+                        binding.edToDate.setText(dd)
                     }
                 }
 
             })
         }
+
         binding.edToDate.setOnClickListener {
+            if (tourType=="oneway"){
+                return@setOnClickListener
+            }
+            val bundle=Bundle()
+            bundle.putString("tourType", tourType)
            // showDateRangePicker()
             val dialog= DateRangePickerBottomSheet()
+            dialog.arguments=bundle
             dialog.show(parentFragmentManager, APP_TAG)
             dialog.setSelectedRange(object : DateRangePickerBottomSheet.OnDateRangeSelected{
-                override fun selectedRange(start: kotlin.String, end: kotlin.String) {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun selectedRange(start: kotlin.String, end: kotlin.String, isToday:Boolean) {
                     if (start.isNotEmpty()){
                         fromDate=start
-                        binding.edFromDate.setText(start.toString())
+                        val dd= changeStringDateFormat(fromDate)
+                        binding.edFromDate.setText(dd)
+                        binding.edFromDate.error = null
+                        if (isToday)fromDate=fromDate+"T"+getCurrentTimeAheadThreeMinutes()
                     }
                     if (end.isNotEmpty()){
                         toDate=end
-                        binding.edToDate.setText(end.toString())
+                        val dd= changeStringDateFormat(toDate)
+                        binding.edToDate.setText(dd)
                     }
                 }
 
@@ -130,11 +179,17 @@ class FlightSearchFragment:Fragment() {
         }
 
         binding.btnSearch.setOnClickListener {
-            val flightSearch=FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, "Round")
-            val bundle=Bundle()
-            bundle.putString("from_to", "$originName-$destinationName")
-            bundle.putSerializable("search",flightSearch)
-            findNavController().navigate(R.id.action_flight_search_to_flight_list_fragment, bundle)
+            if (validateFields()){
+                mNoOfAdult=noOfAdult
+                mNoOfChildern=noOfChild
+                mNoOfInfent=noOfInfant
+                if (tourType=="oneway") toDate=""
+                val flightSearch= FlightSearch(origin, destination, fromDate, toDate, noOfAdult, noOfChild, noOfInfant, tourType,"PKR")
+                val bundle=Bundle()
+                mFromTo = "$originName-$destinationName"
+                bundle.putSerializable("search",flightSearch)
+                findNavController().navigate(R.id.action_flight_search_to_flight_list_fragment, bundle)
+            }
         }
         return binding.root
     }
@@ -186,7 +241,7 @@ class FlightSearchFragment:Fragment() {
             }
             btnAdultDown!!.setOnClickListener {
                 noOfAdult -= 1
-                if (noOfAdult<=0) noOfAdult=0
+                if (noOfAdult<=1) noOfAdult=1
                 val formatted = String.format("%02d", noOfAdult)
                 tvAdult!!.text = "$formatted Adults"
                 tvNoOfAdult!!.text="$formatted"
@@ -231,5 +286,31 @@ class FlightSearchFragment:Fragment() {
         }catch (e:Exception){
             e.printStackTrace()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getCurrentTimeAheadThreeMinutes():kotlin.String{
+        val timestamp= SimpleDateFormat("HH:mm:ss")
+        val time = Calendar.getInstance()
+        time.add(Calendar.MINUTE, 3)
+        val d  = timestamp.format(time.time)
+        //Toast.makeText(requireContext(),d.toString(), Toast.LENGTH_LONG).show()
+        return d.toString()
+    }
+
+    private fun validateFields():Boolean{
+        if (binding.edOrigin.text.toString().trim().isNullOrEmpty()){
+            binding.edOrigin.error = getString(R.string.lbl_field_required)
+            return false
+        }
+        if (destination==""){
+            binding.edFinal.error = getString(R.string.lbl_field_required)
+            return false
+        }
+        if (fromDate==""){
+            binding.edFromDate.error = getString(R.string.lbl_field_required)
+            return false
+        }
+        return true
     }
 }

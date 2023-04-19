@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.trips.pk.model.visa.Visa" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/fg_cv"
+        app:strokeWidth="@dimen/_1dp"
+        app:rippleColor="@color/btn_color"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_0dp"
+        android:layout_marginTop="@dimen/_10px"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="190px">
+
+            <ImageView
+                android:id="@+id/iv_country"
+                android:layout_width="200px"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/turkey"/>
+
+            <TextView
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_country"
+                android:layout_marginStart="@dimen/_10px"
+                android:layout_marginTop="@dimen/_10px"
+                tools:text="Turkey"
+                android:text="@{obj.countries.name}"
+                android:fontFamily="@font/raleway_semiboldd"
+                android:textSize="@dimen/_16sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_des"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_country"
+                app:layout_constraintStart_toStartOf="@id/tv_country"
+                android:text="@string/lbl_visa_processing_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_5dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_12sp"
+                android:textColor="@color/grey_007"/>
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Rs.1400"
+                android:text="@{obj.totalPrice}"
+                android:textColor="@color/btn_color"
+                android:textSize="@dimen/_16sp"
+               app:layout_constraintStart_toStartOf="@id/tv_country"
+                app:layout_constraintTop_toBottomOf="@id/tv_des"
+                android:fontFamily="@font/poppins_semibold" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

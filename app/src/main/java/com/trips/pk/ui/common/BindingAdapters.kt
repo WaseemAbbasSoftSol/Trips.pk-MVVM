@@ -1,26 +1,16 @@
 package com.trips.pk.ui.common
 
-import android.annotation.SuppressLint
-import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.os.Build
-import android.text.Editable
-import android.text.Html
-import android.text.TextWatcher
-import android.view.MotionEvent
-import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import de.hdodenhof.circleimageview.CircleImageView
+import com.bumptech.glide.Glide
+import com.mikelau.views.shimmer.ShimmerRecyclerViewX
+import com.trips.pk.R
+import com.trips.pk.utils.Helpers
 
 
 @BindingAdapter("navigation")
@@ -30,6 +20,10 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
     }
 }
 
+@BindingAdapter("drawLineOverTextView")
+fun drawLine(view: TextView, isFlag:Boolean) {
+   if (isFlag)view.paintFlags= view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+}
 //@BindingAdapter("imageTint")
 //fun setImage(view: ImageView, colorResource: Int) {
 //    view.setColorFilter(
@@ -45,11 +39,11 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //    )
 //}
 //
-//@BindingAdapter("imageRes")
-//fun setImageRes(view: ImageView, imageRes: Int) {
-//    view.setImageResource(imageRes)
-//}
-//
+@BindingAdapter("imageRes")
+fun setImageRes(view: ImageView, imageRes: Int) {
+    view.setImageResource(imageRes)
+}
+
 //@BindingAdapter(value = ["imageUrl", "default"], requireAll = false)
 //fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
 //    if (default == null) {
@@ -58,12 +52,20 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //        Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
 //    }
 //}
-//
-//@BindingAdapter("imageUri")
-//fun loadImage(view: ImageView, imageUrl: Uri?) {
-//    Glide.with(view.context).load(imageUrl).into(view)
-//}
-//
+
+
+
+@BindingAdapter(value = ["imageUrl", "default"], requireAll = false)
+fun loadImage(view: ImageView, imageUrl: String?, default: Drawable?) {
+    if (default == null) {
+        if (imageUrl!!.isNotEmpty()) Glide.with(view.context).load(imageUrl).into(view)
+        else Glide.with(view.context).load(R.drawable.image_placeholder).into(view)
+    } else {
+       if (imageUrl!!.isNotEmpty()) Glide.with(view.context).load(imageUrl).placeholder(default).into(view)
+        else Glide.with(view.context).load(R.drawable.image_placeholder).placeholder(default).into(view)
+    }
+}
+
 //@BindingAdapter(value = ["imageUrl", "default", "borderColor"], requireAll = false)
 //fun loadImage(
 //    view: CircleImageView,
@@ -134,36 +136,57 @@ fun navigateUp(view: CardView, isEnabled: Boolean) {
 //
 //    })
 //}
-//
-//@BindingAdapter(
-//    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick"],
-//    requireAll = false
-//)
-//fun <T> setItems(
-//    view: RecyclerView, itemsList: List<T>, layout: Int,
-//    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
-//    onItemViewClick: OnItemViewClickListener<T>?
-//) {
-//    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout)
-//    view.adapter = mAdapter
-//    mAdapter.setItemClickListener(itemClickListener)
-//    mAdapter.onItemViewClick = onItemViewClick
-//    view.setHasFixedSize(hasFixSize)
-//}
-//
-////@BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
-////fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
-////    val adapter = ArrayAdapter<T>(
-////        view.context,
-////        android.R.layout.simple_spinner_dropdown_item, items
-////    )
-////    view.setAdapter(adapter)
-////    if (isSpinner) {
-////        view.setOnClickListener { view.showDropDown() } //show drop down like spinner
-////    } else if (view is MultiAutoCompleteTextView) {
-////        view.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
-////    }
-////}
+
+@BindingAdapter(
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick","hasMargin"],
+    requireAll = false
+)
+fun <T> setItems(
+    view: RecyclerView, itemsList: List<T>, layout: Int,
+    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
+    onItemViewClick: OnItemViewClickListener<T>?, hasMargin:Boolean
+) {
+    val mAdapter = GenericRecyclerViewAdapter(itemsList, layout, hasMargin)
+    view.adapter = mAdapter
+    mAdapter.setItemClickListener(itemClickListener)
+    mAdapter.onItemViewClick = onItemViewClick
+    view.setHasFixedSize(hasFixSize)
+}
+@BindingAdapter(
+    value = ["itemsList", "itemLayout", "itemClickListener", "hasFixSize", "onItemViewClick","hasMargin"],
+    requireAll = false
+)
+fun <T> setItems(
+    view: ShimmerRecyclerViewX, itemsList: List<T>, layout: Int,
+    itemClickListener: OnListItemClickListener<T>?, hasFixSize: Boolean = false,
+    onItemViewClick: OnItemViewClickListener<T>?, hasMargin: Boolean
+) {
+    if (itemsList.isNotEmpty()){
+        val mAdapter = GenericRecyclerViewAdapter(itemsList, layout,hasMargin)
+        view.adapter = mAdapter
+        mAdapter.setItemClickListener(itemClickListener)
+        mAdapter.onItemViewClick = onItemViewClick
+        view.setHasFixedSize(hasFixSize)
+       if (hasMargin) Helpers.setMargins(view,0,0,0,0)
+    }
+   else {
+       view.showShimmerAdapter()
+        if (hasMargin)Helpers.setMargins(view,30,0,0,0)
+    }
+}
+@BindingAdapter(value = ["itemsList", "isSpinner"], requireAll = false)
+fun <T> setSpinnerItems(view: AutoCompleteTextView, items: List<T>, isSpinner: Boolean = false) {
+    val adapter = ArrayAdapter<T>(
+        view.context,
+        android.R.layout.simple_spinner_dropdown_item, items
+    )
+    view.setAdapter(adapter)
+    if (isSpinner) {
+        view.setOnClickListener { view.showDropDown() } //show drop down like spinner
+    } else if (view is MultiAutoCompleteTextView) {
+        view.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+    }
+}
 //
 //@BindingAdapter(value = ["spItemsList", "isSmall"], requireAll = false)
 //fun <T> setSpinnerItems(view: Spinner, spItemsList: List<T>, isSmall: Boolean = false) {

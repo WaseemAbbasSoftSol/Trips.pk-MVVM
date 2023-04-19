@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_agent"
+            android:layout_width="90dp"
+            android:layout_height="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/primary_color_14"
+            app:cardCornerRadius="@dimen/_10dp"
+            app:cardElevation="@dimen/_0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_agent"
+            app:layout_constraintBottom_toBottomOf="@id/iv_flight"
+            android:layout_marginTop="-10dp"
+            android:layout_marginBottom="-10dp">
+
+            <ImageView
+                android:id="@+id/iv_agent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/im_deluxe_agent"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_agent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/cv_agent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Mehman Pk"
+            android:fontFamily="@font/raleway_semiboldd"
+            android:textSize="@dimen/_16sp"
+            android:textColor="@color/black"
+            android:maxLines="2"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_20dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_agent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_agent"
+            android:text="@string/offc_address"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_12sp"
+            android:textColor="@color/grey_003"
+            android:maxLines="2"
+            />
+
+        <ImageView
+            android:id="@+id/iv_flight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flight"
+            android:layout_marginTop="@dimen/_5dp"
+            app:layout_constraintStart_toStartOf="@id/tv_agent"
+            app:layout_constraintTop_toBottomOf="@id/tv_address"/>
+
+        <ImageView
+            android:id="@+id/iv_hotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_hotel"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintStart_toEndOf="@id/iv_flight"
+            app:layout_constraintTop_toTopOf="@id/iv_flight"/>
+
+        <ImageView
+            android:id="@+id/iv_passport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_passport"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintStart_toEndOf="@id/iv_hotel"
+            app:layout_constraintTop_toTopOf="@id/iv_flight"/>
+
+        <ImageView
+            android:id="@+id/iv_camp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camp"
+            android:layout_marginStart="@dimen/_5dp"
+            app:layout_constraintStart_toEndOf="@id/iv_passport"
+            app:layout_constraintTop_toTopOf="@id/iv_flight"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/grey_005"
+            app:layout_constraintTop_toBottomOf="@id/cv_agent"
+            android:layout_marginTop="@dimen/_10dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

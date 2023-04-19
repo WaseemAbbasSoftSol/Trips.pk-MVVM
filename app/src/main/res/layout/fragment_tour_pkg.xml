@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.trips.pk.ui.tour.pkg.TourPackageViewModel" />
+        <variable
+            name="countryClickListener"
+            type="com.trips.pk.ui.tour.pkg.TourPackageFragment.OnCountryItemClickListener" />
+        <variable
+            name="cityClickListener"
+            type="com.trips.pk.ui.tour.pkg.TourPackageFragment.OnPakCityClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_color">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/base_toolbar" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <com.github.captain_miao.optroundcardview.OptRoundCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:behavior_hideable="true"
+                    android:background="#F2F2F2"
+                    app:layout_behavior="@string/bottom_sheet_behavior"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:optRoundCardBackgroundColor="@color/white"
+                    app:optRoundCardCornerRadius="35dp"
+                    app:optRoundCardLeftBottomCorner="false"
+                    app:optRoundCardRightBottomCorner="false">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_5dp"
+                        >
+
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
+                            android:id="@+id/rv_worldwide_trip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="@dimen/_12px"
+                            itemsList="@{viewModel.countries}"
+                            itemLayout="@{@layout/item_worldwide_trips}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{countryClickListener}"
+                            tools:listitem="@layout/item_worldwide_trips"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="3"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_grid_child_count="3"
+                            app:shimmer_demo_child_count="8"
+                            app:shimmer_demo_layout="@layout/item_worldwide_trips"
+                            app:shimmer_demo_layout_manager_type="grid"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginEnd="@dimen/_15dp"
+                            />
+
+
+                        <com.mikelau.views.shimmer.ShimmerRecyclerViewX
+                            android:id="@+id/rv_pak_packages"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            tools:listitem="@layout/item_pak_tour_pkg"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="2"
+                            android:visibility="gone"
+                            itemsList="@{viewModel.cities}"
+                            itemLayout="@{@layout/item_pak_tour_pkg}"
+                            hasFixSize="@{true}"
+                            itemClickListener="@{cityClickListener}"
+                            app:shimmer_demo_angle="10"
+                            app:shimmer_demo_grid_child_count="2"
+                            app:shimmer_demo_child_count="8"
+                            app:shimmer_demo_layout="@layout/item_pak_tour_pkg_shimmer"
+                            app:shimmer_demo_layout_manager_type="grid"
+                            android:layout_marginStart="@dimen/_15dp"
+                            android:layout_marginEnd="@dimen/_15dp"
+                            android:layout_marginTop="@dimen/_12px"
+                            app:layout_constraintTop_toBottomOf="@id/rv_worldwide_trip"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

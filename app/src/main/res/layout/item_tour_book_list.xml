@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.trips.pk.model.tour.TourPackagePrices"/>
+        <variable
+            name="onViewClick"
+            type="com.trips.pk.ui.common.OnItemViewClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10px">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/bg_sq_cv"
+            app:cardElevation="@dimen/_0dp"
+            app:cardCornerRadius="@dimen/_10dp"
+            app:strokeColor="@color/fg_cv"
+            app:strokeWidth="@dimen/_1dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_18px"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_book"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_book"
+                    tools:text="01-Jul-2022  I  15-Jul-2022"
+                    android:text="@{obj.getStartAndEndDate()}"
+                    android:textSize="@dimen/_14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/black"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_book"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:paddingStart="@dimen/_30dp"
+                    android:paddingEnd="@dimen/_30dp"
+                    style="@style/AppTheme.ContainedButton"
+                    android:text="BOOK"
+                    android:onClick="@{(view) -> onViewClick.onClick(view, obj)}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_travel_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Travel Status"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/grey_002"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/btn_book" />
+
+                <TextView
+                    android:id="@+id/tv_travel_sharing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    tools:text="Triple Sharing Per Head Kid (5 to 11 years old)"
+                    android:text="@{obj.note}"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_travel_status" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_travel_sharing"
+                    android:background="@drawable/bg_dashed_line"
+                    android:layout_marginTop="@dimen/_20px"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_price_adult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Price(1 adult)"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/grey_002"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/view"
+                    android:layout_marginTop="@dimen/_20px"/>
+
+                <TextView
+                    android:id="@+id/tv_total_price_adult"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    tools:text="Rs:200,000"
+                    android:text="@{obj.getAdultDiscounts()}"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_date"
+                    app:layout_constraintEnd_toStartOf="@id/guide1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price_adult" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guide1"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.50" />
+
+                <TextView
+                    android:id="@+id/tv_price_child"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Price(1 Child)"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/grey_002"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toEndOf="@id/guide1"
+                    app:layout_constraintTop_toBottomOf="@id/view"
+                    android:layout_marginTop="@dimen/_12px"/>
+
+                <TextView
+                    android:id="@+id/tv_total_price_child"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_2dp"
+                    android:fontFamily="@font/poppins_regular"
+                    tools:text="Rs:150,000"
+                    android:text="@{obj.getChildDiscounts()}"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/primary_color"
+                    android:textSize="@dimen/_12sp"
+                    app:layout_constraintStart_toEndOf="@id/guide1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price_child" />
+
+                <View
+                    android:layout_width="@dimen/_2dp"
+                    android:layout_height="@dimen/_0dp"
+                    app:layout_constraintTop_toTopOf="@id/tv_price_adult"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_total_price_adult"
+                    app:layout_constraintEnd_toStartOf="@id/guide1"
+                    android:background="@color/grey_002"
+                    android:layout_marginEnd="@dimen/_10dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
