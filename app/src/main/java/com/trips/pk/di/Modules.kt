@@ -112,12 +112,12 @@ fun provideAccessToken(prefRepository: PrefRepository) =
               .writeTimeout(30, TimeUnit.SECONDS)
               .build()
 
-    fun createToursApi(factory: GsonConverterFactory, client: OkHttpClient) = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(factory)
-        .client(client)
-        .build()
-        .create(TripsApi::class.java)
+     fun createToursApi(factory: GsonConverterFactory, client: OkHttpClient) = Retrofit.Builder()
+         .baseUrl(BASE_URL)
+         .addConverterFactory(factory)
+         .client(client)
+         .build()
+         .create(TripsApi::class.java)
 
       factory { OAuthInterceptor(provideAccessToken(get())) }
       factory { provideHttpClientWithInterceptor(get()) }

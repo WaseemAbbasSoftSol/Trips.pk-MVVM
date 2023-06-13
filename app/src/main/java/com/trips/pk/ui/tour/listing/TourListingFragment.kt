@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentTourListingBinding
 import com.trips.pk.model.tour.TourDetail
+import com.trips.pk.model.tour.TourSearch
 import com.trips.pk.ui.common.DummyClickListener
 import com.trips.pk.ui.common.OnListItemClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,8 +46,8 @@ class TourListingFragment:Fragment() {
         binding.viewModel=mViewModel
     }
 
-    inner class OnTourItemClickListener : OnListItemClickListener<TourDetail>{
-        override fun onItemClick(item: TourDetail, pos: Int) {
+    inner class OnTourItemClickListener : OnListItemClickListener<TourSearch>{
+        override fun onItemClick(item: TourSearch, pos: Int) {
          //   findNavController().navigate(R.id.action_tour_listing_to_tour_detail)
             findNavController().navigate(TourListingFragmentDirections.actionTourListingToTourDetail(item.id,placeName))
         }

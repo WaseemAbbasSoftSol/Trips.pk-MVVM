@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trips.pk.data.TripsRepository
 import com.trips.pk.model.tour.TourDetail
+import com.trips.pk.model.tour.TourSearch
 import com.trips.pk.ui.common.APP_TAG
 import com.trips.pk.ui.common.RequestState
 import kotlinx.coroutines.Dispatchers
@@ -23,11 +24,15 @@ class TourListingViewModel(
     private val _tour=MutableLiveData<List<TourDetail>>()
     val tour:LiveData<List<TourDetail>> = _tour
 
+    private val _search=MutableLiveData<List<TourSearch>>()
+    val search:LiveData<List<TourSearch>> = _search
+
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
     init {
         _tour.value= emptyList()
+        _search.value= emptyList()
         getListOfToursByPlaceName()
     }
     private fun getListOfToursByPlaceName() {
@@ -37,7 +42,7 @@ class TourListingViewModel(
                 val response = repository.getListOfToursByPlaceName(placeName)
                 if (response.isSuccessful) {
                     response.body().let {
-                        _tour.postValue(it!!.data!!)
+                        _search.postValue(it!!.data!!)
                     }
                 } else {
                     response.errorBody().let {

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="obj"
-            type="com.trips.pk.model.visa.Visa" />
+            type="com.trips.pk.model.visa.VisaCountries" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +29,10 @@
             <ImageView
                 android:id="@+id/iv_logo"
                 android:layout_gravity="center"
+                imageUrl="@{obj.countryFlag}"
                 android:layout_width="@dimen/_40dp"
                 android:layout_height="@dimen/_30dp"
-                android:src="@drawable/toyota_logo"
+                android:src="@drawable/flag_malaysia"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -45,7 +46,7 @@
             app:layout_constraintStart_toStartOf="@id/cardview"
             app:layout_constraintEnd_toEndOf="@id/cardview"
             tools:text="Pakistan"
-            android:text="@{obj.countries.name}"
+            android:text="@{obj.name}"
             android:fontFamily="@font/poppins_regular"
             android:textSize="@dimen/_13sp"
             android:textColor="@color/black"/>

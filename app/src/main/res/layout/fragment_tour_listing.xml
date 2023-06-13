@@ -115,12 +115,12 @@
                         android:id="@+id/rv_tour_listing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        itemsList="@{viewModel.tour}"
-                        itemLayout="@{@layout/item_tour_listing}"
+                        itemsList="@{viewModel.search}"
+                        itemLayout="@{@layout/item_tour_search_listing}"
                         hasFixSize="@{true}"
                         itemClickListener="@{itemClickListener}"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_tour_listing"
+                        tools:listitem="@layout/item_tour_search_listing"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
                         />

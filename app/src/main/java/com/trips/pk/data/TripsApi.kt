@@ -12,7 +12,9 @@ import com.trips.pk.model.rent_a_car.Vehicle
 import com.trips.pk.model.rent_a_car.VehicleCategory
 import com.trips.pk.model.tour.CountriesWithCities
 import com.trips.pk.model.tour.TourDetail
+import com.trips.pk.model.tour.TourSearch
 import com.trips.pk.model.visa.Visa
+import com.trips.pk.model.visa.VisaCountries
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -73,7 +75,7 @@ interface TripsApi {
     @Headers("Content-Type:application/json")
     suspend fun getListOfToursByPlaceName(
         @Header("name") name:String
-    ):Response<BaseResponse<List<TourDetail>>>
+    ):Response<BaseResponse<List<TourSearch>>>
 
     @POST("GetTourByID")
     @Headers("Content-Type:application/json")
@@ -138,10 +140,17 @@ interface TripsApi {
         @Header("id") id:Int
     ):Response<BaseResponse<List<Visa>>>
 
-    @GET("GetCountrieswithVisas")
+    @GET("GetCountrieshaveVisas")
     @Headers("Content-Type:application/json")
     suspend fun getVisaCountries(
-    ):Response<BaseResponse<List<Countries>>>
+    ):Response<BaseResponse<List<VisaCountries>>>
+
+    @GET("GetPromotedCountriesforVisas")
+    @Headers("Content-Type:application/json")
+    suspend fun getPromotedCountriesForVisa(
+    ):Response<BaseResponse<List<VisaCountries>>>
+
+
 
     //To be add in future
     /*

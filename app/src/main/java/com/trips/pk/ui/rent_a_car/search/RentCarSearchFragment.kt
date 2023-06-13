@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -25,6 +26,8 @@ import java.util.*
 
 class RentCarSearchFragment: Fragment(), DummyClickListener {
     private lateinit var binding:FragmentRentACarSearchBinding
+    private var categoryId = 0
+    private var cityId = 0
     private val mViewModel : RentCarSearchViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,9 +88,26 @@ class RentCarSearchFragment: Fragment(), DummyClickListener {
                 return@setOnClickListener
             }
             else {
+
+                val ct = binding.edEnterPickupLocaton.text.toString().trim()
+                for (item in VEHICLE_CITIES){
+                    if (ct==item.name){
+                        cityId=item.id
+                        break
+                    }
+                }
+
+                val cat = binding.edEnterCategory.text.toString().toString()
+                for (item in VEHICLE_CATEGORIES){
+                    if (cat==item.name){
+                        categoryId=item.id
+                        break
+                    }
+                }
+
                 val bundle = Bundle()
-                bundle.putInt("categoryId",1)
-                bundle.putInt("cityId",2851)
+                bundle.putInt("categoryId",categoryId)
+                bundle.putInt("cityId",cityId)
                 findNavController().navigate(R.id.action_global_to_rent_a_car_search_result_fragment,bundle)
                 binding.edEnterCategory.setText("")
                 binding.edEnterPickupLocaton.setText("")
@@ -133,40 +153,60 @@ class RentCarSearchFragment: Fragment(), DummyClickListener {
         dialog.show(parentFragmentManager, APP_TAG)
     }
     private fun showCitiesAdapter(t : String){
-        val tempList = arrayListOf<Countries>()
+        try {
+            val tempList = arrayListOf<Countries>()
 
-        var text = t.trim()
-        tempList.clear()
-        if (text.isNotEmpty()) {
-            text = text.lowercase(Locale.getDefault())
-            for (item in VEHICLE_CITIES) {
-                if (item.name.lowercase(Locale.ROOT).contains(text)) {
-                    tempList.add(item)
+            var text = t.trim()
+            tempList.clear()
+            if (text.isNotEmpty()) {
+                text = text.lowercase(Locale.getDefault())
+                for (item in VEHICLE_CITIES) {
+                    if (item.name.lowercase(Locale.ROOT).contains(text)) {
+                        tempList.add(item)
+                    }
                 }
             }
+
+            val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, tempList)
+            binding.edEnterPickupLocaton.setAdapter(adapter)
+            binding.edEnterPickupLocaton.showDropDown()
+
+//            binding.edEnterPickupLocaton.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+//                val selectedItem = parent.getItemAtPosition(position) as Countries
+//                cityId=selectedItem.id
+//            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
 
-        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, tempList)
-        binding.edEnterPickupLocaton.setAdapter(adapter)
-        binding.edEnterPickupLocaton.showDropDown()
     }
 
     private fun showCategoriesAdapter(t : String){
-        val tempList = arrayListOf<VehicleCategory>()
+        try {
+            val tempList = arrayListOf<VehicleCategory>()
 
-        var text = t.trim()
-        tempList.clear()
-        if (text.isNotEmpty()) {
-            text = text.lowercase(Locale.getDefault())
-            for (item in VEHICLE_CATEGORIES) {
-                if (item.name.lowercase(Locale.ROOT).contains(text)) {
-                    tempList.add(item)
+            var text = t.trim()
+            tempList.clear()
+            if (text.isNotEmpty()) {
+                text = text.lowercase(Locale.getDefault())
+                for (item in VEHICLE_CATEGORIES) {
+                    if (item.name.lowercase(Locale.ROOT).contains(text)) {
+                        tempList.add(item)
+                    }
                 }
             }
+
+            val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, tempList)
+            binding.edEnterCategory.setAdapter(adapter)
+            binding.edEnterCategory.showDropDown()
+
+//            binding.edEnterCategory.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+//                val selectedItem = parent.getItemAtPosition(position) as VehicleCategory
+//                categoryId = selectedItem.id
+//            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
 
-        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item, tempList)
-        binding.edEnterCategory.setAdapter(adapter)
-        binding.edEnterCategory.showDropDown()
     }
 }

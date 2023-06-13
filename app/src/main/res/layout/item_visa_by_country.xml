@@ -6,7 +6,7 @@
     <data>
         <variable
             name="obj"
-            type="com.trips.pk.model.visa.Visa" />
+            type="com.trips.pk.model.visa.VisaCountries" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -42,7 +42,7 @@
                 android:layout_marginStart="@dimen/_10px"
                 android:layout_marginTop="@dimen/_10px"
                 tools:text="Turkey"
-                android:text="@{obj.countries.name}"
+                android:text="@{obj.name}"
                 android:fontFamily="@font/raleway_semiboldd"
                 android:textSize="@dimen/_16sp"
                 android:textColor="@color/black"/>
@@ -53,7 +53,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_country"
                 app:layout_constraintStart_toStartOf="@id/tv_country"
-                android:text="@string/lbl_visa_processing_time"
+                tools:text="@string/lbl_visa_processing_time"
+                android:text="@{obj.description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/_5dp"
                 android:maxLines="2"
@@ -67,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Rs.1400"
-                android:text="@{obj.totalPrice}"
+                android:text="@{obj.price}"
                 android:textColor="@color/btn_color"
                 android:textSize="@dimen/_16sp"
                app:layout_constraintStart_toStartOf="@id/tv_country"

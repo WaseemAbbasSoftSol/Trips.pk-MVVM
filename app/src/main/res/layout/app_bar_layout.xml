@@ -182,6 +182,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/cl_insurance"
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
@@ -214,6 +215,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/cl_agents"
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
@@ -246,6 +248,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/cl_hajj"
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
@@ -278,6 +281,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/cl_destination"
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
