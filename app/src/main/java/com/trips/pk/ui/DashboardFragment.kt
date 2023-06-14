@@ -39,7 +39,7 @@ class DashboardFragment:Fragment() {
         binding.lifecycleOwner=this
         initDrawerLayout()
         prefRepository=PrefRepository(requireActivity().application)
-        if (prefRepository.getBearerToken().isNullOrEmpty()){
+        if (prefRepository.getBearerToken() == "null"){
             prefRepository.saveBearerToken(tempToken)
         }
         getTokens()
