@@ -41,6 +41,8 @@ data class TourDetail(
     val city:City,
     @SerializedName("tourItineraryDetails")
     val tourItineraryDetails: List<TourItineraryDetails>,
+    @SerializedName("tourGalleries")
+    val tourGalleries:List<TourGalleries>?=null
     ){
     val thumbnailLink:String get() = if (thumbnail.isNullOrEmpty() || thumbnail=="N/A") "" else "$ADMIN_BASE_URL$thumbnail"
 

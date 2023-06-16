@@ -4,15 +4,18 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.provider.SyncStateContract.Constants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.trips.pk.databinding.FragmentTourDetailBinding
 import com.trips.pk.model.tour.TourPackagePrices
+import com.trips.pk.ui.common.ADMIN_BASE_URL
 import com.trips.pk.ui.common.mTourPackagePrices
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -88,6 +91,10 @@ class TourDetailFragment:Fragment() {
                 )
                 binding.tvDiscount.text= mViewModel.getTotalPrices(it.priceDetails)
              binding.tvTotalPrice.text=   mViewModel.getDiscountedPrice(it.priceDetails)
+
+                var img = it.tourGalleries?.get(0)!!.imageURL
+                val link ="$ADMIN_BASE_URL$img"
+                if (img.isNotEmpty()) Glide.with(requireContext()).load(link).into(binding.guideDetailImage)
             }
         }
     }

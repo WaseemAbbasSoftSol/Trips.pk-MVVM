@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.trips.pk.R
 import com.trips.pk.databinding.FragmentVisaDetailBinding
@@ -75,6 +76,13 @@ class VisaDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel=mViewModel
+        mViewModel.visa.observe(viewLifecycleOwner){
+            if (it.isNotEmpty()){
+                var img = ""
+                if (it.get(0).countries.flag.isNotEmpty() && it.get(0).countries.flag !="N/A") img=it.get(0).countries.flag
+                if (img.isNotEmpty()) Glide.with(requireContext()).load(it[0].countries.flag).into(binding.guideDetailImage)
+            }
+        }
     }
 
     inner class OnApplyVisaClick : OnItemViewClickListener<Visa>{

@@ -16,6 +16,7 @@ data class CountriesWithCities(
     val regionID: Int,
     @SerializedName("cities")
     val cities: List<City>,
+    val flag : String = ""
 //    @SerializedName("airPorts")
 //    val airPorts: Any,
 //    @SerializedName("bookingDetails")

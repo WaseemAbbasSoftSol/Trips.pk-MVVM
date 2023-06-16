@@ -34,7 +34,9 @@ class DashboardViewModel(
                 if (response.isSuccessful) {
                     response.body().let {
                         val tempList= arrayListOf<News>()
-                        _news.postValue(it!!.data!!)
+                        tempList.addAll(it!!.data)
+                        tempList.reverse()
+                        _news.postValue(tempList)
                     }
                 } else {
                     response.errorBody().let {

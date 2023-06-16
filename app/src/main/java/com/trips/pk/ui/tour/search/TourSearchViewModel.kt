@@ -54,15 +54,16 @@ class TourSearchViewModel(
                 val response = repository.getCountriesForTour()
                 if (response.isSuccessful) {
                     response.body().let {
-                        mTourCountries.clear()
-                        mTourCountries.addAll(it!!.data)
+
                         val tempList= arrayListOf<Countries>()
-                        for (item in it.data){
-                          //  if (item.isPromoted){
+                        for (item in it!!.data){
+                            if (item.code!="PAK"){
                                 tempList.add(item)
-                          //  }
+                            }
                         }
                         _promotedCountries.postValue(tempList)
+                        mTourCountries.clear()
+                        mTourCountries.addAll(tempList)
                     }
                 } else {
                     response.errorBody().let {
@@ -146,7 +147,7 @@ class TourSearchViewModel(
                 val response = repository.getPromotedCountries("PromoteForTour")
                 if (response.isSuccessful) {
                     response.body().let {
-                        _promotedCountries.postValue(it!!.data!!)
+                      //  _promotedCountries.postValue(it!!.data!!)
                     }
                 } else {
                     response.errorBody().let {
